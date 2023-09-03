@@ -1,5 +1,5 @@
-import { DugClient } from '#lib/DugClient';
 import '#lib/setup';
+import { DugClient } from '#lib/DugClient';
 
 const client = new DugClient();
 
