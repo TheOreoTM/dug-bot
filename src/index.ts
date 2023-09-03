@@ -10,7 +10,7 @@ const main = async () => {
 		await client.login(process.env.DISCORD_TOKEN);
 		client.logger.info('logged in');
 	} catch (error) {
-		client.logger.fatal(error);
+		client.logger.fatal(process.env.DISCORD_TOKEN);
 		client.destroy();
 		process.exit(1);
 	}
