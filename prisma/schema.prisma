@@ -1,0 +1,54 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  idx             Int              @id @default(autoincrement())
+  id              String           @unique
+  badges          Badge[]
+  titles          Title[]
+  bio             String?          @db.VarChar(512)
+  factionPosition FactionPosition?
+
+  faction   Faction? @relation(fields: [factionId], references: [id])
+  factionId Int?
+}
+
+model Faction {
+  id          Int           @id @default(autoincrement())
+  badges      Badge[]
+  titles      Title[]
+  joinType    FactionStatus
+  iconUrl     String
+  name        String        @db.VarChar(32)
+  description String        @db.VarChar(512)
+  ownerId     String
+  members     User[]
+}
+
+enum Badge {
+  BETA_TESTER
+  ELITE_LEVEL
+}
+
+enum Title {
+  BETA_TESTER
+  ELITE_LEVEL
+}
+
+enum FactionPosition {
+  OWNER
+  SENIOR
+  MEMBER
+}
+
+enum FactionStatus {
+  OPEN
+  CLOSED
+  INVITE_ONLY
+}

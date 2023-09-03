@@ -1,0 +1,15 @@
+{
+	"extends": ["@sapphire/ts-config", "@sapphire/ts-config/extra-strict", "@sapphire/ts-config/decorators"],
+	"compilerOptions": {
+		"rootDir": "src",
+		"outDir": "dist",
+		"tsBuildInfoFile": "dist/.tsbuildinfo",
+		"paths": {
+			"#config": ["./src/lib/util/config.ts"],
+			"#constants": ["./src/lib//util/constants.ts"],
+			"#lib/*": ["./src/lib/*"],
+			"#utils/*": ["./src/lib/util/*"]
+		}
+	},
+	"include": ["src"]
+}
