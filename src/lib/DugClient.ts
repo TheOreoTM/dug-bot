@@ -2,7 +2,7 @@ import { ClientConfig } from '#config';
 import { container, SapphireClient } from '@sapphire/framework';
 import { xprisma } from './util/prisma';
 
-export class NexusClient<Ready extends boolean = boolean> extends SapphireClient<Ready> {
+export class DugClient<Ready extends boolean = boolean> extends SapphireClient<Ready> {
 	public constructor() {
 		super(ClientConfig);
 	}

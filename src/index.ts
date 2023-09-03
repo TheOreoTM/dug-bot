@@ -1,16 +1,7 @@
+import { DugClient } from '#lib/DugClient';
 import '#lib/setup';
-import { LogLevel, SapphireClient } from '@sapphire/framework';
-import { GatewayIntentBits } from 'discord.js';
 
-const client = new SapphireClient({
-	defaultPrefix: '!',
-	caseInsensitiveCommands: true,
-	logger: {
-		level: LogLevel.Debug
-	},
-	intents: [GatewayIntentBits.DirectMessages, GatewayIntentBits.GuildMessages, GatewayIntentBits.Guilds, GatewayIntentBits.MessageContent],
-	loadMessageCommandListeners: true
-});
+const client = new DugClient();
 
 const main = async () => {
 	try {
