@@ -1,5 +1,5 @@
 import { formatSuccessMessage, generateFactionEmbed } from '#lib/util/formatter';
-import { Badge, FactionStatus } from '@prisma/client';
+import { FactionStatus } from '@prisma/client';
 import { ApplyOptions } from '@sapphire/decorators';
 import { Command } from '@sapphire/framework';
 
