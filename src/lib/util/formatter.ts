@@ -22,7 +22,7 @@ export function formatTitles(titles: Title[]) {
 		titlesList.push(`- ${TitleTexts[title]}`);
 	}
 
-	return titlesList.join('\n');
+	return titlesList.length ? titlesList.join('\n') : 'No titles';
 }
 
 export function formatBadges(badges: Badge[]) {
@@ -31,7 +31,7 @@ export function formatBadges(badges: Badge[]) {
 		icons.push(BadgeIcons[badge]);
 	}
 
-	return icons.join(' ');
+	return icons.length ? icons.join(' ') : 'No badges';
 }
 
 export function generateFactionEmbed(data: FactionType) {
