@@ -1,4 +1,5 @@
-import { FactionStatus } from '@prisma/client';
+import { formatSuccessMessage, generateFactionEmbed } from '#lib/util/formatter';
+import { Badge, FactionStatus } from '@prisma/client';
 import { ApplyOptions } from '@sapphire/decorators';
 import { Command } from '@sapphire/framework';
 
@@ -62,6 +63,7 @@ export class UserCommand extends Command {
 				name,
 				joinType,
 				iconUrl: icon.url,
+
 				members: {
 					connect: {
 						idx: owner.idx,
@@ -75,10 +77,14 @@ export class UserCommand extends Command {
 				description: true,
 				name: true,
 				joinType: true,
-				iconUrl: true
+				iconUrl: true,
+				badges: true,
+				titles: true
 			}
 		});
 
-		console.log(faction);
+		const embed = generateFactionEmbed(faction);
+
+		interaction.reply({ content: formatSuccessMessage('Created Faction'), embeds: [embed] });
 	}
 }
