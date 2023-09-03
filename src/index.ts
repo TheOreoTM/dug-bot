@@ -2,12 +2,11 @@ import { DugClient } from '#lib/DugClient';
 import '#lib/setup';
 
 const client = new DugClient();
-console.log(process.env.DISCORD_TOKEN);
 
 const main = async () => {
 	try {
 		client.logger.info('Logging in');
-		await client.login(process.env.DISCORD_TOKEN);
+		await client.login();
 		client.logger.info('logged in');
 	} catch (error) {
 		client.logger.fatal(process.env.DISCORD_TOKEN);
