@@ -1,7 +1,11 @@
 import { GuildMessage } from '#lib/types/Discord';
+import { ApplyOptions } from '@sapphire/decorators';
 import { Precondition } from '@sapphire/framework';
 import type { ChatInputCommandInteraction, ContextMenuCommandInteraction, GuildMember } from 'discord.js';
 
+@ApplyOptions<Precondition.Options>({
+	position: 1
+})
 export class UserPrecondition extends Precondition {
 	public override messageRun(message: GuildMessage) {
 		return this.check(message.member);
