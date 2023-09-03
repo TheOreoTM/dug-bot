@@ -55,7 +55,7 @@ export class UserCommand extends Command {
 		const joinType = options.getString('type', true) as FactionStatus;
 		const icon = options.getAttachment('icon', true);
 
-		const faction = this.container.db.faction.create({
+		const faction = await this.container.db.faction.create({
 			data: {
 				ownerId: owner.id,
 				description,
