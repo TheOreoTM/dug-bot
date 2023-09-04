@@ -40,10 +40,6 @@ export const xprisma = new PrismaClient().$extends({
 
 export async function resetAutoIncrement() {
 	try {
-		const result: any = await prisma.$queryRaw`
-      SELECT MAX(idx) FROM "User";
-    `;
-
 		await prisma.$queryRaw`
      SELECT setval('"YourTableName_id_seq"', 1, false);
     `;
