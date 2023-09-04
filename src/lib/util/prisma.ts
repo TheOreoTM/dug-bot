@@ -45,9 +45,10 @@ export async function resetAutoIncrement() {
     `;
 
 		const currentMaxId = result[0].max;
+		console.log('🚀 ~ file: prisma.ts:48 ~ resetAutoIncrement ~ currentMaxId:', currentMaxId);
 
 		await prisma.$queryRaw`
-      SELECT setval('"User_idx_seq"', ${currentMaxId - 1});
+      SELECT setval('"User_idx_seq"', 0);
     `;
 
 		console.log('Auto-increment sequence reset successfully.');
