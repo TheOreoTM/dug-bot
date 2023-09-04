@@ -41,7 +41,7 @@ export const xprisma = new PrismaClient().$extends({
 export async function resetAutoIncrement() {
 	try {
 		await prisma.$queryRaw`
-     SELECT setval('"YourTableName_id_seq"', 1, false);
+     SELECT setval('"User_id_seq"', 1, false);
     `;
 
 		console.log('Auto-increment sequence reset successfully.');
