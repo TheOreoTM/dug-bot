@@ -23,6 +23,11 @@ export class UserCommand extends Command {
 
 	public override async chatInputRun(interaction: Command.ChatInputCommandInteraction) {
 		const factionId = interaction.options.getString('faction', true);
+		if (!factionId) {
+			interaction.reply({ content: formatFailMessage('That faction doesnt exist'), ephemeral: true });
+			return;
+		}
+
 		const faction = await this.container.db.faction.findUnique({
 			where: {
 				id: Number(factionId)
