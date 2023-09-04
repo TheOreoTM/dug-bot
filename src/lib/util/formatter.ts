@@ -54,7 +54,7 @@ export function generateFactionEmbed(data: FactionType) {
 			},
 			{
 				name: `Member Count`,
-				value: `\`${members.length} Members\``,
+				value: `\`${members?.length ?? 0} Members\``,
 				inline: true
 			},
 			{

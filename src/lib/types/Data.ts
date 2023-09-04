@@ -7,7 +7,7 @@ export type FactionType = {
 	iconUrl: string;
 	badges: Badge[];
 	titles: Title[];
-	members: User[];
+	members?: User[];
 	joinType: FactionStatus;
 };
 

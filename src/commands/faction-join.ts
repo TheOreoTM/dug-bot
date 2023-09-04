@@ -1,4 +1,4 @@
-import { formatFailMessage } from '#lib/util/formatter';
+import { formatFailMessage, generateFactionEmbed } from '#lib/util/formatter';
 import { ApplyOptions } from '@sapphire/decorators';
 import { Command } from '@sapphire/framework';
 
@@ -23,7 +23,7 @@ export class UserCommand extends Command {
 
 	public override async chatInputRun(interaction: Command.ChatInputCommandInteraction) {
 		const factionId = interaction.options.getString('faction', true);
-		const faction = this.container.db.faction.findUnique({
+		const faction = await this.container.db.faction.findUnique({
 			where: {
 				id: Number(factionId)
 			}
@@ -34,8 +34,7 @@ export class UserCommand extends Command {
 			return;
 		}
 
-		console.log(await this.container.db.faction.findMany());
-
-		interaction.reply({ content: `\`\`\`json\n${JSON.stringify(faction, null, 2)}\`\`\`\n${factionId}` });
+		const embed = generateFactionEmbed(faction);
+		interaction.reply({ embeds: [embed] });
 	}
 }
