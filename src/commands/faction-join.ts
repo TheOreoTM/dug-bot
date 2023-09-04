@@ -34,6 +34,8 @@ export class UserCommand extends Command {
 			return;
 		}
 
+		console.log(await this.container.db.faction.findMany());
+
 		interaction.reply({ content: `\`\`\`json\n${JSON.stringify(faction, null, 2)}\`\`\`\n${factionId}` });
 	}
 }
