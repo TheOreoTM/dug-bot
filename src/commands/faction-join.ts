@@ -34,6 +34,6 @@ export class UserCommand extends Command {
 			return;
 		}
 
-		interaction.reply({ content: `\`\`\`json\n${JSON.stringify(faction, null, 2)}\`\`\`` });
+		interaction.reply({ content: `\`\`\`json\n${JSON.stringify(faction, null, 2)}\`\`\`\n${factionId}` });
 	}
 }
