@@ -22,9 +22,8 @@ export class UserCommand extends Command {
 	}
 
 	public override async chatInputRun(interaction: Command.ChatInputCommandInteraction) {
-		const factionId = interaction.options.getString('faction', true);
-		console.log(typeof factionId);
-		if (!factionId) {
+		const factionId = Number(interaction.options.getString('faction', true));
+		if (isNaN(factionId)) {
 			interaction.reply({ content: formatFailMessage('That faction doesnt exist'), ephemeral: true });
 			return;
 		}
