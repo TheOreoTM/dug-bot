@@ -7,6 +7,12 @@ import {
 } from '@sapphire/framework';
 import { cyan } from 'colorette';
 import type { APIUser, Guild, User } from 'discord.js';
+import fuzzysort from 'fuzzysort';
+
+export function fuzzysearch(search: string, targets: (string | Fuzzysort.Prepared | undefined)[], options?: FuzzysearchOptions) {
+	const results = fuzzysort.go(search, targets, options);
+	return results;
+}
 
 export function logSuccessCommand(payload: ContextMenuCommandSuccessPayload | ChatInputCommandSuccessPayload | MessageCommandSuccessPayload): void {
 	let successLoggerData: ReturnType<typeof getSuccessLoggerData>;
@@ -44,4 +50,15 @@ function getAuthorInfo(author: User | APIUser) {
 function getGuildInfo(guild: Guild | null) {
 	if (guild === null) return 'Direct Messages';
 	return `${guild.name}[${cyan(guild.id)}]`;
+}
+
+interface FuzzysearchOptions {
+	/** Don't return matches worse than this (higher is faster) */
+	threshold?: number;
+
+	/** Don't return more results than this (lower is faster) */
+	limit?: number;
+
+	/** If true, returns all results for an empty search */
+	all?: boolean;
 }

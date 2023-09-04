@@ -1,6 +1,7 @@
 import { ApplyOptions } from '@sapphire/decorators';
 import { InteractionHandler, InteractionHandlerTypes } from '@sapphire/framework';
 import { AutocompleteInteraction, type ApplicationCommandOptionChoiceData } from 'discord.js';
+import fuzzysort from 'fuzzysort';
 
 @ApplyOptions<InteractionHandler.Options>({
 	interactionHandlerType: InteractionHandlerTypes.Autocomplete
@@ -22,8 +23,9 @@ export class AutocompleteHandler extends InteractionHandler {
 				const factionNames = allFactions.map((faction) => {
 					return { name: faction.name, value: `${faction.id}` };
 				});
+				const factions = fuzzysort.go(focusedOption.value, factionNames, { key: 'name', limit: 5 });
 
-				return this.some(factionNames);
+				return this.some(factions);
 			}
 			default:
 				return this.none();
