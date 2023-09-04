@@ -21,7 +21,7 @@ export class AutocompleteHandler extends InteractionHandler {
 			case 'faction': {
 				const allFactions = await this.container.db.faction.findMany();
 				const factionNames = allFactions.map((faction) => {
-					return { name: faction.name, value: faction.id };
+					return { name: faction.name, value: `${faction.id}` };
 				});
 
 				console.log('🚀 ~ file: factionSearch.ts:28 ~ AutocompleteHandler ~ overrideparse ~ factionNames:', factionNames);
