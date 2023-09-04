@@ -23,9 +23,13 @@ export class AutocompleteHandler extends InteractionHandler {
 				const factionNames = allFactions.map((faction) => {
 					return { name: faction.name, value: `${faction.id}` };
 				});
+
 				const factions = fuzzysort.go(focusedOption.value, factionNames, { key: ['name'], limit: 5 });
-				console.log(factions);
-				return this.some(factions);
+				return this.some(
+					factions.map((f) => {
+						return { name: f.obj.name, value: f.obj.value };
+					})
+				);
 			}
 			default:
 				return this.none();
