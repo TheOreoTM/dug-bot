@@ -35,13 +35,15 @@ export class UserCommand extends Command {
 			paginatedShop
 				.addPageEmbed((embed) =>
 					embed //
-						.setDescription('This is the first page')
-						.setTitle('Page 1')
+						.addFields({ name: 'Item1', value: '111' })
 				)
-				.addPageBuilder((builder) =>
-					builder //
-						.setContent('This is the second page')
-						.setEmbeds([new EmbedBuilder().setTimestamp()])
+				.addPageEmbed((embed) =>
+					embed //
+						.addFields({ name: 'Item2', value: '222' })
+				)
+				.addPageEmbed((embed) =>
+					embed //
+						.addFields({ name: 'Item3', value: 'kkk' })
 				);
 
 			await paginatedShop.run(interaction, interaction.user);
