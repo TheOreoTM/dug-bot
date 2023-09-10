@@ -1,5 +1,18 @@
 import { Badge, FactionStatus, Title, User } from '@prisma/client';
 
+export const SelectAllOptions = {
+	id: true,
+	ownerId: true,
+	name: true,
+	description: true,
+	iconUrl: true,
+	badges: true,
+	titles: true,
+	members: true,
+	joinType: true,
+	pendingMemberIds: true
+};
+
 export type FactionType = {
 	id: number;
 	ownerId: string;
@@ -10,6 +23,7 @@ export type FactionType = {
 	titles: Title[];
 	members?: User[];
 	joinType: FactionStatus;
+	pendingMemberIds: string[];
 };
 
 export const BadgeIcons = {

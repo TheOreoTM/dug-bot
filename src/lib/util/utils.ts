@@ -9,6 +9,10 @@ import { cyan } from 'colorette';
 import type { APIUser, Guild, User } from 'discord.js';
 import fuzzysort from 'fuzzysort';
 
+export function isAlphaNumeric(str: string) {
+	return /^[a-zA-Z0-9 ]+$/.test(str);
+}
+
 export function fuzzysearch(search: string, targets: (string | Fuzzysort.Prepared | undefined)[], options?: FuzzysearchOptions) {
 	const results = fuzzysort.go(search, targets, options);
 	return results;

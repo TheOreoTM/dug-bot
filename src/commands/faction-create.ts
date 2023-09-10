@@ -1,3 +1,4 @@
+import { SelectAllOptions } from '#lib/types/Data';
 import { formatSuccessMessage, generateFactionEmbed } from '#lib/util/formatter';
 import { FactionStatus } from '@prisma/client';
 import { ApplyOptions } from '@sapphire/decorators';
@@ -71,17 +72,7 @@ export class UserCommand extends Command {
 					}
 				}
 			},
-			select: {
-				id: true,
-				members: true,
-				ownerId: true,
-				description: true,
-				name: true,
-				joinType: true,
-				iconUrl: true,
-				badges: true,
-				titles: true
-			}
+			select: SelectAllOptions
 		});
 
 		const embed = generateFactionEmbed(faction);
