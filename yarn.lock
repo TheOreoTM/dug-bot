@@ -158,7 +158,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sapphire/discord.js-utilities@npm:7.0.2, @sapphire/discord.js-utilities@npm:^7.0.1":
+"@sapphire/discord.js-utilities@npm:^7.0.1, @sapphire/discord.js-utilities@npm:^7.0.2":
   version: 7.0.2
   resolution: "@sapphire/discord.js-utilities@npm:7.0.2"
   dependencies:
@@ -447,7 +447,7 @@ __metadata:
     "@prisma/client": ^5.2.0
     "@sapphire/cli": ^1.6.1
     "@sapphire/decorators": ^6.0.2
-    "@sapphire/discord.js-utilities": 7.0.2
+    "@sapphire/discord.js-utilities": ^7.0.2
     "@sapphire/framework": ^4.5.3
     "@sapphire/plugin-api": ^5.1.1
     "@sapphire/plugin-logger": ^3.0.6

@@ -1,5 +1,17 @@
 import { Badge, FactionStatus, Title, User } from '@prisma/client';
 
+export type ShopItem = {
+	name: string;
+	description: string;
+	value: string;
+	usage: string;
+	usable: boolean;
+	type: string;
+	emoji: string;
+	price: number;
+	sellable: boolean;
+};
+
 export const SelectAllOptions = {
 	id: true,
 	ownerId: true,
