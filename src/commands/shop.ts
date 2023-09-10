@@ -42,13 +42,13 @@ export class UserCommand extends Command {
 						}
 					},
 					{
-						customId: '@sapphire/paginated-messages.firstPage',
+						customId: '@sapphire/paginated-messages.lastPage',
 						style: ButtonStyle.Secondary,
 						emoji: '🔛',
 						type: ComponentType.Button,
 						run: ({ handler, interaction }) => {
 							console.log(handler, interaction);
-							handler.index = 1;
+							handler.index = handler.pages.length;
 						}
 					}
 				]
