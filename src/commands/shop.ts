@@ -48,7 +48,7 @@ export class UserCommand extends Command {
 						type: ComponentType.Button,
 						run: ({ handler, interaction }) => {
 							console.log(handler, interaction);
-							handler.index = handler.pages.length;
+							handler.index = handler.pages.length - 1;
 						}
 					}
 				]
