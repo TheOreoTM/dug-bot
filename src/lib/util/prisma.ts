@@ -33,6 +33,20 @@ export const xprisma = new PrismaClient().$extends({
 						id: userId
 					}
 				});
+			},
+			async hasPendingInvite(userId: string, factionId: number) {
+				const factionPendingMembers = (
+					(await prisma.faction.findUnique({
+						where: {
+							id: factionId
+						},
+						select: {
+							pendingMemberIds: true
+						}
+					})) ?? { pendingMemberIds: [] }
+				).pendingMemberIds;
+
+				return factionPendingMembers.includes(userId);
 			}
 		}
 	}

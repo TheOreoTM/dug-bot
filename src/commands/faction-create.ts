@@ -72,6 +72,7 @@ export class UserCommand extends Command {
 				}
 			},
 			select: {
+				id: true,
 				members: true,
 				ownerId: true,
 				description: true,

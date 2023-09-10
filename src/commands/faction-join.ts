@@ -1,4 +1,7 @@
-import { formatFailMessage, generateFactionEmbed } from '#lib/util/formatter';
+import { DugEvents } from '#constants';
+import { FactionType } from '#lib/types/Data';
+import { formatFailMessage, formatSuccessMessage } from '#lib/util/formatter';
+import { FactionStatus } from '@prisma/client';
 import { ApplyOptions } from '@sapphire/decorators';
 import { Command } from '@sapphire/framework';
 
@@ -39,7 +42,12 @@ export class UserCommand extends Command {
 			return;
 		}
 
-		const embed = generateFactionEmbed(faction);
-		interaction.reply({ embeds: [embed] });
+		const isInviteOnly = faction.joinType === FactionStatus.INVITE_ONLY;
+
+		this.container.client.emit(DugEvents.FactionJoin, interaction.user, faction as FactionType);
+
+		isInviteOnly
+			? interaction.reply({ content: formatSuccessMessage(`Your request to join ${faction.name} has been sent`) })
+			: interaction.reply({ content: formatSuccessMessage(`You have joined ${faction.name}`) });
 	}
 }

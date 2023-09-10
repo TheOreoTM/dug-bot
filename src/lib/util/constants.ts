@@ -1,3 +1,4 @@
+import { Events } from '@sapphire/framework';
 import { join } from 'path';
 
 export const rootDir = join(__dirname, '..', '..', '..');
@@ -25,3 +26,11 @@ export const DugEmojis = {
 	Off: '<:off:1146683633483141140>',
 	On: '<:on:1146683600641736744>'
 };
+
+export const DugEvents = {
+	...Events,
+	FactionJoin: 'factionJoin',
+	FactionSendInvite: 'factionSendInvite'
+};
+
+export const NotificationChannelID = '825619988853162014';

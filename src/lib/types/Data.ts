@@ -1,6 +1,7 @@
 import { Badge, FactionStatus, Title, User } from '@prisma/client';
 
 export type FactionType = {
+	id: number;
 	ownerId: string;
 	name: string;
 	description: string;

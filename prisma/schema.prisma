@@ -14,21 +14,24 @@ model User {
   titles          Title[]
   bio             String?          @db.VarChar(512)
   factionPosition FactionPosition?
+  cash            Int              @default(100)
+  bank            Int              @default(500)
 
   faction   Faction? @relation(fields: [factionId], references: [id])
   factionId Int?
 }
 
 model Faction {
-  id          Int           @id @default(autoincrement())
-  badges      Badge[]
-  titles      Title[]
-  joinType    FactionStatus
-  iconUrl     String
-  name        String        @db.VarChar(32)
-  description String        @db.VarChar(512)
-  ownerId     String
-  members     User[]
+  id               Int           @id @default(autoincrement())
+  badges           Badge[]
+  titles           Title[]
+  joinType         FactionStatus
+  iconUrl          String
+  name             String        @db.VarChar(32)
+  description      String        @db.VarChar(512)
+  ownerId          String
+  pendingMemberIds String[]      @default([])
+  members          User[]
 }
 
 enum Badge {
