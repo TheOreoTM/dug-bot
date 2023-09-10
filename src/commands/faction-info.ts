@@ -15,7 +15,7 @@ export class UserCommand extends Command {
 				.addStringOption((option) =>
 					option //
 						.setAutocomplete(true)
-						.setName('name')
+						.setName('faction')
 						.setDescription('The name of the faction')
 						.setRequired(true)
 				)
