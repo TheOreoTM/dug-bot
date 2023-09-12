@@ -35,6 +35,17 @@ const itemsArray: ItemType[] = [
 		emoji: '🧩',
 		price: 90,
 		sellable: true
+	},
+	{
+		name: 'Points booster',
+		description: 'This item is used to gain +3% of points after the end of the day',
+		value: 'rose',
+		usage: 'Use this item to gain +3% of points after the end of the day',
+		usable: true,
+		type: ItemTypes.Tool,
+		emoji: '🪙',
+		price: 40,
+		sellable: true
 	}
 ];
 

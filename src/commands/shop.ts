@@ -30,11 +30,7 @@ export class UserCommand extends Command {
 			.setDescription(`Your balance: ${user.cash.toLocaleString()}`);
 
 		if (subcommand === 'view') {
-			new PaginatedShop({
-				template: template
-			})
-				.make()
-				.run(interaction, interaction.user);
+			new PaginatedShop({}).setTemplate(template).make().run(interaction, interaction.user);
 
 			return;
 		}
