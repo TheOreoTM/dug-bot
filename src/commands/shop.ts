@@ -38,7 +38,9 @@ export class UserCommand extends Command {
 			});
 
 			const r = new PaginatedFieldMessageEmbed<ShopItemType>().setItems(Array.from(ShopItems.values()));
-			r.setTemplate(template).formatItems((item: ShopItemType) => `${item.emoji} ${item.name} - $${item.price} \n${item.description}`);
+			r.setTemplate(template)
+				.formatItems((item: ShopItemType) => `${item.emoji} ${item.name} - $${item.price} \n${item.description}`)
+				.setTitleField('Shop');
 
 			r.make();
 			r.run(interaction, interaction.user);
