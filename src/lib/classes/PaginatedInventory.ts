@@ -1,9 +1,9 @@
-import { InventoryItemType } from '#lib/types/Data';
+import { InventoryItemTypeWithCount } from '#lib/types/Data';
 import { PaginatedMessageEmbedFields, PaginatedMessageOptions } from '@sapphire/discord.js-utilities';
 import { ButtonStyle, ComponentType, EmbedField } from 'discord.js';
 
 export class PaginatedInventory extends PaginatedMessageEmbedFields {
-	public constructor(inventory: InventoryItemType[], options: PaginatedMessageOptions = {}) {
+	public constructor(inventory: Record<string, InventoryItemTypeWithCount>, options: PaginatedMessageOptions = {}) {
 		super(options);
 		this.setActions([
 			{
@@ -63,13 +63,21 @@ export class PaginatedInventory extends PaginatedMessageEmbedFields {
 
 		const items: EmbedField[] = [];
 
-		inventory.forEach((item) => {
+		for (const item in inventory) {
+			const { name, emoji, count, type, value } = inventory[item];
 			items.push({
-				name: `${item.emoji} ${item.name} - `,
-				value: `${item.description}`,
+				name: `${emoji} ${name} - ${count}`,
+				value: `ID \`${value}\` - ${type}`,
 				inline: false
 			});
-		});
+		}
+		// inventory.forEach((item) => {
+		// 	items.push({
+		// 		name: `${item.emoji} ${item.name} - `,
+		// 		value: `${item.description}`,
+		// 		inline: false
+		// 	});
+		// });
 
 		this.setItems(items).setItemsPerPage(5);
 	}
