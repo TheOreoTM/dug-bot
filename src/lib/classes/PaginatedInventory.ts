@@ -1,10 +1,9 @@
-import { DugEmojis } from '#constants';
-import { ShopItems } from '#lib/shop';
+import { InventoryItemType } from '#lib/types/Data';
 import { PaginatedMessageEmbedFields, PaginatedMessageOptions } from '@sapphire/discord.js-utilities';
 import { ButtonStyle, ComponentType, EmbedField } from 'discord.js';
 
-export class PaginatedShop extends PaginatedMessageEmbedFields {
-	public constructor(options: PaginatedMessageOptions = {}) {
+export class PaginatedInventory extends PaginatedMessageEmbedFields {
+	public constructor(inventory: InventoryItemType[], options: PaginatedMessageOptions = {}) {
 		super(options);
 		this.setActions([
 			{
@@ -64,9 +63,9 @@ export class PaginatedShop extends PaginatedMessageEmbedFields {
 
 		const items: EmbedField[] = [];
 
-		ShopItems.forEach((item) => {
+		inventory.forEach((item) => {
 			items.push({
-				name: `${item.emoji} ${item.name} - ${DugEmojis.Points}${item.price}`,
+				name: `${item.emoji} ${item.name} - `,
 				value: `${item.description}`,
 				inline: false
 			});

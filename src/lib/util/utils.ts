@@ -1,3 +1,4 @@
+import { InventoryItemType, InventoryItemTypeWithCount } from '#lib/types/Data';
 import {
 	container,
 	type ChatInputCommandSuccessPayload,
@@ -8,6 +9,21 @@ import {
 import { cyan } from 'colorette';
 import type { APIUser, Guild, User } from 'discord.js';
 import fuzzysort from 'fuzzysort';
+
+export function groupItems(items: InventoryItemType[]) {
+	const itemInfo: Record<string, InventoryItemTypeWithCount> = {};
+
+	items.forEach((item) => {
+		const { name } = item;
+		if (itemInfo[name]) {
+			itemInfo[name].count++;
+		} else {
+			itemInfo[name] = { ...item, count: 1 };
+		}
+	});
+
+	return itemInfo;
+}
 
 export function isAlphaNumeric(str: string) {
 	return /^[a-zA-Z0-9 ]+$/.test(str);

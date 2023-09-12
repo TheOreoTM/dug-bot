@@ -27,12 +27,17 @@ export const xprisma = new PrismaClient().$extends({
 					}
 				});
 			},
+			/**
+			 * Get a user that is expected to be registered
+			 * @param userId The is of the user you want to get
+			 * @returns A non-null user object
+			 */
 			async getUser(userId: string) {
-				return await prisma.user.findUnique({
+				return (await prisma.user.findUnique({
 					where: {
 						id: userId
 					}
-				});
+				})!)!;
 			},
 			async hasPendingInvite(userId: string, factionId: number) {
 				const factionPendingMembers = (
@@ -47,6 +52,15 @@ export const xprisma = new PrismaClient().$extends({
 				).pendingMemberIds;
 
 				return factionPendingMembers.includes(userId);
+			},
+			async getInventory(userId: string) {
+				const items = await prisma.item.findMany({
+					where: {
+						ownerId: userId
+					}
+				});
+
+				return items;
 			}
 		}
 	}

@@ -24,7 +24,8 @@ export const DugEmojis = {
 	Fail: '<:fail:1146683470114996274>',
 	Reply: '<:reply:1146683155370221639>',
 	Off: '<:off:1146683633483141140>',
-	On: '<:on:1146683600641736744>'
+	On: '<:on:1146683600641736744>',
+	Points: '<:point:1151220466913136731>'
 };
 
 export const DugEvents = {

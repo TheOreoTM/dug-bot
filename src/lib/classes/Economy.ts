@@ -1,13 +1,13 @@
 import { InventoryItemType, ItemType } from '#lib/types/Data';
-import { ItemTypes } from '#lib/types/Enums';
 import { container } from '@sapphire/framework';
+
 export namespace Economy {
-	class Item implements ItemType {
+	export class Item implements ItemType {
 		public readonly name: string;
 		public readonly description: string;
 		public readonly usage: string;
 		public readonly usable: boolean;
-		public readonly type: ItemTypes;
+		public readonly type: string;
 		public readonly emoji: string;
 		public readonly sellable: boolean;
 		public readonly value: string;
@@ -64,7 +64,7 @@ export namespace Economy {
 		}
 	}
 
-	class InventoryItem extends Item implements InventoryItemType {
+	export class InventoryItem extends Item implements InventoryItemType {
 		public readonly ownerId: string | null;
 
 		public constructor(data: InventoryItemType) {

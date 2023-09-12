@@ -1,12 +1,11 @@
 import { Badge, FactionStatus, Title, User } from '@prisma/client';
-import { ItemTypes } from './Enums';
 
 export type ItemType = {
 	name: string;
 	description: string;
 	usage: string;
 	usable: boolean;
-	type: ItemTypes;
+	type: string;
 	emoji: string;
 	sellable: boolean;
 	value: string;
@@ -19,6 +18,10 @@ export type InventoryItemType = ItemType & {
 
 export type ShopItemType = ItemType & {
 	price: number;
+};
+
+export type InventoryItemTypeWithCount = InventoryItemType & {
+	count: number;
 };
 
 export const SelectAllOptions = {

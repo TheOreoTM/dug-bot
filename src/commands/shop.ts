@@ -31,7 +31,6 @@ export class UserCommand extends Command {
 
 		if (subcommand === 'view') {
 			new PaginatedShop({}).setTemplate(template).make().run(interaction, interaction.user);
-
 			return;
 		}
 	}

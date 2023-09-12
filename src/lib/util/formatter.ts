@@ -1,7 +1,16 @@
 import { DugColors, DugEmojis } from '#constants';
-import { BadgeIcons, FactionType, TitleTexts } from '#lib/types/Data';
+import { BadgeIcons, FactionType, InventoryItemTypeWithCount, TitleTexts } from '#lib/types/Data';
 import { Badge, Title } from '@prisma/client';
 import { EmbedBuilder, userMention } from 'discord.js';
+
+export function formatItems(itemCounts: Record<string, InventoryItemTypeWithCount>) {
+	const formattedItems = [];
+	for (const name in itemCounts) {
+		const count = itemCounts[name].count;
+		formattedItems.push(count > 1 ? `${name} x${count}` : name);
+	}
+	return formattedItems;
+}
 
 export function formatFailMessage(message: string) {
 	return `${DugEmojis.Fail} ${message}`;
