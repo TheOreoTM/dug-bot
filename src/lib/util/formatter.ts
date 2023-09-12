@@ -111,7 +111,7 @@ export async function generateProfileEmbed(member: GuildMember) {
 	const embed = new EmbedBuilder()
 		.setThumbnail(member.displayAvatarURL())
 		.setTitle(member.user.username)
-		.setDescription(`BIO: \n${bio}`)
+		.setDescription(`${bio ?? '`No bio`'}`)
 		.setColor(DugColors.Info)
 		.addFields(
 			{
