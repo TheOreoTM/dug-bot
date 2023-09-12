@@ -21,7 +21,7 @@ const itemsArray: ItemType[] = [
 		usage: 'Use this item to get a medium hint for the ongoing cipher',
 		usable: true,
 		type: ItemTypes.Tool,
-		emoji: '🧩🧩',
+		emoji: '🧩',
 		price: 60,
 		sellable: true
 	},
@@ -32,7 +32,7 @@ const itemsArray: ItemType[] = [
 		usage: 'Use this item to get a major hint for the ongoing cipher',
 		usable: true,
 		type: ItemTypes.Tool,
-		emoji: '🧩🧩🧩',
+		emoji: '🧩',
 		price: 90,
 		sellable: true
 	}

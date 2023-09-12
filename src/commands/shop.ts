@@ -1,10 +1,8 @@
 import { DugColors } from '#constants';
 import { PaginatedShop } from '#lib/classes/PaginatedShop';
-import { ShopItems } from '#lib/shop';
 import { ApplyOptions } from '@sapphire/decorators';
-import { PaginatedMessageEmbedFields } from '@sapphire/discord.js-utilities';
 import { Command } from '@sapphire/framework';
-import { EmbedBuilder, EmbedField } from 'discord.js';
+import { EmbedBuilder } from 'discord.js';
 
 @ApplyOptions<Command.Options>({
 	description: 'The Shop'
@@ -32,25 +30,9 @@ export class UserCommand extends Command {
 			.setDescription(`Your balance: ${user.cash.toLocaleString()}`);
 
 		if (subcommand === 'view') {
-			const paginatedShop = new PaginatedShop({
+			new PaginatedShop({
 				template: template
-			});
-			paginatedShop;
-
-			const items: EmbedField[] = [];
-
-			ShopItems.forEach((item) => {
-				items.push({
-					name: `${item.emoji} ${item.name} - $${item.price}`,
-					value: `${item.description}`,
-					inline: false
-				});
-			});
-
-			await new PaginatedMessageEmbedFields()
-				.setTemplate(template)
-				.setItems(items)
-				.setItemsPerPage(2)
+			})
 				.make()
 				.run(interaction, interaction.user);
 

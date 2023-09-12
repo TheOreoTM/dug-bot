@@ -1,5 +1,6 @@
+import { ShopItems } from '#lib/shop';
 import { PaginatedMessageEmbedFields, PaginatedMessageOptions } from '@sapphire/discord.js-utilities';
-import { ButtonStyle, ComponentType } from 'discord.js';
+import { ButtonStyle, ComponentType, EmbedField } from 'discord.js';
 
 export class PaginatedShop extends PaginatedMessageEmbedFields {
 	public constructor(options: PaginatedMessageOptions = {}) {
@@ -59,5 +60,17 @@ export class PaginatedShop extends PaginatedMessageEmbedFields {
 				}
 			}
 		]);
+
+		const items: EmbedField[] = [];
+
+		ShopItems.forEach((item) => {
+			items.push({
+				name: `${item.emoji} ${item.name} - $${item.price}`,
+				value: `${item.description}`,
+				inline: false
+			});
+		});
+
+		this.setItems(items).setItemsPerPage(5);
 	}
 }
