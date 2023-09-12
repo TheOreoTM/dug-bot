@@ -48,8 +48,9 @@ export class UserCommand extends Command {
 			.then(() => {
 				message.channel.send({ content: formatSuccessMessage(`Successfully purchased ${item.name}`) });
 			})
-			.catch(() => {
+			.catch((e) => {
 				message.channel.send({ content: formatFailMessage(`Something went wrong...`) });
+				console.log(e);
 			});
 	}
 }
