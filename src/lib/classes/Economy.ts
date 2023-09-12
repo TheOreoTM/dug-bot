@@ -1,4 +1,6 @@
 import { InventoryItemType, ItemType } from '#lib/types/Data';
+import { ItemTypes } from '#lib/types/Enums';
+import { convertValueToBadge } from '#lib/util/formatter';
 import { container } from '@sapphire/framework';
 
 export namespace Economy {
@@ -37,30 +39,49 @@ export namespace Economy {
 			};
 			const inventoryItem = new InventoryItem(data);
 
-			const purchase = await container.db.item
-				.create({
-					data: {
-						...inventoryItem,
-						ownerId: customer
-					}
-				})
-				.then(async () => {
-					await container.db.user.update({
-						where: {
-							id: customer
-						},
+			if (item.type !== ItemTypes.Badge) {
+				const purchase = await container.db.item
+					.create({
 						data: {
-							cash: {
-								decrement: inventoryItem.price
-							}
+							...inventoryItem,
+							ownerId: customer
 						}
+					})
+					.then(async () => {
+						await container.db.user.update({
+							where: {
+								id: customer
+							},
+							data: {
+								cash: {
+									decrement: inventoryItem.price
+								}
+							}
+						});
+					})
+					.catch(() => {
+						null;
 					});
-				})
-				.catch(() => {
-					null;
-				});
 
-			return purchase;
+				return purchase;
+			}
+
+			if (item.type === ItemTypes.Badge) {
+				const badge = convertValueToBadge(item.value);
+				if (!badge) {
+					return console.log(`Badge ${badge} is not implemented but is avaiable for purchase`);
+				}
+				await container.db.user.update({
+					where: {
+						id: customer
+					},
+					data: {
+						badges: {
+							push: badge
+						}
+					}
+				});
+			}
 		}
 	}
 

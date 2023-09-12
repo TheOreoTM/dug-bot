@@ -1,5 +1,7 @@
 export enum ItemTypes {
 	Item = 'ITEM',
 	Tool = 'TOOL',
-	Boost = 'BOOST'
+	Boost = 'BOOST',
+	Badge = 'BADGE',
+	Title = 'TITLE'
 }

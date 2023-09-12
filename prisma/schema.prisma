@@ -58,6 +58,7 @@ model Item {
 enum Badge {
   BETA_TESTER
   ELITE_LEVEL
+  AHA_BADGE
 }
 
 enum Title {

@@ -46,6 +46,17 @@ const itemsArray: ItemType[] = [
 		emoji: '🪙',
 		price: -1,
 		sellable: true
+	},
+	{
+		name: 'Aha Badge',
+		description: 'The struggle is real',
+		value: 'aha badge',
+		usage: 'None',
+		usable: false,
+		type: ItemTypes.Badge,
+		emoji: '🫀',
+		price: 0,
+		sellable: false
 	}
 ];
 

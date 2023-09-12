@@ -34,6 +34,15 @@ export function formatTitles(titles: Title[]) {
 	return titlesList.length ? titlesList.join('\n') : 'No titles';
 }
 
+export function convertValueToBadge(value: string) {
+	const badgeText = value.toUpperCase().replaceAll(' ', '_') as Badge;
+	if (badgeText in BadgeIcons) {
+		return badgeText;
+	}
+
+	return null;
+}
+
 export function formatBadges(badges: Badge[]) {
 	const icons: BadgeIcons[] = [];
 	for (const badge of badges) {
