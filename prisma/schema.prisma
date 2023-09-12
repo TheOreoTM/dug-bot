@@ -7,15 +7,21 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model Bruh {
+  bro String @id
+}
+
 model User {
-  idx             Int              @id @default(autoincrement())
-  id              String           @unique
+  idx             Int              @default(autoincrement())
+  id              String           @id @unique
   badges          Badge[]
   titles          Title[]
   bio             String?          @db.VarChar(512)
   factionPosition FactionPosition?
   cash            Int              @default(100)
   bank            Int              @default(500)
+
+  items Item[]
 
   faction   Faction? @relation(fields: [factionId], references: [id])
   factionId Int?
@@ -32,6 +38,21 @@ model Faction {
   ownerId          String
   pendingMemberIds String[]      @default([])
   members          User[]
+}
+
+model Item {
+  id          String  @id @default(uuid())
+  name        String
+  description String
+  usage       String
+  usable      Boolean
+  type        String
+  emoji       String
+  sellable    Boolean
+  value       String
+  ownerId     String?
+  price       Int
+  owner       User?   @relation(fields: [ownerId], references: [id])
 }
 
 enum Badge {

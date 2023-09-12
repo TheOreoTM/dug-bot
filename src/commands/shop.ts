@@ -1,8 +1,11 @@
 import { DugColors } from '#constants';
+import { PaginatedShop } from '#lib/classes/PaginatedShop';
+import { ShopItems } from '#lib/shop';
+import { ShopItemType } from '#lib/types/Data';
 import { ApplyOptions } from '@sapphire/decorators';
-import { PaginatedMessage } from '@sapphire/discord.js-utilities';
+import { PaginatedFieldMessageEmbed } from '@sapphire/discord.js-utilities';
 import { Command } from '@sapphire/framework';
-import { ButtonStyle, ComponentType, EmbedBuilder } from 'discord.js';
+import { EmbedBuilder } from 'discord.js';
 
 @ApplyOptions<Command.Options>({
 	description: 'The Shop'
@@ -26,80 +29,17 @@ export class UserCommand extends Command {
 		const user = (await this.container.db.user.getUser(interaction.user.id))!;
 
 		if (subcommand === 'view') {
-			const paginatedShop = new PaginatedMessage({
+			const paginatedShop = new PaginatedShop({
 				template: new EmbedBuilder()
 					.setColor(DugColors.Default)
 					.setTitle('The Shop')
-					.setDescription(`Your balance: ${user.cash.toLocaleString()}`),
-				actions: [
-					{
-						customId: '@sapphire/paginated-messages.firstPage',
-						style: ButtonStyle.Secondary,
-						emoji: '⏪',
-						type: ComponentType.Button,
-						run: ({ handler }) => {
-							handler.index = 0;
-						}
-					},
-					{
-						customId: '@sapphire/paginated-messages.previousPage',
-						style: ButtonStyle.Secondary,
-						emoji: '◀️',
-						type: ComponentType.Button,
-						run: ({ handler }) => {
-							if (handler.index === 0) {
-								handler.index = handler.pages.length - 1;
-							} else {
-								--handler.index;
-							}
-						}
-					},
-					{
-						customId: '@sapphire/paginated-messages.stop',
-						style: ButtonStyle.Danger,
-						emoji: '⏹️',
-						type: ComponentType.Button,
-						run: ({ collector }) => {
-							collector.stop();
-						}
-					},
-					{
-						customId: '@sapphire/paginated-messages.nextPage',
-						style: ButtonStyle.Secondary,
-						emoji: '▶️',
-						type: ComponentType.Button,
-						run: ({ handler }) => {
-							if (handler.index === handler.pages.length - 1) {
-								handler.index = 0;
-							} else {
-								++handler.index;
-							}
-						}
-					},
-					{
-						customId: '@sapphire/paginated-messages.lastPage',
-						style: ButtonStyle.Secondary,
-						emoji: '⏩',
-						type: ComponentType.Button,
-						run: ({ handler }) => {
-							handler.index = handler.pages.length - 1;
-						}
-					}
-				]
+					.setDescription(`Your balance: ${user.cash.toLocaleString()}`)
 			});
-			paginatedShop
-				.addPageEmbed((embed) =>
-					embed //
-						.addFields({ name: 'Item1', value: '111' })
-				)
-				.addPageEmbed((embed) =>
-					embed //
-						.addFields({ name: 'Item2', value: '222' })
-				)
-				.addPageEmbed((embed) =>
-					embed //
-						.addFields({ name: 'Item3', value: 'kkk' })
-				);
+
+			const r = new PaginatedFieldMessageEmbed<ShopItemType>().setItems(Array.from(ShopItems.values()));
+
+			r.make();
+			r.run(interaction, interaction.user);
 
 			await paginatedShop.run(interaction, interaction.user);
 			return;
