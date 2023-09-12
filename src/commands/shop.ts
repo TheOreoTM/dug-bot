@@ -5,7 +5,6 @@ import { ApplyOptions } from '@sapphire/decorators';
 import { PaginatedMessageEmbedFields } from '@sapphire/discord.js-utilities';
 import { Command } from '@sapphire/framework';
 import { EmbedBuilder, EmbedField } from 'discord.js';
-import { it } from 'node:test';
 
 @ApplyOptions<Command.Options>({
 	description: 'The Shop'
