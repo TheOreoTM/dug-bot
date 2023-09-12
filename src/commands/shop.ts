@@ -37,13 +37,16 @@ export class UserCommand extends Command {
 				template: template
 			});
 
-			const r = new PaginatedFieldMessageEmbed<ShopItemType>().setItems(Array.from(ShopItems.values()));
-			r.setTemplate(template)
-				.formatItems((item: ShopItemType) => `${item.emoji} ${item.name} - $${item.price} \n${item.description}`)
-				.setTitleField('Shop');
-
-			r.make();
-			r.run(interaction, interaction.user);
+			new PaginatedFieldMessageEmbed<ShopItemType>()
+				.setTemplate(template)
+				.setItems(Array.from(ShopItems.values()))
+				.formatItems((item) => {
+					`${item.emoji} ${item.name} - $${item.price} \n ${item.description}`;
+				})
+				.setTitleField('Shop')
+				.setItemsPerPage(1)
+				.make()
+				.run(interaction, interaction.user);
 
 			await paginatedShop.run(interaction, interaction.user);
 			return;
