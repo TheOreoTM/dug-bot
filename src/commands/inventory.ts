@@ -1,3 +1,4 @@
+import { DugColors } from '#constants';
 import { PaginatedInventory } from '#lib/classes/PaginatedInventory';
 import { InventoryItemType } from '#lib/types/Data';
 import { groupItems } from '#lib/util/utils';
@@ -14,7 +15,7 @@ export class UserCommand extends Command {
 		const invItems: InventoryItemType[] = await this.container.db.user.getInventory(message.author.id);
 		const groupedItems = groupItems(invItems);
 
-		const template = new EmbedBuilder().setTitle(`${message.author.username}'s Inventory`);
+		const template = new EmbedBuilder().setTitle(`${message.author.username}'s Inventory`).setColor(DugColors.Default);
 		new PaginatedInventory(groupedItems).setTemplate(template).make().run(message, message.author);
 	}
 }
