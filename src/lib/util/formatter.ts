@@ -6,8 +6,8 @@ import { EmbedBuilder, userMention } from 'discord.js';
 export function formatItems(itemCounts: Record<string, InventoryItemTypeWithCount>) {
 	const formattedItems = [];
 	for (const name in itemCounts) {
-		const count = itemCounts[name].count;
-		formattedItems.push(count > 1 ? `${name} x${count}` : name);
+		const { count, emoji, description } = itemCounts[name];
+		formattedItems.push(count > 1 ? `${emoji}${name} x${count}\n${description}` : name);
 	}
 	return formattedItems;
 }

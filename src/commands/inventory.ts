@@ -6,7 +6,8 @@ import { Command } from '@sapphire/framework';
 import type { Message } from 'discord.js';
 
 @ApplyOptions<Command.Options>({
-	description: 'Check your inventory'
+	description: 'Check your inventory',
+	aliases: ['inv']
 })
 export class UserCommand extends Command {
 	public override async messageRun(message: Message) {
