@@ -27,16 +27,18 @@ export class UserCommand extends Command {
 	public override async chatInputRun(interaction: Command.ChatInputCommandInteraction) {
 		const subcommand = interaction.options.getSubcommand() as 'view';
 		const user = (await this.container.db.user.getUser(interaction.user.id))!;
+		const template = new EmbedBuilder()
+			.setColor(DugColors.Default)
+			.setTitle('The Shop')
+			.setDescription(`Your balance: ${user.cash.toLocaleString()}`);
 
 		if (subcommand === 'view') {
 			const paginatedShop = new PaginatedShop({
-				template: new EmbedBuilder()
-					.setColor(DugColors.Default)
-					.setTitle('The Shop')
-					.setDescription(`Your balance: ${user.cash.toLocaleString()}`)
+				template: template
 			});
 
 			const r = new PaginatedFieldMessageEmbed<ShopItemType>().setItems(Array.from(ShopItems.values()));
+			r.setTemplate(template).formatItems((item: ShopItemType) => `${item.emoji} ${item.name} - $${item.price} \n${item.description}`);
 
 			r.make();
 			r.run(interaction, interaction.user);
