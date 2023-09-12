@@ -1,7 +1,8 @@
 import { DugColors, DugEmojis } from '#constants';
 import { BadgeIcons, FactionType, InventoryItemTypeWithCount, TitleTexts } from '#lib/types/Data';
 import { Badge, Title } from '@prisma/client';
-import { EmbedBuilder, userMention } from 'discord.js';
+import { container } from '@sapphire/framework';
+import { EmbedBuilder, GuildMember, userMention } from 'discord.js';
 
 export function formatItems(itemCounts: Record<string, InventoryItemTypeWithCount>) {
 	const formattedItems = [];
@@ -84,6 +85,54 @@ export function generateFactionEmbed(data: FactionType) {
 				name: 'Titles',
 				value: formatTitles(titles),
 				inline: true
+			}
+		);
+
+	return embed;
+}
+
+export async function generateProfileEmbed(member: GuildMember) {
+	const data = (await container.db.user.findUnique({
+		where: {
+			id: member.id
+		},
+		select: {
+			bio: true,
+			badges: true,
+			titles: true,
+			bank: true,
+			cash: true,
+			faction: true
+		}
+	}))!;
+
+	const { bio, badges, titles, bank, cash, faction } = data;
+
+	const embed = new EmbedBuilder()
+		.setThumbnail(member.displayAvatarURL())
+		.setTitle(member.user.username)
+		.setDescription(`BIO: \n${bio}`)
+		.setColor(DugColors.Info)
+		.addFields(
+			{
+				name: 'Economy',
+				value: [`Cash: ${cash}`, `Bank: ${bank}`, `Networth: ${cash + bank}`].join('\n'),
+				inline: true
+			},
+
+			{
+				name: 'Badges',
+				value: formatBadges(badges),
+				inline: true
+			},
+			{
+				name: 'Titles',
+				value: formatTitles(titles),
+				inline: true
+			},
+			{
+				name: 'Faction',
+				value: `${faction?.name || 'None'}`
 			}
 		);
 

@@ -1,5 +1,5 @@
 import { SelectAllOptions } from '#lib/types/Data';
-import { formatFailMessage, generateFactionEmbed } from '#lib/util/formatter';
+import { formatFailMessage, generateProfileEmbed } from '#lib/util/formatter';
 import { ApplyOptions } from '@sapphire/decorators';
 import { Command } from '@sapphire/framework';
 
@@ -41,7 +41,7 @@ export class UserCommand extends Command {
 			return;
 		}
 
-		const embed = generateFactionEmbed(faction);
+		const embed = generateProfileEmbed(faction);
 
 		interaction.reply({
 			embeds: [embed]

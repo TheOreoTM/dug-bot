@@ -25,7 +25,7 @@ export class UserCommand extends Command {
 	// }
 
 	public override async messageRun(message: Message, args: Args) {
-		const value = (await args.pick('string')).toLowerCase();
+		const value = (await args.rest('string')).toLowerCase();
 
 		const itemObject = ShopItems.get(value);
 		if (!itemObject) {
