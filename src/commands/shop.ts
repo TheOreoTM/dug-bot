@@ -35,6 +35,7 @@ export class UserCommand extends Command {
 			const paginatedShop = new PaginatedShop({
 				template: template
 			});
+			paginatedShop;
 
 			const items: EmbedField[] = [];
 
@@ -46,9 +47,13 @@ export class UserCommand extends Command {
 				});
 			});
 
-			await new PaginatedMessageEmbedFields().setItems(items).setItemsPerPage(1).make().run(interaction, interaction.user);
+			await new PaginatedMessageEmbedFields()
+				.setTemplate(template)
+				.setItems(items)
+				.setItemsPerPage(2)
+				.make()
+				.run(interaction, interaction.user);
 
-			await paginatedShop.run(interaction, interaction.user);
 			return;
 		}
 	}
