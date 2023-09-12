@@ -1,7 +1,6 @@
 import { DugColors } from '#constants';
 import { PaginatedShop } from '#lib/classes/PaginatedShop';
 import { ShopItems } from '#lib/shop';
-import { ShopItemType } from '#lib/types/Data';
 import { ApplyOptions } from '@sapphire/decorators';
 import { PaginatedFieldMessageEmbed } from '@sapphire/discord.js-utilities';
 import { Command } from '@sapphire/framework';
@@ -37,11 +36,15 @@ export class UserCommand extends Command {
 				template: template
 			});
 
-			new PaginatedFieldMessageEmbed<ShopItemType>()
+			new PaginatedFieldMessageEmbed()
 				.setTemplate(template)
-				.setItems(Array.from(ShopItems.values()))
-				.formatItems((item) => {
-					`${item.emoji} ${item.name} - $${item.price} \n ${item.description}`;
+				.setItems(
+					ShopItems.map((item) => {
+						return { name: `${item.emoji} ${item.name} - $${item.price}`, value: `${item.description}` };
+					})
+				)
+				.formatItems((item: any) => {
+					`${item.name}\n${item.value}`;
 				})
 				.setTitleField('Shop')
 				.setItemsPerPage(1)
