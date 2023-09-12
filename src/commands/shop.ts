@@ -2,9 +2,10 @@ import { DugColors } from '#constants';
 import { PaginatedShop } from '#lib/classes/PaginatedShop';
 import { ShopItems } from '#lib/shop';
 import { ApplyOptions } from '@sapphire/decorators';
-import { PaginatedFieldMessageEmbed } from '@sapphire/discord.js-utilities';
+import { PaginatedMessageEmbedFields } from '@sapphire/discord.js-utilities';
 import { Command } from '@sapphire/framework';
-import { EmbedBuilder } from 'discord.js';
+import { EmbedBuilder, EmbedField } from 'discord.js';
+import { it } from 'node:test';
 
 @ApplyOptions<Command.Options>({
 	description: 'The Shop'
@@ -36,20 +37,17 @@ export class UserCommand extends Command {
 				template: template
 			});
 
-			new PaginatedFieldMessageEmbed()
-				.setTemplate(template)
-				.setItems(
-					ShopItems.map((item) => {
-						return { name: `${item.emoji} ${item.name} - $${item.price}`, value: `${item.description}` };
-					})
-				)
-				.formatItems((item: any) => {
-					`${item.name}\n${item.value}`;
-				})
-				.setTitleField('Shop')
-				.setItemsPerPage(1)
-				.make()
-				.run(interaction, interaction.user);
+			const items: EmbedField[] = [];
+
+			ShopItems.forEach((item) => {
+				items.push({
+					name: `${item.emoji} ${item.name} - $${item.price}`,
+					value: `${item.description}`,
+					inline: false
+				});
+			});
+
+			await new PaginatedMessageEmbedFields().setItems(items).setItemsPerPage(1).make().run(interaction, interaction.user);
 
 			await paginatedShop.run(interaction, interaction.user);
 			return;
