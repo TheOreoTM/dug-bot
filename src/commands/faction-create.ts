@@ -1,5 +1,5 @@
 import { SelectAllOptions } from '#lib/types/Data';
-import { formatSuccessMessage, generateProfileEmbed } from '#lib/util/formatter';
+import { formatSuccessMessage, generateFactionEmbed } from '#lib/util/formatter';
 import { FactionStatus } from '@prisma/client';
 import { ApplyOptions } from '@sapphire/decorators';
 import { Command } from '@sapphire/framework';
@@ -75,7 +75,7 @@ export class UserCommand extends Command {
 			select: SelectAllOptions
 		});
 
-		const embed = generateProfileEmbed(faction);
+		const embed = generateFactionEmbed(faction);
 
 		interaction.reply({ content: formatSuccessMessage('Created Faction'), embeds: [embed] });
 	}
