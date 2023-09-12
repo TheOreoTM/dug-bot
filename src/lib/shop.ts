@@ -44,7 +44,7 @@ const itemsArray: ItemType[] = [
 		usable: true,
 		type: ItemTypes.Tool,
 		emoji: '🪙',
-		price: 40,
+		price: -1,
 		sellable: true
 	}
 ];
