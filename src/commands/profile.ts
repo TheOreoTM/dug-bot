@@ -8,6 +8,7 @@ import { Args, Command } from '@sapphire/framework';
 })
 export class UserCommand extends Command {
 	public override async messageRun(message: GuildMessage, args: Args) {
+		console.log('hi');
 		const member = await args.pick('member').catch(() => message.member);
 		const embed = await generateProfileEmbed(member);
 
