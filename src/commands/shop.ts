@@ -2,7 +2,7 @@ import { DugColors } from '#constants';
 import { PaginatedShop } from '#lib/classes/PaginatedShop';
 import { ApplyOptions } from '@sapphire/decorators';
 import { Command } from '@sapphire/framework';
-import { EmbedBuilder } from 'discord.js';
+import { EmbedBuilder, Message } from 'discord.js';
 
 @ApplyOptions<Command.Options>({
 	description: 'The Shop'
@@ -33,5 +33,16 @@ export class UserCommand extends Command {
 			new PaginatedShop({}).setTemplate(template).make().run(interaction, interaction.user);
 			return;
 		}
+	}
+
+	public override async messageRun(message: Message) {
+		const user = await this.container.db.user.getUser(message.author.id);
+		const template = new EmbedBuilder()
+			.setColor(DugColors.Default)
+			.setTitle('The Shop')
+			.setDescription(`Your balance: ${user.cash.toLocaleString()}`);
+
+		new PaginatedShop({}).setTemplate(template).make().run(message, message.author);
+		return;
 	}
 }
