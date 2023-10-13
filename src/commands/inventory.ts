@@ -16,7 +16,7 @@ export class UserCommand extends Command {
 	public override async messageRun(message: GuildMessage, args: Args) {
 		const target = await args.pick('member').catch(() => message.member);
 		const invItems: InventoryItemType[] = await this.container.db.user.getInventory(target.id);
-		const template = new EmbedBuilder().setTitle(`${message.author.username}'s Inventory`).setColor(DugColors.Default);
+		const template = new EmbedBuilder().setTitle(`${target.user.username}'s Inventory`).setColor(DugColors.Default);
 
 		if (invItems.length === 0) {
 			send(message, {
