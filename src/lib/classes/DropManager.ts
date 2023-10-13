@@ -14,11 +14,11 @@ export class DropManager {
 		if (!DropManager.instance) {
 			DropManager.instance = new DropManager();
 		}
+		console.log('hi');
 		return DropManager.instance;
 	}
 
 	public performDropLogic() {
-		console.log(`logiced`);
 		if (!this.allowDrop) return;
 		const randomDrop = this.getRandomDrop();
 		if (!randomDrop) return;
@@ -28,7 +28,6 @@ export class DropManager {
 
 	public triggerDrop(drop: DropType) {
 		container.client.emit(DugEvents.TriggerDrop, drop);
-		console.log('triggered');
 		this.allowDrop = false;
 	}
 

@@ -9,7 +9,6 @@ import { ActionRowBuilder, ButtonBuilder, ButtonInteraction, ButtonStyle, Compon
 @ApplyOptions<Listener.Options>({ event: DugEvents.TriggerDrop, name: DugEvents.TriggerDrop })
 export class UserEvent extends Listener {
 	public override async run(drop: DropType) {
-		console.log('i triggered');
 		const channel = this.container.client.channels.cache.get('1138806085998874746');
 		if (!channel || !channel.isTextBased()) return;
 
