@@ -9,7 +9,6 @@ export class UserCommand extends Command {
 	public override async messageRun() {
 		const manager = DropManager.getInstance();
 		manager.allowDrop = true;
-		console.log(manager);
 		manager.performDropLogic();
 	}
 }
