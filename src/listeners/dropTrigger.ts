@@ -50,7 +50,7 @@ export class UserEvent extends Listener {
 					],
 					components: [
 						new ActionRowBuilder<ButtonBuilder>().addComponents(
-							dropButton.setDisabled(true).setLabel('Expired').setStyle(ButtonStyle.Secondary)
+							dropButton.setDisabled(true).setLabel('Expired').setStyle(ButtonStyle.Secondary).setEmoji('🫳')
 						)
 					]
 				});
@@ -65,7 +65,7 @@ export class UserEvent extends Listener {
 				],
 				components: [
 					new ActionRowBuilder<ButtonBuilder>().addComponents(
-						dropButton.setDisabled(true).setLabel('Collected').setStyle(ButtonStyle.Success)
+						dropButton.setDisabled(true).setLabel('Collected').setStyle(ButtonStyle.Success).setEmoji('✊')
 					)
 				]
 			});
