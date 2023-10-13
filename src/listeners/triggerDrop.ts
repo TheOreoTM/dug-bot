@@ -28,7 +28,19 @@ export class UserEvent extends Listener {
 		const collector = response.createMessageComponentCollector({ componentType: ComponentType.Button, max: 1, maxUsers: 1, time: 60_000 });
 
 		collector.on('collect', async (i: ButtonInteraction) => {
-			await i.deferUpdate();
+			await i.update({
+				embeds: [
+					dropEmbed.addFields({
+						name: `Collected by:`,
+						value: userMention(i.user.id)
+					})
+				],
+				components: [
+					new ActionRowBuilder<ButtonBuilder>().addComponents(
+						dropButton.setDisabled(true).setLabel('Collected').setStyle(ButtonStyle.Success).setEmoji('✊')
+					)
+				]
+			});
 			const userId = i.user.id;
 			const itemData = AllItems.get(`${drop.id}crate`);
 			if (!itemData) return;
@@ -54,19 +66,6 @@ export class UserEvent extends Listener {
 				});
 				return;
 			}
-			response.edit({
-				embeds: [
-					dropEmbed.addFields({
-						name: `Collected by:`,
-						value: userMention(collectedBy.user.id)
-					})
-				],
-				components: [
-					new ActionRowBuilder<ButtonBuilder>().addComponents(
-						dropButton.setDisabled(true).setLabel('Collected').setStyle(ButtonStyle.Success).setEmoji('✊')
-					)
-				]
-			});
 		});
 	}
 }
