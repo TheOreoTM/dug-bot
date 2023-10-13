@@ -1,5 +1,5 @@
 import { Economy } from '#lib/classes/Economy';
-import { ShopItems } from '#lib/shop';
+import { ShopItems } from '#lib/items';
 import { formatFailMessage, formatSuccessMessage } from '#lib/util/formatter';
 import { ApplyOptions } from '@sapphire/decorators';
 import { Args, Command } from '@sapphire/framework';

@@ -2,7 +2,7 @@ import { Collection } from 'discord.js';
 import { ItemType } from './types/Data';
 import { ItemTypes } from './types/Enums';
 
-const itemsArray: ItemType[] = [
+const shopItemsArray: ItemType[] = [
 	{
 		name: 'Minor cipher hint',
 		description: 'A Minor Hint for the cipher task',
@@ -60,7 +60,57 @@ const itemsArray: ItemType[] = [
 	}
 ];
 
+const dropItemsArray: ItemType[] = [
+	{
+		name: 'Legendary Sword',
+		description: 'TODO',
+		emoji: '⚔️',
+		price: 10000,
+		sellable: true,
+		type: ItemTypes.Item,
+		usable: false,
+		usage: '',
+		value: `sword`
+	},
+
+	{
+		name: 'Elixir of Power',
+		description: 'TODO',
+		emoji: '🫕',
+		price: 10000,
+		sellable: true,
+		type: ItemTypes.Boost,
+		usable: true,
+		usage: 'Use this item to give your pet a 20% boost in strength',
+		value: `elixir`
+	},
+
+	{
+		name: 'Gold',
+		description: 'TODO',
+		emoji: '👛',
+		price: 10,
+		sellable: true,
+		type: ItemTypes.Item,
+		usable: false,
+		usage: '',
+		value: `gold`
+	}
+];
+
+const allItemsArray: ItemType[] = [...shopItemsArray, ...dropItemsArray];
+
+export const DropItems = new Collection<string, ItemType>();
+dropItemsArray.map((item) => {
+	DropItems.set(item.value, item);
+});
+
 export const ShopItems = new Collection<string, ItemType>();
-itemsArray.map((item) => {
+shopItemsArray.map((item) => {
 	ShopItems.set(item.value, item);
+});
+
+export const AllItems = new Collection<string, ItemType>();
+allItemsArray.map((item) => {
+	AllItems.set(item.value, item);
 });

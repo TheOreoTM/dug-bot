@@ -1,4 +1,5 @@
 import { Badge, FactionStatus, Title, User } from '@prisma/client';
+import { ColorResolvable } from 'discord.js';
 
 export type BadgeType = {
 	name: string;
@@ -72,3 +73,14 @@ export const TitleTexts = {
 } as const;
 
 export type TitleTexts = (typeof TitleTexts)[keyof typeof TitleTexts];
+
+export type DropType = {
+	color: ColorResolvable;
+	image: string;
+	description: string;
+	/**
+	 * The unique value of the item in the shop
+	 */
+	items: string[];
+	weight: number;
+};

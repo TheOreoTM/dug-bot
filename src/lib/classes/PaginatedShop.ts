@@ -1,5 +1,5 @@
 import { DugEmojis } from '#constants';
-import { ShopItems } from '#lib/shop';
+import { ShopItems } from '#lib/items';
 import { PaginatedMessageEmbedFields, PaginatedMessageOptions } from '@sapphire/discord.js-utilities';
 import { ButtonStyle, ComponentType, EmbedField } from 'discord.js';
 

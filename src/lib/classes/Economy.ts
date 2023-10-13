@@ -31,7 +31,7 @@ export namespace Economy {
 			return balance >= this.price;
 		}
 
-		public async buy(customer: string) {
+		public async buy(customer: string, free = false) {
 			const item = new Item(this);
 			const data: InventoryItemType = {
 				...item,
@@ -48,6 +48,7 @@ export namespace Economy {
 						}
 					})
 					.then(async () => {
+						if (free) return;
 						await container.db.user.update({
 							where: {
 								id: customer
