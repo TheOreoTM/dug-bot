@@ -11,6 +11,7 @@ export class UserCommand extends Command {
 	public override async messageRun(message: Message) {
 		await this.container.db.faction.deleteMany();
 		await this.container.db.user.deleteMany();
+		await this.container.db.item.deleteMany();
 		await resetAutoIncrement();
 
 		message.channel.send('done 👍');

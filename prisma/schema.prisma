@@ -7,10 +7,6 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Bruh {
-  bro String @id
-}
-
 model User {
   idx             Int              @default(autoincrement())
   id              String           @id @unique
