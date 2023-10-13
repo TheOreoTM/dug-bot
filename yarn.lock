@@ -477,6 +477,7 @@ __metadata:
     colorette: ^2.0.20
     discord.js: ^14.13.0
     fuzzysort: ^2.0.4
+    loot-table-advanced: ^1.4.6
     prettier: ^3.0.2
     prisma: ^5.2.0
     tsc-watch: ^6.0.4
@@ -620,6 +621,13 @@ __metadata:
   version: 4.17.21
   resolution: "lodash@npm:4.17.21"
   checksum: eb835a2e51d381e561e508ce932ea50a8e5a68f4ebdd771ea240d3048244a8d13658acbd502cd4829768c56f2e16bdd4340b9ea141297d472517b83868e677f7
+  languageName: node
+  linkType: hard
+
+"loot-table-advanced@npm:^1.4.6":
+  version: 1.4.6
+  resolution: "loot-table-advanced@npm:1.4.6"
+  checksum: b00b1549cbc2533ae5900d991152a0a306e64ddd69a102de8d96e991620258d5ca607682cb5a0f56fc89b4f11d494216c78da6068c418dcf8d303f58e869b50a
   languageName: node
   linkType: hard
 

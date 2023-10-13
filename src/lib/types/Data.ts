@@ -21,6 +21,15 @@ export type ItemType = {
 	price: number;
 };
 
+export type LootItemType = {
+	id: string;
+	amount: {
+		min: number;
+		max: number;
+	};
+	weight: number;
+};
+
 export type InventoryItemType = ItemType & {
 	ownerId: string | null;
 };

@@ -4,7 +4,7 @@ import { ItemTypes } from './types/Enums';
 import { DropTypes } from './classes/DropManager';
 import { DugEmojis } from '#constants';
 
-const shopItemsArray: ItemType[] = [
+const shopItemsArray: ReadonlyArray<ItemType> = [
 	{
 		name: 'Minor cipher hint',
 		description: 'A Minor Hint for the cipher task',
@@ -62,7 +62,7 @@ const shopItemsArray: ItemType[] = [
 	}
 ];
 
-const dropItemsArray: ItemType[] = [
+const dropItemsArray: ReadonlyArray<ItemType> = [
 	{
 		name: 'Legendary Crate',
 		description: DropTypes['legendary'].description,
@@ -122,7 +122,7 @@ const dropItemsArray: ItemType[] = [
 	}
 ];
 
-const allItemsArray: ItemType[] = [...shopItemsArray, ...dropItemsArray];
+const allItemsArray: ReadonlyArray<ItemType> = [...shopItemsArray, ...dropItemsArray];
 
 export const DropItems = new Collection<string, ItemType>();
 dropItemsArray.map((item) => {
