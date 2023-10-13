@@ -14,7 +14,6 @@ export class DropManager {
 		if (!DropManager.instance) {
 			DropManager.instance = new DropManager();
 		}
-		console.log('hi');
 		return DropManager.instance;
 	}
 
