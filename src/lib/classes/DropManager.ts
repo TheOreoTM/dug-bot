@@ -27,8 +27,8 @@ export class DropManager {
 	}
 
 	public triggerDrop(drop: DropType) {
-		console.log('triggered');
 		container.client.emit(DugEvents.TriggerDrop, drop);
+		console.log('triggered');
 		this.allowDrop = false;
 	}
 
