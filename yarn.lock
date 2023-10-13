@@ -226,6 +226,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@sapphire/plugin-editable-commands@npm:^3.0.3":
+  version: 3.0.3
+  resolution: "@sapphire/plugin-editable-commands@npm:3.0.3"
+  dependencies:
+    "@skyra/editable-commands": ^3.0.1
+  checksum: c4b6953df71447eb74f4b2e36709f04897e63798ac4bab6237da210dfe59b5cdbfd8f5eb31ca83367c2de69957b49a83d1a663de06825a534bcd039788456019
+  languageName: node
+  linkType: hard
+
 "@sapphire/plugin-logger@npm:^3.0.6":
   version: 3.0.6
   resolution: "@sapphire/plugin-logger@npm:3.0.6"
@@ -306,6 +315,13 @@ __metadata:
   version: 3.13.0
   resolution: "@sapphire/utilities@npm:3.13.0"
   checksum: c2f901c104459e01a24af71871294b700ff188925cf050558880486de6564792df2b7549796dd9fd6f309c12af7d4e2b2d2f4069ec9d4c27d9c3998eca3ac9a9
+  languageName: node
+  linkType: hard
+
+"@skyra/editable-commands@npm:^3.0.1":
+  version: 3.0.1
+  resolution: "@skyra/editable-commands@npm:3.0.1"
+  checksum: a945fa47d6f5df20396edc268ede830a79fcedb3f3fe57e91cca94e4d0a26af5e4e6f3c673e2eb3b2d182ae6c6acefcd3074df8e072dc647981d1dccda10ade8
   languageName: node
   linkType: hard
 
@@ -450,6 +466,7 @@ __metadata:
     "@sapphire/discord.js-utilities": ^7.0.2
     "@sapphire/framework": ^4.5.3
     "@sapphire/plugin-api": ^5.1.1
+    "@sapphire/plugin-editable-commands": ^3.0.3
     "@sapphire/plugin-logger": ^3.0.6
     "@sapphire/prettier-config": ^2.0.0
     "@sapphire/ts-config": ^5.0.0
