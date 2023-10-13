@@ -7,6 +7,7 @@ import { Command } from '@sapphire/framework';
 })
 export class UserCommand extends Command {
 	public override async messageRun() {
+		console.log('trigger');
 		const manager = DropManager.getInstance();
 		manager.allowDrop = true;
 		manager.performDropLogic();

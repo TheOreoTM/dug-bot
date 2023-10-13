@@ -23,9 +23,11 @@ export class DropManager {
 		if (!randomDrop) return;
 
 		this.triggerDrop(randomDrop);
+		console.log(`logiced`);
 	}
 
 	public triggerDrop(drop: DropType) {
+		console.log('triggered');
 		container.client.emit(DugEvents.TriggerDrop, drop);
 		this.allowDrop = false;
 	}
