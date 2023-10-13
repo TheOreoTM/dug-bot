@@ -1,6 +1,8 @@
+import { GuildMessage } from '#lib/types/Discord';
 import { formatFailMessage, formatSuccessMessage } from '#lib/util/formatter';
 import { ApplyOptions } from '@sapphire/decorators';
 import { Command } from '@sapphire/framework';
+import { reply } from '@sapphire/plugin-editable-commands';
 
 @ApplyOptions<Command.Options>({
 	description: 'Register to run commands'
@@ -19,5 +21,12 @@ export class UserCommand extends Command {
 			.register(interaction.user.id)
 			.then((data) => interaction.reply(formatSuccessMessage(`You have registered as \`User #${data.idx}\``)))
 			.catch(() => interaction.reply(formatFailMessage('Something went wrong')));
+	}
+
+	public override async messageRun(message: GuildMessage) {
+		await this.container.db.user
+			.register(message.author.id)
+			.then((data) => reply(message, formatSuccessMessage(`You have registered as \`User #${data.idx}\``)))
+			.catch(() => reply(message, formatFailMessage('Something went wrong')));
 	}
 }
