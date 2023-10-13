@@ -1,4 +1,3 @@
-import { DugEvents } from '#constants';
 import { Economy } from '#lib/classes/Economy';
 import { AllItems } from '#lib/items';
 import { DropType } from '#lib/types/Data';
@@ -6,7 +5,7 @@ import { ApplyOptions } from '@sapphire/decorators';
 import { Listener } from '@sapphire/framework';
 import { ActionRowBuilder, ButtonBuilder, ButtonInteraction, ButtonStyle, ComponentType, EmbedBuilder, userMention } from 'discord.js';
 
-@ApplyOptions<Listener.Options>({ event: DugEvents.TriggerDrop, name: 'Trigger Drop' })
+@ApplyOptions<Listener.Options>({ name: 'Trigger Drop' })
 export class UserEvent extends Listener {
 	public override async run(drop: DropType) {
 		const channel = this.container.client.channels.cache.get('1138806085998874746');
