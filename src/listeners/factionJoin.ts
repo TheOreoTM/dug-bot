@@ -1,8 +1,9 @@
 import { DugEvents } from '#constants';
 import { FactionType } from '#lib/types/Data';
-import { FactionStatus, User } from '@prisma/client';
+import { FactionStatus } from '@prisma/client';
 import { ApplyOptions } from '@sapphire/decorators';
 import { Listener } from '@sapphire/framework';
+import { User } from 'discord.js';
 
 @ApplyOptions<Listener.Options>({ event: DugEvents.FactionJoin })
 export class UserEvent extends Listener {
