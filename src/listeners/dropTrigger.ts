@@ -26,7 +26,7 @@ export class UserEvent extends Listener {
 			components: [new ActionRowBuilder<ButtonBuilder>().addComponents(dropButton)]
 		});
 
-		const collector = response.createMessageComponentCollector({ componentType: ComponentType.Button, max: 1, maxUsers: 1, idle: 60_000 });
+		const collector = response.createMessageComponentCollector({ componentType: ComponentType.Button, max: 1, maxUsers: 1, time: 60_000 });
 
 		collector.on('collect', async (i: ButtonInteraction) => {
 			i.reply({}).catch(() => null); // silent interaction
