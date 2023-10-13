@@ -17,7 +17,7 @@ export class UserCommand extends Command {
 			LootTableEntry('pearls', 5, 1, 5, 1, 2)
 		];
 
-		const loot = GetLoot(legendaryCrateLoot, 2);
+		const loot = GetLoot(legendaryCrateLoot);
 
 		message.channel.send(JSON.stringify(loot, null, 2));
 	}
