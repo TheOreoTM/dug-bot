@@ -18,12 +18,12 @@ export class DropManager {
 	}
 
 	public performDropLogic() {
+		console.log(`logiced`);
 		if (!this.allowDrop) return;
 		const randomDrop = this.getRandomDrop();
 		if (!randomDrop) return;
 
 		this.triggerDrop(randomDrop);
-		console.log(`logiced`);
 	}
 
 	public triggerDrop(drop: DropType) {
