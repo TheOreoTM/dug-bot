@@ -82,5 +82,15 @@ export type DropType = {
 	 * The unique value of the item in the shop
 	 */
 	items: string[];
+	id: DropRarityType;
 	weight: number;
 };
+
+export type DropRarityType = 'legendary' | 'mythic' | 'gold' | 'silver' | 'bronze';
+export enum DropRarityTypes {
+	Legendary = 'legendary',
+	Mythic = 'mythic',
+	Gold = 'gold',
+	Silver = 'silver',
+	Bronze = 'bronze'
+}

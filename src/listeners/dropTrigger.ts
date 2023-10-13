@@ -4,7 +4,6 @@ import { AllItems } from '#lib/items';
 import { DropType } from '#lib/types/Data';
 import { ApplyOptions } from '@sapphire/decorators';
 import { Listener } from '@sapphire/framework';
-import { pickRandom } from '@sapphire/utilities';
 import { ActionRowBuilder, ButtonBuilder, ButtonInteraction, ButtonStyle, ComponentType, EmbedBuilder, userMention } from 'discord.js';
 
 @ApplyOptions<Listener.Options>({ event: DugEvents.TriggerDrop })
@@ -32,8 +31,7 @@ export class UserEvent extends Listener {
 			// i.reply({}).catch(() => null); // silent interaction
 			await i.deferUpdate();
 			const userId = i.user.id;
-			const itemValue = pickRandom(drop.items);
-			const itemData = AllItems.get(itemValue);
+			const itemData = AllItems.get(drop.id);
 			if (!itemData) return;
 			const item = new Economy.Item(itemData);
 			item.buy(userId, true);

@@ -1,6 +1,8 @@
 import { Collection } from 'discord.js';
 import { ItemType } from './types/Data';
 import { ItemTypes } from './types/Enums';
+import { DropTypes } from './classes/DropManager';
+import { DugEmojis } from '#constants';
 
 const shopItemsArray: ItemType[] = [
 	{
@@ -62,39 +64,61 @@ const shopItemsArray: ItemType[] = [
 
 const dropItemsArray: ItemType[] = [
 	{
-		name: 'Legendary Sword',
-		description: 'TODO',
-		emoji: '⚔️',
-		price: 10000,
-		sellable: true,
+		name: 'Legendary Crate',
+		description: DropTypes['legendary'].description,
+		emoji: DugEmojis.LegendaryCrate,
+		price: 0,
+		sellable: false,
 		type: ItemTypes.Item,
-		usable: false,
-		usage: '',
-		value: `sword`
-	},
-
-	{
-		name: 'Elixir of Power',
-		description: 'TODO',
-		emoji: '🫕',
-		price: 10000,
-		sellable: true,
-		type: ItemTypes.Boost,
 		usable: true,
-		usage: 'Use this item to give your pet a 20% boost in strength',
-		value: `elixir`
+		usage: 'Open a legendary crate',
+		value: `legendarycrate`
 	},
 
 	{
-		name: 'Gold',
-		description: 'TODO',
-		emoji: '👛',
-		price: 10,
-		sellable: true,
+		name: 'Mythical Crate',
+		description: DropTypes['mythic'].description,
+		emoji: DugEmojis.MythicCrate,
+		price: 0,
+		sellable: false,
 		type: ItemTypes.Item,
-		usable: false,
-		usage: '',
-		value: `gold`
+		usable: true,
+		usage: 'Open a mythical crate',
+		value: `mythiccrate`
+	},
+
+	{
+		name: 'Golden Crate',
+		description: DropTypes['gold'].description,
+		emoji: DugEmojis.GoldCrate,
+		price: 0,
+		sellable: false,
+		type: ItemTypes.Item,
+		usable: true,
+		usage: 'Open a golden crate',
+		value: `goldcrate`
+	},
+	{
+		name: 'Silver Crate',
+		description: DropTypes['silver'].description,
+		emoji: DugEmojis.MythicCrate,
+		price: 0,
+		sellable: false,
+		type: ItemTypes.Item,
+		usable: true,
+		usage: 'Open a silver crate',
+		value: `silvercrate`
+	},
+	{
+		name: 'Bronze Crate',
+		description: DropTypes['bronze'].description,
+		emoji: DugEmojis.MythicCrate,
+		price: 0,
+		sellable: false,
+		type: ItemTypes.Item,
+		usable: true,
+		usage: 'Open a bronze crate',
+		value: `bronzecrate`
 	}
 ];
 

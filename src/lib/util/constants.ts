@@ -107,7 +107,12 @@ export const DugEmojis = {
 	Reply: '<:reply:1146683155370221639>',
 	Off: '<:off:1146683633483141140>',
 	On: '<:on:1146683600641736744>',
-	Points: '<:point:1151220466913136731>'
+	Points: '<:point:1151220466913136731>',
+	BronzeCrate: '<:crate_bronze:1162411168636350475>',
+	SilverCrate: '<:crate_silver:1162410744176980048>',
+	GoldCrate: '<:crate_gold:1162411133706190908>',
+	MythicCrate: '<:crate_mythic:1162410963492937728>',
+	LegendaryCrate: '<:crate_legendary:1162410877627154564>'
 };
 
 export const DropChannelID = '1138806085998874746';

@@ -1,5 +1,5 @@
 import { DugColors, DugEvents } from '#constants';
-import { DropType } from '#lib/types/Data';
+import { DropRarityType, DropRarityTypes, DropType } from '#lib/types/Data';
 import { container } from '@sapphire/framework';
 
 export class DropManager {
@@ -53,43 +53,46 @@ export class DropManager {
 	}
 }
 
-export class Drop {}
-
-const DropTypes: Record<string, DropType> = {
-	legendary: {
+export const DropTypes: Record<DropRarityType, DropType> = {
+	[DropRarityTypes.Legendary]: {
 		color: DugColors.Halloween,
 		image: 'https://i.imgur.com/pPdhdOa.png',
 		description: 'A crate with legendary items. Derived from the blood of ancient demons, these relics are steeped in mystery and power.',
 		items: ['sword', 'elixir'],
+		id: 'legendary',
 		weight: 1
 	},
-	mythic: {
+	[DropRarityTypes.Mythic]: {
 		color: DugColors.Halloween,
 		image: 'https://i.imgur.com/iLpFghe.png',
 		description: 'A crate with mythic items. Forged by mythical beings, these artifacts carry the essence of fabled heroes and gods.',
 		items: ['sword', 'elixir'],
-		weight: 2
+		weight: 2,
+		id: 'mythic'
 	},
-	gold: {
+	[DropRarityTypes.Gold]: {
 		color: DugColors.Halloween,
 		image: 'https://i.imgur.com/Knvbi1Z.png',
 		description: 'A crate with gold items. Treasures of prosperity, crafted from the finest materials and adorned with precious gems.',
 		items: ['sword', 'elixir'],
-		weight: 20
+		weight: 20,
+		id: 'gold'
 	},
-	silver: {
+	[DropRarityTypes.Silver]: {
 		color: DugColors.Halloween,
 		image: 'https://i.imgur.com/pXCDght.png',
 		description:
 			'A crate with silver items. Enchanted with lunar magic, these items offer ethereal abilities and guidance from celestial realms.',
 		items: ['gold'],
-		weight: 30
+		weight: 30,
+		id: 'silver'
 	},
-	bronze: {
+	[DropRarityTypes.Bronze]: {
 		color: DugColors.Halloween,
 		image: 'https://i.imgur.com/TlTfwV9.png',
 		description: 'A crate with bronze items. Holding ancient relics from a bygone era, these treasures carry the weight of history.',
 		items: ['gold'],
-		weight: 50
+		weight: 50,
+		id: 'bronze'
 	}
 };
