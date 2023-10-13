@@ -6,7 +6,7 @@ import { ApplyOptions } from '@sapphire/decorators';
 import { Listener } from '@sapphire/framework';
 import { ActionRowBuilder, ButtonBuilder, ButtonInteraction, ButtonStyle, ComponentType, EmbedBuilder, userMention } from 'discord.js';
 
-@ApplyOptions<Listener.Options>({ event: DugEvents.TriggerDrop })
+@ApplyOptions<Listener.Options>({ event: DugEvents.TriggerDrop, name: DugEvents.TriggerDrop })
 export class UserEvent extends Listener {
 	public override async run(drop: DropType) {
 		console.log('i triggered');
