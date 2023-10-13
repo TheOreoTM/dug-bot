@@ -29,7 +29,8 @@ export class UserEvent extends Listener {
 		const collector = response.createMessageComponentCollector({ componentType: ComponentType.Button, max: 1, maxUsers: 1, time: 60_000 });
 
 		collector.on('collect', async (i: ButtonInteraction) => {
-			i.reply({}).catch(() => null); // silent interaction
+			// i.reply({}).catch(() => null); // silent interaction
+			await i.deferUpdate();
 			const userId = i.user.id;
 			const itemValue = pickRandom(drop.items);
 			const itemData = AllItems.get(itemValue);
