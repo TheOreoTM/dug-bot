@@ -101,7 +101,7 @@ const dropItemsArray: ItemType[] = [
 	{
 		name: 'Silver Crate',
 		description: DropTypes['silver'].description,
-		emoji: DugEmojis.MythicCrate,
+		emoji: DugEmojis.SilverCrate,
 		price: 0,
 		sellable: false,
 		type: ItemTypes.Item,
@@ -112,7 +112,7 @@ const dropItemsArray: ItemType[] = [
 	{
 		name: 'Bronze Crate',
 		description: DropTypes['bronze'].description,
-		emoji: DugEmojis.MythicCrate,
+		emoji: DugEmojis.BronzeCrate,
 		price: 0,
 		sellable: false,
 		type: ItemTypes.Item,
