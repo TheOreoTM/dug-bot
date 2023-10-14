@@ -51,6 +51,14 @@ model Item {
   owner       User?   @relation(fields: [ownerId], references: [id])
 }
 
+enum PrismaDropRarityType {
+  legendary
+  mythic
+  gold
+  silver
+  bronze
+}
+
 enum Badge {
   BETA_TESTER
   ELITE_LEVEL
