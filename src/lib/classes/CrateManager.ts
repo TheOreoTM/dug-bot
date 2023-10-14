@@ -3,10 +3,10 @@ import { GetLoot, LootTable, LootTableEntry } from 'loot-table-advanced';
 
 export class Crate {
 	private legendaryLootTable = legendaryLootTable;
-	private mythicLootTable = legendaryLootTable;
-	private goldLootTable = legendaryLootTable;
-	private silverLootTable = legendaryLootTable;
-	private bronzeLootTable = legendaryLootTable;
+	private mythicLootTable = mythicLootTable;
+	private goldLootTable = goldLootTable;
+	private silverLootTable = silverLootTable;
+	private bronzeLootTable = bronzeLootTable;
 
 	// public constructor(data: Partial<DropType>) {
 	// 	this.data = {
@@ -29,16 +29,12 @@ export class Crate {
 				return this.openLegendary();
 			case 'mythic':
 				return this.openMythic();
-
 			case 'gold':
 				return this.openGold();
-
 			case 'silver':
 				return this.openSilver();
-
 			case 'bronze':
 				return this.openBronze();
-
 			default:
 				return this.openBronze();
 		}
@@ -78,3 +74,26 @@ const legendaryLootTable: LootTable = [
 	LootTableEntry('diamond', 10, 1, 3, 1, 2),
 	LootTableEntry('pearls', 5, 1, 5, 1, 2)
 ];
+
+const mythicLootTable: LootTable = [
+	LootTableEntry('coin', 55, 15, 80, 6, 1),
+	LootTableEntry('sword', 8, 1, 1, 1, 2),
+	LootTableEntry('gold', 15, 1, 4, 1, 2),
+	LootTableEntry('silver', 25, 4, 10, 2, 2),
+	LootTableEntry('diamond', 8, 1, 3, 1, 2)
+];
+
+const goldLootTable: LootTable = [
+	LootTableEntry('coin', 60, 15, 70, 8, 1),
+	LootTableEntry('sword', 8, 1, 1, 1, 2),
+	LootTableEntry('gold', 10, 1, 4, 1, 2),
+	LootTableEntry('silver', 20, 4, 10, 2, 2)
+];
+
+const silverLootTable: LootTable = [
+	LootTableEntry('coin', 80, 20, 60, 8, 1),
+	LootTableEntry('sword', 8, 1, 1, 1, 2),
+	LootTableEntry('silver', 20, 4, 10, 2, 2)
+];
+
+const bronzeLootTable: LootTable = [LootTableEntry('coin', 85, 20, 60, 8, 1), LootTableEntry('sword', 4, 1, 1, 1, 2)];
