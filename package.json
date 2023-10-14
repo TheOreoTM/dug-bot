@@ -20,6 +20,7 @@
 		"@sapphire/plugin-api": "^5.1.1",
 		"@sapphire/plugin-editable-commands": "^3.0.3",
 		"@sapphire/plugin-logger": "^3.0.6",
+		"@sapphire/time-utilities": "^1.7.10",
 		"@sapphire/utilities": "^3.13.0",
 		"@skyra/env-utilities": "^1.2.1",
 		"colorette": "^2.0.20",
