@@ -137,7 +137,7 @@ export const MythicLootTable: LootTable = [
 ];
 
 export const GoldLootTable: LootTable = [
-	LootTableEntry(Items.Coins, 60, 15, 70, 8, 1),
+	LootTableEntry(Items.Coins, 60, 50, 125, 8, 1),
 	LootTableEntry('sword', 8, 1, 1, 1, 2),
 	LootTableEntry('gold', 10, 1, 4, 1, 2),
 	LootTableEntry('silver', 20, 4, 10, 2, 2)
