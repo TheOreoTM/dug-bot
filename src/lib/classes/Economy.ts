@@ -1,19 +1,20 @@
 import { InventoryItemType, ItemType } from '#lib/types/Data';
-import { ItemTypes } from '#lib/types/Enums';
+import { ItemTypes, Items } from '#lib/types/Enums';
 import { convertValueToBadge } from '#lib/util/formatter';
 import { container } from '@sapphire/framework';
 
 export namespace Economy {
 	export class Item implements ItemType {
-		public readonly name: string;
-		public readonly description: string;
-		public readonly usage: string;
-		public readonly usable: boolean;
-		public readonly type: string;
-		public readonly emoji: string;
-		public readonly sellable: boolean;
-		public readonly value: string;
-		public readonly price: number;
+		public name: string;
+		public description: string;
+		public usage: string;
+		public usable: boolean;
+		public type: string;
+		public emoji: string;
+		public sellable: boolean;
+		public sellPrice?: number | undefined;
+		public value: Items;
+		public price: number;
 
 		public constructor(data: ItemType) {
 			this.name = data.name;
