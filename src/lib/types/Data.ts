@@ -95,9 +95,9 @@ export type DropType = {
 	weight: number;
 };
 
-export type DropRarityType = 'legendary' | 'mythic' | 'gold' | 'silver' | 'bronze';
+export type DropRarityType = 'mythic' | 'gold' | 'silver' | 'bronze'; // | 'legendary'
 export enum DropRarityTypes {
-	Legendary = 'legendary',
+	// Legendary = 'legendary',
 	Mythic = 'mythic',
 	Gold = 'gold',
 	Silver = 'silver',

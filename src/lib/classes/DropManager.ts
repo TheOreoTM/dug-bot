@@ -54,14 +54,14 @@ export class DropManager {
 }
 
 export const DropTypes: Record<DropRarityType, DropType> = {
-	[DropRarityTypes.Legendary]: {
-		color: DugColors.Halloween,
-		image: 'https://i.imgur.com/pPdhdOa.png',
-		description: 'A crate with legendary items. Derived from the blood of ancient demons, these relics are steeped in mystery and power.',
-		items: ['sword', 'elixir'],
-		id: 'legendary',
-		weight: 1
-	},
+	// [DropRarityTypes.Legendary]: {
+	// 	color: DugColors.Halloween,
+	// 	image: 'https://i.imgur.com/pPdhdOa.png',
+	// 	description: 'A crate with legendary items. Derived from the blood of ancient demons, these relics are steeped in mystery and power.',
+	// 	items: ['sword', 'elixir'],
+	// 	id: 'legendary',
+	// 	weight: 1
+	// },
 	[DropRarityTypes.Mythic]: {
 		color: DugColors.Halloween,
 		image: 'https://i.imgur.com/iLpFghe.png',

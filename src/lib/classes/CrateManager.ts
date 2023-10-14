@@ -2,22 +2,11 @@ import { DropRarityType } from '#lib/types/Data';
 import { GetLoot, LootTable, LootTableEntry } from 'loot-table-advanced';
 
 export class Crate {
-	private legendaryLootTable = legendaryLootTable;
+	// private legendaryLootTable = legendaryLootTable;
 	private mythicLootTable = mythicLootTable;
 	private goldLootTable = goldLootTable;
 	private silverLootTable = silverLootTable;
 	private bronzeLootTable = bronzeLootTable;
-
-	// public constructor(data: Partial<DropType>) {
-	// 	this.data = {
-	// 		color: data.color || DugColors.Halloween,
-	// 		description: data.description || 'A crate',
-	// 		id: data.id || 'bronze',
-	// 		image: data.image || '',
-	// 		items: data.items || [],
-	// 		weight: data.weight || 50
-	// 	};
-	// }
 
 	public constructor(readonly crateId: DropRarityType) {
 		this.crateId = crateId;
@@ -25,8 +14,8 @@ export class Crate {
 
 	public open() {
 		switch (this.crateId) {
-			case 'legendary':
-				return this.openLegendary();
+			// case 'legendary':
+			// 	return this.openLegendary();
 			case 'mythic':
 				return this.openMythic();
 			case 'gold':
@@ -60,20 +49,20 @@ export class Crate {
 		return loot;
 	}
 
-	private openLegendary() {
-		const loot = GetLoot(this.legendaryLootTable);
-		return loot;
-	}
+	// private openLegendary() {
+	// 	const loot = GetLoot(this.legendaryLootTable);
+	// 	return loot;
+	// }
 }
 
-const legendaryLootTable: LootTable = [
-	LootTableEntry('coin', 50, 80, 200, 8, 1),
-	LootTableEntry('sword', 10, 1, 1, 1, 2),
-	LootTableEntry('gold', 20, 1, 5, 1, 2),
-	LootTableEntry('silver', 30, 5, 10, 2, 2),
-	LootTableEntry('diamond', 10, 1, 3, 1, 2),
-	LootTableEntry('pearls', 5, 1, 5, 1, 2)
-];
+// const legendaryLootTable: LootTable = [
+// 	LootTableEntry('coin', 50, 80, 200, 8, 1),
+// 	LootTableEntry('sword', 10, 1, 1, 1, 2),
+// 	LootTableEntry('gold', 20, 1, 5, 1, 2),
+// 	LootTableEntry('silver', 30, 5, 10, 2, 2),
+// 	LootTableEntry('diamond', 10, 1, 3, 1, 2),
+// 	LootTableEntry('pearls', 5, 1, 5, 1, 2)
+// ];
 
 const mythicLootTable: LootTable = [
 	LootTableEntry('coin', 55, 50, 150, 6, 1),
