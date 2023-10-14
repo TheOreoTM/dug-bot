@@ -22,7 +22,7 @@ export class UserCommand extends Command {
 
 		const amountOfCratesAvailable = await this.container.db.item.findMany({
 			where: {
-				value: crateName,
+				value: `${crateName}crate`,
 				ownerId: message.author.id
 			}
 		});
