@@ -464,6 +464,7 @@ __metadata:
     "@sapphire/cli": ^1.6.1
     "@sapphire/decorators": ^6.0.2
     "@sapphire/discord.js-utilities": ^7.0.2
+    "@sapphire/duration": ^1.1.0
     "@sapphire/framework": ^4.5.3
     "@sapphire/plugin-api": ^5.1.1
     "@sapphire/plugin-editable-commands": ^3.0.3
