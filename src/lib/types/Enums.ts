@@ -12,5 +12,6 @@ export enum Items {
 	MythicCrate = 'mythiccrate',
 	GoldCrate = 'goldcrate',
 	SilverCrate = 'silvercrate',
-	BronzeCrate = 'bronzecrate'
+	BronzeCrate = 'bronzecrate',
+	Coins = 'coins'
 }
