@@ -42,10 +42,10 @@ export class UserCommand extends Command {
 
 		send(message, JSON.stringify(loot, null, 2));
 
-		this.container.db.item.delete({
-			where: {
-				id: crateData.id
-			}
-		});
+		// this.container.db.item.delete({
+		// 	where: {
+		// 		id: crateData.id
+		// 	}
+		// });
 	}
 }
