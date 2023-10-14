@@ -35,10 +35,6 @@ export class UserCommand extends Command {
 
 		const crate = new Crate(crateName);
 		const loot = crate.open();
-		if (!loot) {
-			send(message, 'You got nothing lmao');
-			return;
-		}
 
 		send(message, JSON.stringify(loot, null, 2));
 
