@@ -67,7 +67,7 @@ export class Crate {
 }
 
 const legendaryLootTable: LootTable = [
-	LootTableEntry('coin', 50, 20, 100, 8, 1),
+	LootTableEntry('coin', 50, 80, 200, 8, 1),
 	LootTableEntry('sword', 10, 1, 1, 1, 2),
 	LootTableEntry('gold', 20, 1, 5, 1, 2),
 	LootTableEntry('silver', 30, 5, 10, 2, 2),
@@ -76,7 +76,7 @@ const legendaryLootTable: LootTable = [
 ];
 
 const mythicLootTable: LootTable = [
-	LootTableEntry('coin', 55, 15, 80, 6, 1),
+	LootTableEntry('coin', 55, 50, 150, 6, 1),
 	LootTableEntry('sword', 8, 1, 1, 1, 2),
 	LootTableEntry('gold', 15, 1, 4, 1, 2),
 	LootTableEntry('silver', 25, 4, 10, 2, 2),
@@ -93,7 +93,8 @@ const goldLootTable: LootTable = [
 const silverLootTable: LootTable = [
 	LootTableEntry('coin', 80, 20, 60, 8, 1),
 	LootTableEntry('sword', 8, 1, 1, 1, 2),
-	LootTableEntry('silver', 20, 4, 10, 2, 2)
+	LootTableEntry('silver', 20, 4, 10, 2, 2),
+	LootTableEntry(null, 20)
 ];
 
 const bronzeLootTable: LootTable = [LootTableEntry('coin', 85, 20, 60, 8, 1), LootTableEntry('sword', 4, 1, 1, 1, 2)];
