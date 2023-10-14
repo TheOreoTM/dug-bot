@@ -20,14 +20,17 @@ export class UserCommand extends Command {
 			return;
 		}
 
-		const amountOfCratesAvailable = await this.container.db.item.count({
+		const amountOfCratesAvailable = await this.container.db.item.findMany({
 			where: {
 				value: crateName,
 				ownerId: message.author.id
 			}
 		});
 
-		if (amountOfCratesAvailable < amountToOpen) {
+		const inv = await this.container.db.user.getInventory(message.author.id);
+		console.log(inv, amountOfCratesAvailable);
+
+		if (amountOfCratesAvailable.length < amountToOpen) {
 			send(message, formatFailMessage(`You dont have enough \`${crateName}\` crates`));
 			return;
 		}
