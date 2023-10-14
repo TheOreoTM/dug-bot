@@ -10,6 +10,15 @@ import { cyan } from 'colorette';
 import type { APIUser, Guild, User } from 'discord.js';
 import fuzzysort from 'fuzzysort';
 
+/**
+ *
+ * @param crateName The name of the crate
+ * @returns The expected value of the crate in the db
+ */
+export function rarityToValue(crateName: string) {
+	return `${crateName.toLowerCase()}crate` as const;
+}
+
 export function groupItems(items: InventoryItemType[]) {
 	const itemInfo: Record<string, InventoryItemTypeWithCount> = {};
 
