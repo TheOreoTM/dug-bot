@@ -1,10 +1,12 @@
+import { DugColors } from '#constants';
 import { Crate } from '#lib/classes/CrateManager';
+import { AllItems } from '#lib/items';
 import { formatFailMessage } from '#lib/util/formatter';
 import { rarityToValue } from '#lib/util/utils';
 import { ApplyOptions } from '@sapphire/decorators';
 import { Args, Command } from '@sapphire/framework';
 import { send } from '@sapphire/plugin-editable-commands';
-import type { Message } from 'discord.js';
+import { EmbedBuilder, type Message } from 'discord.js';
 
 @ApplyOptions<Command.Options>({
 	description: 'A basic command'
@@ -36,12 +38,16 @@ export class UserCommand extends Command {
 		const crate = new Crate(crateName);
 		const loot = crate.open();
 
-		send(message, JSON.stringify(loot, null, 2));
+		const description: string[] = [];
+		loot.forEach((item) => {
+			if (!item.id) return;
+			const itemData = AllItems.get(item.id);
+			if (!itemData) return;
+			description.push(`${itemData.emoji} **${itemData.name}** x \`${item.quantity}\``);
+		});
 
-		// this.container.db.item.delete({
-		// 	where: {
-		// 		id: crateData.id
-		// 	}
-		// });
+		const embed = new EmbedBuilder().setTitle(`Crate Opening Results`).setColor(DugColors.Halloween).setDescription(description.join('\n'));
+
+		send(message, { embeds: [embed] });
 	}
 }
