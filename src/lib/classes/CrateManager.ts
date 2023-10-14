@@ -24,7 +24,6 @@ export class Crate {
 	}
 
 	public open() {
-		if (this.crateId) return null;
 		switch (this.crateId) {
 			case 'legendary':
 				return this.openLegendary();
