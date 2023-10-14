@@ -1,12 +1,13 @@
+import { BronzeLootTable, GoldLootTable, MythicLootTable, SilverLootTable } from '#lib/items';
 import { DropRarityType } from '#lib/types/Data';
-import { GetLoot, LootTable, LootTableEntry } from 'loot-table-advanced';
+import { GetLoot } from 'loot-table-advanced';
 
 export class Crate {
 	// private legendaryLootTable = legendaryLootTable;
-	private mythicLootTable = mythicLootTable;
-	private goldLootTable = goldLootTable;
-	private silverLootTable = silverLootTable;
-	private bronzeLootTable = bronzeLootTable;
+	private mythicLootTable = MythicLootTable;
+	private goldLootTable = GoldLootTable;
+	private silverLootTable = SilverLootTable;
+	private bronzeLootTable = BronzeLootTable;
 
 	public constructor(readonly crateId: DropRarityType) {
 		this.crateId = crateId;
@@ -63,27 +64,3 @@ export class Crate {
 // 	LootTableEntry('diamond', 10, 1, 3, 1, 2),
 // 	LootTableEntry('pearls', 5, 1, 5, 1, 2)
 // ];
-
-const mythicLootTable: LootTable = [
-	LootTableEntry('coin', 55, 50, 150, 6, 1),
-	LootTableEntry('sword', 8, 1, 1, 1, 2),
-	LootTableEntry('gold', 15, 1, 4, 1, 2),
-	LootTableEntry('silver', 25, 4, 10, 2, 2),
-	LootTableEntry('diamond', 8, 1, 3, 1, 2)
-];
-
-const goldLootTable: LootTable = [
-	LootTableEntry('coin', 60, 15, 70, 8, 1),
-	LootTableEntry('sword', 8, 1, 1, 1, 2),
-	LootTableEntry('gold', 10, 1, 4, 1, 2),
-	LootTableEntry('silver', 20, 4, 10, 2, 2)
-];
-
-const silverLootTable: LootTable = [
-	LootTableEntry('coin', 80, 20, 60, 8, 1),
-	LootTableEntry('sword', 8, 1, 1, 1, 2),
-	LootTableEntry('silver', 20, 4, 10, 2, 2),
-	LootTableEntry(null, 20)
-];
-
-const bronzeLootTable: LootTable = [LootTableEntry('coin', 85, 20, 60, 8, 1), LootTableEntry('sword', 4, 1, 1, 1, 2)];

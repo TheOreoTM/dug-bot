@@ -1,3 +1,4 @@
+import { InventoryItemType } from '#lib/types/Data';
 import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 
@@ -60,7 +61,7 @@ export const xprisma = new PrismaClient().$extends({
 					}
 				});
 
-				return items;
+				return items as InventoryItemType[];
 			}
 		}
 	}

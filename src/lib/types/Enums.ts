@@ -5,3 +5,12 @@ export enum ItemTypes {
 	Badge = 'BADGE',
 	Title = 'TITLE'
 }
+
+export enum Items {
+	Ticket = 'ticket',
+	TicketFragment = 'ticketfragment',
+	MythicCrate = 'mythiccrate',
+	GoldCrate = 'goldcrate',
+	SilverCrate = 'silvercrate',
+	BronzeCrate = 'bronzecrate'
+}

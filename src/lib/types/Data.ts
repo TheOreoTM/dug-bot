@@ -1,5 +1,6 @@
 import { Badge, FactionStatus, Title, User } from '@prisma/client';
 import { ColorResolvable } from 'discord.js';
+import { Items } from './Enums';
 
 export type BadgeType = {
 	name: string;
@@ -16,8 +17,9 @@ export type ItemType = {
 	usable: boolean;
 	type: string;
 	emoji: string;
+	sellPrice?: number;
 	sellable: boolean;
-	value: string;
+	value: Items;
 	price: number;
 };
 

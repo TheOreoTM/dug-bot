@@ -45,6 +45,7 @@ model Item {
   type        String
   emoji       String
   sellable    Boolean
+  sellPrice   Int
   value       String
   ownerId     String?
   price       Int
