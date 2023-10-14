@@ -129,7 +129,7 @@ allItemsArray.map((item) => {
 });
 
 export const MythicLootTable: LootTable = [
-	LootTableEntry('coins', 55, 50, 150, 6, 1),
+	LootTableEntry(Items.Coins, 55, 50, 150, 6, 1),
 	LootTableEntry('sword', 8, 1, 1, 1, 2),
 	LootTableEntry('gold', 15, 1, 4, 1, 2),
 	LootTableEntry('silver', 25, 4, 10, 2, 2),
@@ -137,21 +137,21 @@ export const MythicLootTable: LootTable = [
 ];
 
 export const GoldLootTable: LootTable = [
-	LootTableEntry('coin', 60, 15, 70, 8, 1),
+	LootTableEntry(Items.Coins, 60, 15, 70, 8, 1),
 	LootTableEntry('sword', 8, 1, 1, 1, 2),
 	LootTableEntry('gold', 10, 1, 4, 1, 2),
 	LootTableEntry('silver', 20, 4, 10, 2, 2)
 ];
 
 export const SilverLootTable: LootTable = [
-	LootTableEntry('coin', 80, 20, 60, 8, 1),
+	LootTableEntry(Items.Coins, 80, 20, 60, 8, 1),
 	LootTableEntry('sword', 8, 1, 1, 1, 2),
 	LootTableEntry('silver', 20, 4, 10, 2, 2),
 	LootTableEntry(null, 20, 1, 1, 1, 2)
 ];
 
 export const BronzeLootTable: LootTable = [
-	LootTableEntry('coin', 85, 20, 60, 8, 1),
+	LootTableEntry(Items.Coins, 85, 20, 60, 8, 1),
 	LootTableEntry('sword', 4, 1, 1, 1, 2),
 	LootTableEntry(Items.Ticket, 90, 1, 5, 1, 3),
 	LootTableEntry(null, 10, 1, 1, 1, 2)
