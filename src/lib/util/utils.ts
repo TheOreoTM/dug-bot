@@ -20,7 +20,7 @@ export function genRandomInt(min: number, max: number) {
 }
 
 export function xpOfLevel(level: number) {
-	return Math.round((5 / 6) * (level + 1) * (2 * (level + 1) * (level + 1) + 27 * (level + 1) + 91));
+	return Math.round((5 / 6) * level * (2 * level * level + 27 * level + 91));
 }
 
 export function getLevelInfo(currentLevel: number) {
