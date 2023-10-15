@@ -26,7 +26,7 @@ export function xpOfLevel(level: number) {
 export function getLevelInfo(currentLevel: number) {
 	let xpToDesiredLevel = xpOfLevel(currentLevel);
 	let xpOfCurrentLevel = xpOfLevel(currentLevel + 1);
-	let xpNeeded = xpToDesiredLevel - xpOfCurrentLevel;
+	let xpNeeded = xpOfCurrentLevel - xpToDesiredLevel;
 	return {
 		level: currentLevel,
 		totalXpToNextLevel: xpToDesiredLevel,
