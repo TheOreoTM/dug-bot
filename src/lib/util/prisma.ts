@@ -70,14 +70,22 @@ export const xprisma = new PrismaClient().$extends({
 			async addXp(userId: string, amount?: number) {
 				if (!amount) amount = genRandomXp();
 
-				const data = await prisma.userLevel.update({
+				const data = await prisma.userLevel.upsert({
 					where: {
 						userId
 					},
-					data: {
+					update: {
 						currentXp: {
 							increment: amount
+						},
+						totalXp: {
+							increment: amount
 						}
+					},
+					create: {
+						currentXp: amount,
+						totalXp: amount,
+						userId
 					}
 				});
 
