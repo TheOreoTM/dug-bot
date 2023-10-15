@@ -7,6 +7,7 @@ export class UserEvent extends Listener {
 	public override async run(message: GuildMessage) {
 		const member = message.member;
 		const shouldAddXP = await this.container.db.userLevel.shouldAddXP(member.id);
+		console.log('🚀 ~ file: leveling.ts:10 ~ UserEvent ~ overriderun ~ shouldAddXP:', shouldAddXP);
 		if (!shouldAddXP) return;
 		await this.container.db.userLevel.addXp(member.id);
 
