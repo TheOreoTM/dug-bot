@@ -13,9 +13,12 @@ export class UserEvent extends Listener {
 		if (!shouldAddXP) return;
 		await this.container.db.userLevel.addXp(member.id);
 
-		const data = await this.container.db.userLevel.findUnique({
+		const data = await this.container.db.userLevel.update({
 			where: {
 				userId: member.id
+			},
+			data: {
+				lastXpEarned: new Date()
 			}
 		});
 
