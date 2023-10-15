@@ -93,7 +93,7 @@ export const xprisma = new PrismaClient().$extends({
 					let levelsToAdd = 0;
 					let requiredXp = data.requiredXp;
 					let currentXp = data.currentXp;
-					while (data.currentXp >= requiredXp) {
+					while (currentXp >= requiredXp) {
 						currentXp -= requiredXp;
 						levelsToAdd++;
 
