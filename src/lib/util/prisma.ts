@@ -23,10 +23,10 @@ export const xprisma = new PrismaClient().$extends({
 
 				// Check if it's been more than 45 seconds since last XP earned
 				if (secondsSinceLastXp > 45) {
-					return false;
+					return true;
 				}
 
-				return true;
+				return false;
 			},
 
 			async getRequiredXp(userId: string) {
