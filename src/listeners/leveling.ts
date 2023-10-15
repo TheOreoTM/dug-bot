@@ -6,6 +6,7 @@ import { Listener } from '@sapphire/framework';
 @ApplyOptions<Listener.Options>({ event: DugEvents.MessageCreate })
 export class UserEvent extends Listener {
 	public override async run(message: GuildMessage) {
+		if (message.content === '' || message.author.bot) return;
 		const member = message.member;
 		const shouldAddXP = await this.container.db.userLevel.shouldAddXP(member.id);
 		if (!shouldAddXP) return;
