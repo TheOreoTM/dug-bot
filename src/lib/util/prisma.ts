@@ -1,10 +1,110 @@
 import { InventoryItemType } from '#lib/types/Data';
 import { PrismaClient } from '@prisma/client';
+import { genRandomXp, getLevelInfo } from '#utils/utils';
 const prisma = new PrismaClient();
 
 export const xprisma = new PrismaClient().$extends({
 	name: 'xprisma',
 	model: {
+		userLevel: {
+			async shouldAddXP(userId: string) {
+				const data = await prisma.userLevel.findUnique({
+					where: {
+						userId
+					}
+				});
+				if (!data) return true;
+				const now = new Date();
+				const lastXpEarned = new Date(data.lastXpEarned);
+
+				// Calculate the time difference in milliseconds
+				const millisecondsSinceLastXp = now.getTime() - lastXpEarned.getTime();
+				const secondsSinceLastXp = Math.floor(millisecondsSinceLastXp / 1000);
+
+				// Check if it's been more than 45 seconds since last XP earned
+				if (secondsSinceLastXp > 45) {
+					return false;
+				}
+
+				return true;
+			},
+
+			async getRequiredXp(userId: string) {
+				const data = await prisma.userLevel.findUnique({
+					where: {
+						userId
+					}
+				});
+
+				return data?.requiredXp ? data.requiredXp : 100;
+			},
+			async getCurrentLevel(userId: string) {
+				const data = await prisma.userLevel.findUnique({
+					where: {
+						userId
+					}
+				});
+
+				return data?.currentLevel ? data.currentLevel : 0;
+			},
+
+			async getTotalXp(userId: string) {
+				const data = await prisma.userLevel.findUnique({
+					where: {
+						userId
+					}
+				});
+
+				return data?.totalXp ? data.totalXp : 0;
+			},
+			async getCurrentXp(userId: string) {
+				const data = await prisma.userLevel.findUnique({
+					where: {
+						userId
+					}
+				});
+
+				return data?.currentXp ? data.currentXp : 0;
+			},
+
+			async addXp(userId: string, amount?: number) {
+				if (!amount) amount = genRandomXp();
+
+				const data = await prisma.userLevel.update({
+					where: {
+						userId
+					},
+					data: {
+						currentXp: {
+							increment: amount
+						}
+					}
+				});
+
+				if (data.currentXp >= data.requiredXp) {
+					let levelsToAdd = 0;
+					let requiredXp = data.requiredXp;
+					let currentXp = data.currentXp;
+					while (data.currentXp >= requiredXp) {
+						currentXp -= requiredXp;
+						levelsToAdd++;
+
+						requiredXp = getLevelInfo(data.currentLevel + levelsToAdd).xpNeededToLevelUp;
+					}
+
+					await prisma.userLevel.update({
+						where: {
+							userId
+						},
+						data: {
+							currentLevel: {
+								increment: levelsToAdd
+							}
+						}
+					});
+				}
+			}
+		},
 		user: {
 			async isRegistered(userId: string) {
 				const user = await prisma.user.findUnique({

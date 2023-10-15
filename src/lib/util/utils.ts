@@ -10,6 +10,31 @@ import { cyan } from 'colorette';
 import type { APIUser, Guild, User } from 'discord.js';
 import fuzzysort from 'fuzzysort';
 
+export function genRandomXp() {
+	return genRandomInt(15, 25);
+}
+
+export function genRandomInt(min: number, max: number) {
+	// min and max included
+	return Math.floor(Math.random() * (max - min + 1) + min);
+}
+
+export function xpOfLevel(level: number) {
+	return Math.round((5 / 6) * (level + 1) * (2 * (level + 1) * (level + 1) + 27 * (level + 1) + 91));
+}
+
+export function getLevelInfo(currentLevel: number) {
+	let xpToDesiredLevel = xpOfLevel(currentLevel);
+	let xpOfCurrentLevel = xpOfLevel(currentLevel + 1);
+	let xpNeeded = xpToDesiredLevel - xpOfCurrentLevel;
+	return {
+		level: currentLevel,
+		totalXpToNextLevel: xpToDesiredLevel,
+		totalXpOfCurrentLevel: xpOfCurrentLevel,
+		xpNeededToLevelUp: xpNeeded
+	};
+}
+
 /**
  *
  * @param crateName The name of the crate
