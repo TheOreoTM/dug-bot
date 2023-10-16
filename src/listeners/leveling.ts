@@ -10,8 +10,6 @@ export class UserEvent extends Listener {
 		const member = message.member;
 		// const shouldAddXP = await this.container.db.userLevel.shouldAddXP(member.id);
 		// if (!shouldAddXP) return;
-		await this.container.db.userLevel.addXp(member.id);
-
 		const data = await this.container.db.userLevel.update({
 			where: {
 				userId: member.id
@@ -19,6 +17,9 @@ export class UserEvent extends Listener {
 			data: {
 				lastXpEarned: new Date()
 			}
+		});
+		await this.container.db.userLevel.addXp(member.id, {
+			xpBoost: data.xpBoost
 		});
 
 		message.channel.send(`\`\`\`json\n${JSON.stringify(data, null, 2)}\`\`\``);
