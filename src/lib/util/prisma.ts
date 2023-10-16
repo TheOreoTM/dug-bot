@@ -106,7 +106,8 @@ export const xprisma = new PrismaClient().$extends({
 							userId
 						},
 						data: {
-							currentXp: currentXp,
+							currentXp,
+							requiredXp,
 							currentLevel: {
 								increment: levelsToAdd
 							}
