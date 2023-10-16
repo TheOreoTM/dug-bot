@@ -1,4 +1,3 @@
-import { DugColors } from '#constants';
 import type { GuildMessage } from '#lib/types/Discord';
 import { ApplyOptions } from '@sapphire/decorators';
 import { Args, Command } from '@sapphire/framework';
@@ -58,22 +57,27 @@ export class UserCommand extends Command {
 			}
 		});
 
-		const rank = new canvacord.Rank()
-			.setAvatar(member.displayAvatarURL())
-			.setRank(1, 'RANK')
-			.setBackground('COLOR', DugColors.Default.toString())
-			.setProgressBar(DugColors.Halloween.toString(), 'COLOR')
-			.setLevelColor(DugColors.Halloween.toString())
-			.setRankColor(DugColors.Halloween.toString())
-			.setLevel(data?.currentLevel || 0, 'LEVEL')
-			.setCurrentXP(data?.currentXp || 0)
-			.setRequiredXP(data?.requiredXp || 0)
-			.setStatus('dnd')
-			.setProgressBar(DugColors.Default.toString(), 'COLOR', true)
-			.setUsername(member.user.username)
-			.setDiscriminator('0');
+		const rank = 1;
+		const img = member.displayAvatarURL({ forceStatic: true });
+		const fontColor = '#ffffff';
+		const barColor = '#ffffff';
+		const bgColor = `#23272a `;
 
-		const attachment = new AttachmentBuilder(await rank.build(), { name: 'rankcard.png' });
+		const rankCard = new canvacord.Rank()
+			.setLevel(data?.currentLevel || 0, 'LEVEL')
+			.setRank(rank, 'RANK')
+			.setAvatar(img)
+			.setCurrentXP(data?.currentXp || 0, fontColor)
+			.setRequiredXP(data?.requiredXp || 0, fontColor)
+			.setStatus('dnd', false, false)
+			.setUsername(member.user.username, fontColor)
+			.setDiscriminator(member.user.discriminator, fontColor)
+			.setBackground('COLOR', bgColor)
+			.setProgressBar(`${barColor}`, 'COLOR')
+			.setRankColor(fontColor, fontColor)
+			.setLevelColor(fontColor, fontColor);
+
+		const attachment = new AttachmentBuilder(await rankCard.build(), { name: 'rankcard.png' });
 		return attachment;
 	}
 }
