@@ -60,6 +60,12 @@ export class UserCommand extends Command {
 
 		const rank = new canvacord.Rank()
 			.setAvatar(member.displayAvatarURL())
+			.setRank(1, 'RANK')
+			.setBackground('COLOR', DugColors.Default.toString())
+			.setProgressBar(DugColors.Halloween.toString(), 'COLOR')
+			.setLevelColor(DugColors.Halloween.toString())
+			.setRankColor(DugColors.Halloween.toString())
+			.setLevel(data?.currentLevel || 0, 'LEVEL')
 			.setCurrentXP(data?.currentXp || 0)
 			.setRequiredXP(data?.requiredXp || 0)
 			.setStatus('dnd')
