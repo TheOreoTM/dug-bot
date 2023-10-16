@@ -517,9 +517,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"canvacord@npm:^5.4.10":
-  version: 5.4.10
-  resolution: "canvacord@npm:5.4.10"
+"canvacord@npm:5.4.8":
+  version: 5.4.8
+  resolution: "canvacord@npm:5.4.8"
   dependencies:
     "@napi-rs/canvas": ^0.1.29
     "@skyra/gifenc": ^1.0.0
@@ -529,7 +529,7 @@ __metadata:
     node-fetch: 2.6.7
   bin:
     canvacord: bin/canvacord.js
-  checksum: 8f36928583dd7df1e98b4c9a4f6fb6553317bbaed527305140603fa056ef6389310ef5dd6e53c43d79df35f921a0c91090af772b3b7a5bb50def6e9964fbc225
+  checksum: 22df165658499f061cd8c99d0d5448971df8d392490958930d2c8e5bda83309355891946bc2922d66f8cc40c65533d79a4d10d8b8468431f91e5f6fd76ba7cb1
   languageName: node
   linkType: hard
 
@@ -635,7 +635,7 @@ __metadata:
     "@skyra/env-utilities": ^1.2.1
     "@types/node": ^18.17.12
     "@types/ws": ^8.5.5
-    canvacord: ^5.4.10
+    canvacord: 5.4.8
     colorette: ^2.0.20
     discord.js: ^14.13.0
     fuzzysort: ^2.0.4
