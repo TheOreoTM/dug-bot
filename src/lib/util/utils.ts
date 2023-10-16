@@ -10,8 +10,10 @@ import { cyan } from 'colorette';
 import type { APIUser, Guild, User } from 'discord.js';
 import fuzzysort from 'fuzzysort';
 
-export function genRandomXp() {
-	return genRandomInt(15, 25);
+export function genRandomXp(xpBoost = 0) {
+	const baseXp = genRandomInt(15, 25);
+	const boostedXp = baseXp + baseXp * xpBoost;
+	return Math.floor(boostedXp);
 }
 
 export function genRandomInt(min: number, max: number) {
