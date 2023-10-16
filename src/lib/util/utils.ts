@@ -6,6 +6,7 @@ import {
 	type ContextMenuCommandSuccessPayload,
 	type MessageCommandSuccessPayload
 } from '@sapphire/framework';
+import { isNullishOrEmpty } from '@sapphire/utilities';
 import { cyan } from 'colorette';
 import type { APIUser, Guild, User } from 'discord.js';
 import fuzzysort from 'fuzzysort';
@@ -14,6 +15,14 @@ export function genRandomXp(xpBoost = 0) {
 	const baseXp = genRandomInt(15, 25);
 	const boostedXp = baseXp + baseXp * xpBoost;
 	return Math.floor(boostedXp);
+}
+
+export function usesPomelo(user: User | APIUser) {
+	return isNullishOrEmpty(user.discriminator) || user.discriminator === '0';
+}
+
+export function getTag(user: User | APIUser) {
+	return usesPomelo(user) ? `@${user.username}` : `${user.username}#${user.discriminator}`;
 }
 
 export function genRandomInt(min: number, max: number) {

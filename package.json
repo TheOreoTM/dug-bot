@@ -23,6 +23,7 @@
 		"@sapphire/time-utilities": "^1.7.10",
 		"@sapphire/utilities": "^3.13.0",
 		"@skyra/env-utilities": "^1.2.1",
+		"canvacord": "^5.4.10",
 		"colorette": "^2.0.20",
 		"discord.js": "^14.13.0",
 		"fuzzysort": "^2.0.4",
