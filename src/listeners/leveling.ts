@@ -10,11 +10,15 @@ export class UserEvent extends Listener {
 		const member = message.member;
 		// const shouldAddXP = await this.container.db.userLevel.shouldAddXP(member.id);
 		// if (!shouldAddXP) return;
-		const data = await this.container.db.userLevel.update({
+		const data = await this.container.db.userLevel.upsert({
 			where: {
 				userId: member.id
 			},
-			data: {
+			update: {
+				lastXpEarned: new Date()
+			},
+			create: {
+				userId: member.id,
 				lastXpEarned: new Date()
 			}
 		});
