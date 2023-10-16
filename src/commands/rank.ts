@@ -63,7 +63,7 @@ export class UserCommand extends Command {
 			.setCurrentXP(data?.currentXp || 0)
 			.setRequiredXP(data?.requiredXp || 0)
 			.setStatus('dnd')
-			.setProgressBar(DugColors.Default.toString(), 'GRADIENT', true)
+			.setProgressBar(DugColors.Default.toString(), 'COLOR', true)
 			.setUsername(member.user.username)
 			.setDiscriminator('0');
 
