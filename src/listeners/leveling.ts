@@ -9,21 +9,16 @@ export class UserEvent extends Listener {
 		if (message.content === '' || message.author.bot) return;
 		const member = message.member;
 		const shouldAddXP = await this.container.db.userLevel.shouldAddXP(member.id);
-		console.log('🚀 ~ file: leveling.ts:12 ~ UserEvent ~ overriderun ~ shouldAddXP:', shouldAddXP);
 		if (!shouldAddXP) return;
 		await this.container.db.userLevel.addXp(member.id);
 
-		const data = await this.container.db.userLevel.update({
+		await this.container.db.userLevel.update({
 			where: {
 				userId: member.id
 			},
 			data: {
 				lastXpEarned: new Date()
 			}
-		});
-
-		message.channel.send({
-			content: `\`\`\`json\n${JSON.stringify(data, null, 2)}\`\`\``
 		});
 	}
 }

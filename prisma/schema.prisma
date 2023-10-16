@@ -8,7 +8,8 @@ datasource db {
 }
 
 model UserLevel {
-  userId       String   @id @unique
+  userId String @id @unique
+
   totalXp      Int      @default(0)
   currentXp    Int      @default(0)
   requiredXp   Int      @default(100)
