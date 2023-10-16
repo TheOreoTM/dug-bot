@@ -1,7 +1,7 @@
 import { DugColors } from '#constants';
 import type { GuildMessage } from '#lib/types/Discord';
 import { ApplyOptions } from '@sapphire/decorators';
-import { Command } from '@sapphire/framework';
+import { Args, Command } from '@sapphire/framework';
 import { send } from '@sapphire/plugin-editable-commands';
 import canvacord from 'canvacord';
 import { ApplicationCommandType, AttachmentBuilder, GuildMember } from 'discord.js';
@@ -33,8 +33,9 @@ export class UserCommand extends Command {
 	}
 
 	// Message command
-	public override async messageRun(message: GuildMessage) {
-		const rankcard = await this.genRankCard(message.member);
+	public override async messageRun(message: GuildMessage, args: Args) {
+		const member = await args.pick('member').catch(() => message.member);
+		const rankcard = await this.genRankCard(member);
 		send(message, { files: [rankcard] });
 	}
 
