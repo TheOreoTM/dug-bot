@@ -12,6 +12,7 @@ import { EmbedBuilder } from 'discord.js';
 	description: 'Modify your rank card',
 
 	subcommands: [
+		{ name: 'help', chatInputRun: 'slashHelp', messageRun: 'msgHelp' },
 		{ name: 'reset', chatInputRun: 'slashReset', messageRun: 'msgReset' },
 		// { name: 'bgImage', chatInputRun: 'slashBgImage', messageRun: 'msgBgImage' }, // DISABLED
 		{ name: 'bgColor', chatInputRun: 'slashBgColor', messageRun: 'msgBgColor' },
@@ -24,6 +25,23 @@ import { EmbedBuilder } from 'discord.js';
 	]
 })
 export class UserCommand extends Subcommand {
+	public async msgHelp(message: GuildMessage) {
+		const helpEmbed = new EmbedBuilder()
+			.setTitle('Card Help')
+			.setDescription('Below are the list of subcommands and what they do')
+			.setColor(DugColors.Default)
+			.addFields(
+				{ name: 'reset', value: 'Reset your card to default' },
+				{ name: 'bgColor', value: 'Change your cards background color' },
+				{ name: 'reset', value: 'Reset your card to default' },
+				{ name: 'reset', value: 'Reset your card to default' },
+				{ name: 'reset', value: 'Reset your card to default' },
+				{ name: 'reset', value: 'Reset your card to default' }
+			);
+
+		send(message, { embeds: [helpEmbed] });
+	}
+
 	public async msgReset(message: GuildMessage) {
 		const member = message.member;
 		await this.container.db.userLevel.resetCustoms(member.id);
