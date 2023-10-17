@@ -2,7 +2,7 @@ import { DugColors } from '#constants';
 import { formatRoles } from '#lib/util/formatter';
 import { sendTemporaryMessage } from '#lib/util/messages';
 import { ApplyOptions } from '@sapphire/decorators';
-import { Listener, type MessageCommandErrorPayload, UserError, Events } from '@sapphire/framework';
+import { Listener, type MessageCommandErrorPayload, UserError, Events, ArgumentError } from '@sapphire/framework';
 import { EmbedBuilder } from 'discord.js';
 
 @ApplyOptions<Listener.Options>({
@@ -11,7 +11,7 @@ import { EmbedBuilder } from 'discord.js';
 export class UserListener extends Listener {
 	public override async run(error: UserError, { message }: MessageCommandErrorPayload) {
 		let content = '';
-		if (error instanceof UserError) {
+		if (error instanceof UserError || ArgumentError) {
 			if (Reflect.get(Object(error.context), 'silent')) return;
 
 			if (error.identifier === 'NotRegistered') {
