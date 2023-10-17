@@ -57,10 +57,16 @@ export class UserCommand extends Command {
 			}
 		});
 
-		const rank = 1;
+		const rank: number = 1;
+		let rankColor = `#ffffff`;
+		if (rank === 1) rankColor = `#FFD700`;
+		if (rank === 2) rankColor = `#C0C0C0`;
+		if (rank === 3) rankColor = `#CD7F32`;
+
 		const img = member.displayAvatarURL({ forceStatic: true });
+		const requiredXpColor = `#747879`;
 		const fontColor = '#ffffff';
-		const barColor = '#ffffff';
+		const barColor = member.roles.highest.hexColor;
 		const bgColor = `#23272a`;
 
 		const rankCard = new Rank()
@@ -68,13 +74,14 @@ export class UserCommand extends Command {
 			.setRank(rank, 'RANK')
 			.setAvatar(img)
 			.setCurrentXp(data?.currentXp || 0, fontColor)
-			.setRequiredXp(data?.requiredXp || 0, fontColor)
+			.setRequiredXp(data?.requiredXp || 0, requiredXpColor)
 			.setBarColor(barColor)
 			.setStatus('dnd')
+			.setRankColor('')
 			.setUsername(member.user.username, fontColor)
 			.setBackground('color', bgColor)
-			.setRankColor(fontColor, fontColor)
-			.setLevelColor(fontColor, fontColor);
+			.setRankColor(fontColor, rankColor)
+			.setLevelColor(fontColor, barColor);
 
 		const attachment = new AttachmentBuilder(await rankCard.build(), { name: 'rankcard.png' });
 		return attachment;
