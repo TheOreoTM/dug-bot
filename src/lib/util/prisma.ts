@@ -33,6 +33,31 @@ export const xprisma = new PrismaClient().$extends({
 				};
 			},
 
+			async resetCustoms(userId: string) {
+				await prisma.userLevel.upsert({
+					where: {
+						userId
+					},
+					update: {
+						fontColor: null,
+						borderColor: null,
+						bgImage: null,
+						bgColor: null,
+						avatarBorderColor: null,
+						barColor: null
+					},
+					create: {
+						userId,
+						fontColor: null,
+						borderColor: null,
+						bgImage: null,
+						bgColor: null,
+						avatarBorderColor: null,
+						barColor: null
+					}
+				});
+			},
+
 			async updateCustoms(userId: string, customs: Partial<CustomOptions>) {
 				await prisma.userLevel.upsert({
 					where: {

@@ -1,3 +1,4 @@
+import { DugColors } from '#constants';
 import type { GuildMessage } from '#lib/types/Discord';
 import { formatSuccessMessage } from '#lib/util/formatter';
 import { ApplyOptions } from '@sapphire/decorators';
@@ -10,6 +11,7 @@ import { EmbedBuilder } from 'discord.js';
 	name: 'card',
 	description: 'Modify your rank card',
 	subcommands: [
+		{ name: 'reset', chatInputRun: 'slashReset', messageRun: 'msgReset' },
 		{ name: 'bgImage', chatInputRun: 'slashBgImage', messageRun: 'msgBgImage' },
 		{ name: 'bgColor', chatInputRun: 'slashBgColor', messageRun: 'msgBgColor' },
 		{ name: 'borderColor', chatInputRun: 'slashBorderColor', messageRun: 'msgBorderColor' },
@@ -19,6 +21,15 @@ import { EmbedBuilder } from 'discord.js';
 	]
 })
 export class UserCommand extends Subcommand {
+	public async msgReset(message: GuildMessage) {
+		const member = message.member;
+		await this.container.db.userLevel.resetCustoms(member.id);
+
+		const embed = new EmbedBuilder().setDescription(formatSuccessMessage('Successfully reset `*`')).setColor(DugColors.Success);
+
+		send(message, { embeds: [embed] });
+	}
+
 	public async msgBgColor(message: GuildMessage, args: Args) {
 		const member = message.member;
 		const hexCode = await args.pick('hexCode');
