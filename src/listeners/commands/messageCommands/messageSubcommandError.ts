@@ -1,11 +1,12 @@
 import { DugColors } from '#constants';
 import { sendTemporaryMessage } from '#lib/util/messages';
 import { ApplyOptions } from '@sapphire/decorators';
-import { Listener, type MessageCommandErrorPayload, UserError, Events, ArgumentError } from '@sapphire/framework';
+import { Listener, type MessageCommandErrorPayload, UserError, ArgumentError, Events } from '@sapphire/framework';
+import { SubcommandPluginEvents } from '@sapphire/plugin-subcommands';
 import { EmbedBuilder, Message } from 'discord.js';
 
 @ApplyOptions<Listener.Options>({
-	event: Events.MessageCommandError
+	event: SubcommandPluginEvents.MessageSubcommandError
 })
 export class UserListener extends Listener {
 	public override async run(error: Error, { message, context }: MessageCommandErrorPayload) {
