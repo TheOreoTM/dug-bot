@@ -1,7 +1,7 @@
 import { DugColors } from '#constants';
 import { sendTemporaryMessage } from '#lib/util/messages';
 import { ApplyOptions } from '@sapphire/decorators';
-import { Listener, type MessageCommandErrorPayload, UserError, ArgumentError, Events } from '@sapphire/framework';
+import { Listener, type MessageCommandErrorPayload, UserError, ArgumentError } from '@sapphire/framework';
 import { SubcommandPluginEvents } from '@sapphire/plugin-subcommands';
 import { EmbedBuilder, Message } from 'discord.js';
 
