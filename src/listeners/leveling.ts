@@ -25,7 +25,5 @@ export class UserEvent extends Listener {
 		await this.container.db.userLevel.addXp(member.id, {
 			xpBoost: data.xpBoost
 		});
-
-		message.channel.send(`\`\`\`json\n${JSON.stringify(data, null, 2)}\`\`\``);
 	}
 }
