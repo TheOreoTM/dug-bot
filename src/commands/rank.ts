@@ -61,7 +61,7 @@ export class UserCommand extends Command {
 		const img = member.displayAvatarURL({ forceStatic: true });
 		const fontColor = '#ffffff';
 		const barColor = '#ffffff';
-		const bgColor = `#23272a `;
+		const bgColor = `#23272a`;
 
 		const rankCard = new Rank()
 			.setLevel(data?.currentLevel || 0, 'LEVEL')
