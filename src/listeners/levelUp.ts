@@ -18,6 +18,7 @@ export class UserEvent extends Listener {
 			.build();
 
 		message.reply({
+			content: `GG ${member}, You just leveled up!`,
 			files: [
 				{
 					attachment: levelUp,
