@@ -20,6 +20,7 @@ model UserLevel {
   bgImage           String?
   bgColor           String?
   borderColor       String?
+  noBorder          Boolean?
   avatarBorderColor String?
   barColor          String?
   fontColor         String?

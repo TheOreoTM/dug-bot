@@ -10,11 +10,14 @@ import { EmbedBuilder } from 'discord.js';
 @ApplyOptions<Subcommand.Options>({
 	name: 'card',
 	description: 'Modify your rank card',
+
 	subcommands: [
 		{ name: 'reset', chatInputRun: 'slashReset', messageRun: 'msgReset' },
 		{ name: 'bgImage', chatInputRun: 'slashBgImage', messageRun: 'msgBgImage' },
 		{ name: 'bgColor', chatInputRun: 'slashBgColor', messageRun: 'msgBgColor' },
 		{ name: 'borderColor', chatInputRun: 'slashBorderColor', messageRun: 'msgBorderColor' },
+		{ name: 'hideBorder', chatInputRun: 'slashNoBorder', messageRun: 'msgNoBorder' },
+		{ name: 'showBorder', chatInputRun: 'slashYesBorder', messageRun: 'msgYesBorder' },
 		{ name: 'avatarBorderColor', chatInputRun: 'slashAvBorderColor', messageRun: 'msgAvBorderColor' },
 		{ name: 'barColor', chatInputRun: 'slashBarColor', messageRun: 'msgBarColor' },
 		{ name: 'fontColor', chatInputRun: 'slashFontColor', messageRun: 'msgFontColor' }
@@ -88,6 +91,28 @@ export class UserCommand extends Subcommand {
 		});
 
 		const embed = new EmbedBuilder().setDescription(formatSuccessMessage('Successfully set your `borderColor`')).setColor(borderColor);
+
+		send(message, { embeds: [embed] });
+	}
+
+	public async msgNoBorder(message: GuildMessage) {
+		const member = message.member;
+		await this.container.db.userLevel.updateCustoms(member.id, {
+			noBorder: true
+		});
+
+		const embed = new EmbedBuilder().setDescription(formatSuccessMessage('Successfully hid your `border`')).setColor(DugColors.Success);
+
+		send(message, { embeds: [embed] });
+	}
+
+	public async msgYesBorder(message: GuildMessage) {
+		const member = message.member;
+		await this.container.db.userLevel.updateCustoms(member.id, {
+			noBorder: false
+		});
+
+		const embed = new EmbedBuilder().setDescription(formatSuccessMessage('Successfully un-hid your `border`')).setColor(DugColors.Success);
 
 		send(message, { embeds: [embed] });
 	}

@@ -18,7 +18,8 @@ export const xprisma = new PrismaClient().$extends({
 						bgColor: true,
 						bgImage: true,
 						fontColor: true,
-						borderColor: true
+						borderColor: true,
+						noBorder: true
 					}
 				});
 
@@ -29,7 +30,8 @@ export const xprisma = new PrismaClient().$extends({
 					bgColor: null,
 					bgImage: null,
 					fontColor: null,
-					borderColor: null
+					borderColor: null,
+					noBorder: null
 				};
 			},
 
@@ -287,4 +289,5 @@ interface CustomOptions {
 	avatarBorderColor: string;
 	barColor: string;
 	fontColor: string;
+	noBorder: boolean;
 }

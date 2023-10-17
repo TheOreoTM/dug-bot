@@ -1,10 +1,12 @@
+import { DugColors } from '#constants';
 import type { GuildMessage } from '#lib/types/Discord';
+import { formatFailMessage } from '#lib/util/formatter';
 import { getTag } from '#lib/util/utils';
 import { ApplyOptions } from '@sapphire/decorators';
 import { Args, Command } from '@sapphire/framework';
 import { send } from '@sapphire/plugin-editable-commands';
 import { Rank } from 'canvafy';
-import { ApplicationCommandType, AttachmentBuilder, GuildMember } from 'discord.js';
+import { ApplicationCommandType, AttachmentBuilder, EmbedBuilder, GuildMember } from 'discord.js';
 
 @ApplyOptions<Command.Options>({
 	description: 'View your level information',
@@ -36,21 +38,21 @@ export class UserCommand extends Command {
 	// Message command
 	public override async messageRun(message: GuildMessage, args: Args) {
 		const member = await args.pick('member').catch(() => message.member);
-		const rankcard = await this.genRankCard(member);
-		send(message, { files: [rankcard] });
+		const result = await this.genRankCard(member);
+		send(message, result);
 	}
 
 	// Chat Input (slash) command
 	public override async chatInputRun(interaction: Command.ChatInputCommandInteraction<'cached'>) {
-		const rankcard = await this.genRankCard(interaction.options.getMember('user') ?? interaction.member);
-		interaction.reply({ files: [rankcard] });
+		const result = await this.genRankCard(interaction.options.getMember('user') ?? interaction.member);
+		interaction.reply(result);
 	}
 
 	// Context Menu command
 	public override async contextMenuRun(interaction: Command.ContextMenuCommandInteraction<'cached'>) {
 		const member = await interaction.guild.members.cache.get(interaction.targetId);
-		const rankcard = await this.genRankCard(member || interaction.member);
-		interaction.reply({ files: [rankcard] });
+		const result = await this.genRankCard(member || interaction.member);
+		interaction.reply(result);
 	}
 
 	private async genRankCard(member: GuildMember) {
@@ -60,24 +62,30 @@ export class UserCommand extends Command {
 			}
 		});
 
+		if (!data) {
+			const embed = new EmbedBuilder()
+				.setDescription(formatFailMessage('You have no rank. Send some messages to earn a rank.'))
+				.setColor(DugColors.Fail);
+			return { embeds: [embed] };
+		}
+
 		const rank: number = 1;
 		let rankColor = `#ffffff`;
 		if (rank === 1) rankColor = `#FFD700`;
 		if (rank === 2) rankColor = `#C0C0C0`;
 		if (rank === 3) rankColor = `#CD7F32`;
 
-		const customData = await this.container.db.userLevel.getCustoms(member.id);
-
 		const roleColor = member.roles.highest.hexColor;
 		const img = member.displayAvatarURL({ forceStatic: true });
 		const requiredXpColor = `#747879`;
-		const bgImage = customData.bgImage;
-		const fontColor = customData.fontColor ? customData.fontColor : '#ffffff';
-		const barColor = customData.barColor ? customData.barColor : roleColor;
-		const bgColor = customData.bgColor ? customData.bgColor : `#23272a`;
+		const bgImage = data.bgImage;
+		const fontColor = data.fontColor ? data.fontColor : '#ffffff';
+		const barColor = data.barColor ? data.barColor : roleColor;
+		const bgColor = data.bgColor ? data.bgColor : `#23272a`;
 		const levelColor = roleColor;
-		const customStatusColor = customData.avatarBorderColor ? customData.avatarBorderColor : roleColor;
-		const borderColor = customData.borderColor ? customData.borderColor : roleColor;
+		const customStatusColor = data.avatarBorderColor ? data.avatarBorderColor : roleColor;
+		const borderColor = data.borderColor ? data.borderColor : roleColor;
+		const noBorder = data.noBorder ? data.noBorder : false;
 
 		const rankCard = new Rank()
 			.setLevel(data?.currentLevel || 0, 'LEVEL')
@@ -85,7 +93,6 @@ export class UserCommand extends Command {
 			.setAvatar(img)
 			.setCurrentXp(data?.currentXp || 0, bgColor)
 			.setRequiredXp(data?.requiredXp || 100, requiredXpColor)
-			.setBorder(borderColor)
 			.setBarColor(barColor)
 			.setCustomStatus(customStatusColor)
 			.setUsername(getTag(member.user), fontColor)
@@ -94,8 +101,9 @@ export class UserCommand extends Command {
 			.setLevelColor(fontColor, levelColor);
 
 		if (bgImage) rankCard.setBackground('image', bgImage);
+		if (!noBorder) rankCard.setBorder(borderColor);
 
 		const attachment = new AttachmentBuilder(await rankCard.build(), { name: 'rankcard.png' });
-		return attachment;
+		return { files: [attachment] };
 	}
 }
