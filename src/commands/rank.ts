@@ -2,7 +2,7 @@ import type { GuildMessage } from '#lib/types/Discord';
 import { ApplyOptions } from '@sapphire/decorators';
 import { Args, Command } from '@sapphire/framework';
 import { send } from '@sapphire/plugin-editable-commands';
-import canvacord from 'canvacord';
+import { Rank } from 'canvafy';
 import { ApplicationCommandType, AttachmentBuilder, GuildMember } from 'discord.js';
 
 @ApplyOptions<Command.Options>({
@@ -63,17 +63,16 @@ export class UserCommand extends Command {
 		const barColor = '#ffffff';
 		const bgColor = `#23272a `;
 
-		const rankCard = new canvacord.Rank()
+		const rankCard = new Rank()
 			.setLevel(data?.currentLevel || 0, 'LEVEL')
 			.setRank(rank, 'RANK')
 			.setAvatar(img)
-			.setCurrentXP(data?.currentXp || 0, fontColor)
-			.setRequiredXP(data?.requiredXp || 0, fontColor)
-			.setStatus('dnd', false, false)
+			.setCurrentXp(data?.currentXp || 0, fontColor)
+			.setRequiredXp(data?.requiredXp || 0, fontColor)
+			.setBarColor(barColor)
+			.setStatus('dnd')
 			.setUsername(member.user.username, fontColor)
-			.setDiscriminator(member.user.discriminator, fontColor)
-			.setBackground('COLOR', bgColor)
-			.setProgressBar(`${barColor}`, 'COLOR')
+			.setBackground('color', bgColor)
 			.setRankColor(fontColor, fontColor)
 			.setLevelColor(fontColor, fontColor);
 
