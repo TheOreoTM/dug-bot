@@ -1,45 +1,50 @@
 import { DugColors } from '#constants';
-import { formatRoles } from '#lib/util/formatter';
 import { sendTemporaryMessage } from '#lib/util/messages';
 import { ApplyOptions } from '@sapphire/decorators';
-import { Listener, type MessageCommandErrorPayload, UserError, Events } from '@sapphire/framework';
-import { EmbedBuilder } from 'discord.js';
+import { Listener, type MessageCommandErrorPayload, UserError, Events, ArgumentError } from '@sapphire/framework';
+import { EmbedBuilder, Message } from 'discord.js';
 
 @ApplyOptions<Listener.Options>({
 	event: Events.MessageCommandError
 })
 export class UserListener extends Listener {
-	public override async run(error: UserError, { message }: MessageCommandErrorPayload) {
-		let content = '';
+	public override async run(error: Error, { message, context }: MessageCommandErrorPayload) {
+		console.log('ewim');
+		if (Reflect.get(Object(context), 'silent')) return;
 
+		if (error instanceof ArgumentError) this.argumentError(message, error);
+		if (error instanceof UserError) this.userError(message, error);
+	}
+
+	private userError(message: Message, error: UserError) {
+		// `context: { silent: true }` should make UserError silent:
+		// Use cases for this are for example permissions error when running the `eval` command.
 		if (Reflect.get(Object(error.context), 'silent')) return;
 
-		if (error.identifier === 'NotRegistered') {
-			content = `Please register your account using \`${await this.container.client.fetchPrefix(message)}register\``;
-		} else if (error.identifier === 'argsMissing') {
-			content = `You are missing some arguments`;
-		} else if (error.identifier === 'argsUnavailable') {
-			content = `Some arguments arent available`;
-		} else if (error.identifier === 'preconditionGuildOnly') {
-			content = `This command can only run in guilds`;
-		} else if (error.identifier === 'preconditionNsfw') {
-			content = `This command can only be used in NSFW channels`;
-		} else if (error.identifier === 'preconditionUserPermissions') {
-			const { missing } = error.context as { missing: [] };
-			content = `You need \`${formatRoles(missing).join('` `')}\` permission${missing.length - 1 === 0 ? '' : '(s)'} to run this command`;
-		} else {
-			return await sendTemporaryMessage(message, {
-				embeds: [
-					new EmbedBuilder()
-						.setColor(DugColors.Fail)
-						.setDescription(content === '' ? error.message : content)
-						.setTitle(error.identifier ?? 'Error')
-				]
-			});
-		}
+		const identifier = error.identifier;
+		return sendTemporaryMessage(message, {
+			embeds: [
+				new EmbedBuilder()
+					.setColor(DugColors.Fail)
+					.setDescription(error.message)
+					.setTitle(identifier ?? 'Error')
+			]
+		});
+	}
 
-		return await sendTemporaryMessage(message, {
-			embeds: [new EmbedBuilder().setDescription(content === '' ? error.message : content).setTitle(error.identifier ?? 'Error')]
+	private argumentError(message: Message, error: ArgumentError<unknown>) {
+		const argument = error.argument.name;
+		const identifier = error.identifier;
+		const msg = error.message;
+		const parameter = error.parameter.replaceAll('`', '῾');
+		return sendTemporaryMessage(message, {
+			embeds: [
+				new EmbedBuilder()
+					.setColor(DugColors.Fail)
+					.setDescription(msg)
+					.setTitle(identifier ?? 'Error')
+					.setFooter({ text: `Parameter: ${parameter}, Argument: ${argument}` })
+			]
 		});
 	}
 }
