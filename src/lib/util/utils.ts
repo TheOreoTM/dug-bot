@@ -17,6 +17,13 @@ export function genRandomXp(xpBoost = 0) {
 	return Math.floor(boostedXp);
 }
 
+const ImageUrlRegex = /\.(jpeg|jpg|gif|png|bmp)$/i;
+const ImgurLinkRegex = /^(https?:\/\/)?(i\.)?imgur\.com\/\w+(\.\w+)?$/i;
+
+export function isImageLink(url: string) {
+	return ImageUrlRegex.test(url) || ImgurLinkRegex.test(url);
+}
+
 export function usesPomelo(user: User | APIUser) {
 	return isNullishOrEmpty(user.discriminator) || user.discriminator === '0';
 }

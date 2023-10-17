@@ -7,6 +7,46 @@ export const xprisma = new PrismaClient().$extends({
 	name: 'xprisma',
 	model: {
 		userLevel: {
+			async getCustoms(userId: string) {
+				const data = await prisma.userLevel.findUnique({
+					where: {
+						userId
+					},
+					select: {
+						avatarBorderColor: true,
+						barColor: true,
+						bgColor: true,
+						bgImage: true,
+						fontColor: true,
+						borderColor: true
+					}
+				});
+
+				if (data) return data;
+				return {
+					avatarBorderColor: null,
+					barColor: null,
+					bgColor: null,
+					bgImage: null,
+					fontColor: null,
+					borderColor: null
+				};
+			},
+
+			async updateCustoms(userId: string, customs: Partial<CustomOptions>) {
+				await prisma.userLevel.upsert({
+					where: {
+						userId
+					},
+					update: {
+						...customs
+					},
+					create: {
+						userId,
+						...customs
+					}
+				});
+			},
 			async shouldAddXP(userId: string) {
 				const data = await prisma.userLevel.findUnique({
 					where: {
@@ -210,7 +250,16 @@ export async function resetAutoIncrement() {
 	}
 }
 
-type AddXpOptions = {
+interface AddXpOptions {
 	amount?: number;
 	xpBoost?: number;
-};
+}
+
+interface CustomOptions {
+	bgImage: string;
+	bgColor: string;
+	borderColor: string;
+	avatarBorderColor: string;
+	barColor: string;
+	fontColor: string;
+}

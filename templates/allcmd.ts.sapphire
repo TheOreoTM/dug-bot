@@ -37,7 +37,7 @@ export class UserCommand extends Command {
 	}
 
 	// Message command
-	public override async messageRun(message: Message) {
+	public override async messageRun(message: GuildMessage) {
 		return this.sendPing(message);
 	}
 

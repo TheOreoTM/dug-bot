@@ -16,6 +16,13 @@ model UserLevel {
   currentLevel Int      @default(0)
   xpBoost      Float    @default(0.0)
   lastXpEarned DateTime @default(now())
+
+  bgImage           String?
+  bgColor           String?
+  borderColor       String?
+  avatarBorderColor String?
+  barColor          String?
+  fontColor         String?
 }
 
 model User {
