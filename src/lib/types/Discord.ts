@@ -1,3 +1,4 @@
+import { DugClient } from '#lib/DugClient';
 import {
 	ChatInputCommand,
 	ChatInputCommandContext,
@@ -5,8 +6,7 @@ import {
 	ContextMenuCommand,
 	ContextMenuCommandContext,
 	MessageCommand,
-	MessageCommandContext,
-	SapphireClient
+	MessageCommandContext
 } from '@sapphire/framework';
 import {
 	CommandInteraction,
@@ -39,7 +39,7 @@ export interface GuildInteraction extends CommandInteraction {
 	readonly member: GuildMember;
 	readonly channel: TextChannel;
 	options: GuildCommandInteractionOptionResolver;
-	client: SapphireClient<true>;
+	client: DugClient<true>;
 }
 
 export type InteractionOrMessage = GuildMessage | Command.ChatInputCommandInteraction | Command.ContextMenuCommandInteraction;

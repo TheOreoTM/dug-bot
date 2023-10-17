@@ -1,6 +1,6 @@
 import { ClientConfig } from '#config';
 import { container, SapphireClient } from '@sapphire/framework';
-import { xprisma } from './util/prisma';
+import { xprisma } from '#lib/util/prisma';
 
 export class DugClient<Ready extends boolean = boolean> extends SapphireClient<Ready> {
 	public constructor() {
