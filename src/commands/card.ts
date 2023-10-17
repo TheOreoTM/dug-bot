@@ -7,6 +7,7 @@ import { Subcommand } from '@sapphire/plugin-subcommands';
 import { EmbedBuilder } from 'discord.js';
 
 @ApplyOptions<Subcommand.Options>({
+	name: 'card',
 	description: 'Modify your rank card',
 	subcommands: [
 		{ name: 'bgImage', chatInputRun: 'slashBgImage', messageRun: 'msgBgImage' },
