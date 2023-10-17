@@ -14,7 +14,7 @@ export class UserCommand extends Command {
 			send(message, formatFailMessage('Calm down buddy'));
 			return;
 		}
-		await this.container.db.userLevel.update({
+		const data = await this.container.db.userLevel.update({
 			where: {
 				userId: message.author.id
 			},
@@ -22,5 +22,7 @@ export class UserCommand extends Command {
 				xpBoost
 			}
 		});
+
+		message.channel.send({ content: `\`\`\`json\n${JSON.stringify(data, null, 2)}\`\`\`` });
 	}
 }

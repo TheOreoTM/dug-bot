@@ -4,6 +4,7 @@ process.env.NODE_ENV ??= 'development';
 import { ApplicationCommandRegistries, RegisterBehavior } from '@sapphire/framework';
 import '@sapphire/plugin-logger/register';
 import '@sapphire/plugin-subcommands/register';
+import '@sapphire/plugin-scheduled-tasks/register';
 import { setup } from '@skyra/env-utilities';
 import * as colorette from 'colorette';
 

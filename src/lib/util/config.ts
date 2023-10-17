@@ -13,8 +13,24 @@ import {
 } from 'discord.js';
 import { BotOwners, BotPrefix } from '#constants';
 import { ServerOptions } from '@sapphire/plugin-api';
+import { envParseNumber, envParseString } from '@skyra/env-utilities';
+import { RedisOptions } from 'bullmq';
+import { ScheduledTaskHandlerOptions } from '@sapphire/plugin-scheduled-tasks';
+
+export function parseRedisOption(): Pick<RedisOptions, 'port' | 'password' | 'host'> {
+	return {
+		port: envParseNumber('REDIS_PORT'),
+		password: envParseString('REDIS_PASSWORD'),
+		host: envParseString('REDIS_HOST')
+	};
+}
 
 export const config: Config = {
+	tasks: {
+		bull: {
+			connection: parseRedisOption()
+		}
+	},
 	api: {
 		origin: '*',
 		prefix: '',
@@ -108,6 +124,7 @@ export const ClientConfig: ClientOptions = {
 };
 
 interface Config {
+	tasks: ScheduledTaskHandlerOptions;
 	intents: GatewayIntentBits[];
 	cooldown_options: CooldownOptions;
 	mentions: MessageMentionOptions;

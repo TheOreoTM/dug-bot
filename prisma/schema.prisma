@@ -7,6 +7,13 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model XpBoost {
+  id        String   @id @default(uuid())
+  userId    String
+  amount    Float
+  expiresAt DateTime
+}
+
 model UserLevel {
   userId String @id @unique
 
