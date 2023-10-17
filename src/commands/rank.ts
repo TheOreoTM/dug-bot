@@ -76,7 +76,7 @@ export class UserCommand extends Command {
 			.setCurrentXp(data?.currentXp || 0, bgColor)
 			.setRequiredXp(data?.requiredXp || 0, requiredXpColor)
 			.setBarColor(barColor)
-			.setRankColor(fontColor, rankColor)
+			.setBorder(`#00ff00`)
 			.setUsername(member.user.username, fontColor)
 			.setBackground('color', bgColor)
 			.setRankColor(fontColor, rankColor)
