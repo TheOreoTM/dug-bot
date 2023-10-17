@@ -101,7 +101,6 @@ export const ClientConfig: ClientOptions = {
 	defaultPrefix: BotPrefix,
 	logger: config.logger,
 	loadMessageCommandListeners: true,
-	typing: true,
 	shards: 'auto',
 	disableMentionPrefix: false,
 	preventFailedToFetchLogForGuilds: true,

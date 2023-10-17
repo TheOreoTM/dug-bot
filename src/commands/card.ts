@@ -33,10 +33,12 @@ export class UserCommand extends Subcommand {
 			.addFields(
 				{ name: 'reset', value: 'Reset your card to default' },
 				{ name: 'bgColor', value: 'Change your cards background color' },
-				{ name: 'reset', value: 'Reset your card to default' },
-				{ name: 'reset', value: 'Reset your card to default' },
-				{ name: 'reset', value: 'Reset your card to default' },
-				{ name: 'reset', value: 'Reset your card to default' }
+				{ name: 'borderColor', value: 'Change your cards border color' },
+				{ name: 'hideBorder', value: 'Hide the outer border of your card' },
+				{ name: 'showBorder', value: 'Show the outer border of your card' },
+				{ name: 'avatarBorderColor', value: 'Change the border around your avatar' },
+				{ name: 'barColor', value: 'Change the color of the progress bar of your card' },
+				{ name: 'fontColor', value: 'Change the username color of your card' }
 			);
 
 		send(message, { embeds: [helpEmbed] });
