@@ -115,7 +115,23 @@ export const xprisma = new PrismaClient().$extends({
 							}
 						}
 					});
+
+					return {
+						leveledUp: levelsToAdd > 0 ? true : false,
+						levelsAdded: levelsToAdd,
+						newLevel: data.currentLevel + levelsToAdd,
+						oldLevel: data.currentLevel,
+						xpAdded: amount
+					};
 				}
+
+				return {
+					leveledUp: false,
+					levelsAdded: 0,
+					newLevel: data.currentLevel,
+					oldLevel: data.currentLevel,
+					xpAdded: amount
+				};
 			}
 		},
 		user: {

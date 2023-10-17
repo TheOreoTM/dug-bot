@@ -98,7 +98,8 @@ export enum DugEvents {
 	// Custom Events
 	FactionJoin = 'factionJoin',
 	FactionSendInvite = 'factionSendInvite',
-	TriggerDrop = 'triggerDrop'
+	TriggerDrop = 'triggerDrop',
+	MemberLevelUp = 'memberLevelUp'
 }
 
 export const DugEmojis = {

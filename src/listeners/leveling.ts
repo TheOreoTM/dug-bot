@@ -22,8 +22,10 @@ export class UserEvent extends Listener {
 				lastXpEarned: new Date()
 			}
 		});
-		await this.container.db.userLevel.addXp(member.id, {
+		const addXpData = await this.container.db.userLevel.addXp(member.id, {
 			xpBoost: data.xpBoost
 		});
+
+		if (addXpData.leveledUp) this.container.client.emit(DugEvents.MemberLevelUp, message, addXpData.oldLevel, addXpData.newLevel);
 	}
 }
