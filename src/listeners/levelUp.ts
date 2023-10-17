@@ -15,6 +15,7 @@ export class UserEvent extends Listener {
 			.setUsername(getTag(member.user))
 			.setLevels(oldLevel, newLevel)
 			.setBorder(member.roles.highest.hexColor)
+			.setAvatarBorder(member.roles.highest.hexColor)
 			.build();
 
 		message.reply({
