@@ -46,7 +46,8 @@ export class UserCommand extends Command {
 
 	// Context Menu command
 	public override async contextMenuRun(interaction: Command.ContextMenuCommandInteraction<'cached'>) {
-		const rankcard = await this.genRankCard(interaction.member);
+		const member = await interaction.guild.members.cache.get(interaction.targetId);
+		const rankcard = await this.genRankCard(member || interaction.member);
 		interaction.reply({ files: [rankcard] });
 	}
 
