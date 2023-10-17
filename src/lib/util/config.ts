@@ -18,6 +18,11 @@ import { RedisOptions } from 'bullmq';
 import { ScheduledTaskHandlerOptions } from '@sapphire/plugin-scheduled-tasks';
 
 export function parseRedisOption(): Pick<RedisOptions, 'port' | 'password' | 'host'> {
+	console.log({
+		port: envParseNumber('REDIS_PORT'),
+		password: envParseString('REDIS_PASSWORD'),
+		host: envParseString('REDIS_HOST')
+	});
 	return {
 		port: envParseNumber('REDIS_PORT'),
 		password: envParseString('REDIS_PASSWORD'),
