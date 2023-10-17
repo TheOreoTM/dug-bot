@@ -23,7 +23,8 @@ export class UserEvent extends Listener {
 					attachment: levelUp,
 					name: 'levelup.png'
 				}
-			]
+			],
+			allowedMentions: { repliedUser: true }
 		});
 	}
 }
