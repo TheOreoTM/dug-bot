@@ -23,6 +23,7 @@ export function parseRedisOption(): Pick<RedisOptions, 'port' | 'password' | 'ho
 		password: envParseString('REDIS_PASSWORD'),
 		host: envParseString('REDIS_HOST')
 	});
+
 	return {
 		port: envParseNumber('REDIS_PORT'),
 		password: envParseString('REDIS_PASSWORD'),
