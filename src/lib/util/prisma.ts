@@ -159,6 +159,77 @@ export const xprisma = new PrismaClient().$extends({
 				});
 			},
 
+			async removeXp(userId: string, amnt?: number) {
+				let amount = genRandomXp();
+				if (amnt) amount = amnt;
+
+				const data = await prisma.userLevel.upsert({
+					where: {
+						userId
+					},
+					update: {
+						currentXp: {
+							decrement: amount
+						},
+						totalXp: {
+							decrement: amount
+						}
+					},
+					create: {
+						currentXp: amount,
+						totalXp: amount,
+						userId
+					}
+				});
+
+				// if (data.currentXp < 0) {
+				// 	// Handle case where currentXp goes negative (if needed)
+				// 	// You may want to adjust this behavior based on your application's logic
+				// }
+
+				if (data.currentXp < data.requiredXp) {
+					let levelsToRemove = 0;
+					let requiredXp = getLevelInfo(data.currentLevel).xpNeededToLevelUp;
+					let currentXp = data.currentXp;
+
+					while (currentXp < 0 && data.currentLevel > 0) {
+						currentXp = currentXp + requiredXp;
+						levelsToRemove++;
+
+						requiredXp = getLevelInfo(data.currentLevel - levelsToRemove).xpNeededToLevelUp;
+					}
+
+					await prisma.userLevel.update({
+						where: {
+							userId
+						},
+						data: {
+							currentXp,
+							requiredXp,
+							currentLevel: {
+								decrement: levelsToRemove // Decrease currentLevel instead of incrementing
+							}
+						}
+					});
+
+					return {
+						leveledDown: levelsToRemove > 0 ? true : false,
+						levelsRemoved: levelsToRemove,
+						newLevel: Math.max(data.currentLevel - levelsToRemove, 0), // Ensure level doesn't go below 0
+						oldLevel: data.currentLevel,
+						xpRemoved: amount
+					};
+				}
+
+				return {
+					leveledDown: false,
+					levelsRemoved: 0,
+					newLevel: data.currentLevel,
+					oldLevel: data.currentLevel,
+					xpRemoved: amount
+				};
+			},
+
 			async addXp(userId: string, options?: AddXpOptions) {
 				let amount: number = genRandomXp();
 				if (options?.amount) amount = options.amount;

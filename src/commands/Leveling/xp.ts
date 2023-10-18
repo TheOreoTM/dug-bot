@@ -1,6 +1,6 @@
 import type { GuildMessage } from '#lib/types/Discord';
 import { formatFailMessage, formatSuccessMessage } from '#lib/util/formatter';
-import { getLevelInfo } from '#lib/util/utils';
+import { getLevelInfo, getTag } from '#lib/util/utils';
 import { ApplyOptions } from '@sapphire/decorators';
 import { Command } from '@sapphire/framework';
 import { send } from '@sapphire/plugin-editable-commands';
@@ -98,16 +98,14 @@ export class UserCommand extends Command {
 				amount: xpAmountToChange
 			});
 
-			interaction.reply(formatSuccessMessage(`Added \`${xpAmountToChange}xp\` to ${targetMember}`));
+			interaction.reply(formatSuccessMessage(`Added \`${xpAmountToChange}xp\` to ${getTag(targetMember.user)}`));
 			return;
 		}
 
 		if (subcommand === 'remove') {
-			await this.container.db.userLevel.addXp(targetMember.id, {
-				amount: -xpAmountToChange
-			});
+			await this.container.db.userLevel.removeXp(targetMember.id, xpAmountToChange);
 
-			interaction.reply(formatSuccessMessage(`Removed \`${xpAmountToChange}xp\` from ${targetMember}`));
+			interaction.reply(formatSuccessMessage(`Removed \`${xpAmountToChange}xp\` from ${getTag(targetMember.user)}`));
 			return;
 		}
 	}
