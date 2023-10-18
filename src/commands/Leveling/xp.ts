@@ -64,7 +64,6 @@ export class UserCommand extends Command {
 	public override async chatInputRun(interaction: Command.ChatInputCommandInteraction) {
 		const subcommandGroup = interaction.options.getSubcommandGroup() as 'set' | null;
 		const subcommand = interaction.options.getSubcommand(true) as 'level' | 'xp' | 'add' | 'remove';
-		const levelsToAdd = interaction.options.getNumber('level', true);
 		const xpAmountToChange = interaction.options.getNumber('xp', true);
 		const targetMember = interaction.options.getMember('member');
 		if (!targetMember || !(targetMember instanceof GuildMember)) {
@@ -74,6 +73,8 @@ export class UserCommand extends Command {
 
 		if (subcommandGroup) {
 			if (subcommand === 'level') {
+				const levelsToAdd = interaction.options.getNumber('level', true);
+
 				const currentLevel = await this.container.db.userLevel.getCurrentLevel(targetMember.id);
 				const totalXp = await this.container.db.userLevel.getTotalXp(targetMember.id);
 				const newLevelinfo = getLevelInfo(currentLevel + levelsToAdd);
