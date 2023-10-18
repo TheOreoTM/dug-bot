@@ -12,7 +12,7 @@ import { EmbedBuilder } from 'discord.js';
 	description: 'Modify your rank card',
 
 	subcommands: [
-		{ name: 'help', chatInputRun: 'slashHelp', messageRun: 'msgHelp' },
+		{ name: 'help', chatInputRun: 'slashHelp', messageRun: 'msgHelp', default: true },
 		{ name: 'reset', chatInputRun: 'slashReset', messageRun: 'msgReset' },
 		// { name: 'bgImage', chatInputRun: 'slashBgImage', messageRun: 'msgBgImage' }, // DISABLED
 		{ name: 'bgColor', chatInputRun: 'slashBgColor', messageRun: 'msgBgColor' },
