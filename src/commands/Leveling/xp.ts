@@ -64,7 +64,6 @@ export class UserCommand extends Command {
 	public override async chatInputRun(interaction: Command.ChatInputCommandInteraction) {
 		const subcommandGroup = interaction.options.getSubcommandGroup() as 'set' | null;
 		const subcommand = interaction.options.getSubcommand(true) as 'level' | 'xp' | 'add' | 'remove';
-		const xpAmountToChange = interaction.options.getNumber('xp', true);
 		const targetMember = interaction.options.getMember('member');
 		if (!targetMember || !(targetMember instanceof GuildMember)) {
 			interaction.reply({ content: formatFailMessage('Please provide a valid target member'), ephemeral: true });
@@ -92,12 +91,14 @@ export class UserCommand extends Command {
 			return;
 		}
 
+		const xpAmountToChange = interaction.options.getNumber('xp', true);
+
 		if (subcommand === 'add') {
 			await this.container.db.userLevel.addXp(targetMember.id, {
 				amount: xpAmountToChange
 			});
 
-			interaction.reply(formatSuccessMessage(`Added ${xpAmountToChange} to user`));
+			interaction.reply(formatSuccessMessage(`Added \`${xpAmountToChange}xp\` to ${targetMember}`));
 			return;
 		}
 
@@ -106,7 +107,7 @@ export class UserCommand extends Command {
 				amount: -xpAmountToChange
 			});
 
-			interaction.reply(formatSuccessMessage(`Removed ${xpAmountToChange} from user`));
+			interaction.reply(formatSuccessMessage(`Removed \`${xpAmountToChange}xp\` from ${targetMember}`));
 			return;
 		}
 	}
