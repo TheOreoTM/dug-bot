@@ -95,7 +95,7 @@ export class UserCommand extends Command {
 			.setBarColor(barColor)
 			.setCustomStatus(customStatusColor)
 			.setUsername(getTag(member.user), fontColor)
-			.setRankColor(rankColor, rankColor)
+			.setRankColor(fontColor, rankColor)
 			.setBackground('color', bgColor)
 			.setLevelColor(fontColor, levelColor);
 
