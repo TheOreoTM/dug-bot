@@ -70,17 +70,31 @@ export class UserCommand extends Command {
 			return;
 		}
 
-		if (subcommandGroup) {
+		if (subcommandGroup === 'set') {
 			if (subcommand === 'level') {
-				const levelsToAdd = interaction.options.getNumber('level', true);
+				const levelToSet = interaction.options.getNumber('level', true);
+				const levelData = getLevelInfo(levelToSet);
 
-				const currentLevel = await this.container.db.userLevel.getCurrentLevel(targetMember.id);
-				const totalXp = await this.container.db.userLevel.getTotalXp(targetMember.id);
-				const newLevelinfo = getLevelInfo(currentLevel + levelsToAdd);
-				const xpToAdd = newLevelinfo.totalXpOfCurrentLevel - totalXp;
-				const data = await this.container.db.userLevel.addXp(targetMember.id, { amount: xpToAdd });
+				await this.container.db.userLevel.upsert({
+					where: {
+						userId: targetMember.id
+					},
+					create: {
+						userId: targetMember.id,
+						currentLevel: levelToSet,
+						currentXp: 0,
+						totalXp: levelData.totalXpOfCurrentLevel,
+						requiredXp: levelData.xpNeededToLevelUp
+					},
+					update: {
+						currentLevel: levelToSet,
+						currentXp: 0,
+						totalXp: levelData.totalXpOfCurrentLevel,
+						requiredXp: levelData.xpNeededToLevelUp
+					}
+				});
 
-				interaction.reply(formatSuccessMessage(`Set user level to ${data.newLevel}`));
+				interaction.reply(formatSuccessMessage(`Set user level to ${levelToSet}`));
 				return;
 			}
 
