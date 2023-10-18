@@ -89,14 +89,13 @@ export class UserCommand extends Command {
 
 		const rankCard = new Rank()
 			.setLevel(data?.currentLevel || 0, 'LEVEL')
-			.setRank(rank, 'RANK')
 			.setAvatar(img)
 			.setCurrentXp(data?.currentXp || 0, bgColor)
 			.setRequiredXp(data?.requiredXp || 100, requiredXpColor)
 			.setBarColor(barColor)
 			.setCustomStatus(customStatusColor)
 			.setUsername(getTag(member.user), fontColor)
-			.setRankColor(fontColor, rankColor)
+			.setRankColor(rankColor, rankColor)
 			.setBackground('color', bgColor)
 			.setLevelColor(fontColor, levelColor);
 
