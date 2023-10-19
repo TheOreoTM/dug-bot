@@ -27,7 +27,7 @@ export class UserCommand extends Command {
 			false
 		);
 
-		const embed = new EmbedBuilder().setDescription(`${bar} \` ${percentage}% \` \` ${percentage}/100 \``).setColor(DugColors.Default);
+		const embed = new EmbedBuilder().setDescription(`${bar} \` ${percentage}% \` \` ${percentage} / 100 \``).setColor(DugColors.Default);
 		message.channel.send({ embeds: [embed] });
 	}
 }
