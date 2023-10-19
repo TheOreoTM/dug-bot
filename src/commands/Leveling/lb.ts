@@ -37,7 +37,7 @@ export class UserCommand extends Command {
 	private async sendLeaderboard(interactionOrMessage: InteractionOrMessage, page = 1) {
 		const leaderboard = await this.container.db.userLevel.getLeaderboard(page);
 		const usersData = leaderboard.map(async (user, index) => {
-			const discordUser = await this.container.client.users.fetch(user.userId, { cache: true });
+			const discordUser = await this.container.client.users.fetch(user.userId);
 			if (!discordUser) return null;
 			console.log(`https://cdn.discordapp.com/avatars/${user.userId}/${discordUser.avatar}.png`);
 			console.log({
