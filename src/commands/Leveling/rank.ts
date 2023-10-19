@@ -71,7 +71,7 @@ export class UserCommand extends Command {
 
 		const rank: number = 1;
 		let rankColor = `#ffffff`;
-		if (rank === 1) rankColor = `#2b2d31`;
+		if (rank === 1) rankColor = `#000000`;
 		if (rank === 2) rankColor = `#c0c0c0`;
 		if (rank === 3) rankColor = `#cd7f32`;
 
@@ -98,7 +98,7 @@ export class UserCommand extends Command {
 			.setUsername(getTag(member.user), fontColor)
 			.setBackground('color', bgColor)
 			.setLevelColor(fontColor, levelColor)
-			.setRankColor(fontColor, rankColor);
+			.setRankColor(rankColor, rankColor);
 
 		if (bgImage) rankCard.setBackground('image', bgImage);
 		if (!noBorder) rankCard.setBorder(borderColor);
