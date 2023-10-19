@@ -44,7 +44,9 @@ export class UserCommand extends Command {
 				top: index + 1,
 				tag: getTag(discordUser),
 				score: user.currentLevel,
-				avatar: discordUser?.displayAvatarURL({ extension: 'png', forceStatic: true }) ?? 'https://cdn.discordapp.com/embed/avatars/0.png'
+				avatar:
+					discordUser?.displayAvatarURL({ extension: 'png', forceStatic: true, size: 16 }) ??
+					'https://cdn.discordapp.com/embed/avatars/0.png'
 			});
 			return {
 				top: index + 1,
