@@ -97,6 +97,8 @@ export class UserCommand extends Command {
 			console.log(rank);
 		}
 
+		console.log(rankColor);
+
 		const rankCard = new Rank()
 			.setRank(rank, 'RANK')
 			.setLevel(data?.currentLevel || 0, 'LEVEL')
