@@ -38,6 +38,7 @@ export class UserCommand extends Command {
 		const leaderboard = await this.container.db.userLevel.getLeaderboard(page);
 		const usersData = leaderboard.map((user, index) => {
 			const discordUser = this.container.client.users.cache.get(user.userId);
+			if (!discordUser) return null;
 			return {
 				top: index + 1,
 				tag: getTag(discordUser),
@@ -45,6 +46,14 @@ export class UserCommand extends Command {
 				avatar: discordUser?.displayAvatarURL() ?? 'https://cdn.discordapp.com/embed/avatars/0.png'
 			};
 		});
+
+		const filteredUserData = usersData.filter((user) => user !== null) as {
+			top: number;
+			tag: string;
+			score: number;
+			avatar: string;
+		}[];
+
 		const lbImage = await new Top()
 			.setColors({
 				box: '#212121',
@@ -54,7 +63,7 @@ export class UserCommand extends Command {
 				secondRank: '#9e9e9e',
 				thirdRank: '#94610f'
 			})
-			.setUsersData(usersData)
+			.setUsersData(filteredUserData)
 			.setScoreMessage('Level: ')
 			.build();
 
