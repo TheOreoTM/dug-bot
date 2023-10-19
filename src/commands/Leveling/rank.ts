@@ -81,7 +81,7 @@ export class UserCommand extends Command {
 		const borderColor = data.borderColor ? data.borderColor : roleColor;
 		const noBorder = data.noBorder ? data.noBorder : false;
 
-		const rank: number = 1;
+		const rank: number = await this.container.db.userLevel.getRank(data.userId);
 
 		let rankColor = fontColor;
 		if (rank === 1) {

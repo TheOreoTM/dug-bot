@@ -159,6 +159,28 @@ export const xprisma = new PrismaClient().$extends({
 				});
 			},
 
+			async getRank(userId: string) {
+				const user = await prisma.userLevel.upsert({
+					where: {
+						userId
+					},
+					create: {
+						userId
+					},
+					update: {}
+				});
+
+				const rank = await prisma.userLevel.count({
+					where: {
+						totalXp: {
+							gte: user.totalXp
+						}
+					}
+				});
+
+				return rank;
+			},
+
 			async removeXp(userId: string, amnt?: number) {
 				let amount = genRandomXp();
 				if (amnt) amount = amnt;
