@@ -4,7 +4,7 @@ import { ApplyOptions } from '@sapphire/decorators';
 import { Args, Command } from '@sapphire/framework';
 import { send } from '@sapphire/plugin-editable-commands';
 import { Top } from 'canvafy';
-import { Message } from 'discord.js';
+import { ChatInputCommandInteraction, EmbedBuilder, Message } from 'discord.js';
 
 @ApplyOptions<Command.Options>({
 	description: 'View the leaderbord of the server',
@@ -35,6 +35,7 @@ export class UserCommand extends Command {
 	}
 
 	private async sendLeaderboard(interactionOrMessage: InteractionOrMessage, page = 1) {
+		interactionOrMessage instanceof ChatInputCommandInteraction ? interactionOrMessage.deferReply() : null;
 		const leaderboard = await this.container.db.userLevel.getLeaderboard(page);
 		const usersData = leaderboard.map(async (user, index) => {
 			const discordUser = await this.container.client.users.fetch(user.userId);
@@ -54,8 +55,6 @@ export class UserCommand extends Command {
 			avatar: string;
 		}>[];
 
-		console.log(await Promise.all(filteredUserData));
-
 		const lbImage = await new Top()
 			.setColors({
 				box: '#212121',
@@ -71,8 +70,10 @@ export class UserCommand extends Command {
 			.setOpacity(0.6)
 			.build();
 
+		const embed = new EmbedBuilder().setTitle(`${interactionOrMessage.guild?.name}'s leaderboard`).setImage(`attachment://leaderboard.png`);
+
 		interactionOrMessage instanceof Message
-			? await send(interactionOrMessage, { files: [{ name: 'leaderboard.png', attachment: lbImage }] })
-			: await interactionOrMessage.reply({ files: [{ name: 'leaderboard.png', attachment: lbImage }] });
+			? await send(interactionOrMessage, { files: [{ name: 'leaderboard.png', attachment: lbImage }], embeds: [embed] })
+			: await interactionOrMessage.editReply({ files: [{ name: 'leaderboard.png', attachment: lbImage }], embeds: [embed] });
 	}
 }
