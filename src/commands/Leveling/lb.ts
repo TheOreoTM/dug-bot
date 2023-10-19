@@ -1,3 +1,4 @@
+import { DugColors } from '#constants';
 import type { GuildMessage, InteractionOrMessage } from '#lib/types/Discord';
 import { getTag } from '#lib/util/utils';
 import { ApplyOptions } from '@sapphire/decorators';
@@ -70,7 +71,10 @@ export class UserCommand extends Command {
 			.setOpacity(0.6)
 			.build();
 
-		const embed = new EmbedBuilder().setTitle(`${interactionOrMessage.guild?.name}'s leaderboard`).setImage(`attachment://leaderboard.png`);
+		const embed = new EmbedBuilder()
+			.setTitle(`${interactionOrMessage.guild?.name}'s leaderboard`)
+			.setImage(`attachment://leaderboard.png`)
+			.setColor(DugColors.Default);
 
 		interactionOrMessage instanceof Message
 			? await send(interactionOrMessage, { files: [{ name: 'leaderboard.png', attachment: lbImage }], embeds: [embed] })
