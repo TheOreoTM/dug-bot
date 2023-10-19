@@ -71,9 +71,9 @@ export class UserCommand extends Command {
 
 		const rank: number = 1;
 		let rankColor = `#ffffff`;
-		if (rank === 1) rankColor = `#FFD700`;
-		if (rank === 2) rankColor = `#C0C0C0`;
-		if (rank === 3) rankColor = `#CD7F32`;
+		if (rank === 1) rankColor = `#ffd700`;
+		if (rank === 2) rankColor = `#c0c0c0`;
+		if (rank === 3) rankColor = `#cd7f32`;
 
 		const roleColor = member.roles.highest.hexColor;
 		const img = member.displayAvatarURL({ forceStatic: true });
