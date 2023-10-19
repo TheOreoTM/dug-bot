@@ -1,4 +1,3 @@
-import { DugColors } from '#constants';
 import type { GuildMessage, InteractionOrMessage } from '#lib/types/Discord';
 import { getTag } from '#lib/util/utils';
 import { ApplyOptions } from '@sapphire/decorators';
