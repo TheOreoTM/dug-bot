@@ -102,6 +102,19 @@ export enum DugEvents {
 	MemberLevelUp = 'memberLevelUp'
 }
 
+export const ProgressBar = {
+	StartEmpty: `<:PB1E:1164479248271159306>`,
+	StartHalfFull: `<:PB1HF:1164479266361200712>`,
+	StartFull: `<:PB1C:1164479305947033600>`,
+	MiddleEmpty: `<:PB2E:1164479915048050709>`,
+	MiddleHalfFull: `<:PB2HF:1164479708021403698>`,
+	MiddleFull: `<:PB2F:1164479717202743296>`,
+	MiddleContinue: `<:PB2C:1164479713578852402>`,
+	EndEmpty: `<:PB3E:1164479719316652076>`,
+	EndHalfFull: `<:PB3HF:1164479711573983272>`,
+	EndFull: `<:PB3F:1164479723225763892>`
+};
+
 export const DugEmojis = {
 	Success: '<:success:1146683498766291024>',
 	Fail: '<:fail:1146683470114996274>',
