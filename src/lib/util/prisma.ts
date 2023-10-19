@@ -159,6 +159,21 @@ export const xprisma = new PrismaClient().$extends({
 				});
 			},
 
+			async getLeaderboard(page = 1) {
+				const perPage = 10; // Number of users per page
+				const offset = (page - 1) * perPage; // Calculate the offset based on the page number
+
+				const topUsers = await prisma.userLevel.findMany({
+					take: perPage, // Limit the results to the number of users per page
+					skip: offset, // Apply the calculated offset
+					orderBy: {
+						totalXp: 'desc' // Sort by totalXp in descending order
+					}
+				});
+
+				return topUsers;
+			},
+
 			async getRank(userId: string) {
 				const user = await prisma.userLevel.upsert({
 					where: {

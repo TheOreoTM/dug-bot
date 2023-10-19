@@ -28,7 +28,8 @@ export function usesPomelo(user: User | APIUser) {
 	return isNullishOrEmpty(user.discriminator) || user.discriminator === '0';
 }
 
-export function getTag(user: User | APIUser) {
+export function getTag(user: User | APIUser | undefined) {
+	if (!user) return `@Deleted User`;
 	return usesPomelo(user) ? `@${user.username}` : `${user.username}#${user.discriminator}`;
 }
 
