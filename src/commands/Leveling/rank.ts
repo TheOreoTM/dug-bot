@@ -88,6 +88,7 @@ export class UserCommand extends Command {
 		const noBorder = data.noBorder ? data.noBorder : false;
 
 		const rankCard = new Rank()
+			.setRank(rank, 'RANK')
 			.setLevel(data?.currentLevel || 0, 'LEVEL')
 			.setAvatar(img)
 			.setCurrentXp(data?.currentXp || 0, bgColor)
@@ -95,9 +96,9 @@ export class UserCommand extends Command {
 			.setBarColor(barColor)
 			.setCustomStatus(customStatusColor)
 			.setUsername(getTag(member.user), fontColor)
-			.setRankColor(fontColor, rankColor)
 			.setBackground('color', bgColor)
-			.setLevelColor(fontColor, levelColor);
+			.setLevelColor(fontColor, levelColor)
+			.setRankColor(fontColor, rankColor);
 
 		if (bgImage) rankCard.setBackground('image', bgImage);
 		if (!noBorder) rankCard.setBorder(borderColor);
