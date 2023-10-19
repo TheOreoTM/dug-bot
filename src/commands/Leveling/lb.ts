@@ -39,6 +39,7 @@ export class UserCommand extends Command {
 		const usersData = leaderboard.map(async (user, index) => {
 			const discordUser = await this.container.client.users.fetch(user.userId, { cache: true });
 			if (!discordUser) return null;
+			console.log(`https://cdn.discordapp.com/avatars/${user.userId}/${discordUser.avatar}.png`);
 			console.log({
 				top: index + 1,
 				tag: getTag(discordUser),
