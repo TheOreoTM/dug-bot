@@ -39,6 +39,12 @@ export class UserCommand extends Command {
 		const usersData = leaderboard.map(async (user, index) => {
 			const discordUser = await this.container.client.users.fetch(user.userId, { cache: true });
 			if (!discordUser) return null;
+			console.log({
+				top: index + 1,
+				tag: getTag(discordUser),
+				score: user.currentLevel,
+				avatar: discordUser?.displayAvatarURL({ extension: 'png', forceStatic: true }) ?? 'https://cdn.discordapp.com/embed/avatars/0.png'
+			});
 			return {
 				top: index + 1,
 				tag: getTag(discordUser),
@@ -65,6 +71,7 @@ export class UserCommand extends Command {
 			})
 			.setUsersData(filteredUserData)
 			.setScoreMessage('Level: ')
+			.setOpacity(0.6)
 			.build();
 
 		interactionOrMessage instanceof Message
