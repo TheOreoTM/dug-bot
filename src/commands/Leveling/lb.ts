@@ -49,9 +49,14 @@ export class UserCommand extends Command {
 			};
 		});
 
-		const filteredUserData = usersData.filter((user) => user !== null) as typeof usersData;
+		const filteredUserData = usersData.filter((user) => user !== null) as Promise<{
+			top: number;
+			tag: string;
+			score: number;
+			avatar: string;
+		}>[];
 
-		console.log(filteredUserData);
+		console.log(await Promise.all(filteredUserData));
 
 		const lbImage = await new Top()
 			.setColors({
@@ -63,7 +68,7 @@ export class UserCommand extends Command {
 				thirdRank: '#94610f'
 			})
 			.setBackground('color', '#c0c0c0')
-			.setUsersData(filteredUserData)
+			.setUsersData(await Promise.all(filteredUserData))
 			.setScoreMessage('Level: ')
 			.setOpacity(0.6)
 			.build();
