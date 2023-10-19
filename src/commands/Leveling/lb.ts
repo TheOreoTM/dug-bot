@@ -72,6 +72,7 @@ export class UserCommand extends Command {
 				secondRank: '#9e9e9e',
 				thirdRank: '#94610f'
 			})
+			.setBackground('color', '#c0c0c0')
 			.setUsersData(filteredUserData)
 			.setScoreMessage('Level: ')
 			.setOpacity(0.6)
