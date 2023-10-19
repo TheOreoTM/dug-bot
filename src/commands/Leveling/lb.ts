@@ -36,8 +36,8 @@ export class UserCommand extends Command {
 
 	private async sendLeaderboard(interactionOrMessage: InteractionOrMessage, page = 1) {
 		const leaderboard = await this.container.db.userLevel.getLeaderboard(page);
-		const usersData = leaderboard.map((user, index) => {
-			const discordUser = this.container.client.users.cache.get(user.userId);
+		const usersData = leaderboard.map(async (user, index) => {
+			const discordUser = await this.container.client.users.fetch(user.userId, { cache: true });
 			if (!discordUser) return null;
 			return {
 				top: index + 1,
@@ -47,12 +47,12 @@ export class UserCommand extends Command {
 			};
 		});
 
-		const filteredUserData = usersData.filter((user) => user !== null) as {
+		const filteredUserData = usersData.filter((user) => user !== null) as Promise<{
 			top: number;
 			tag: string;
 			score: number;
 			avatar: string;
-		}[];
+		}>[];
 
 		const lbImage = await new Top()
 			.setColors({
