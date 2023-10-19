@@ -82,10 +82,20 @@ export class UserCommand extends Command {
 		const noBorder = data.noBorder ? data.noBorder : false;
 
 		const rank: number = 1;
+
 		let rankColor = fontColor;
-		if (rank === 1) rankColor = `#000000`;
-		if (rank === 2) rankColor = `#c0c0c0`;
-		if (rank === 3) rankColor = `#cd7f32`;
+		if (rank === 1) {
+			rankColor = `#000000`;
+			console.log(rank);
+		}
+		if (rank === 2) {
+			rankColor = `#c0c0c0`;
+			console.log(rank);
+		}
+		if (rank === 3) {
+			rankColor = `#cd7f32`;
+			console.log(rank);
+		}
 
 		const rankCard = new Rank()
 			.setRank(rank, 'RANK')
