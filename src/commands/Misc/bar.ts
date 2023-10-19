@@ -1,8 +1,8 @@
-import { ProgressBar } from '#constants';
+import { DugColors, ProgressBar } from '#constants';
 import { progressBar } from '#lib/util/formatter';
 import { ApplyOptions } from '@sapphire/decorators';
 import { Args, Command } from '@sapphire/framework';
-import type { Message } from 'discord.js';
+import { EmbedBuilder, type Message } from 'discord.js';
 
 @ApplyOptions<Command.Options>({
 	description: 'A basic command'
@@ -27,6 +27,7 @@ export class UserCommand extends Command {
 			false
 		);
 
-		message.channel.send(`${bar}`);
+		const embed = new EmbedBuilder().setDescription(`${bar} \` ${percentage}% \` \` ${percentage}/100 \``).setColor(DugColors.Default);
+		message.channel.send({ embeds: [embed] });
 	}
 }
