@@ -1,3 +1,4 @@
+import { DugColors } from '#constants';
 import type { GuildMessage, InteractionOrMessage } from '#lib/types/Discord';
 import { getTag } from '#lib/util/utils';
 import { ApplyOptions } from '@sapphire/decorators';
@@ -43,9 +44,7 @@ export class UserCommand extends Command {
 				top: index + 1,
 				tag: getTag(discordUser),
 				score: user.currentLevel,
-				avatar:
-					discordUser?.displayAvatarURL({ extension: 'png', forceStatic: true, size: 16 }) ??
-					'https://cdn.discordapp.com/embed/avatars/0.png'
+				avatar: discordUser?.displayAvatarURL({ extension: 'png', forceStatic: true }) ?? 'https://cdn.discordapp.com/embed/avatars/0.png'
 			};
 		});
 
@@ -67,7 +66,7 @@ export class UserCommand extends Command {
 				secondRank: '#9e9e9e',
 				thirdRank: '#94610f'
 			})
-			.setBackground('color', '#c0c0c0')
+			.setBackground('color', `#2b2d31`)
 			.setUsersData(await Promise.all(filteredUserData))
 			.setScoreMessage('Level: ')
 			.setOpacity(0.6)
