@@ -69,12 +69,6 @@ export class UserCommand extends Command {
 			return { embeds: [embed] };
 		}
 
-		const rank: number = 1;
-		let rankColor = `#ffffff`;
-		if (rank === 1) rankColor = `#000000`;
-		if (rank === 2) rankColor = `#c0c0c0`;
-		if (rank === 3) rankColor = `#cd7f32`;
-
 		const roleColor = member.roles.highest.hexColor;
 		const img = member.displayAvatarURL({ forceStatic: true });
 		const requiredXpColor = `#747879`;
@@ -86,6 +80,12 @@ export class UserCommand extends Command {
 		const customStatusColor = data.avatarBorderColor ? data.avatarBorderColor : roleColor;
 		const borderColor = data.borderColor ? data.borderColor : roleColor;
 		const noBorder = data.noBorder ? data.noBorder : false;
+
+		const rank: number = 1;
+		let rankColor = fontColor;
+		if (rank === 1) rankColor = `#000000`;
+		if (rank === 2) rankColor = `#c0c0c0`;
+		if (rank === 3) rankColor = `#cd7f32`;
 
 		const rankCard = new Rank()
 			.setRank(rank, 'RANK')
