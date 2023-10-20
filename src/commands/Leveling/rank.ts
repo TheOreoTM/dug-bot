@@ -85,7 +85,7 @@ export class UserCommand extends Command {
 
 		let rankColor = fontColor;
 		if (rank === 1) {
-			rankColor = `#000000`;
+			rankColor = `#f7b900`;
 			console.log(rank);
 		}
 		if (rank === 2) {
