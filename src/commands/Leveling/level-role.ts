@@ -1,5 +1,5 @@
 import { DugColors } from '#constants';
-import { formatSuccessMessage } from '#lib/util/formatter';
+import { formatFailMessage, formatSuccessMessage } from '#lib/util/formatter';
 import { LevelRole } from '@prisma/client';
 import { ApplyOptions } from '@sapphire/decorators';
 import { Command } from '@sapphire/framework';
@@ -46,6 +46,10 @@ export class UserCommand extends Command {
 		if (subcommand === 'add') {
 			const level = interaction.options.getNumber('level', true);
 			const role = interaction.options.getRole('role', true);
+			if (role.id === interaction.guildId) {
+				interaction.reply(formatFailMessage(`You can't set the \`@everyone\` as a level role `));
+				return;
+			}
 
 			await this.container.db.levelRole.upsert({
 				where: {
@@ -61,7 +65,7 @@ export class UserCommand extends Command {
 				}
 			});
 
-			interaction.reply(formatSuccessMessage(`Set new level role for level \`${level}\` as **\`@${role.name}\`**`));
+			interaction.reply(formatSuccessMessage(`Set new level role for \`level ${level}\` as \`${role.name}\``));
 			return;
 		}
 
@@ -97,7 +101,7 @@ export class UserCommand extends Command {
 			levelRoles.forEach((levelRole) => {
 				levelRoleTable.push(`${emojis.sequence} ${roleMention(levelRole.roleId)} - \`Level ${levelRole.level}\``);
 			});
-			levelRoleTable.push(`${emojis.sequence} ${roleMention(lastLevelRole.roleId)} - \`Level ${lastLevelRole.level}\``);
+			levelRoleTable.push(`${emojis.last} ${roleMention(lastLevelRole.roleId)} - \`Level ${lastLevelRole.level}\``);
 
 			embed.setDescription(levelRoleTable.join('\n'));
 			interaction.reply({ embeds: [embed] });
