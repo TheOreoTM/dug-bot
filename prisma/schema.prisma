@@ -7,6 +7,12 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model LevelRole {
+  id     String @id @default(uuid())
+  level  Int    @unique
+  roleId String
+}
+
 model XpBoost {
   id        String   @id @default(uuid())
   userId    String
