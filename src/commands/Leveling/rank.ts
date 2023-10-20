@@ -6,7 +6,17 @@ import { ApplyOptions } from '@sapphire/decorators';
 import { Args, Command } from '@sapphire/framework';
 import { send } from '@sapphire/plugin-editable-commands';
 import { Rank } from 'canvafy';
-import { ApplicationCommandType, AttachmentBuilder, EmbedBuilder, GuildMember } from 'discord.js';
+import {
+	ActionRowBuilder,
+	ApplicationCommandType,
+	AttachmentBuilder,
+	ButtonBuilder,
+	ButtonStyle,
+	EmbedBuilder,
+	GuildMember,
+	InteractionReplyOptions,
+	MessageCreateOptions
+} from 'discord.js';
 
 @ApplyOptions<Command.Options>({
 	description: 'View your level information',
@@ -38,24 +48,24 @@ export class UserCommand extends Command {
 	// Message command
 	public override async messageRun(message: GuildMessage, args: Args) {
 		const member = await args.pick('member').catch(() => message.member);
-		const result = await this.genRankCard(member);
+		const result = (await this.genRankCard(member)) as MessageCreateOptions;
 		send(message, result);
 	}
 
 	// Chat Input (slash) command
 	public override async chatInputRun(interaction: Command.ChatInputCommandInteraction<'cached'>) {
-		const result = await this.genRankCard(interaction.options.getMember('user') ?? interaction.member);
+		const result = (await this.genRankCard(interaction.options.getMember('user') ?? interaction.member)) as InteractionReplyOptions;
 		interaction.reply(result);
 	}
 
 	// Context Menu command
 	public override async contextMenuRun(interaction: Command.ContextMenuCommandInteraction<'cached'>) {
 		const member = await interaction.guild.members.cache.get(interaction.targetId);
-		const result = await this.genRankCard(member || interaction.member);
+		const result = (await this.genRankCard(member || interaction.member)) as InteractionReplyOptions;
 		interaction.reply(result);
 	}
 
-	private async genRankCard(member: GuildMember) {
+	private async genRankCard(member: GuildMember): Promise<MessageCreateOptions | (InteractionReplyOptions & { fetchReply: true })> {
 		const data = await this.container.db.userLevel.findUnique({
 			where: {
 				userId: member.id
@@ -86,18 +96,13 @@ export class UserCommand extends Command {
 		let rankColor = fontColor;
 		if (rank === 1) {
 			rankColor = `#f7b900`;
-			console.log(rank);
 		}
 		if (rank === 2) {
 			rankColor = `#c0c0c0`;
-			console.log(rank);
 		}
 		if (rank === 3) {
 			rankColor = `#cd7f32`;
-			console.log(rank);
 		}
-
-		console.log(rankColor);
 
 		const rankCard = new Rank()
 			.setRank(rank, 'RANK')
@@ -115,7 +120,14 @@ export class UserCommand extends Command {
 		if (bgImage) rankCard.setBackground('image', bgImage);
 		if (!noBorder) rankCard.setBorder(borderColor);
 
+		const userXpBoost = Math.floor(data.xpBoost * 100);
+		const xpBoostButton = new ButtonBuilder()
+			.setDisabled(true)
+			.setLabel(`Current Xp Boost: ${userXpBoost}%`)
+			.setCustomId('none')
+			.setStyle(ButtonStyle.Secondary);
+
 		const attachment = new AttachmentBuilder(await rankCard.build(), { name: 'rankcard.png' });
-		return { files: [attachment] };
+		return { files: [attachment], components: userXpBoost > 0.0 ? [new ActionRowBuilder<ButtonBuilder>().addComponents(xpBoostButton)] : [] };
 	}
 }

@@ -26,7 +26,6 @@ export class UserEvent extends Listener {
 		});
 
 		member.roles.add(availableLevelRoles.map((r) => r.roleId));
-		console.log(availableLevelRoles);
 
 		message.reply({
 			content: `GG ${member}, You just leveled up!`,
