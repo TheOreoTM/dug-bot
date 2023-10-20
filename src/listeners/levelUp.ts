@@ -17,6 +17,16 @@ export class UserEvent extends Listener {
 			.setAvatarBorder(member.roles.highest.hexColor)
 			.build();
 
+		const availableLevelRoles = await this.container.db.levelRole.findMany({
+			where: {
+				level: {
+					lte: newLevel
+				}
+			}
+		});
+
+		member.roles.add(availableLevelRoles.map((r) => r.roleId));
+
 		message.reply({
 			content: `GG ${member}, You just leveled up!`,
 			files: [
