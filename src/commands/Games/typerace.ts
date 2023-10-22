@@ -10,6 +10,7 @@ import { send } from '@sapphire/plugin-editable-commands';
 export class UserCommand extends Command {
 	public override async messageRun(message: GuildMessage) {
 		const game = new TypeRacer(message);
+		game.start();
 		send(message, game.text);
 	}
 }
