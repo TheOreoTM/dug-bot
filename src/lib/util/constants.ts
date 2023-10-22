@@ -1,4 +1,5 @@
 import { join } from 'path';
+import { seconds } from './common';
 
 export const rootDir = join(__dirname, '..', '..', '..');
 export const srcDir = join(rootDir, 'src');
@@ -7,6 +8,11 @@ export const BotPrefix = '.';
 export const BotOwners = ['600707283097485322'];
 export const EventConfig = {
 	EventManager: '1034778285185454090'
+};
+
+export const TyperacerConfig = {
+	LobbyTime: seconds(12),
+	GameTime: seconds(30)
 };
 
 export const enum DugColors {
