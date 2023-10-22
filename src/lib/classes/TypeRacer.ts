@@ -39,7 +39,7 @@ export class TypeRacer extends EventEmitter {
 
 	public async start() {
 		if (this.started) return;
-		if (this.partipants.size < 2) {
+		if (this.partipants.size < 1) {
 			TypeRacer.announce(this.message, formatFailMessage(`Not enough players to start the game.`));
 			return;
 		}
