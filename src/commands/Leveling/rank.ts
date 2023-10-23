@@ -1,6 +1,6 @@
 import { DugColors } from '#constants';
 import type { GuildMessage } from '#lib/types/Discord';
-import { formatFailMessage, genBar } from '#lib/util/formatter';
+import { formatFailMessage, genBar, toCompactNum } from '#lib/util/formatter';
 import { getTag } from '#lib/util/utils';
 import { ApplyOptions } from '@sapphire/decorators';
 import { Args, Command } from '@sapphire/framework';
@@ -88,9 +88,9 @@ export class UserCommand extends Command {
 				.setTitle('Level Information')
 				.setColor(DugColors.Default)
 				.setDescription(
-					`${blockQuote(`**Level:** \` ${data.currentLevel} \`\n**XP:** \` ${data.currentXp} / ${data.requiredXp}`)} \` \` ${(
-						data.currentXp / data.requiredXp
-					).toFixed(2)}% \`\n\n${genBar(data.currentXp, data.requiredXp, 6)}`
+					`${blockQuote(
+						`**Level:** \` ${data.currentLevel} \`\n**XP:** \` ${toCompactNum(data.currentXp)} / ${toCompactNum(data.requiredXp)}`
+					)} \` \` ${(data.currentXp / data.requiredXp).toFixed(2)}% \`\n\n${genBar(data.currentXp, data.requiredXp, 6)}`
 				);
 			return { embeds: [embed] };
 		}
