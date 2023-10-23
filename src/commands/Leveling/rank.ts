@@ -90,7 +90,7 @@ export class UserCommand extends Command {
 				.setDescription(
 					`${blockQuote(
 						`**Level:** \` ${data.currentLevel} \`\n**XP:** \` ${toCompactNum(data.currentXp)} / ${toCompactNum(data.requiredXp)}`
-					)} \` \` ${(data.currentXp / data.requiredXp).toFixed(2)}% \`\n\n${genBar(data.currentXp, data.requiredXp, 6)}`
+					)} \` \n\n${genBar(data.currentXp, data.requiredXp, 6)} \` ${((data.currentXp / data.requiredXp) * 100).toFixed(2)}% \``
 				);
 			return { embeds: [embed] };
 		}
