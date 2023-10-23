@@ -13,5 +13,6 @@ export class UserCommand extends Command {
 		game.partipants.set(message.author.id, message.author);
 		game.start();
 		send(message, game.text);
+		// TODO: Make it multiplayer
 	}
 }

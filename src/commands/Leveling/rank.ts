@@ -1,6 +1,6 @@
 import { DugColors } from '#constants';
 import type { GuildMessage } from '#lib/types/Discord';
-import { formatFailMessage } from '#lib/util/formatter';
+import { formatFailMessage, genBar } from '#lib/util/formatter';
 import { getTag } from '#lib/util/utils';
 import { ApplyOptions } from '@sapphire/decorators';
 import { Args, Command } from '@sapphire/framework';
@@ -15,12 +15,14 @@ import {
 	EmbedBuilder,
 	GuildMember,
 	InteractionReplyOptions,
-	MessageCreateOptions
+	MessageCreateOptions,
+	blockQuote
 } from 'discord.js';
 
 @ApplyOptions<Command.Options>({
 	description: 'View your level information',
-	aliases: ['level']
+	aliases: ['level'],
+	flags: ['text']
 })
 export class UserCommand extends Command {
 	// Register Chat Input and Context Menu command
@@ -36,6 +38,7 @@ export class UserCommand extends Command {
 						.setDescription('The member you want to check the rank for')
 						.setRequired(false)
 				)
+				.addBooleanOption((o) => o.setName('text').setDescription('Send the text based version (for slow wifi users)').setRequired(false))
 		);
 
 		// Register Context Menu command available from any user
@@ -47,8 +50,9 @@ export class UserCommand extends Command {
 
 	// Message command
 	public override async messageRun(message: GuildMessage, args: Args) {
+		const shouldText = args.getFlags('text');
 		const member = await args.pick('member').catch(() => message.member);
-		const result = (await this.genRankCard(member)) as MessageCreateOptions;
+		const result = (await this.genRankCard(member, shouldText)) as MessageCreateOptions;
 		send(message, result);
 	}
 
@@ -65,7 +69,7 @@ export class UserCommand extends Command {
 		interaction.reply(result);
 	}
 
-	private async genRankCard(member: GuildMember): Promise<MessageCreateOptions | (InteractionReplyOptions & { fetchReply: true })> {
+	private async genRankCard(member: GuildMember, text?: boolean): Promise<MessageCreateOptions | (InteractionReplyOptions & { fetchReply: true })> {
 		const data = await this.container.db.userLevel.findUnique({
 			where: {
 				userId: member.id
@@ -76,6 +80,18 @@ export class UserCommand extends Command {
 			const embed = new EmbedBuilder()
 				.setDescription(formatFailMessage('You have no rank. Send some messages to earn a rank.'))
 				.setColor(DugColors.Fail);
+			return { embeds: [embed] };
+		}
+
+		if (text) {
+			const embed = new EmbedBuilder()
+				.setTitle('Level Information')
+				.setColor(DugColors.Default)
+				.setDescription(
+					`${blockQuote(`**Level:** \` ${data.currentLevel} \`\n**XP:** \` ${data.currentXp} / ${data.requiredXp}`)} \` \` ${(
+						data.currentXp / data.requiredXp
+					).toFixed(2)}% \`\n\n${genBar(data.currentXp, data.requiredXp, 6)}`
+				);
 			return { embeds: [embed] };
 		}
 

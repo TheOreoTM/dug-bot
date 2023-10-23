@@ -1,8 +1,27 @@
-import { DugColors, DugEmojis } from '#constants';
+import { DugColors, DugEmojis, ProgressBar } from '#constants';
 import { BadgeIcons, FactionType, InventoryItemTypeWithCount, TitleTexts } from '#lib/types/Data';
 import { Badge, Title } from '@prisma/client';
 import { container } from '@sapphire/framework';
 import { EmbedBuilder, GuildMember, PermissionsString, userMention } from 'discord.js';
+
+export function genBar(value: number, maxValue: number, size: number) {
+	return progressBar(
+		ProgressBar.StartEmpty,
+		ProgressBar.StartHalfFull,
+		ProgressBar.StartFull,
+		ProgressBar.MiddleEmpty,
+		ProgressBar.MiddleHalfFull,
+		ProgressBar.MiddleFull,
+		ProgressBar.MiddleContinue,
+		ProgressBar.EndEmpty,
+		ProgressBar.EndHalfFull,
+		ProgressBar.EndFull,
+		value,
+		maxValue,
+		size,
+		false
+	);
+}
 
 export function progressBar(
 	Bar1empty: string,

@@ -2,7 +2,8 @@ import { DugColors, TyperacerConfig } from '#constants';
 import Words from '#lib/typerace-data/words';
 import { GuildMessage } from '#lib/types/Discord';
 import { seconds } from '#lib/util/common';
-import { formatFailMessage } from '#lib/util/formatter';
+import { formatFailMessage, formatSuccessMessage } from '#lib/util/formatter';
+import { getTag } from '#lib/util/utils';
 import { sleep } from '@sapphire/utilities';
 import { Collection, EmbedBuilder, Message, MessageCollector, MessageCreateOptions, Snowflake, User } from 'discord.js';
 import { EventEmitter } from 'events';
@@ -41,6 +42,7 @@ export class TypeRacer extends EventEmitter {
 		if (this.started) return;
 		if (this.partipants.size < 1) {
 			TypeRacer.announce(this.message, formatFailMessage(`Not enough players to start the game.`));
+			this.finish();
 			return;
 		}
 		// Ready to start
@@ -50,6 +52,16 @@ export class TypeRacer extends EventEmitter {
 		msg = await TypeRacer.announce(this.message, 'Go!');
 		this.emit('game:start');
 		this.started = true;
+	}
+
+	public addPlayer(user: User) {
+		if (this.started) {
+			TypeRacer.announce(this.message, formatFailMessage('This game has already started'));
+			return;
+		}
+		this.partipants.set(user.id, user);
+		TypeRacer.announce(this.message, formatSuccessMessage(`${getTag(user)} has joined the game`));
+		this.emit('player:join', user);
 	}
 
 	private addResponse(message: Message) {
