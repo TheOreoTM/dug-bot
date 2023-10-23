@@ -103,6 +103,10 @@ export function progressBar(
 		console.warn('if you set the size to less than 3, your size will be reset to 6');
 	}
 	size = Math.trunc(size);
+
+	if (value === 0) {
+		return Bar1empty + Bar2empty.repeat(size - 2) + Bar3empty;
+	}
 	const percent = value > maxValue ? 100 : ((value / maxValue) * 100).toFixed(1);
 	const full = Math.floor(size * (value / maxValue > 1 ? 1 : value / maxValue));
 	let full_notround = 0;
