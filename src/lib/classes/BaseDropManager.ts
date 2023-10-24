@@ -14,21 +14,28 @@ export class BaseDropManager<T extends BaseDropType> {
 		return BaseDropManager.instance;
 	}
 
+	public setAllowDrop(shouldAllowDrop: boolean) {
+		this.allowDrop = shouldAllowDrop;
+		return this;
+	}
+
 	public performDropLogic() {
 		if (!this.allowDrop) return;
 		const randomDrop = this.getRandomDrop();
 		if (!randomDrop) return;
 
 		this.triggerDrop(randomDrop.id, randomDrop);
+		return this;
 	}
 
 	public triggerDrop(id: string, drop: T) {
 		// Assuming container.client and DugEvents are defined elsewhere
 		container.client.emit<T>(DugEvents.TriggerDrop, id, drop);
 		this.allowDrop = false;
+		return this;
 	}
 
-	public getAvailableDrops() {
+	get availableDrops() {
 		return this.dropsAvailable;
 	}
 
