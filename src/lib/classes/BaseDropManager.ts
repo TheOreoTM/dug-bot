@@ -26,7 +26,6 @@ export class BaseDropManager<T extends BaseDropType> {
 	public performDropLogic() {
 		if (!this.allowDrop) return;
 		const randomDrop = this.getRandomDrop();
-		console.log(randomDrop);
 		if (!randomDrop) return;
 
 		this.triggerDrop(randomDrop.id, randomDrop);
@@ -34,7 +33,6 @@ export class BaseDropManager<T extends BaseDropType> {
 	}
 
 	public triggerDrop(id: string, drop: T) {
-		// Assuming container.client and DugEvents are defined elsewhere
 		container.client.emit<T>(DugEvents.TriggerDrop, id, drop);
 		this.allowDrop = false;
 		return this;
@@ -46,12 +44,10 @@ export class BaseDropManager<T extends BaseDropType> {
 
 	private getRandomDrop(): (T & { id: string }) | null {
 		const totalWeight = Object.values(this.dropsAvailable).reduce((acc, drop) => acc + drop.weight, 0);
-		console.log(this.dropsAvailable, totalWeight);
 		if (totalWeight === 0) return null;
 
 		let randomWeight = Math.random() * totalWeight;
 
-		console.log(this.dropsAvailable);
 		for (const dropName in this.dropsAvailable) {
 			if (Object.prototype.hasOwnProperty.call(this.dropsAvailable, dropName)) {
 				const drop = this.dropsAvailable[dropName];

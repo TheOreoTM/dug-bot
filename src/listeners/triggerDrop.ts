@@ -1,3 +1,4 @@
+import { DugEvents } from '#constants';
 import { Economy } from '#lib/classes/Economy';
 import { AllItems } from '#lib/items';
 import { BaseDropType } from '#lib/types/Drops';
@@ -5,12 +6,13 @@ import { ApplyOptions } from '@sapphire/decorators';
 import { Listener } from '@sapphire/framework';
 import { ActionRowBuilder, ButtonBuilder, ButtonInteraction, ButtonStyle, ComponentType, EmbedBuilder, userMention } from 'discord.js';
 
-@ApplyOptions<Listener.Options>({ name: 'Trigger Drop' })
+@ApplyOptions<Listener.Options>({ event: DugEvents.TriggerDrop })
 export class UserEvent extends Listener {
 	public override async run(id: string, drop: BaseDropType) {
 		const channel = this.container.client.channels.cache.get('1138806085998874746');
 		if (!channel || !channel.isTextBased()) return;
 
+		console.log(id, drop);
 		const dropEmbed = new EmbedBuilder()
 			.setTitle(`Halloween Drops`)
 			.setDescription(drop.description)
