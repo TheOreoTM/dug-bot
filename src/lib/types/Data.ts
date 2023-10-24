@@ -1,5 +1,4 @@
 import { Badge, FactionStatus, Title, User } from '@prisma/client';
-import { ColorResolvable } from 'discord.js';
 import { Items } from './Enums';
 
 export type BadgeType = {
@@ -84,24 +83,3 @@ export const TitleTexts = {
 } as const;
 
 export type TitleTexts = (typeof TitleTexts)[keyof typeof TitleTexts];
-
-export type DropType = {
-	color: ColorResolvable;
-	image: string;
-	description: string;
-	/**
-	 * The unique value of the item in the shop
-	 */
-	items: string[];
-	id: DropRarityType;
-	weight: number;
-};
-
-export type DropRarityType = 'mythic' | 'gold' | 'silver' | 'bronze'; // | 'legendary'
-export enum DropRarityTypes {
-	// Legendary = 'legendary',
-	Mythic = 'mythic',
-	Gold = 'gold',
-	Silver = 'silver',
-	Bronze = 'bronze'
-}

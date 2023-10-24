@@ -1,4 +1,4 @@
-import { DropManager } from '#lib/classes/DropManager';
+import { LevelingDropManager } from '#lib/classes/XpDropManager';
 import { ApplyOptions } from '@sapphire/decorators';
 import { Command } from '@sapphire/framework';
 
@@ -7,8 +7,7 @@ import { Command } from '@sapphire/framework';
 })
 export class UserCommand extends Command {
 	public override async messageRun() {
-		const manager = DropManager.getInstance();
-		manager.allowDrop = true;
+		const manager = LevelingDropManager.getInstance();
 		manager.performDropLogic();
 	}
 }
