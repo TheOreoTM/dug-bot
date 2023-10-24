@@ -19,6 +19,7 @@ export class LevelingDropManager extends BaseDropManager<LevelingDropType> {
 
 const levelingDrops: Record<string, LevelingDropType> = {
 	levelUp1: {
+		name: '+1 Level',
 		amount: 1,
 		color: DugColors.Default,
 		description: 'Gain +1 Level',
@@ -26,6 +27,7 @@ const levelingDrops: Record<string, LevelingDropType> = {
 		weight: 30
 	},
 	levelUp2: {
+		name: '+2 Levels',
 		amount: 2,
 		color: DugColors.Default,
 		description: 'Gain +2 Levels',
@@ -33,6 +35,7 @@ const levelingDrops: Record<string, LevelingDropType> = {
 		weight: 15
 	},
 	levelUp3: {
+		name: '+3 Levels',
 		amount: 3,
 		color: DugColors.Default,
 		description: 'Gain +3 Levels',
@@ -40,6 +43,7 @@ const levelingDrops: Record<string, LevelingDropType> = {
 		weight: 5
 	},
 	xpBoost30: {
+		name: '+30% XP Boost',
 		amount: 0.2,
 		color: DugColors.Default,
 		description: 'Gain +30% XP',
@@ -47,6 +51,7 @@ const levelingDrops: Record<string, LevelingDropType> = {
 		weight: 80
 	},
 	xpBoost50: {
+		name: '+50% XP Boost',
 		amount: 0.5,
 		color: DugColors.Default,
 		description: 'Gain +50% XP',

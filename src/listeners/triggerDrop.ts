@@ -12,8 +12,7 @@ export class UserEvent extends Listener {
 		const channel = this.container.client.channels.cache.get('1138806085998874746');
 		if (!channel || !channel.isTextBased()) return;
 
-		console.log(id, drop);
-		const dropEmbed = new EmbedBuilder().setTitle(`Halloween Drops`).setDescription(drop.description).setColor(drop.color);
+		const dropEmbed = new EmbedBuilder().setTitle(drop.name).setDescription(drop.description).setColor(drop.color);
 		if (drop.image) dropEmbed.setThumbnail(drop.image);
 
 		const dropButton = new ButtonBuilder().setLabel('Collect').setStyle(ButtonStyle.Success).setEmoji('🖐️').setCustomId('collectDrop');

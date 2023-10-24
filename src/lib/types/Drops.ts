@@ -1,6 +1,7 @@
 import { ColorResolvable } from 'discord.js';
 
 export type BaseDropType = {
+	name: string;
 	color: ColorResolvable;
 	description: string;
 	weight: number;
