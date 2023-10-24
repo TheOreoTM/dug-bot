@@ -14,7 +14,7 @@ import { EmbedBuilder } from 'discord.js';
 	subcommands: [
 		{ name: 'help', chatInputRun: 'slashHelp', messageRun: 'msgHelp', default: true },
 		{ name: 'reset', chatInputRun: 'slashReset', messageRun: 'msgReset' },
-		// { name: 'bgImage', chatInputRun: 'slashBgImage', messageRun: 'msgBgImage' }, // DISABLED
+		// { name: 'bgImage', chatInputRun: 'slashBgImage', messageRun: 'msgBgImage' }, // DISABLED!
 		{ name: 'bgColor', chatInputRun: 'slashBgColor', messageRun: 'msgBgColor' },
 		{ name: 'borderColor', chatInputRun: 'slashBorderColor', messageRun: 'msgBorderColor' },
 		{ name: 'hideBorder', chatInputRun: 'slashNoBorder', messageRun: 'msgNoBorder' },
