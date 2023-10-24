@@ -46,6 +46,7 @@ export class BaseDropManager<T extends BaseDropType> {
 
 		let randomWeight = Math.random() * totalWeight;
 
+		console.log(this.dropsAvailable);
 		for (const dropName in this.dropsAvailable) {
 			if (Object.prototype.hasOwnProperty.call(this.dropsAvailable, dropName)) {
 				const drop = this.dropsAvailable[dropName];
