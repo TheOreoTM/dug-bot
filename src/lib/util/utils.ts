@@ -1,4 +1,5 @@
-import { InventoryItemType, InventoryItemTypeWithCount } from '#lib/types/Data';
+import { Items } from '#lib/items';
+import { InventoryItemType, InventoryItemTypeWithCount, ItemValue } from '#lib/types/Data';
 import {
 	container,
 	type ChatInputCommandSuccessPayload,
@@ -61,6 +62,10 @@ export function getLevelInfo(currentLevel: number) {
  */
 export function rarityToValue(crateName: string) {
 	return `${crateName.toLowerCase()}crate` as const;
+}
+
+export function isItemValue(value: string): value is ItemValue {
+	return value in Items;
 }
 
 export function groupItems(items: InventoryItemType[]) {

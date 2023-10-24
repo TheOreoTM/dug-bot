@@ -1,5 +1,5 @@
 import { Economy } from '#lib/classes/Economy';
-import { ShopItems } from '#lib/items';
+import { Items } from '#lib/items';
 import { formatFailMessage, formatSuccessMessage } from '#lib/util/formatter';
 import { ApplyOptions } from '@sapphire/decorators';
 import { Args, Command } from '@sapphire/framework';
@@ -25,9 +25,9 @@ export class UserCommand extends Command {
 	// }
 
 	public override async messageRun(message: Message, args: Args) {
-		const value = (await args.rest('string')).toLowerCase();
-
-		const itemObject = ShopItems.get(value);
+		const value = await args.rest('item');
+		const ShopItems = Items;
+		const itemObject = ShopItems[value];
 		if (!itemObject) {
 			message.channel.send({
 				content: formatFailMessage('That item doesnt exist')
