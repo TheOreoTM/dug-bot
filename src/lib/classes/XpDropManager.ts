@@ -1,4 +1,5 @@
 import { DugColors } from '#constants';
+import { ItemValue } from '#lib/types/Data';
 import { LevelingDropType } from '#lib/types/Drops';
 import { BaseDropManager } from './BaseDropManager';
 
@@ -17,7 +18,7 @@ export class LevelingDropManager extends BaseDropManager<LevelingDropType> {
 	}
 }
 
-const levelingDrops: Record<string, LevelingDropType> = {
+const levelingDrops: Record<ItemValue, LevelingDropType> = {
 	levelUp1: {
 		name: '+1 Level',
 		amount: 1,
@@ -27,7 +28,7 @@ const levelingDrops: Record<string, LevelingDropType> = {
 		weight: 30
 	},
 	levelUp2: {
-		name: '+2 Levels',
+		name: '+ Level',
 		amount: 2,
 		color: DugColors.Default,
 		description: 'Gain +2 Levels',
@@ -49,13 +50,5 @@ const levelingDrops: Record<string, LevelingDropType> = {
 		description: 'Gain +30% XP',
 		type: 'xpBoost',
 		weight: 80
-	},
-	xpBoost50: {
-		name: '+50% XP Boost',
-		amount: 0.5,
-		color: DugColors.Default,
-		description: 'Gain +50% XP',
-		type: 'xpBoost',
-		weight: 40
 	}
 };

@@ -1,5 +1,6 @@
+import { Items } from '#lib/items';
 import { Badge, FactionStatus, Title, User } from '@prisma/client';
-import { Items } from './Enums';
+import { ItemTypes } from './Enums';
 
 export type BadgeType = {
 	name: string;
@@ -9,18 +10,23 @@ export type BadgeType = {
 	value: string;
 };
 
-export type ItemType = {
-	name: string;
+export type ItemType = Uppercase<keyof typeof ItemTypes>;
+
+export type BaseItemType = {
 	description: string;
-	usage: string;
-	usable: boolean;
-	type: string;
+	name: string;
 	emoji: string;
-	sellPrice?: number;
-	sellable: boolean;
-	value: Items;
 	price: number;
+	sellable: boolean;
+	type: ItemType;
+	usable: boolean;
+	usage: string;
+	value: ItemValue;
+	sellPrice?: number;
 };
+
+export type Item = (typeof Items)[keyof typeof Items];
+export type ItemValue = keyof typeof Items;
 
 export type LootItemType = {
 	id: string;
@@ -31,11 +37,11 @@ export type LootItemType = {
 	weight: number;
 };
 
-export type InventoryItemType = ItemType & {
+export type InventoryItemType = BaseItemType & {
 	ownerId: string | null;
 };
 
-export type ShopItemType = ItemType & {
+export type ShopItemType = BaseItemType & {
 	price: number;
 };
 

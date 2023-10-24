@@ -1,92 +1,56 @@
-import { Collection } from 'discord.js';
-import { ItemType } from './types/Data';
-import { ItemTypes, Items } from './types/Enums';
+import { Item } from './types/Data';
+import { ItemTypes } from './types/Enums';
 
-import { LootTable, LootTableEntry } from 'loot-table-advanced';
-
-const shopItemsArray: ReadonlyArray<ItemType> = [];
-
-const lootItemsArray: ReadonlyArray<ItemType> = [
-	{
-		name: 'Lotto Ticket',
-		description: 'Get a chance to win nitro',
-		emoji: '🎫',
-		price: 0,
+export const Items = {
+	levelUp1: {
+		description: 'Gain +1 Level',
+		name: '+1 Level',
+		emoji: '⬆️',
+		price: 1000,
 		sellable: true,
-		value: Items.Ticket,
+		type: ItemTypes.Item,
 		usable: true,
-		sellPrice: 10000,
-		type: ItemTypes.Item,
-		usage: 'Use this item to participate in the nitro giveaway'
+		usage: 'Use to gain +1 Level',
+		value: 'levelUp1',
+		sellPrice: 750
 	},
-	{
-		name: 'Lotto Ticket Fragment',
-		description: 'A small piece of the Lotto Ticket',
-		emoji: '🎫',
-		price: 0,
+	levelUp2: {
+		description: 'Gain +2 Levels',
+		name: '+2 Levels',
+		emoji: '⬆️',
+		price: 1000,
 		sellable: true,
-		value: Items.TicketFragment,
+		type: ItemTypes.Item,
 		usable: true,
-		sellPrice: 1500,
-		type: ItemTypes.Item,
-		usage: 'Collect 5 of these fragments to craft a Lotto Ticket'
+		usage: 'Use to gain +2 Level',
+		value: 'levelUp2',
+		sellPrice: 750
 	},
-	{
-		name: 'Coins',
-		description: 'Use coins to buy items from the shop',
-		emoji: '🪙',
-		price: 0,
+	levelUp3: {
+		description: 'Gain +3 Levels',
+		name: '+3 Levels',
+		emoji: '⬆️',
+		price: 1000,
 		sellable: true,
-		sellPrice: 1,
 		type: ItemTypes.Item,
-		usable: false,
-		usage: 'Spend it in the shop',
-		value: Items.Coins
+		usable: true,
+		usage: 'Use to gain +3 Levels',
+		value: 'levelUp3',
+		sellPrice: 750
+	},
+	xpBoost30: {
+		description: 'Gain +30% XP',
+		name: '30% XP Boost',
+		emoji: '⬆️',
+		price: 1000,
+		sellable: true,
+		type: ItemTypes.Boost,
+		usable: true,
+		usage: 'Use to gain +30 XP',
+		value: 'levelUp3',
+		sellPrice: 750
 	}
-];
+} as const;
 
-const allItemsArray: ReadonlyArray<ItemType> = [...shopItemsArray, ...lootItemsArray];
-
-export const ShopItems = new Collection<string, ItemType>();
-shopItemsArray.map((item) => {
-	ShopItems.set(item.value, item);
-});
-
-export const LootItems = new Collection<string, ItemType>();
-lootItemsArray.map((item) => {
-	LootItems.set(item.value, item);
-});
-
-export const AllItems = new Collection<string, ItemType>();
-allItemsArray.map((item) => {
-	AllItems.set(item.value, item);
-});
-
-export const MythicLootTable: LootTable = [
-	LootTableEntry(Items.Coins, 55, 50, 150, 6, 1),
-	LootTableEntry('sword', 8, 1, 1, 1, 2),
-	LootTableEntry('gold', 15, 1, 4, 1, 2),
-	LootTableEntry('silver', 25, 4, 10, 2, 2),
-	LootTableEntry('diamond', 8, 1, 3, 1, 2)
-];
-
-export const GoldLootTable: LootTable = [
-	LootTableEntry(Items.Coins, 60, 50, 125, 8, 1),
-	LootTableEntry('sword', 8, 1, 1, 1, 2),
-	LootTableEntry('gold', 10, 1, 4, 1, 2),
-	LootTableEntry('silver', 20, 4, 10, 2, 2)
-];
-
-export const SilverLootTable: LootTable = [
-	LootTableEntry(Items.Coins, 80, 20, 60, 8, 1),
-	LootTableEntry('sword', 8, 1, 1, 1, 2),
-	LootTableEntry('silver', 20, 4, 10, 2, 2),
-	LootTableEntry(null, 20, 1, 1, 1, 2)
-];
-
-export const BronzeLootTable: LootTable = [
-	LootTableEntry(Items.Coins, 85, 20, 60, 8, 1),
-	LootTableEntry('sword', 4, 1, 1, 1, 2),
-	LootTableEntry(Items.Ticket, 90, 1, 5, 1, 3),
-	LootTableEntry(null, 10, 1, 1, 1, 2)
-];
+const shopItemsArray: ReadonlyArray<Item> = Object.values(Items);
+export { shopItemsArray };

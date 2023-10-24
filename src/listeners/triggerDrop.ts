@@ -1,6 +1,7 @@
 import { DugEvents } from '#constants';
 import { Economy } from '#lib/classes/Economy';
-import { AllItems } from '#lib/items';
+import { Items } from '#lib/items';
+import { ItemValue } from '#lib/types/Data';
 import { BaseDropType } from '#lib/types/Drops';
 import { ApplyOptions } from '@sapphire/decorators';
 import { Listener } from '@sapphire/framework';
@@ -8,7 +9,7 @@ import { ActionRowBuilder, ButtonBuilder, ButtonInteraction, ButtonStyle, Compon
 
 @ApplyOptions<Listener.Options>({ event: DugEvents.TriggerDrop })
 export class UserEvent extends Listener {
-	public override async run(id: string, drop: BaseDropType) {
+	public override async run(id: ItemValue, drop: BaseDropType) {
 		const channel = this.container.client.channels.cache.get('1138806085998874746');
 		if (!channel || !channel.isTextBased()) return;
 
@@ -39,9 +40,9 @@ export class UserEvent extends Listener {
 				]
 			});
 			const userId = i.user.id;
-			const itemData = AllItems.get(id);
+			const itemData = Items[id];
 			if (!itemData) return;
-			const item = new Economy.Item(itemData);
+			const item = new Economy.Item(itemData as Economy.Item);
 			item.buy(userId, true);
 		});
 
