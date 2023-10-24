@@ -22,6 +22,7 @@ export class BaseDropManager<T extends BaseDropType> {
 	public performDropLogic() {
 		if (!this.allowDrop) return;
 		const randomDrop = this.getRandomDrop();
+		console.log(randomDrop);
 		if (!randomDrop) return;
 
 		this.triggerDrop(randomDrop.id, randomDrop);

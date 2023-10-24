@@ -10,6 +10,7 @@ export class UserCommand extends Command {
 	public override async messageRun(message: Message) {
 		message.channel.send('Hi');
 		const manager = LevelingDropManager.getInstance();
-		manager.setAllowDrop(true).performDropLogic();
+		manager.setAllowDrop(true);
+		manager.performDropLogic();
 	}
 }
