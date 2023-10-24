@@ -42,7 +42,7 @@ export class BaseDropManager<T extends BaseDropType> {
 
 	private getRandomDrop(): (T & { id: string }) | null {
 		const totalWeight = Object.values(this.dropsAvailable).reduce((acc, drop) => acc + drop.weight, 0);
-		console.log(totalWeight);
+		console.log(this.dropsAvailable, totalWeight);
 		if (totalWeight === 0) return null;
 
 		let randomWeight = Math.random() * totalWeight;
