@@ -47,7 +47,7 @@ export const Items = {
 		type: ItemTypes.Boost,
 		usable: true,
 		usage: 'Use to gain +30 XP',
-		value: 'levelUp3',
+		value: 'xpBoost30',
 		sellPrice: 750
 	}
 } as const;
