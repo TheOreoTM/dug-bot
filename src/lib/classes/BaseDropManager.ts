@@ -43,23 +43,21 @@ export class BaseDropManager<T extends BaseDropType> {
 	}
 
 	private getRandomDrop(): (T & { id: string }) | null {
-		const totalWeight = Object.values(this.dropsAvailable).reduce((acc, drop) => acc + drop.weight, 0);
-		if (totalWeight === 0) return null;
+		const weightedRarities: (keyof typeof this.availableDrops)[] = [];
 
-		let randomWeight = Math.random() * totalWeight;
-
-		for (const dropName in this.dropsAvailable) {
-			if (Object.prototype.hasOwnProperty.call(this.dropsAvailable, dropName)) {
-				const drop = this.dropsAvailable[dropName];
-				randomWeight -= drop.weight;
-				if (randomWeight <= 0) {
-					return {
-						...drop,
-						id: dropName
-					};
+		for (const item in this.availableDrops) {
+			if (Object.prototype.hasOwnProperty.call(this.availableDrops, item)) {
+				for (let i = 0; i < this.availableDrops[item as keyof typeof this.availableDrops].weight; i++) {
+					weightedRarities.push(item as keyof typeof this.availableDrops);
 				}
 			}
 		}
-		return null;
+
+		const randomIndex = Math.floor(Math.random() * weightedRarities.length);
+		const item = weightedRarities[randomIndex];
+		return {
+			...this.availableDrops[item],
+			id: item
+		};
 	}
 }

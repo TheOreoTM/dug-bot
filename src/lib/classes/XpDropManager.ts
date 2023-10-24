@@ -28,7 +28,7 @@ const levelingDrops: Record<ItemValue, LevelingDropType> = {
 		weight: 30
 	},
 	levelUp2: {
-		name: '+ Level',
+		name: '+2 Level',
 		amount: 2,
 		color: DugColors.Default,
 		description: 'Gain +2 Levels',
@@ -45,7 +45,7 @@ const levelingDrops: Record<ItemValue, LevelingDropType> = {
 	},
 	xpBoost30: {
 		name: '+30% XP Boost',
-		amount: 0.2,
+		amount: 0.3,
 		color: DugColors.Default,
 		description: 'Gain +30% XP',
 		type: 'xpBoost',
