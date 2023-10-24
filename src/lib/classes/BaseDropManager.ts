@@ -3,13 +3,17 @@ import { BaseDropType } from '#lib/types/Drops';
 import { container } from '@sapphire/framework';
 
 export class BaseDropManager<T extends BaseDropType> {
-	private static instance: BaseDropManager<any>;
+	protected static instance: BaseDropManager<any>;
 	protected dropsAvailable: Record<string, T> = {};
 	private allowDrop: boolean = true;
 
-	public static getInstance(): BaseDropManager<any> {
+	protected constructor(dropsAvailable: Record<string, T>) {
+		this.dropsAvailable = dropsAvailable;
+	}
+
+	public static getInstance(dropsAvailable: Record<string, any>): BaseDropManager<any> {
 		if (!BaseDropManager.instance) {
-			BaseDropManager.instance = new BaseDropManager();
+			BaseDropManager.instance = new BaseDropManager(dropsAvailable);
 		}
 		return BaseDropManager.instance;
 	}

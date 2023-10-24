@@ -4,8 +4,16 @@ import { BaseDropManager } from './BaseDropManager';
 
 export class LevelingDropManager extends BaseDropManager<LevelingDropType> {
 	override dropsAvailable: Record<string, LevelingDropType> = levelingDrops;
+	static override instance: LevelingDropManager;
 	private constructor() {
-		super();
+		super(levelingDrops);
+	}
+
+	public static override getInstance(): LevelingDropManager {
+		if (!LevelingDropManager.instance) {
+			LevelingDropManager.instance = new LevelingDropManager();
+		}
+		return this.instance;
 	}
 }
 
