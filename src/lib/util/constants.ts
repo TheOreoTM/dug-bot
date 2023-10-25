@@ -1,5 +1,5 @@
 import { join } from 'path';
-import { seconds } from './common';
+import { seconds } from '#utils/common';
 
 export const rootDir = join(__dirname, '..', '..', '..');
 export const srcDir = join(rootDir, 'src');
