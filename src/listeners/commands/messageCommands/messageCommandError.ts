@@ -11,8 +11,9 @@ export class UserListener extends Listener {
 	public override async run(error: Error, { message, context }: MessageCommandErrorPayload) {
 		if (Reflect.get(Object(context), 'silent')) return;
 
-		if (error instanceof ArgumentError) this.argumentError(message, error);
-		if (error instanceof UserError) this.userError(message, error);
+		if (error instanceof ArgumentError) return this.argumentError(message, error);
+		if (error instanceof UserError) return this.userError(message, error);
+		return undefined;
 	}
 
 	private userError(message: Message, error: UserError) {
