@@ -9,6 +9,7 @@ import { EmbedBuilder, Message } from 'discord.js';
 })
 export class UserListener extends Listener {
 	public override async run(error: Error, { message, context }: MessageCommandErrorPayload) {
+		console.log(error, error instanceof ArgumentError);
 		if (Reflect.get(Object(context), 'silent')) return;
 
 		if (error instanceof ArgumentError) this.argumentError(message, error);
