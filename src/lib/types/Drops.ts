@@ -11,4 +11,5 @@ export type BaseDropType = {
 export type LevelingDropType = BaseDropType & {
 	type: 'xpBoost' | 'levelUp';
 	amount: number;
+	durationMs?: number;
 };

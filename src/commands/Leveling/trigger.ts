@@ -1,7 +1,6 @@
-import { LevelingDropManager } from '#lib/classes/XpDropManager';
+import { LevelingDropManager } from '#lib/classes/LevelingDropManager';
 import { ApplyOptions } from '@sapphire/decorators';
 import { Command } from '@sapphire/framework';
-
 @ApplyOptions<Command.Options>({
 	description: 'A basic command'
 })

@@ -27,6 +27,12 @@ export type BaseItemType = {
 
 export type Item = (typeof Items)[keyof typeof Items];
 export type ItemValue = keyof typeof Items;
+export type XpBoostItemValue = {
+	[K in keyof typeof Items]: K extends `xpBoost${string}` ? K : never;
+}[keyof typeof Items];
+export type LevelUpItemValue = {
+	[K in keyof typeof Items]: K extends `levelUp${string}` ? K : never;
+}[keyof typeof Items];
 
 export type LootItemType = {
 	id: string;

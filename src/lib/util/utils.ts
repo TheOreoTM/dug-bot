@@ -64,9 +64,15 @@ export function rarityToValue(crateName: string) {
 	return `${crateName.toLowerCase()}crate` as const;
 }
 
-export function isItemValue(value: string, caseSensitive = true): value is ItemValue {
+export function isItemValue(value: string, caseSensitive = true): ItemValue | null {
 	const lookupValue = caseSensitive ? value : value.toLowerCase();
-	return Object.keys(Items).some((item) => (caseSensitive ? item === lookupValue : item.toLowerCase() === lookupValue));
+	const foundKey = Object.keys(Items).find((item) => (caseSensitive ? item === lookupValue : item.toLowerCase() === lookupValue));
+
+	if (foundKey) {
+		return foundKey as ItemValue;
+	}
+
+	return null;
 }
 
 export function groupItems(items: InventoryItemType[]) {
