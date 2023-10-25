@@ -41,7 +41,7 @@ export class UserListener extends Listener {
 			embeds: [
 				new EmbedBuilder()
 					.setColor(DugColors.Fail)
-					.setDescription(msg)
+					.setDescription(msg ?? 'There was an error in command input')
 					.setTitle(identifier ?? 'Error')
 					.setFooter({ text: `Parameter: ${parameter}, Argument: ${argument}` })
 			]
