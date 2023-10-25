@@ -30,7 +30,8 @@
 		"colorette": "^2.0.20",
 		"discord.js": "^14.13.0",
 		"fuzzysort": "^2.0.4",
-		"loot-table-advanced": "^1.4.6"
+		"loot-table-advanced": "^1.4.6",
+		"tsup": "^7.2.0"
 	},
 	"devDependencies": {
 		"@sapphire/cli": "^1.6.1",
@@ -46,11 +47,11 @@
 	"scripts": {
 		"sapphire": "sapphire",
 		"generate": "sapphire generate",
-		"build": "tsc",
-		"watch": "tsc -w",
+		"build": "tsup",
+		"watch": "tsup --watch",
 		"start": "node dist/index.js",
 		"dev": "npm run build && npm run start",
-		"watch:start": "tsc-watch --onSuccess \"npm run start\"",
+		"watch:start": "tsup --watch --onSuccess \"node ./dist/index.js\"",
 		"format": "prettier --write \"src/\""
 	},
 	"prettier": "@sapphire/prettier-config",
