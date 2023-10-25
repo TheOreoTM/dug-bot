@@ -6,7 +6,7 @@ import { Argument } from '@sapphire/framework';
 @ApplyOptions<Argument.Options>({})
 export class UserArgument extends Argument<ItemValue> {
 	public override run(parameter: string) {
-		return isItemValue(parameter) ? this.ok(parameter) : this.error({ parameter, identifier: 'invalidItem' });
+		return isItemValue(parameter, false) ? this.ok(parameter) : this.error({ parameter, identifier: 'invalidItem' });
 	}
 }
 
