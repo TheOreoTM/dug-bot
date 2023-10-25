@@ -37,7 +37,6 @@ export class UserListener extends Listener {
 		const identifier = error.identifier;
 		const msg = error.message;
 		const parameter = error.parameter.replaceAll('`', '῾');
-		console.log(argument, identifier, msg, parameter);
 		return sendTemporaryMessage(message, {
 			embeds: [
 				new EmbedBuilder()
