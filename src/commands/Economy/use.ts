@@ -1,7 +1,7 @@
 import { BoostItems } from '#lib/items';
 import { LevelUpItemValue, XpBoostItemValue } from '#lib/types/Data';
 import { hours } from '#lib/util/common';
-import { formatFailMessage } from '#lib/util/formatter';
+import { formatFailMessage, formatSuccessMessage } from '#lib/util/formatter';
 import { getLevelInfo } from '#lib/util/utils';
 import { ApplyOptions } from '@sapphire/decorators';
 import { Args, Command } from '@sapphire/framework';
@@ -82,5 +82,7 @@ export class UserCommand extends Command {
 
 			await this.container.db.userLevel.addXpBoost(message.author.id, xpBoostToAdd, expiresAt);
 		}
+
+		send(message, formatSuccessMessage(`Used \` ${itemToUse.name} \``));
 	}
 }
