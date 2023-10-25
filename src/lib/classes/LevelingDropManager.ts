@@ -1,7 +1,6 @@
 import { BoostItems } from '#lib/items';
-import { ItemValue } from '#lib/types/Data';
-import { LevelingDropType } from '#lib/types/Drops';
-import { BaseDropManager } from './BaseDropManager';
+import { LevelingDropType, ItemValue } from '#lib/types';
+import { BaseDropManager } from '#lib/classes';
 
 export class LevelingDropManager extends BaseDropManager<LevelingDropType> {
 	override dropsAvailable: Record<string, LevelingDropType> = levelingDrops;

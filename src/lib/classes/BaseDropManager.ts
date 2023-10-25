@@ -1,5 +1,5 @@
 import { DugEvents } from '#constants';
-import { BaseDropType } from '#lib/types/Drops';
+import { BaseDropType } from '#lib/types';
 import { container } from '@sapphire/framework';
 
 export class BaseDropManager<T extends BaseDropType> {

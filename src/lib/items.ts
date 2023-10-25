@@ -1,8 +1,6 @@
 import { DugColors } from '#constants';
-import { Item, ItemValue } from './types/Data';
-import { LevelingDropType } from './types/Drops';
-import { ItemTypes } from './types/Enums';
-import { hours } from './util/common';
+import { ItemTypes, LevelingDropType, Item, ItemValue } from '#lib/types';
+import { hours } from '#utils/common';
 
 export const Items = {
 	levelUp1: {

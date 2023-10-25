@@ -4,9 +4,9 @@ import { getTag } from '#lib/util/utils';
 import { ApplyOptions } from '@sapphire/decorators';
 import { Args, Command } from '@sapphire/framework';
 import { send } from '@sapphire/plugin-editable-commands';
-import { Top } from 'canvafy';
+import canvafy from 'canvafy';
 import { ChatInputCommandInteraction, EmbedBuilder, Message } from 'discord.js';
-
+const { Top } = canvafy;
 @ApplyOptions<Command.Options>({
 	description: 'View the leaderbord of the server',
 	aliases: ['leaderboard', 'top']

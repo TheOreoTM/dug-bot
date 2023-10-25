@@ -9,7 +9,7 @@
 		"esModuleInterop": true,
 		"experimentalDecorators": true,
 		"importHelpers": true,
-		"verbatimModuleSyntax": true,
+		"verbatimModuleSyntax": false,
 		"incremental": true,
 		"moduleResolution": "Node",
 		"newLine": "lf",

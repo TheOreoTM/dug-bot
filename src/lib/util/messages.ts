@@ -1,6 +1,6 @@
 import { MessageCreateOptions } from 'discord.js';
 import { Message } from 'discord.js';
-import { seconds } from './common';
+import { seconds } from '#utils/common';
 import { send } from '@sapphire/plugin-editable-commands';
 import { sleep } from '@sapphire/utilities';
 

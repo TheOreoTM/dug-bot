@@ -9,6 +9,8 @@
 		"#config": "./dist/lib/util/config.js",
 		"#constants": "./dist/lib/util/constants.js",
 		"#lib/*": "./dist/lib/*.js",
+		"#lib/types": "./dist/lib/types/index.js",
+		"#lib/classes": "./dist/lib/classes/index.js",
 		"#utils/*": "./dist/lib/util/*.js"
 	},
 	"dependencies": {

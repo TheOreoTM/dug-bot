@@ -3,7 +3,8 @@ import { GuildMessage } from '#lib/types/Discord';
 import { getTag } from '#lib/util/utils';
 import { ApplyOptions } from '@sapphire/decorators';
 import { Listener } from '@sapphire/framework';
-import { LevelUp } from 'canvafy';
+import canvafy from 'canvafy';
+const { LevelUp } = canvafy;
 
 @ApplyOptions<Listener.Options>({ event: DugEvents.MemberLevelUp })
 export class UserEvent extends Listener {

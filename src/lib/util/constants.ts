@@ -1,8 +1,4 @@
-import { join } from 'path';
 import { seconds } from '#utils/common';
-
-export const rootDir = join(__dirname, '..', '..', '..');
-export const srcDir = join(rootDir, 'src');
 
 export const BotPrefix = '.';
 export const BotOwners = ['600707283097485322'];

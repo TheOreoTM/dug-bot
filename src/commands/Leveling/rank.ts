@@ -5,7 +5,7 @@ import { getTag } from '#lib/util/utils';
 import { ApplyOptions } from '@sapphire/decorators';
 import { Args, Command } from '@sapphire/framework';
 import { send } from '@sapphire/plugin-editable-commands';
-import { Rank } from 'canvafy';
+import canvafy from 'canvafy';
 import {
 	ActionRowBuilder,
 	ApplicationCommandType,
@@ -18,6 +18,7 @@ import {
 	MessageCreateOptions,
 	blockQuote
 } from 'discord.js';
+const { Rank } = canvafy;
 
 @ApplyOptions<Command.Options>({
 	description: 'View your level information',

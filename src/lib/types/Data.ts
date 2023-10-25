@@ -1,6 +1,6 @@
 import { Items } from '#lib/items';
 import { Badge, FactionStatus, Title, User } from '@prisma/client';
-import { ItemTypes } from './Enums';
+import { ItemTypes } from '#lib/types';
 
 export type BadgeType = {
 	name: string;
