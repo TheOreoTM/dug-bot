@@ -22,7 +22,7 @@ export class UserCommand extends Command {
 								.setName('money')
 								.setDescription('Add money')
 								.addNumberOption((o) => o.setName('amount').setDescription('Amount to add').setRequired(true))
-								.addUserOption((o) => o.setName('member').setRequired(true))
+								.addUserOption((o) => o.setName('member').setDescription('The member you want to add money to').setRequired(true))
 						)
 				)
 		);
