@@ -1,4 +1,4 @@
-import { ItemValue } from '#lib/types/Data';
+import { type ItemValue } from '#lib/types/Data';
 import { isItemValue } from '#lib/util/utils';
 import { ApplyOptions } from '@sapphire/decorators';
 import { Argument } from '@sapphire/framework';

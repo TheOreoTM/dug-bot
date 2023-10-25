@@ -1,0 +1,32 @@
+{
+	"compileOnSave": true,
+	"compilerOptions": {
+		"allowSyntheticDefaultImports": true,
+		"alwaysStrict": true,
+		"declaration": true,
+		"declarationMap": true,
+		"emitDecoratorMetadata": true,
+		"esModuleInterop": true,
+		"experimentalDecorators": true,
+		"importHelpers": true,
+		"verbatimModuleSyntax": true,
+		"incremental": true,
+		"moduleResolution": "Node",
+		"newLine": "lf",
+		"noEmitHelpers": false,
+		"noFallthroughCasesInSwitch": true,
+		"noImplicitReturns": true,
+		"noUnusedLocals": true,
+		"noUnusedParameters": true,
+		"preserveConstEnums": true,
+		"pretty": true,
+		"resolveJsonModule": true,
+		"sourceMap": true,
+		"strict": true,
+		"useDefineForClassFields": true,
+		"lib": ["ESNext"],
+		"target": "ESNext",
+		"module": "ESNext",
+		"removeComments": true
+	}
+}

@@ -1,17 +1,18 @@
 {
-	"extends": ["@sapphire/ts-config", "@sapphire/ts-config/extra-strict", "@sapphire/ts-config/decorators"],
+	"extends": "../tsconfig.base.json",
 	"compilerOptions": {
 		"outDir": "../dist",
 		"rootDir": ".",
 		"baseUrl": ".",
-		"skipLibCheck": true,
-		"composite": true,
+		"allowJs": true,
 		"paths": {
 			"#config": ["lib/util/config.ts"],
 			"#constants": ["lib/util/constants.ts"],
 			"#lib/*": ["lib/*"],
 			"#utils/*": ["lib/util/*"]
-		}
+		},
+		"skipLibCheck": true,
+		"composite": true
 	},
 	"include": [".", "./**/*.json"],
 	"exclude": ["./tsconfig.json"]
