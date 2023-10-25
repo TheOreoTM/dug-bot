@@ -32,11 +32,11 @@ export class UserListener extends Listener {
 	}
 
 	private argumentError(message: Message, error: ArgumentError<unknown>) {
-		console.log('hi');
 		const argument = error.argument.name;
 		const identifier = error.identifier;
 		const msg = error.message;
 		const parameter = error.parameter.replaceAll('`', '῾');
+		console.log(argument, identifier, msg, parameter);
 		return sendTemporaryMessage(message, {
 			embeds: [
 				new EmbedBuilder()
