@@ -96,7 +96,7 @@ export class UserCommand extends Command {
 							data.requiredXp
 						)}`
 					)} \` \n\n${genBar(data.currentXp, data.requiredXp, 6)} \` ${((data.currentXp / data.requiredXp) * 100).toFixed(2)}% \`
-					${data.xpBoost > 0.0 ? `\n${DugEmojis.ListLast} **XP Boost:** \` ${userXpBoost}% \`` : ``}`
+					${data.xpBoost > 0.0 ? `${DugEmojis.ListLast} **XP Boost:** \` ${userXpBoost}% \`` : ``}`
 				);
 			return { embeds: [embed] };
 		}
