@@ -1,4 +1,4 @@
-import { DugColors } from '#constants';
+import { DugColors, DugEmojis } from '#constants';
 import type { GuildMessage } from '#lib/types/Discord';
 import { formatFailMessage, genBar, toCompactNum } from '#lib/util/formatter';
 import { getTag } from '#lib/util/utils';
@@ -84,6 +84,8 @@ export class UserCommand extends Command {
 			return { embeds: [embed] };
 		}
 
+		const userXpBoost = Math.floor(data.xpBoost * 100);
+
 		if (text) {
 			const embed = new EmbedBuilder()
 				.setTitle('Level Information')
@@ -93,7 +95,8 @@ export class UserCommand extends Command {
 						`**Level:** \` ${data.currentLevel} \`\n**XP:**​ ​ ​ ​ ​ ​ ​\` ${toCompactNum(data.currentXp)} / ${toCompactNum(
 							data.requiredXp
 						)}`
-					)} \` \n\n${genBar(data.currentXp, data.requiredXp, 6)} \` ${((data.currentXp / data.requiredXp) * 100).toFixed(2)}% \``
+					)} \` \n\n${genBar(data.currentXp, data.requiredXp, 6)} \` ${((data.currentXp / data.requiredXp) * 100).toFixed(2)}% \`
+					${data.xpBoost > 0.0 ? `\n${DugEmojis.ListLast} **XP Boost:** \` ${userXpBoost}% \`` : ``}`
 				);
 			return { embeds: [embed] };
 		}
@@ -139,7 +142,6 @@ export class UserCommand extends Command {
 		if (bgImage) rankCard.setBackground('image', bgImage);
 		if (!noBorder) rankCard.setBorder(borderColor);
 
-		const userXpBoost = Math.floor(data.xpBoost * 100);
 		const xpBoostButton = new ButtonBuilder()
 			.setDisabled(true)
 			.setLabel(`Current Xp Boost: ${userXpBoost}%`)

@@ -128,7 +128,9 @@ export const DugEmojis = {
 	SilverCrate: '<:crate_silver:1162410744176980048>',
 	GoldCrate: '<:crate_gold:1162411133706190908>',
 	MythicCrate: '<:crate_mythic:1162410963492937728>',
-	LegendaryCrate: '<:crate_legendary:1162410877627154564>'
+	LegendaryCrate: '<:crate_legendary:1162410877627154564>',
+	ListBranch: '<:branch_90_curved:1161486023814025266>',
+	ListLast: '<:branch_tail_curved:1161479147839828018>'
 };
 
 export const DropChannelID = '1138806085998874746';
