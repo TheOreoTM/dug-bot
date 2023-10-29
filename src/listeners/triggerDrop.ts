@@ -23,11 +23,9 @@ export class UserEvent extends Listener {
 			components: [new ActionRowBuilder<ButtonBuilder>().addComponents(dropButton)]
 		});
 
-		const collector = response.createMessageComponentCollector({ componentType: ComponentType.Button, max: 1, maxUsers: 1, time: 60_000 });
+		const collector = response.createMessageComponentCollector({ componentType: ComponentType.Button, maxUsers: 1, time: 60_000 });
 
 		collector.on('collect', async (i: ButtonInteraction) => {
-			await i.deferUpdate();
-
 			await i.update({
 				embeds: [
 					dropEmbed.addFields({
