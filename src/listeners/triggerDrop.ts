@@ -26,7 +26,11 @@ export class UserEvent extends Listener {
 		const collector = response.createMessageComponentCollector({ componentType: ComponentType.Button, maxUsers: 1, time: 60_000 });
 
 		collector.on('collect', async (i: ButtonInteraction) => {
-			const imposterButton = new ButtonBuilder(dropButton.data).setCustomId('imposterDropButton').setLabel('Collected').setEmoji('✊');
+			const imposterButton = new ButtonBuilder(dropButton.data)
+				.setCustomId('imposterDropButton')
+				.setLabel('Collected')
+				.setEmoji('✊')
+				.setDisabled(true);
 
 			await i.update({
 				embeds: [
