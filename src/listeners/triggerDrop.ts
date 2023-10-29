@@ -27,6 +27,8 @@ export class UserEvent extends Listener {
 		let firstUserId: string = '0';
 
 		collector.on('collect', async (i: ButtonInteraction) => {
+			console.log(firstUserId);
+
 			if (firstUserId !== '0') {
 				i.reply({
 					content: `You're too slow`,
@@ -34,6 +36,8 @@ export class UserEvent extends Listener {
 				});
 				return;
 			}
+			console.log(firstUserId);
+
 			firstUserId = i.user.id;
 			await i.update({
 				embeds: [
