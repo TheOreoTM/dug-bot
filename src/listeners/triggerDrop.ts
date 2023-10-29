@@ -24,8 +24,17 @@ export class UserEvent extends Listener {
 		});
 
 		const collector = response.createMessageComponentCollector({ componentType: ComponentType.Button, max: 1, maxUsers: 1, time: 60_000 });
+		let firstUserId: string = '0';
 
 		collector.on('collect', async (i: ButtonInteraction) => {
+			if (firstUserId !== '0') {
+				i.reply({
+					content: `You're too slow`,
+					ephemeral: true
+				});
+				return;
+			}
+			firstUserId = i.user.id;
 			await i.update({
 				embeds: [
 					dropEmbed.addFields({
