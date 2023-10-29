@@ -133,5 +133,24 @@ export const DugEmojis = {
 	ListLast: '<:branch_tail_curved:1161479147839828018>'
 };
 
+export const CrateAssets = {
+	Common: {
+		Image: 'https://i.imgur.com/ZYB2r1f.png',
+		Emoji: '<:crate_common:1162792170277834792>'
+	},
+	Uncommon: {
+		Image: 'https://i.imgur.com/M5xKemu.png',
+		Emoji: '<:crate_uncommon:1162792140456333453>'
+	},
+	Rare: {
+		Image: 'https://i.imgur.com/cJqMcyq.png',
+		Emoji: '<:crate_rare:1162792090451853383>'
+	},
+	Mythic: {
+		Image: 'https://i.imgur.com/Wq756bZ.png',
+		Emoji: '<:crate_mythic:1162792060110245979>'
+	}
+};
+
 export const DropChannelID = '1138806085998874746';
 export const NotificationChannelID = '825619988853162014';

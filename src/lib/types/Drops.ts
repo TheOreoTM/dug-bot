@@ -13,4 +13,5 @@ export type LevelingDropType = BaseDropType & {
 
 export type CrateDropType = BaseDropType & {
 	image: string;
+	emoji: string;
 };

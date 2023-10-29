@@ -1,6 +1,6 @@
 import { BaseDropManager } from '#lib/classes';
-import { Crates } from '#lib/crates';
-import { CrateDropType, CrateRarity } from '#lib/types';
+import { Crates } from '#lib/items';
+import { CrateDropType, CrateItemValue } from '#lib/types';
 
 export class CrateDropManager extends BaseDropManager<CrateDropType> {
 	override dropsAvailable: Record<string, CrateDropType> = crateDrops;
@@ -17,4 +17,4 @@ export class CrateDropManager extends BaseDropManager<CrateDropType> {
 	}
 }
 
-const crateDrops: Record<CrateRarity, CrateDropType> = Crates;
+const crateDrops: Record<CrateItemValue, CrateDropType> = Crates;

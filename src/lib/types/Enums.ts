@@ -3,5 +3,6 @@ export const enum ItemTypes {
 	Tool = 'TOOL',
 	Boost = 'BOOST',
 	Badge = 'BADGE',
-	Title = 'TITLE'
+	Title = 'TITLE',
+	Crate = 'CRATE'
 }
