@@ -1,6 +1,7 @@
 import { Items } from '#lib/items';
 import { Badge, FactionStatus, Title, User } from '@prisma/client';
 import { ItemTypes } from '#lib/types';
+import { Crates } from '#lib/crates';
 
 export type BadgeType = {
 	name: string;
@@ -33,6 +34,8 @@ export type XpBoostItemValue = {
 export type LevelUpItemValue = {
 	[K in keyof typeof Items]: K extends `levelUp${string}` ? K : never;
 }[keyof typeof Items];
+
+export type CrateRarity = keyof typeof Crates;
 
 export type LootItemType = {
 	id: string;

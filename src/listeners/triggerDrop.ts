@@ -1,4 +1,4 @@
-import { DugEvents } from '#constants';
+import { DugColors, DugEvents } from '#constants';
 import { Economy } from '#lib/classes/Economy';
 import { Items } from '#lib/items';
 import { ItemValue } from '#lib/types/Data';
@@ -13,7 +13,7 @@ export class UserEvent extends Listener {
 		const channel = this.container.client.channels.cache.get('1138806085998874746');
 		if (!channel || !channel.isTextBased()) return;
 
-		const dropEmbed = new EmbedBuilder().setTitle(drop.name).setDescription(drop.description).setColor(drop.color);
+		const dropEmbed = new EmbedBuilder().setTitle(drop.name).setDescription(drop.description).setColor(DugColors.Default);
 		if (drop.image) dropEmbed.setThumbnail(drop.image);
 
 		const dropButton = new ButtonBuilder().setLabel('Collect').setStyle(ButtonStyle.Success).setEmoji('🖐️').setCustomId('collectDrop');
