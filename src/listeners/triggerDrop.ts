@@ -23,15 +23,9 @@ export class UserEvent extends Listener {
 			components: [new ActionRowBuilder<ButtonBuilder>().addComponents(dropButton)]
 		});
 
-		const collector = response.createMessageComponentCollector({ componentType: ComponentType.Button, maxUsers: 1, time: 60_000 });
+		const collector = response.createMessageComponentCollector({ componentType: ComponentType.Button, maxUsers: 1, time: 15_000 });
 
 		collector.on('collect', async (i: ButtonInteraction) => {
-			const imposterButton = new ButtonBuilder(dropButton.data)
-				.setCustomId('imposterDropButton')
-				.setLabel('Collected')
-				.setEmoji('✊')
-				.setDisabled(true);
-
 			await i.update({
 				embeds: [
 					dropEmbed.addFields({
@@ -39,7 +33,7 @@ export class UserEvent extends Listener {
 						value: userMention(i.user.id)
 					})
 				],
-				components: [new ActionRowBuilder<ButtonBuilder>().addComponents(imposterButton)]
+				components: []
 			});
 			const userId = i.user.id;
 			const itemData = Items[id];
