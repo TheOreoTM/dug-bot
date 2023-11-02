@@ -3,6 +3,7 @@ import { BaseDropType, FactionType } from '#lib/types/Data';
 import { User } from 'discord.js';
 import { GuildMessage } from './Discord';
 import { ArrayString, NumberString } from '@skyra/env-utilities';
+import { ModuleName } from '#config';
 
 declare module '@sapphire/framework' {
 	interface SapphireClient {
@@ -10,6 +11,7 @@ declare module '@sapphire/framework' {
 		emit(event: DugEvents.FactionJoin, user: User, faction: FactionType): boolean;
 		emit<T extends BaseDropType>(event: DugEvents.TriggerDrop, id: string, drop: T): boolean;
 		emit(event: DugEvents.MemberLevelUp, message: GuildMessage, oldLevel: number, newLevel: number): boolean;
+		loadedModules: ModuleName[];
 	}
 }
 

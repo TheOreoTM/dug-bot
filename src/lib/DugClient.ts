@@ -8,6 +8,8 @@ export class DugClient<Ready extends boolean = boolean> extends SapphireClient<R
 	public constructor() {
 		super(ClientConfig);
 
+		this.loadedModules = config.enabled_modules;
+
 		if (isEnabled('core')) enableModule(this, 'core');
 		if (isEnabled('leveling')) enableModule(this, 'leveling');
 		if (isEnabled('economy')) enableModule(this, 'economy');

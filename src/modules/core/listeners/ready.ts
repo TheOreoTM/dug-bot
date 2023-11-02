@@ -1,3 +1,4 @@
+import { ModuleName } from '#config';
 import { ApplyOptions } from '@sapphire/decorators';
 import { Listener, Store } from '@sapphire/framework';
 import { blue, gray, green, magenta, magentaBright, white, yellow } from 'colorette';
@@ -38,13 +39,19 @@ ${line03}${dev ? ` ${pad}${blc('<')}${llc('/')}${blc('>')} ${llc('DEVELOPMENT MO
 	private printStoreDebugInformation() {
 		const { client, logger } = this.container;
 		const stores = [...client.stores.values()];
-		const last = stores.pop()!;
+		const modules = [...client.loadedModules.values()];
+		const lastModule = modules.pop()!;
 
-		for (const store of stores) logger.info(this.styleStore(store, false));
-		logger.info(this.styleStore(last, true));
+		for (const store of stores) logger.info(this.styleStore(store));
+		for (const module of modules) logger.info(this.styleModule(module, false));
+		logger.info(this.styleModule(lastModule, true));
 	}
 
-	private styleStore(store: Store<any>, last: boolean) {
-		return gray(`${last ? '└─' : '├─'} Loaded ${this.style(store.size.toString().padEnd(3, ' '))} ${store.name}.`);
+	private styleModule(module: ModuleName, last: boolean) {
+		return gray(`${last ? '└─' : '├─'} Loaded ${this.style('Module'.padEnd(3, ' '))} ${module}.`);
+	}
+
+	private styleStore(store: Store<any>) {
+		return gray(`└─ Loaded ${this.style(store.size.toString().padEnd(3, ' '))} ${store.name}.`);
 	}
 }
