@@ -14,12 +14,16 @@ export class UserEvent extends Listener<typeof Events.MessageCommandDenied> {
 		// Use cases for this are for example permissions error when running the `eval` command.
 		if (Reflect.get(Object(context), 'silent')) return;
 		if (identifier === 'NotRegistered') {
-			const registerButton = new ButtonBuilder().setCustomId('register').setLabel('Register').setStyle(ButtonStyle.Secondary);
+			const registerButton = new ButtonBuilder()
+				.setCustomId(`register-${message.author.id}`)
+				.setLabel('Register')
+				.setStyle(ButtonStyle.Secondary);
 			send(message, {
 				content: formatFailMessage(content),
 				components: [new ActionRowBuilder<ButtonBuilder>().addComponents(registerButton)],
 				allowedMentions: { users: [message.author.id], roles: [] }
 			});
+			return;
 		}
 		if (identifier === Identifiers.PreconditionCooldown) {
 			let send = !cooldownMessageCooldown.has(message.author.id);

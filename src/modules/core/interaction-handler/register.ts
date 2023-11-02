@@ -14,7 +14,9 @@ export class ButtonHandler extends InteractionHandler {
 	}
 
 	public override parse(interaction: ButtonInteraction) {
-		if (interaction.customId !== 'register') return this.none();
+		const [id, memberId] = interaction.customId.split('-');
+		if (memberId !== interaction.user.id) return this.none();
+		if (id !== 'register') return this.none();
 
 		return this.some();
 	}
