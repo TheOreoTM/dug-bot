@@ -158,3 +158,5 @@ export const ChannelIDs = {
 export const NonBotChannels = ['856722573576765450'];
 
 export const NotificationChannelID = '825619988853162014';
+
+export const GlobalBoost = 0.2;
