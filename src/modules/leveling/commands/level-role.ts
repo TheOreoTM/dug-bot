@@ -21,7 +21,7 @@ export class UserCommand extends Command {
 						.setDescription('Add a level role')
 						.addRoleOption((o) => o.setName('role').setDescription('The role you want to assign at the level').setRequired(true))
 						.addNumberOption((o) =>
-							o.setName('level').setDescription('The level at which the role is given').setRequired(true).setMinValue(1)
+							o.setName('level').setDescription('The level at which the role is given').setRequired(true).setMinValue(0)
 						)
 				)
 				.addSubcommand((cmd) =>
