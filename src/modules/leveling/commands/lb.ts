@@ -53,7 +53,7 @@ export class UserCommand extends Command {
 			const discordUser = await this.container.client.users.fetch(user.userId);
 			if (!discordUser) return null;
 			return {
-				top: index * (page - 1) + (index + 1),
+				top: 10 * (page - 1) + (index + 1),
 				tag: getTag(discordUser),
 				score: user.currentLevel,
 				avatar: discordUser?.displayAvatarURL({ extension: 'png', forceStatic: true }) ?? 'https://cdn.discordapp.com/embed/avatars/0.png'

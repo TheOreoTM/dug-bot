@@ -23,7 +23,7 @@ const { Rank: RankCard } = canvacord;
 @ApplyOptions<Command.Options>({
 	description: 'View your level information',
 	aliases: ['level'],
-	flags: ['text']
+	flags: ['text', 't', 'slow-wifi']
 })
 export class UserCommand extends Command {
 	// Register Chat Input and Context Menu command
@@ -51,7 +51,7 @@ export class UserCommand extends Command {
 
 	// Message command
 	public override async messageRun(message: GuildMessage, args: Args) {
-		const shouldText = args.getFlags('text');
+		const shouldText = args.getFlags('text', 't', 'slow-wifi');
 		const member = await args.pick('member').catch(() => message.member);
 		const result = (await this.genRankCard(member, shouldText)) as MessageCreateOptions;
 		send(message, result);
