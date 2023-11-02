@@ -1,5 +1,5 @@
 import { BoostItems } from '#lib/items';
-import { LevelingDropType, ItemValue, BoostItemValue } from '#lib/types';
+import { LevelingDropType, BoostItemValue } from '#lib/types';
 import { BaseDropManager } from '#lib/classes';
 
 export class LevelingDropManager extends BaseDropManager<LevelingDropType> {

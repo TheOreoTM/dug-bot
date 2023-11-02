@@ -4,6 +4,8 @@ import { sendTemporaryMessage } from '#lib/util/messages';
 import { DurationFormatter } from '@sapphire/duration';
 import type { Events, MessageCommandDeniedPayload } from '@sapphire/framework';
 import { Identifiers, Listener, type UserError } from '@sapphire/framework';
+import { send } from '@sapphire/plugin-editable-commands';
+import { ActionRowBuilder, ButtonBuilder, ButtonStyle } from 'discord.js';
 
 const cooldownMessageCooldown = new Set();
 export class UserEvent extends Listener<typeof Events.MessageCommandDenied> {
@@ -11,6 +13,14 @@ export class UserEvent extends Listener<typeof Events.MessageCommandDenied> {
 		// `context: { silent: true }` should make UserError silent:
 		// Use cases for this are for example permissions error when running the `eval` command.
 		if (Reflect.get(Object(context), 'silent')) return;
+		if (identifier === 'NotRegistered') {
+			const registerButton = new ButtonBuilder().setCustomId('register').setLabel('Register').setStyle(ButtonStyle.Secondary);
+			send(message, {
+				content: formatFailMessage(content),
+				components: [new ActionRowBuilder<ButtonBuilder>().addComponents(registerButton)],
+				allowedMentions: { users: [message.author.id], roles: [] }
+			});
+		}
 		if (identifier === Identifiers.PreconditionCooldown) {
 			let send = !cooldownMessageCooldown.has(message.author.id);
 			const { remaining } = context as { remaining: number };
