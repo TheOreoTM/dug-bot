@@ -1,4 +1,3 @@
-import { resetAutoIncrement } from '#lib/util/prisma';
 import { ApplyOptions } from '@sapphire/decorators';
 import { Command } from '@sapphire/framework';
 import type { Message } from 'discord.js';
@@ -9,10 +8,10 @@ import type { Message } from 'discord.js';
 })
 export class UserCommand extends Command {
 	public override async messageRun(message: Message) {
-		await this.container.db.faction.deleteMany();
-		await this.container.db.user.deleteMany();
-		await this.container.db.item.deleteMany();
-		await resetAutoIncrement();
+		// await this.container.db.faction.deleteMany();
+		// await this.container.db.user.deleteMany();
+		// await this.container.db.item.deleteMany();
+		// await resetAutoIncrement();
 
 		message.channel.send('done 👍');
 	}
