@@ -1,4 +1,4 @@
-import { DugColors, DugEvents } from '#constants';
+import { ChannelIDs, DugColors, DugEvents } from '#constants';
 import { Economy } from '#lib/classes/Economy';
 import { Items } from '#lib/items';
 import { ItemValue } from '#lib/types/Data';
@@ -10,7 +10,7 @@ import { ActionRowBuilder, ButtonBuilder, ButtonInteraction, ButtonStyle, Compon
 @ApplyOptions<Listener.Options>({ event: DugEvents.TriggerDrop })
 export class UserEvent extends Listener {
 	public override async run(id: ItemValue, drop: BaseDropType) {
-		const channel = this.container.client.channels.cache.get('856722573576765450');
+		const channel = this.container.client.channels.cache.get(ChannelIDs.General);
 		if (!channel || !channel.isTextBased()) return;
 
 		const dropEmbed = new EmbedBuilder().setTitle(drop.name).setDescription(drop.description).setColor(DugColors.Default);

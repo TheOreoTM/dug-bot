@@ -152,5 +152,9 @@ export const CrateAssets = {
 	}
 };
 
-export const DropChannelID = '1138806085998874746';
+export const ChannelIDs = {
+	General: '856722573576765450'
+};
+export const NonBotChannels = ['856722573576765450'];
+
 export const NotificationChannelID = '825619988853162014';
