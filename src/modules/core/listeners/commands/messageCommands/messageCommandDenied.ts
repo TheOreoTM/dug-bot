@@ -30,6 +30,6 @@ export class UserEvent extends Listener<typeof Events.MessageCommandDenied> {
 			return;
 		}
 
-		return message.reply({ content: formatFailMessage(content), allowedMentions: { users: [message.author.id], roles: [] } });
+		sendTemporaryMessage(message, { content: formatFailMessage(content), allowedMentions: { users: [message.author.id], roles: [] } });
 	}
 }
