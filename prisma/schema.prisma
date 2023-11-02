@@ -23,10 +23,10 @@ model XpBoost {
 model UserLevel {
   userId String @id @unique
 
-  totalXp      Int      @default(0)
-  currentXp    Int      @default(0)
-  requiredXp   Int      @default(100)
-  currentLevel Int      @default(0)
+  totalXp      BigInt   @default(0)
+  currentXp    BigInt   @default(0)
+  requiredXp   BigInt   @default(100)
+  currentLevel BigInt   @default(0)
   xpBoost      Float    @default(0.0)
   lastXpEarned DateTime @default(now())
 
