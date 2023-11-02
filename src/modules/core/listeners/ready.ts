@@ -43,15 +43,16 @@ ${line03}${dev ? ` ${pad}${blc('<')}${llc('/')}${blc('>')} ${llc('DEVELOPMENT MO
 		const lastModule = modules.pop()!;
 
 		for (const store of stores) logger.info(this.styleStore(store));
+		logger.info(gray(`├─ Loaded ${this.style(modules.length.toString().padEnd(3, ' '))} ${modules}.`));
 		for (const module of modules) logger.info(this.styleModule(module, false));
 		logger.info(this.styleModule(lastModule, true));
 	}
 
 	private styleModule(module: ModuleName, last: boolean) {
-		return gray(`${last ? '└─' : '├─'} Loaded ${this.style('Module'.padEnd(3, ' '))} ${module}.`);
+		return gray(`${last ? '└─' : '├─'} Loaded ${this.style(`module ${module}.`)}`);
 	}
 
 	private styleStore(store: Store<any>) {
-		return gray(`└─ Loaded ${this.style(store.size.toString().padEnd(3, ' '))} ${store.name}.`);
+		return gray(`├─ Loaded ${this.style(store.size.toString().padEnd(3, ' '))} ${store.name}.`);
 	}
 }
