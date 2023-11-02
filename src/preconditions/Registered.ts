@@ -25,7 +25,7 @@ export class UserPrecondition extends Precondition {
 	private async check(member: GuildMember) {
 		return (await this.container.db.user.isRegistered(member.id))
 			? this.ok()
-			: this.error({ message: 'You have to be registered to run commands', identifier: 'NotRegistered' });
+			: this.error({ message: 'You have to be registered to run commands.\n *Hint: use `.register`*', identifier: 'NotRegistered' });
 	}
 }
 
