@@ -5,6 +5,7 @@ import { getTag } from '#lib/util/utils';
 import { ApplyOptions } from '@sapphire/decorators';
 import { Args, Command } from '@sapphire/framework';
 import { send } from '@sapphire/plugin-editable-commands';
+import { Rank as RankCard } from 'canvacord';
 import canvafy from 'canvafy';
 import {
 	ActionRowBuilder,
@@ -126,6 +127,20 @@ export class UserCommand extends Command {
 			rankColor = `#cd7f32`;
 		}
 
+		const card = new RankCard()
+			.setAvatar(img)
+			.setRank(rank, 'RANK')
+			.setRankColor(rankColor, rankColor)
+			.setLevel(data.currentLevel || 0, 'LEVEL')
+			.setLevelColor(fontColor, levelColor)
+			.setCurrentXP(data.currentXp || 0, fontColor)
+			.setProgressBar(barColor, 'COLOR', true)
+			.setRequiredXP(data.requiredXp || 100, fontColor)
+			.setUsername(getTag(member.user), fontColor)
+			.setBackground('COLOR', bgColor)
+			.setCustomStatusColor(customStatusColor);
+		if (bgImage) card.setBackground('IMAGE', bgImage);
+
 		const rankCard = new Rank()
 			.setRank(rank, 'RANK')
 			.setLevel(data?.currentLevel || 0, 'LEVEL')
@@ -149,6 +164,10 @@ export class UserCommand extends Command {
 			.setStyle(ButtonStyle.Secondary);
 
 		const attachment = new AttachmentBuilder(await rankCard.build(), { name: 'rankcard.png' });
-		return { files: [attachment], components: userXpBoost > 0.0 ? [new ActionRowBuilder<ButtonBuilder>().addComponents(xpBoostButton)] : [] };
+		const attachment2 = new AttachmentBuilder(await card.build(), { name: 'rankcard2.png' });
+		return {
+			files: [attachment, attachment2],
+			components: userXpBoost > 0.0 ? [new ActionRowBuilder<ButtonBuilder>().addComponents(xpBoostButton)] : []
+		};
 	}
 }
