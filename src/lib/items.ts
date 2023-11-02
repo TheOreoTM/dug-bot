@@ -290,7 +290,7 @@ export const BoostItems: Record<BoostItemValue, LevelingDropType> = {
 	},
 	xpBoost20: {
 		name: Items.xpBoost20.name,
-		amount: 0.3,
+		amount: 0.2,
 		description: Items.xpBoost20.description,
 		type: 'xpBoost',
 		weight: 65,
