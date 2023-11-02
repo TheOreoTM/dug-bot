@@ -93,8 +93,8 @@ export class UserCommand extends Command {
 				.setColor(DugColors.Default)
 				.setDescription(
 					`${blockQuote(
-						`**Level:** \` ${data.currentLevel} \`\n
-						 **Rank:** ​ ​ ​ ​ \` #${rank} \`\n
+						`**Level:** \` ${data.currentLevel} \`
+						 **Rank:**​ ​ \` #${rank} \`
 						 **XP:**​ ​ ​ ​ ​ ​ ​\` ${toCompactNum(data.currentXp)} / ${toCompactNum(data.requiredXp)}`
 					)} \` \n\n${genBar(data.currentXp, data.requiredXp, 6)} \` ${((data.currentXp / data.requiredXp) * 100).toFixed(2)}% \`
 					${data.xpBoost > 0.0 ? `${DugEmojis.ListLast} **XP Boost:** \` ${userXpBoost}% \`` : ``}`
