@@ -85,16 +85,17 @@ export class UserCommand extends Command {
 		}
 
 		const userXpBoost = Math.floor(data.xpBoost * 100);
+		const rank: number = await this.container.db.userLevel.getRank(data.userId);
 
 		if (text) {
 			const embed = new EmbedBuilder()
-				.setTitle('Level Information')
+				.setTitle(`${getTag(member.user)}'s Level Information`)
 				.setColor(DugColors.Default)
 				.setDescription(
 					`${blockQuote(
-						`**Level:** \` ${data.currentLevel} \`\n**XP:**​ ​ ​ ​ ​ ​ ​\` ${toCompactNum(data.currentXp)} / ${toCompactNum(
-							data.requiredXp
-						)}`
+						`**Level:** \` ${data.currentLevel} \`\n
+						 **Rank:** ​ ​ ​ ​\` \` #${rank} \`\n
+						\n**XP:**​ ​ ​ ​ ​ ​ ​\` ${toCompactNum(data.currentXp)} / ${toCompactNum(data.requiredXp)}`
 					)} \` \n\n${genBar(data.currentXp, data.requiredXp, 6)} \` ${((data.currentXp / data.requiredXp) * 100).toFixed(2)}% \`
 					${data.xpBoost > 0.0 ? `${DugEmojis.ListLast} **XP Boost:** \` ${userXpBoost}% \`` : ``}`
 				);
@@ -110,8 +111,6 @@ export class UserCommand extends Command {
 		const bgColor = data.bgColor ? data.bgColor : `#23272a`;
 		const levelColor = roleColor;
 		const customStatusColor = data.avatarBorderColor ? data.avatarBorderColor : roleColor;
-
-		const rank: number = await this.container.db.userLevel.getRank(data.userId);
 
 		let rankColor = fontColor;
 		if (rank === 1) {
