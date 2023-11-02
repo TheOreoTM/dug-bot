@@ -4,7 +4,7 @@ import { getTag } from '#lib/util/utils';
 import { ApplyOptions } from '@sapphire/decorators';
 import { Listener } from '@sapphire/framework';
 import canvafy from 'canvafy';
-import { ActionRowBuilder, ButtonBuilder, quote } from 'discord.js';
+import { ActionRowBuilder, ButtonBuilder, ButtonStyle, quote } from 'discord.js';
 const { LevelUp } = canvafy;
 
 @ApplyOptions<Listener.Options>({ event: DugEvents.MemberLevelUp })
@@ -14,6 +14,7 @@ export class UserEvent extends Listener {
 
 		const refButton = new ButtonBuilder()
 			.setLabel('Click Here')
+			.setStyle(ButtonStyle.Link)
 			.setURL(`https://discord.com/channels/519734247519420438/910957338482057256/1147770237945651210`);
 
 		const levelUp = await new LevelUp()
