@@ -1,5 +1,6 @@
 import { DugColors } from '#constants';
 import type { GuildMessage, InteractionOrMessage } from '#lib/types/Discord';
+import { formatFailMessage } from '#lib/util/formatter';
 import { getTag } from '#lib/util/utils';
 import { ApplyOptions } from '@sapphire/decorators';
 import { Args, Command } from '@sapphire/framework';
@@ -38,6 +39,10 @@ export class UserCommand extends Command {
 	private async sendLeaderboard(interactionOrMessage: InteractionOrMessage, page = 1) {
 		interactionOrMessage instanceof ChatInputCommandInteraction ? interactionOrMessage.deferReply() : null;
 		const leaderboard = await this.container.db.userLevel.getLeaderboard(page);
+		if (!leaderboard)
+			interactionOrMessage instanceof Message
+				? send(interactionOrMessage, formatFailMessage('That page doesnt exist'))
+				: interactionOrMessage.reply(formatFailMessage('That page doesnt exist'));
 		const usersData = leaderboard.map(async (user, index) => {
 			const discordUser = await this.container.client.users.fetch(user.userId);
 			if (!discordUser) return null;
