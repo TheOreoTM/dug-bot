@@ -155,7 +155,7 @@ export const CrateAssets = {
 export const ChannelIDs = {
 	General: '856722573576765450'
 };
-export const NonBotChannels = ['856722573576765450'];
+export const WhitelistedChannels = ['856722573576765450'];
 
 export const NotificationChannelID = '825619988853162014';
 

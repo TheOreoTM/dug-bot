@@ -1,4 +1,4 @@
-import { NonBotChannels } from '#constants';
+import { WhitelistedChannels } from '#constants';
 import { ApplyOptions } from '@sapphire/decorators';
 import { Precondition } from '@sapphire/framework';
 import type { ChatInputCommandInteraction, ContextMenuCommandInteraction, Message, Snowflake } from 'discord.js';
@@ -20,9 +20,11 @@ export class UserPrecondition extends Precondition {
 	}
 
 	private isBotChannel(channelId: Snowflake) {
-		const isBotChannel = !NonBotChannels.includes(channelId);
+		const isWhitelistedChannel = WhitelistedChannels.includes(channelId);
 
-		return isBotChannel ? this.ok() : this.error({ identifier: 'BotChannelOnly', message: 'You can only use this command in a bot channel' });
+		return isWhitelistedChannel
+			? this.ok()
+			: this.error({ identifier: 'BotChannelOnly', message: 'You can only use this command in a bot channel' });
 	}
 }
 
