@@ -5,7 +5,6 @@ import { getTag } from '#lib/util/utils';
 import { ApplyOptions } from '@sapphire/decorators';
 import { Args, Command } from '@sapphire/framework';
 import { send } from '@sapphire/plugin-editable-commands';
-import canvafy from 'canvafy';
 import canvacord from 'canvacord';
 import {
 	ActionRowBuilder,
@@ -19,7 +18,6 @@ import {
 	MessageCreateOptions,
 	blockQuote
 } from 'discord.js';
-const { Rank } = canvafy;
 const { Rank: RankCard } = canvacord;
 
 @ApplyOptions<Command.Options>({
@@ -112,8 +110,6 @@ export class UserCommand extends Command {
 		const bgColor = data.bgColor ? data.bgColor : `#23272a`;
 		const levelColor = roleColor;
 		const customStatusColor = data.avatarBorderColor ? data.avatarBorderColor : roleColor;
-		const borderColor = data.borderColor ? data.borderColor : roleColor;
-		const noBorder = data.noBorder ? data.noBorder : false;
 
 		const rank: number = await this.container.db.userLevel.getRank(data.userId);
 
@@ -136,27 +132,11 @@ export class UserCommand extends Command {
 			.setLevelColor(fontColor, levelColor)
 			.setCurrentXP(data.currentXp || 0, fontColor)
 			.setProgressBar(barColor, 'COLOR', true)
-			.setRequiredXP(data.requiredXp || 100, fontColor)
+			.setRequiredXP(data.requiredXp || 100, requiredXpColor)
 			.setUsername(getTag(member.user), fontColor)
 			.setBackground('COLOR', bgColor)
 			.setCustomStatusColor(customStatusColor);
 		if (bgImage) card.setBackground('IMAGE', bgImage);
-
-		const rankCard = new Rank()
-			.setRank(rank, 'RANK')
-			.setLevel(data?.currentLevel || 0, 'LEVEL')
-			.setAvatar(img)
-			.setCurrentXp(data?.currentXp || 0, bgColor)
-			.setRequiredXp(data?.requiredXp || 100, requiredXpColor)
-			.setBarColor(barColor)
-			.setCustomStatus(customStatusColor)
-			.setUsername(getTag(member.user), fontColor)
-			.setBackground('color', bgColor)
-			.setLevelColor(fontColor, levelColor)
-			.setRankColor(rankColor, rankColor);
-
-		if (bgImage) rankCard.setBackground('image', bgImage);
-		if (!noBorder) rankCard.setBorder(borderColor);
 
 		const xpBoostButton = new ButtonBuilder()
 			.setDisabled(true)
@@ -164,10 +144,10 @@ export class UserCommand extends Command {
 			.setCustomId('none')
 			.setStyle(ButtonStyle.Secondary);
 
-		const attachment = new AttachmentBuilder(await rankCard.build(), { name: 'rankcard.png' });
-		const attachment2 = new AttachmentBuilder(await card.build(), { name: 'rankcard2.png' });
+		const attachment = new AttachmentBuilder(await card.build(), { name: 'rankcard.png' });
+
 		return {
-			files: [attachment, attachment2],
+			files: [attachment],
 			components: userXpBoost > 0.0 ? [new ActionRowBuilder<ButtonBuilder>().addComponents(xpBoostButton)] : []
 		};
 	}

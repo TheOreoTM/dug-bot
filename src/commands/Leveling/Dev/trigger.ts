@@ -2,7 +2,8 @@ import { CrateDropManager } from '#lib/classes/CrateDropManager';
 import { ApplyOptions } from '@sapphire/decorators';
 import { Command } from '@sapphire/framework';
 @ApplyOptions<Command.Options>({
-	description: 'A basic command'
+	description: 'A basic command',
+	requiredUserPermissions: 'Administrator'
 })
 export class UserCommand extends Command {
 	public override async messageRun() {

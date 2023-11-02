@@ -12,6 +12,24 @@ export type BadgeType = {
 
 export type ItemType = Uppercase<keyof typeof ItemTypes>;
 
+export type NewItem = {
+	// Define properties of the new item
+	description: string;
+	name: string;
+	emoji: string;
+	price: number;
+	sellable: boolean;
+	type: ItemType;
+	usable: boolean;
+	usage: string;
+	value: string;
+	sellPrice?: number;
+};
+
+export function CreateNewItem(item: NewItem) {
+	return { ...item } as const;
+}
+
 export type BaseItemType = {
 	description: string;
 	name: string;
@@ -21,7 +39,7 @@ export type BaseItemType = {
 	type: ItemType;
 	usable: boolean;
 	usage: string;
-	value: ItemValue;
+	value: string;
 	sellPrice?: number;
 };
 

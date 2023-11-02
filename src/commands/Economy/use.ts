@@ -83,6 +83,9 @@ export class UserCommand extends Command {
 			await this.container.db.userLevel.addXpBoost(message.author.id, xpBoostToAdd, expiresAt);
 		}
 
+		if (itemToUse.value.endsWith('Crate')) {
+		}
+
 		send(message, formatSuccessMessage(`Used \` ${itemToUse.name} \``));
 	}
 }
