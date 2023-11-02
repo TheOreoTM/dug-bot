@@ -127,7 +127,7 @@ export class UserCommand extends Command {
 						xpBoost: boostToSet
 					}
 				});
-				interaction.reply(formatSuccessMessage(`Set user level to ${boostToSet}`));
+				interaction.reply(formatSuccessMessage(`Set user XP Boost to ${boostToSet * 100}%`));
 				return;
 			}
 
