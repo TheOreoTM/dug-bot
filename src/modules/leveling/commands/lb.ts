@@ -33,7 +33,7 @@ export class UserCommand extends Command {
 	// Chat Input (slash) command
 	public override async chatInputRun(interaction: Command.ChatInputCommandInteraction) {
 		const page = interaction.options.getNumber('page') ?? 1;
-		return this.sendLeaderboard(interaction), page;
+		return this.sendLeaderboard(interaction, page);
 	}
 
 	private async sendLeaderboard(interactionOrMessage: InteractionOrMessage, page = 1) {
@@ -47,7 +47,7 @@ export class UserCommand extends Command {
 			const discordUser = await this.container.client.users.fetch(user.userId);
 			if (!discordUser) return null;
 			return {
-				top: index * page + 1,
+				top: index * (page - 1) + 1,
 				tag: getTag(discordUser),
 				score: user.currentLevel,
 				avatar: discordUser?.displayAvatarURL({ extension: 'png', forceStatic: true }) ?? 'https://cdn.discordapp.com/embed/avatars/0.png'
@@ -79,7 +79,8 @@ export class UserCommand extends Command {
 		const embed = new EmbedBuilder()
 			.setTitle(`${interactionOrMessage.guild?.name}'s leaderboard`)
 			.setImage(`attachment://leaderboard.png`)
-			.setColor(DugColors.Default);
+			.setColor(DugColors.Default)
+			.setFooter({ text: `Page ${page}` });
 
 		interactionOrMessage instanceof Message
 			? await send(interactionOrMessage, { files: [{ name: 'leaderboard.png', attachment: lbImage }], embeds: [embed] })
