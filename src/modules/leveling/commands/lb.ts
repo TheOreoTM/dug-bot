@@ -37,7 +37,13 @@ export class UserCommand extends Command {
 	}
 
 	private async sendLeaderboard(interactionOrMessage: InteractionOrMessage, page = 1) {
-		interactionOrMessage instanceof ChatInputCommandInteraction ? interactionOrMessage.deferReply() : null;
+		const loadingEmbed = new EmbedBuilder()
+			.setTitle(`Loading... ${interactionOrMessage.guild?.name}'s leaderboard`)
+			.setImage(`https://media.tenor.com/On7kvXhzml4AAAAi/loading-gif.gif`)
+			.setColor(DugColors.Default)
+			.setFooter({ text: `Page ${page}` });
+
+		interactionOrMessage instanceof Message ? send(interactionOrMessage, { embeds: [loadingEmbed] }) : interactionOrMessage.deferReply();
 		const leaderboard = await this.container.db.userLevel.getLeaderboard(page);
 		if (!leaderboard)
 			interactionOrMessage instanceof Message
