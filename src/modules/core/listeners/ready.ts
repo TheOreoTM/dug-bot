@@ -49,7 +49,7 @@ ${line03}${dev ? ` ${pad}${blc('<')}${llc('/')}${blc('>')} ${llc('DEVELOPMENT MO
 	}
 
 	private styleModule(module: ModuleName, last: boolean) {
-		return gray(`${last ? '└─' : '├─'} Loaded ${this.style(`module ${module}.`)}`.padEnd(11, ' '));
+		return gray(`${last ? '└─' : '├─'} Loaded ${this.style(`module ${module}.`)}`.padStart(11, ' '));
 	}
 
 	private styleStore(store: Store<any>) {
