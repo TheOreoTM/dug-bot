@@ -23,7 +23,8 @@ const { Rank: RankCard } = canvacord;
 @ApplyOptions<Command.Options>({
 	description: 'View your level information',
 	aliases: ['level'],
-	flags: ['text', 't', 'slow-wifi']
+	flags: ['text', 't', 'slow-wifi'],
+	preconditions: ['BotChannelOnly']
 })
 export class UserCommand extends Command {
 	// Register Chat Input and Context Menu command
