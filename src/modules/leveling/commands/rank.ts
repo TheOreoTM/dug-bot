@@ -102,7 +102,7 @@ export class UserCommand extends Command {
 			return { embeds: [embed] };
 		}
 
-		const roleColor = member.roles.highest.hexColor;
+		const roleColor = member.displayHexColor;
 		const img = member.displayAvatarURL({ forceStatic: true });
 		const requiredXpColor = `#747879`;
 		const bgImage = data.bgImage;
