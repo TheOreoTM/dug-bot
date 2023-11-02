@@ -48,7 +48,7 @@ export class UserCommand extends Subcommand {
 		const member = message.member;
 		await this.container.db.userLevel.resetCustoms(member.id);
 
-		const embed = new EmbedBuilder().setDescription(formatSuccessMessage('Successfully reset `*`')).setColor(DugColors.Success);
+		const embed = new EmbedBuilder().setDescription(formatSuccessMessage('Successfully reset `card`')).setColor(DugColors.Success);
 
 		send(message, { embeds: [embed] });
 	}
