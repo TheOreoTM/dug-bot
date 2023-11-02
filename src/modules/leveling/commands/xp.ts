@@ -28,6 +28,20 @@ export class UserCommand extends Command {
 								.addUserOption((o) => o.setName('member').setDescription('Target member').setRequired(true))
 								.addNumberOption((o) => o.setName('level').setDescription('The new level').setRequired(true).setMinValue(0))
 						)
+						.addSubcommand((cmd) =>
+							cmd
+								.setName('boost')
+								.setDescription("Change the user's XP Boost")
+								.addUserOption((o) => o.setName('member').setDescription('Target member').setRequired(true))
+								.addNumberOption((o) =>
+									o
+										.setName('boost')
+										.setDescription('The new XP Boost percentage')
+										.setRequired(true)
+										.setMinValue(0)
+										.setMaxValue(1000)
+								)
+						)
 
 						.addSubcommand((cmd) =>
 							cmd
@@ -63,7 +77,7 @@ export class UserCommand extends Command {
 	// Chat Input (slash) command
 	public override async chatInputRun(interaction: Command.ChatInputCommandInteraction) {
 		const subcommandGroup = interaction.options.getSubcommandGroup() as 'set' | null;
-		const subcommand = interaction.options.getSubcommand(true) as 'level' | 'xp' | 'add' | 'remove';
+		const subcommand = interaction.options.getSubcommand(true) as 'level' | 'xp' | 'add' | 'remove' | 'boost';
 		const targetMember = interaction.options.getMember('member');
 		if (!targetMember || !(targetMember instanceof GuildMember)) {
 			interaction.reply({ content: formatFailMessage('Please provide a valid target member'), ephemeral: true });
@@ -98,7 +112,22 @@ export class UserCommand extends Command {
 				return;
 			}
 
-			if (subcommand === 'xp') {
+			if (subcommand === 'boost') {
+				const boostToSet = interaction.options.getNumber('boost', true) / 100;
+
+				await this.container.db.userLevel.upsert({
+					where: {
+						userId: targetMember.id
+					},
+					create: {
+						userId: targetMember.id,
+						xpBoost: boostToSet
+					},
+					update: {
+						xpBoost: boostToSet
+					}
+				});
+				interaction.reply(formatSuccessMessage(`Set user level to ${boostToSet}`));
 				return;
 			}
 
