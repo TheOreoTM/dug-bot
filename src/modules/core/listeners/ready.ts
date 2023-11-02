@@ -43,13 +43,13 @@ ${line03}${dev ? ` ${pad}${blc('<')}${llc('/')}${blc('>')} ${llc('DEVELOPMENT MO
 		const lastModule = modules.pop()!;
 
 		for (const store of stores) logger.info(this.styleStore(store));
-		logger.info(gray(`├─ Loaded ${this.style(modules.length.toString().padEnd(3, ' '))} ${modules}.`));
+		logger.info(gray(`└─ Loaded ${this.style(modules.length.toString().padEnd(3, ' '))} modules.`));
 		for (const module of modules) logger.info(this.styleModule(module, false));
 		logger.info(this.styleModule(lastModule, true));
 	}
 
 	private styleModule(module: ModuleName, last: boolean) {
-		return gray(`${last ? '└─' : '├─'} Loaded ${this.style(`module ${module}.`)}`);
+		return gray(`${last ? '└─' : '├─'} Loaded ${this.style(`module ${module}.`)}`.padEnd(11, ' '));
 	}
 
 	private styleStore(store: Store<any>) {
