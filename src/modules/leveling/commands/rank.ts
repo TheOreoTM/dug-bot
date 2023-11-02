@@ -1,4 +1,4 @@
-import { DugColors, DugEmojis } from '#constants';
+import { DugColors, DugEmojis, GlobalBoost } from '#constants';
 import type { GuildMessage } from '#lib/types/Discord';
 import { formatFailMessage, genBar, toCompactNum } from '#lib/util/formatter';
 import { getTag } from '#lib/util/utils';
@@ -84,7 +84,7 @@ export class UserCommand extends Command {
 			return { embeds: [embed] };
 		}
 
-		const userXpBoost = Math.floor(data.xpBoost * 100);
+		const userXpBoost = Math.floor((data.xpBoost + GlobalBoost) * 100);
 		const rank: number = await this.container.db.userLevel.getRank(data.userId);
 
 		if (text) {
