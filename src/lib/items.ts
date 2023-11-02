@@ -39,6 +39,18 @@ export const Items = {
 		value: 'levelUp3',
 		sellPrice: 750
 	}),
+	xpBoost20: CreateNewItem({
+		description: 'Gain +20% XP',
+		name: '20% XP Boost',
+		emoji: '⬆️',
+		price: 1000,
+		sellable: true,
+		type: ItemTypes.Boost,
+		usable: true,
+		usage: 'Use to gain +20 XP',
+		value: 'xpBoost20',
+		sellPrice: 750
+	}),
 	xpBoost30: CreateNewItem({
 		description: 'Gain +30% XP',
 		name: '30% XP Boost',
@@ -260,28 +272,36 @@ export const BoostItems: Record<BoostItemValue, LevelingDropType> = {
 		amount: 1,
 		description: 'Gain +1 Level',
 		type: 'levelUp',
-		weight: 30
+		weight: 10
 	},
 	levelUp2: {
 		name: '+2 Level',
 		amount: 2,
 		description: 'Gain +2 Levels',
 		type: 'levelUp',
-		weight: 15
+		weight: 5
 	},
 	levelUp3: {
 		name: '+3 Levels',
 		amount: 3,
 		description: 'Gain +3 Levels',
 		type: 'levelUp',
-		weight: 5
+		weight: 2
+	},
+	xpBoost20: {
+		name: '+30% XP Boost',
+		amount: 0.3,
+		description: 'Gain +30% XP',
+		type: 'xpBoost',
+		weight: 65,
+		durationMs: hours(2)
 	},
 	xpBoost30: {
 		name: '+30% XP Boost',
 		amount: 0.3,
 		description: 'Gain +30% XP',
 		type: 'xpBoost',
-		weight: 80,
+		weight: 40,
 		durationMs: hours(2)
 	},
 	xpBoost50: {
@@ -289,7 +309,7 @@ export const BoostItems: Record<BoostItemValue, LevelingDropType> = {
 		amount: 0.5,
 		description: Items.xpBoost50.description,
 		type: 'xpBoost',
-		weight: 60,
+		weight: 30,
 		durationMs: hours(2)
 	}
 };

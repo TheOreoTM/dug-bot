@@ -1,5 +1,5 @@
 import { BoostItems } from '#lib/items';
-import { LevelingDropType, ItemValue } from '#lib/types';
+import { LevelingDropType, ItemValue, BoostItemValue } from '#lib/types';
 import { BaseDropManager } from '#lib/classes';
 
 export class LevelingDropManager extends BaseDropManager<LevelingDropType> {
@@ -17,4 +17,4 @@ export class LevelingDropManager extends BaseDropManager<LevelingDropType> {
 	}
 }
 
-const levelingDrops: Record<ItemValue, LevelingDropType> = BoostItems;
+const levelingDrops: Record<BoostItemValue, LevelingDropType> = BoostItems;
