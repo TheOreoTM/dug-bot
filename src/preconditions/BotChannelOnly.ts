@@ -20,7 +20,7 @@ export class UserPrecondition extends Precondition {
 	}
 
 	private isBotChannel(channelId: Snowflake) {
-		const isWhitelistedChannel = WhitelistedChannels.includes(channelId);
+		const isWhitelistedChannel = !WhitelistedChannels.includes(channelId);
 
 		return isWhitelistedChannel
 			? this.ok()
