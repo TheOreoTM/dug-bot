@@ -11,6 +11,7 @@ export class AutocompleteHandler extends InteractionHandler {
 	}
 
 	public override async parse(interaction: AutocompleteInteraction) {
+		console.log(interaction.commandName);
 		if (interaction.commandName !== 'level-role') return this.none();
 		const focusedOption = interaction.options.getFocused(true);
 		switch (focusedOption.name) {
