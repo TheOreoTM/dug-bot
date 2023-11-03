@@ -70,15 +70,21 @@ export class UserCommand extends Command {
 		}
 
 		if (subcommand === 'remove') {
-			const levelId = interaction.options.getString('level', true);
+			const roleId = interaction.options.getString('level', true);
+			console.log(roleId);
 
-			const data = await this.container.db.levelRole.delete({
+			await this.container.db.levelRole.deleteMany({
 				where: {
-					id: levelId
+					roleId
 				}
 			});
 
-			interaction.reply(formatSuccessMessage(`Deleted level role for ${data.level}`));
+			interaction.reply({
+				content: formatSuccessMessage(`Deleted level role for ${roleMention(roleId)}`),
+				allowedMentions: {
+					roles: []
+				}
+			});
 			return;
 		}
 
