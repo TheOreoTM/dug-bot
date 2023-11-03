@@ -27,7 +27,7 @@ export class GlobalVariableClass {
 			console.log(Object.prototype.hasOwnProperty.call(this.Data, variable));
 			if (Object.prototype.hasOwnProperty.call(this.Data, variable)) {
 				const value = this.Data[variable as keyof typeof this.Data];
-				container.db.globalVariable.upsert({
+				const data = container.db.globalVariable.upsert({
 					where: {
 						name: variable
 					},
@@ -41,6 +41,7 @@ export class GlobalVariableClass {
 						type: typeof value
 					}
 				});
+				console.log('Saved Variable:', data);
 			}
 		}
 	}
