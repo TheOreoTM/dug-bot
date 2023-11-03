@@ -13,6 +13,6 @@ export class UserCommand extends Command {
 		const newBoostPercentage = await args.pick('number').catch(() => 0);
 		Globals.GlobalBoost = newBoostPercentage / 100;
 
-		message.channel.send(formatSuccessMessage(`Set Global Boost to \`${Globals.GlobalBoost}%\``));
+		message.channel.send(formatSuccessMessage(`Set Global Boost to \`${newBoostPercentage}%\``));
 	}
 }
