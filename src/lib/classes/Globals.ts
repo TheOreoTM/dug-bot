@@ -1,4 +1,5 @@
 import { container } from '@sapphire/pieces';
+import { CookieStore } from '@sapphire/plugin-api';
 
 export class GlobalVariableClass {
 	private static instance: GlobalVariableClass;
@@ -46,6 +47,7 @@ export class GlobalVariableClass {
 
 	private async initVariables() {
 		const variables = await container.db.globalVariable.findMany();
+		console.log(variables);
 		for (const variable of variables) {
 			const name = variable.name as keyof typeof this.Data;
 			if (this.Data[name] !== undefined) {
