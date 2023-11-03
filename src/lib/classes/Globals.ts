@@ -44,7 +44,7 @@ export class GlobalVariableClass {
 	}
 
 	private async initVariables() {
-		console.log(container);
+		console.log(container.db);
 		const variables = await container.db.globalVariable.findMany();
 		for (const variable of variables) {
 			const name = variable.name as keyof typeof this.Data;
