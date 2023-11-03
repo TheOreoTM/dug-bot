@@ -1,10 +1,10 @@
-import { DugEvents } from '#constants';
+import { ChannelIDs, DugEvents } from '#constants';
 import { GuildMessage } from '#lib/types/Discord';
-import { getTag } from '#lib/util/utils';
+import { genRandomInt, getTag } from '#lib/util/utils';
 import { ApplyOptions } from '@sapphire/decorators';
 import { Listener } from '@sapphire/framework';
 import canvafy from 'canvafy';
-import { ActionRowBuilder, ButtonBuilder, ButtonStyle, quote } from 'discord.js';
+import { ActionRowBuilder, ButtonBuilder, ButtonStyle, TextChannel, quote } from 'discord.js';
 const { LevelUp } = canvafy;
 
 @ApplyOptions<Listener.Options>({ event: DugEvents.MemberLevelUp })
@@ -34,19 +34,27 @@ export class UserEvent extends Listener {
 		});
 
 		member.roles.add(availableLevelRoles.map((r) => r.roleId));
-
-		message.reply({
-			content: `GG ${member}, You just leveled up!\n\n ${quote(
-				`Did your levels not get transferred? [\`click here\`](https://discord.com/channels/519734247519420438/910957338482057256/1147770237945651210 'create a ticket') or the button below to create a ticket and click the \`Other\` option and request your levels back`
-			)}`,
+		const channel = message.guild.channels.cache.get(ChannelIDs.LevelUpChannel) as TextChannel;
+		channel.send({
+			content: `GG ${member}, You just leveled up!`,
 			files: [
 				{
 					attachment: levelUp,
 					name: 'levelup.png'
 				}
 			],
-			components: [new ActionRowBuilder<ButtonBuilder>().addComponents(refButton)],
-			allowedMentions: { repliedUser: true }
+			allowedMentions: { users: [member.id] }
 		});
+
+		const shouldSendWarning = 9 > genRandomInt(0, 100);
+
+		if (shouldSendWarning) {
+			channel.send({
+				content: `\n\n ${quote(
+					`Did your levels not get transferred? [\`click here\`](https://discord.com/channels/519734247519420438/910957338482057256/1147770237945651210 'create a ticket') or the button below to create a ticket and click the \`Other\` option and request your levels back`
+				)}`,
+				components: [new ActionRowBuilder<ButtonBuilder>().addComponents(refButton)]
+			});
+		}
 	}
 }
