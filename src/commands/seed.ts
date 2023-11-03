@@ -25,7 +25,8 @@ export class UserCommand extends Command {
 						requiredXp: levelInfo2.xpNeededToLevelUp
 					}
 				});
-				return;
+				console.log(`leveled up ${user.userId}`);
+				continue;
 			}
 
 			await this.container.db.userLevel.update({
@@ -36,7 +37,9 @@ export class UserCommand extends Command {
 					requiredXp: levelInfo.xpNeededToLevelUp
 				}
 			});
+			console.log(`seeded ${user.userId}`);
 		}
+
 		message.channel.send('Done');
 	}
 }

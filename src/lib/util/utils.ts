@@ -50,7 +50,6 @@ export function xpOfLevel(level: number) {
 		xp += i * 100 + 75;
 	}
 
-	console.log(crap);
 	return xp;
 }
 
