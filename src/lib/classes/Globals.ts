@@ -1,5 +1,4 @@
 import { container } from '@sapphire/pieces';
-import { CookieStore } from '@sapphire/plugin-api';
 
 export class GlobalVariableClass {
 	private static instance: GlobalVariableClass;
