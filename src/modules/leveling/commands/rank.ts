@@ -1,4 +1,5 @@
-import { DugColors, DugEmojis, GlobalBoost } from '#constants';
+import { DugColors, DugEmojis } from '#constants';
+import { Globals } from '#lib/classes';
 import type { GuildMessage } from '#lib/types/Discord';
 import { formatFailMessage, genBar, toCompactNum } from '#lib/util/formatter';
 import { getTag } from '#lib/util/utils';
@@ -77,6 +78,7 @@ export class UserCommand extends Command {
 				userId: member.id
 			}
 		});
+		const GlobalBoost = Globals.GlobalBoost;
 
 		if (!data) {
 			const embed = new EmbedBuilder()
