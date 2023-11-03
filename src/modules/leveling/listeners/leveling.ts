@@ -1,4 +1,5 @@
 import { DugEvents } from '#constants';
+import { Globals } from '#lib/classes';
 import { GuildMessage } from '#lib/types/Discord';
 import { ApplyOptions } from '@sapphire/decorators';
 import { Listener } from '@sapphire/framework';
@@ -23,7 +24,7 @@ export class UserEvent extends Listener {
 			}
 		});
 		const addXpData = await this.container.db.userLevel.addXp(member.id, {
-			xpBoost: data.xpBoost
+			xpBoost: data.xpBoost + Globals.GlobalBoost
 		});
 
 		if (addXpData.leveledUp) this.container.client.emit(DugEvents.MemberLevelUp, message, addXpData.oldLevel, addXpData.newLevel);
