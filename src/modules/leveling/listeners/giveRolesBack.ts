@@ -36,6 +36,6 @@ export class UserEvent extends Listener {
 			}
 		});
 
-		member.roles.add(availableLevelRoles.map((r) => r.id));
+		member.roles.add(availableLevelRoles.map((r) => r.roleId));
 	}
 }
