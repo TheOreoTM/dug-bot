@@ -15,13 +15,14 @@ export class AutocompleteHandler extends InteractionHandler {
 		const focusedOption = interaction.options.getFocused(true);
 		switch (focusedOption.name) {
 			case 'level': {
+				console.log(focusedOption.value);
 				const searchResult = await this.container.db.levelRole.findMany({
 					where: {
 						level: Number(focusedOption.value)
 					}
 				});
 				// Map the search results to the structure required for Autocomplete
-				return this.some(searchResult.map((match) => ({ name: `Level Role ${match.level}`, value: match.id })));
+				return this.some(searchResult.map((match) => ({ name: `Level Role ${match.level}`, value: match.roleId })));
 			}
 			default:
 				return this.none();
