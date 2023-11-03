@@ -12,6 +12,7 @@ export class ButtonHandler extends InteractionHandler {
 
 		interaction.reply({ content: formatSuccessMessage(`You have registered as \`User #${data.idx}\``), ephemeral: true });
 		interaction.message.edit({
+			content: formatSuccessMessage(`You have registered as \`User #${data.idx}\``),
 			components: []
 		});
 	}
