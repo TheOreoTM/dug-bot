@@ -1,4 +1,3 @@
-import { GlobalVariableClass } from '#lib/classes';
 import { seconds } from '#utils/common';
 
 export const BotPrefix = '.';
@@ -161,5 +160,3 @@ export const WhitelistedChannels = ['856722573576765450'];
 export const NotificationChannelID = '825619988853162014';
 
 export const LeavingTaxPercentage = 0.1;
-
-export const Globals = GlobalVariableClass.getInstance();

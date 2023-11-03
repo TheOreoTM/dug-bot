@@ -1,4 +1,4 @@
-import { Globals } from '#constants';
+import { Globals } from '#lib/classes';
 import { formatSuccessMessage } from '#lib/util/formatter';
 import { ApplyOptions } from '@sapphire/decorators';
 import { Args, Command } from '@sapphire/framework';

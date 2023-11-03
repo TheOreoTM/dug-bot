@@ -13,3 +13,5 @@ export class GlobalVariableClass {
 		return GlobalVariableClass.instance;
 	}
 }
+
+export const Globals = GlobalVariableClass.getInstance();
