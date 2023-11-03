@@ -1,8 +1,8 @@
 import { InventoryItemType } from '#lib/types/Data';
 import { PrismaClient } from '@prisma/client';
 import { genRandomXp, getLevelInfo } from '#utils/utils';
+import { Globals } from '#lib/classes';
 const prisma = new PrismaClient();
-export let GlobalBoost = 0.2;
 
 export const xprisma = new PrismaClient().$extends({
 	name: 'xprisma',
@@ -269,6 +269,7 @@ export const xprisma = new PrismaClient().$extends({
 			},
 
 			async addXp(userId: string, options?: AddXpOptions) {
+				const GlobalBoost = Globals.GlobalBoost;
 				const xpBoost = options?.xpBoost ? options.xpBoost + GlobalBoost : GlobalBoost;
 
 				let amount: number = genRandomXp();

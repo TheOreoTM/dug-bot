@@ -8,6 +8,12 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model GlobalVariable {
+  name  String @unique
+  value String
+  type  String @default("string") // string | number | json | etc...
+}
+
 model LevelRole {
   id     String @id @default(uuid())
   level  Int    @unique
