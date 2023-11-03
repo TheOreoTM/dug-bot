@@ -11,6 +11,9 @@ export class ButtonHandler extends InteractionHandler {
 		const data = await this.container.db.user.register(interaction.user.id);
 
 		interaction.reply({ content: formatSuccessMessage(`You have registered as \`User #${data.idx}\``), ephemeral: true });
+		interaction.message.edit({
+			components: []
+		});
 	}
 
 	public override parse(interaction: ButtonInteraction) {
