@@ -27,21 +27,24 @@ export class GlobalVariableClass {
 			console.log(Object.prototype.hasOwnProperty.call(this.Data, variable));
 			if (Object.prototype.hasOwnProperty.call(this.Data, variable)) {
 				const value = this.Data[variable as keyof typeof this.Data];
-				const data = container.db.globalVariable.upsert({
-					where: {
-						name: variable
-					},
-					create: {
-						name: variable,
-						value: value.toString(),
-						type: typeof value
-					},
-					update: {
-						value: value.toString(),
-						type: typeof value
-					}
-				});
-				console.log('Saved Variable:', data);
+				container.db.globalVariable
+					.upsert({
+						where: {
+							name: variable
+						},
+						create: {
+							name: variable,
+							value: value.toString(),
+							type: typeof value
+						},
+						update: {
+							value: value.toString(),
+							type: typeof value
+						}
+					})
+					.then((d) => {
+						console.log('Saved Variable:', d);
+					});
 			}
 		}
 	}
