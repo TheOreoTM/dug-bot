@@ -71,7 +71,6 @@ export class UserCommand extends Command {
 
 		if (subcommand === 'remove') {
 			const roleId = interaction.options.getString('level', true);
-			console.log(roleId);
 
 			await this.container.db.levelRole.deleteMany({
 				where: {

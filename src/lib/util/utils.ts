@@ -39,8 +39,19 @@ export function genRandomInt(min: number, max: number) {
 	return Math.floor(Math.random() * (max - min + 1) + min);
 }
 
+// export function xpOfLevel(level: number) {
+// 	return Math.round((5 / 6) * level * (2 * level * level + 27 * level + 91));
+// }
+
 export function xpOfLevel(level: number) {
-	return Math.round((5 / 6) * level * (2 * level * level + 27 * level + 91));
+	let xp = 0;
+	let crap = new Array(level || 0);
+	for (let i = 0; i < crap.length; i++) {
+		xp += i * 100 + 75;
+	}
+
+	console.log(crap);
+	return xp;
 }
 
 export function getLevelInfo(currentLevel: number) {
