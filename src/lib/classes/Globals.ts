@@ -23,6 +23,7 @@ export class GlobalVariableClass {
 
 	private save() {
 		for (const variable in this.Data) {
+			console.log(Object.prototype.hasOwnProperty.call(this.Data, variable));
 			if (Object.prototype.hasOwnProperty.call(this.Data, variable)) {
 				const value = this.Data[variable as keyof typeof this.Data];
 				container.db.globalVariable.upsert({
@@ -56,6 +57,7 @@ export class GlobalVariableClass {
 	private startUp() {
 		setInterval(() => {
 			this.save();
+			console.log('Saved Data');
 		}, 60000);
 	}
 }
