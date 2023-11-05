@@ -34,7 +34,7 @@ export class UserEvent extends Listener {
 		});
 
 		member.roles.add(availableLevelRoles.map((r) => r.roleId));
-		const channel = message.guild.channels.cache.get(ChannelIDs.LevelUpChannel) as TextChannel;
+		const channel = message.guild.channels.cache.get(ChannelIDs.General) as TextChannel;
 		channel.send({
 			content: `GG ${member}, You just leveled up!`,
 			files: [
