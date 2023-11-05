@@ -1,3 +1,4 @@
+import { getLevelInfo } from '#lib/util/utils';
 import { ApplyOptions } from '@sapphire/decorators';
 import { Args, Command } from '@sapphire/framework';
 import type { Message } from 'discord.js';
@@ -8,12 +9,8 @@ import type { Message } from 'discord.js';
 })
 export class UserCommand extends Command {
 	public override async messageRun(message: Message, args: Args) {
-		const member = await args.pick('member');
-		const data = await this.container.db.userLevel.findUnique({
-			where: {
-				userId: member.id
-			}
-		});
+		const level = await args.pick('number');
+		const data = getLevelInfo(level);
 
 		message.channel.send({ content: `\`\`\`json\n${JSON.stringify(data, null, 2)}\`\`\`` });
 	}
