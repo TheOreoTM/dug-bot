@@ -26,7 +26,7 @@ export function parseRedisOption(): Pick<RedisOptions, 'port' | 'password' | 'ho
 }
 
 export const config: Config = {
-	enabled_modules: ['core', 'leveling', 'games'],
+	enabled_modules: ['core', 'leveling', 'games', 'welcomer'],
 	tasks: {
 		bull: {
 			connection: parseRedisOption()
@@ -138,5 +138,5 @@ interface Config {
 	api: ServerOptions;
 }
 
-export type ModuleName = 'leveling' | 'games' | 'core' | 'faction' | 'economy';
+export type ModuleName = 'leveling' | 'games' | 'core' | 'faction' | 'economy' | 'welcomer';
 export type ModulePath = `modules/${ModuleName}`;

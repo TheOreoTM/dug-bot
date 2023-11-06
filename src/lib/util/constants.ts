@@ -154,10 +154,11 @@ export const CrateAssets = {
 
 export const ChannelIDs = {
 	General: '856722573576765450',
-	LevelUpChannel: '907323209609797642'
+	LevelUpChannel: '907323209609797642',
+	WelcomeChannel: '856722573576765450'
 };
-export const WhitelistedChannels = ['856722573576765450'];
+export const WhitelistedChannels = [ChannelIDs.General];
 
-export const NotificationChannelID = '856722573576765450';
+export const NotificationChannelID = ChannelIDs.General;
 
 export const LeavingTaxPercentage = 0.1;
