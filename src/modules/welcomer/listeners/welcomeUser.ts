@@ -9,7 +9,7 @@ import { GuildMember, TextChannel } from 'discord.js';
 export class UserEvent extends Listener {
 	public override async run(member: GuildMember) {
 		const card = await new WelcomeLeave()
-			.setAvatar(member.displayAvatarURL({ forceStatic: true, extension: 'png' }))
+			.setAvatar(member.displayAvatarURL({ forceStatic: true, extension: 'png', size: 1024 }))
 			.setBackground('image', `https://imgur.com/hSUCo6F.png`)
 			.setTitle(member.user.username, '#000')
 			.setDescription(`Welcome! You're the ${member.guild.memberCount}th member to join`, '#000')
