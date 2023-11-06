@@ -13,7 +13,6 @@ export class UserEvent extends Listener {
 			.setBackground('image', `https://imgur.com/hSUCo6F`)
 			.setTitle(member.user.username, '#fff')
 			.setDescription(`Welcome! You're the ${member.guild.memberCount}th member to join`)
-			.setOverlayOpacity(0.01)
 			.build();
 
 		const channel = member.guild.channels.cache.get(ChannelIDs.WelcomeChannel) as TextChannel;
