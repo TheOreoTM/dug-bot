@@ -10,7 +10,7 @@ export class UserEvent extends Listener {
 	public override async run(member: GuildMember) {
 		const card = await new WelcomeLeave()
 			.setAvatar(member.displayAvatarURL({ forceStatic: true, extension: 'png' }))
-			.setBackground('image', `https://imgur.com/hSUCo6F`)
+			.setBackground('image', `https://imgur.com/hSUCo6F.png`)
 			.setTitle(member.user.username, '#fff')
 			.setDescription(`Welcome! You're the ${member.guild.memberCount}th member to join`)
 			.build();
