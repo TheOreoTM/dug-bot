@@ -8,13 +8,12 @@ export class DugClient<Ready extends boolean = boolean> extends SapphireClient<R
 	public constructor() {
 		super(ClientConfig);
 
-		this.loadedModules = config.enabled_modules;
-
 		if (isEnabled('core')) enableModule(this, 'core');
 		if (isEnabled('leveling')) enableModule(this, 'leveling');
 		if (isEnabled('economy')) enableModule(this, 'economy');
 		if (isEnabled('faction')) enableModule(this, 'faction');
 		if (isEnabled('games')) enableModule(this, 'games');
+		if (isEnabled('welcomer')) enableModule(this, 'welcomer');
 	}
 
 	public override async login(token?: string): Promise<string> {
@@ -34,6 +33,7 @@ function isEnabled(moduleName: ModuleName) {
 function enableModule(client: DugClient, moduleName: ModuleName) {
 	const rootData = getRootData();
 
+	client.loadedModules.push(moduleName);
 	client.stores.registerPath(join(rootData.root, `modules/${moduleName}`));
 }
 
