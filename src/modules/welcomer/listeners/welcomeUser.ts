@@ -11,8 +11,8 @@ export class UserEvent extends Listener {
 		const card = await new WelcomeLeave()
 			.setAvatar(member.displayAvatarURL({ forceStatic: true, extension: 'png' }))
 			.setBackground('image', `https://imgur.com/hSUCo6F`)
+			.setTitle(member.user.username, '#fff')
 			.setOverlayOpacity(0)
-			.setTitle(member.user.username)
 			.setDescription(`Welcome! You're the ${member.guild.memberCount}th member to join`)
 			.build();
 
