@@ -11,8 +11,8 @@ export class UserEvent extends Listener {
 		const card = await new WelcomeLeave()
 			.setAvatar(member.displayAvatarURL({ forceStatic: true, extension: 'png' }))
 			.setBackground('image', `https://imgur.com/hSUCo6F.png`)
-			.setTitle(member.user.username, '#fff')
-			.setDescription(`Welcome! You're the ${member.guild.memberCount}th member to join`)
+			.setTitle(member.user.username, '#000')
+			.setDescription(`Welcome! You're the ${member.guild.memberCount}th member to join`, '#000')
 			.build();
 
 		const channel = member.guild.channels.cache.get(ChannelIDs.WelcomeChannel) as TextChannel;
