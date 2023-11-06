@@ -12,8 +12,8 @@ export class UserEvent extends Listener {
 			.setAvatar(member.displayAvatarURL({ forceStatic: true, extension: 'png' }))
 			.setBackground('image', `https://imgur.com/hSUCo6F`)
 			.setTitle(member.user.username, '#fff')
-			.setOverlayOpacity(0)
 			.setDescription(`Welcome! You're the ${member.guild.memberCount}th member to join`)
+			.setOverlayOpacity(0.01)
 			.build();
 
 		const channel = member.guild.channels.cache.get(ChannelIDs.WelcomeChannel) as TextChannel;
