@@ -18,7 +18,7 @@ export class reviveChatWithTopicTask extends ScheduledTask {
 
 		const newTopicButton = new ButtonBuilder().setLabel('New Topic').setStyle(ButtonStyle.Primary).setCustomId('new-topic');
 
-		const embed = new EmbedBuilder().setColor(DugColors.Default).setDescription(`Here's a topic that can help...\n\n> ${generateTopic()}`);
+		const embed = new EmbedBuilder().setColor(DugColors.Default).setDescription(`Here's a topic that can help...\n\n> **${generateTopic()}**`);
 
 		channel.send({
 			embeds: [embed],

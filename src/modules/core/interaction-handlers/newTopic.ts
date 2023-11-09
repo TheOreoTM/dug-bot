@@ -19,7 +19,7 @@ export class ButtonHandler extends InteractionHandler {
 
 		const embed = new EmbedBuilder()
 			.setColor(DugColors.Default)
-			.setDescription(`Here's a **new** topic that can help...\n\n> ${generateTopic()}`)
+			.setDescription(`Here's a **new** topic that can help...\n\n> **${generateTopic()}**`)
 			.setFooter({ text: `Requested by: ${getTag(interaction.user)}` });
 
 		const response = await channel.send({
