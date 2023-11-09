@@ -35,6 +35,10 @@ export class ButtonHandler extends InteractionHandler {
 				components: [new ActionRowBuilder<ButtonBuilder>().addComponents(newTopicButton.setDisabled(false))]
 			})
 			.catch(null);
+
+		await sleep(seconds(2));
+
+		if (response.deletable) response.delete().catch(null);
 	}
 
 	public override parse(interaction: ButtonInteraction) {
