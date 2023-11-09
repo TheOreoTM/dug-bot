@@ -1,7 +1,9 @@
 import { DugColors } from '#constants';
+import { seconds } from '#lib/util/common';
 import { generateTopic, getTag } from '#lib/util/utils';
 import { ApplyOptions } from '@sapphire/decorators';
 import { InteractionHandler, InteractionHandlerTypes } from '@sapphire/framework';
+import { sleep } from '@sapphire/utilities';
 import { EmbedBuilder, type ButtonInteraction, ActionRowBuilder, ButtonBuilder, ButtonStyle, TextChannel } from 'discord.js';
 
 @ApplyOptions<InteractionHandler.Options>({
@@ -20,9 +22,16 @@ export class ButtonHandler extends InteractionHandler {
 			.setDescription(`Here's a **new** topic that can help...\n\n> ${generateTopic()}`)
 			.setFooter({ text: `Requested by: ${getTag(interaction.user)}` });
 
-		channel.send({
+		const response = await channel.send({
 			embeds: [embed],
-			components: [new ActionRowBuilder<ButtonBuilder>().addComponents(newTopicButton)]
+			components: [new ActionRowBuilder<ButtonBuilder>().addComponents(newTopicButton.setDisabled(true))]
+		});
+
+		sleep(seconds(10));
+
+		await response.edit({
+			embeds: [embed],
+			components: [new ActionRowBuilder<ButtonBuilder>().addComponents(newTopicButton.setDisabled(false))]
 		});
 	}
 

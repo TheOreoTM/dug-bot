@@ -23,7 +23,7 @@ export class reviveChatWithTopicTask extends ScheduledTask {
 		channel.send({
 			content: 'Slow Chat Detected',
 			embeds: [embed],
-			components: [new ActionRowBuilder<ButtonBuilder>().addComponents(newTopicButton)]
+			components: [new ActionRowBuilder<ButtonBuilder>().addComponents(newTopicButton.setDisabled(true))]
 		});
 	}
 
