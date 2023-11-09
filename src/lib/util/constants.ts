@@ -1,6 +1,7 @@
 import { seconds } from '#utils/common';
 
 export const BotPrefix = '.';
+export const BotID = '767781855193464882';
 export const BotOwners = ['600707283097485322'];
 export const EventConfig = {
 	EventManager: '1034778285185454090'

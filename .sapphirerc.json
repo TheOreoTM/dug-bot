@@ -7,7 +7,8 @@
 		"listeners": "listeners",
 		"preconditions": "preconditions",
 		"interaction-handlers": "interaction-handlers",
-		"routes": "routes"
+		"routes": "routes",
+		"tasks": "scheduled-tasks"
 	},
 	"customFileTemplates": {
 		"enabled": true,

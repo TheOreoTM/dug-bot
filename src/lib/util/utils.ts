@@ -7,7 +7,7 @@ import {
 	type ContextMenuCommandSuccessPayload,
 	type MessageCommandSuccessPayload
 } from '@sapphire/framework';
-import { isNullishOrEmpty } from '@sapphire/utilities';
+import { isNullishOrEmpty, pickRandom } from '@sapphire/utilities';
 import { cyan } from 'colorette';
 import type { APIUser, Guild, User } from 'discord.js';
 import fuzzysort from 'fuzzysort';
@@ -51,6 +51,34 @@ export function xpOfLevel(level: number) {
 	}
 
 	return xp;
+}
+
+export function generateTopic() {
+	const Topics = [
+		'If you could travel back in time, what era would you visit and why?',
+		'Share a fun and interesting science fact.',
+		"What's a skill or hobby you've always wanted to learn?",
+		'Discuss a movie or TV show you recently watched.',
+		"What's a dream destination you'd love to visit someday?",
+		'Share a personal story or experience that impacted you.',
+		'Discuss a fascinating space-related topic.',
+		"What's a thought-provoking ethical dilemma you've pondered?",
+		'If you had a superpower, what would it be and how would you use it?',
+		"What's a piece of advice you'd give to your younger self?",
+		'Share a cultural tradition or celebration that you find intriguing.',
+		'Discuss a breakthrough in technology that excites you.',
+		'If you could have dinner with any historical figure, who would it be?',
+		"What's a hidden gem of a book or movie you'd recommend?",
+		'Share a favorite childhood memory.',
+		'If you were stranded on a deserted island, what three items would you bring?',
+		"What's a skill you're particularly proud of?",
+		'Discuss a fascinating animal or insect behavior.',
+		"What's a fictional world you'd love to live in for a day?",
+		"Share a personal goal or aspiration you're working towards.",
+		'If you could meet any celebrity, who would it be and why?'
+	];
+
+	return pickRandom(Topics, 1);
 }
 
 export function getLevelInfo(currentLevel: number) {
