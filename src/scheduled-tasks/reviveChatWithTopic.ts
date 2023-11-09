@@ -34,7 +34,7 @@ export class reviveChatWithTopicTask extends ScheduledTask {
 		const isTopicMessage = message.content === 'Slow Chat Detected';
 		const sentByMe = message.author.id === BotID;
 
-		const shouldNotSend = isTopicMessage && sentByMe && !messageIsOld;
+		const shouldNotSend = !(isTopicMessage && sentByMe && !messageIsOld);
 		console.log(`isTopicMessage: ${isTopicMessage} sentByMe: ${sentByMe} messageIsOld: ${messageIsOld}`);
 		console.log(`shouldSend: ${!shouldNotSend}`);
 

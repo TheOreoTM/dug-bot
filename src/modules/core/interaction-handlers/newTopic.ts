@@ -29,10 +29,12 @@ export class ButtonHandler extends InteractionHandler {
 
 		sleep(seconds(10));
 
-		await response.edit({
-			embeds: [embed],
-			components: [new ActionRowBuilder<ButtonBuilder>().addComponents(newTopicButton.setDisabled(false))]
-		});
+		await response
+			.edit({
+				embeds: [embed],
+				components: [new ActionRowBuilder<ButtonBuilder>().addComponents(newTopicButton.setDisabled(false))]
+			})
+			.catch(null);
 	}
 
 	public override parse(interaction: ButtonInteraction) {
