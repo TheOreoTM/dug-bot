@@ -31,7 +31,7 @@ export class reviveChatWithTopicTask extends ScheduledTask {
 		const message = channel.lastMessage;
 		if (!message) return true;
 		const fiveMinutesAgo = new Date(Date.now() - minutes(5));
-		const messageIsOld = message.createdTimestamp < fiveMinutesAgo.getTime();
+		const messageIsOld = message.createdTimestamp > fiveMinutesAgo.getTime();
 		const isTopicMessage = message.content === 'Slow Chat Detected';
 		const sentByMe = message.author.id === BotID;
 
