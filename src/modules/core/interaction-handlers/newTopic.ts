@@ -27,7 +27,7 @@ export class ButtonHandler extends InteractionHandler {
 			components: [new ActionRowBuilder<ButtonBuilder>().addComponents(newTopicButton.setDisabled(true))]
 		});
 
-		sleep(seconds(10));
+		await sleep(seconds(10));
 
 		await response
 			.edit({
