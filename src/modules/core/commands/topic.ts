@@ -2,12 +2,13 @@ import { DugColors } from '#constants';
 import { seconds } from '#lib/util/common';
 import { generateTopic, getTag } from '#lib/util/utils';
 import { ApplyOptions } from '@sapphire/decorators';
-import { Command } from '@sapphire/framework';
+import { BucketScope, Command } from '@sapphire/framework';
 import { ActionRowBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder, type Message } from 'discord.js';
 
 @ApplyOptions<Command.Options>({
 	description: 'A basic command',
-	cooldownDelay: seconds(10)
+	cooldownDelay: seconds(10),
+	cooldownScope: BucketScope.Global
 })
 export class UserCommand extends Command {
 	public override async messageRun(message: Message) {

@@ -7,7 +7,7 @@ import { ActionRowBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder, TextChannel
 
 @ApplyOptions<ScheduledTask.Options>({
 	name: 'reviveChatWithTopicTask',
-	interval: minutes(30)
+	interval: minutes(2.5)
 })
 export class reviveChatWithTopicTask extends ScheduledTask {
 	public async run() {
@@ -30,11 +30,13 @@ export class reviveChatWithTopicTask extends ScheduledTask {
 	private shouldSendTopic(channel: TextChannel) {
 		const message = channel.lastMessage;
 		if (!message) return true;
+		const fiveMinutesAgo = new Date(Date.now() - minutes(5));
+		const messageIsOld = message.createdTimestamp < fiveMinutesAgo.getTime();
 		const isTopicMessage = message.content === 'Slow Chat Detected';
 		const sentByMe = message.author.id === BotID;
 
-		const shouldSend = !(isTopicMessage && sentByMe);
+		const shouldNotSend = isTopicMessage && sentByMe && !messageIsOld;
 
-		return shouldSend;
+		return !shouldNotSend;
 	}
 }
