@@ -21,7 +21,6 @@ export class reviveChatWithTopicTask extends ScheduledTask {
 		const embed = new EmbedBuilder().setColor(DugColors.Default).setDescription(`Here's a topic that can help...\n\n> ${generateTopic()}`);
 
 		channel.send({
-			content: 'Slow Chat Detected',
 			embeds: [embed],
 			components: [new ActionRowBuilder<ButtonBuilder>().addComponents(newTopicButton.setDisabled(true))]
 		});
