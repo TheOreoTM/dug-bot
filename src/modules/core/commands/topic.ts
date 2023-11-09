@@ -7,7 +7,7 @@ import { ActionRowBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder, type Messag
 
 @ApplyOptions<Command.Options>({
 	description: 'A basic command',
-	cooldownDelay: seconds(10),
+	cooldownDelay: seconds(14),
 	cooldownScope: BucketScope.Global
 })
 export class UserCommand extends Command {
