@@ -29,3 +29,9 @@ declare module '@skyra/env-utilities' {
 		REDIS_PASSWORD: string;
 	}
 }
+
+declare module '@sapphire/plugin-scheduled-tasks' {
+	interface ScheduledTasks {
+		ExpireBoostsTask: never;
+	}
+}

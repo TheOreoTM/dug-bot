@@ -72,7 +72,7 @@ export class UserCommand extends Command {
 					}
 				}
 			},
-			select: SelectAllOptions
+			select: SelectAllOptions 
 		});
 
 		const embed = generateFactionEmbed(faction);
