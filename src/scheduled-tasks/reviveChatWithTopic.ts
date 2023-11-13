@@ -31,11 +31,10 @@ export class reviveChatWithTopicTask extends ScheduledTask {
 		if (!message) return true;
 		const fiveMinutesAgo = new Date(Date.now() - minutes(5));
 		const messageIsOld = message.createdTimestamp > fiveMinutesAgo.getTime();
-		const isTopicMessage = message.content === 'Slow Chat Detected';
 		const sentByMe = message.author.id === BotID;
 
-		const shouldNotSend = !(isTopicMessage && sentByMe && !messageIsOld);
-		console.log(`isTopicMessage: ${isTopicMessage} sentByMe: ${sentByMe} messageIsOld: ${messageIsOld}`);
+		const shouldNotSend = !(sentByMe && !messageIsOld);
+		console.log(`sentByMe: ${sentByMe} messageIsOld: ${messageIsOld}`);
 		console.log(`shouldSend: ${!shouldNotSend}`);
 
 		return !shouldNotSend;
