@@ -12,10 +12,12 @@ export class SendLogEmbed {
 			.setDescription(`Added **\` ${amount}xp \`** to ${user} - \` ${user.id} \` at ${nowTimestamp.getLongDateTime()}`)
 			.setFields(
 				{
+					inline: true,
 					name: 'Responsible User',
 					value: responsibleUserText
 				},
 				{
+					inline: true,
 					name: 'Reason',
 					value: reason
 				}
