@@ -61,7 +61,7 @@ export class SendLogEmbed {
 
 	static LevelUp({ user, level, staff, reason }: { user: User; level: number; reason: string; staff?: GuildMember }) {
 		const responsibleUserText = `${staff ? staff : `<@${BotID}>`} - \` ${staff ? staff.id : BotID} \``;
-		const embed = template.setDescription(`${user} level **up** to \`${level}\`at ${nowTimestamp.getLongDateTime()}`).setFields(
+		const embed = template.setDescription(`${user} level **up** to \`${level}\` at ${nowTimestamp.getLongDateTime()}`).setFields(
 			{
 				name: 'Responsible User',
 				value: responsibleUserText,
