@@ -8,20 +8,18 @@ const nowTimestamp = new Timestamp(Date.now());
 export class SendLogEmbed {
 	static AddXp({ user, amount, staff, reason }: { user: User; amount: number; reason: string; staff?: GuildMember }) {
 		const responsibleUserText = `${staff ? staff : `<@${BotID}>`} - \` ${staff ? staff.id : BotID} \``;
-		const embed = template
-			.setDescription(`Added **\`${amount}xp\`** to ${user} - \` ${user.id} \` at ${nowTimestamp.getLongDateTime()}`)
-			.setFields(
-				{
-					inline: true,
-					name: 'Responsible User',
-					value: responsibleUserText
-				},
-				{
-					inline: true,
-					name: 'Reason',
-					value: reason
-				}
-			);
+		const embed = template.setDescription(`Added **\`${amount}xp\`** to ${user} at ${nowTimestamp.getLongDateTime()}`).setFields(
+			{
+				inline: true,
+				name: 'Responsible User',
+				value: responsibleUserText
+			},
+			{
+				inline: true,
+				name: 'Reason',
+				value: reason
+			}
+		);
 
 		container.client.emit(DugEvents.LogSend, embed);
 	}
@@ -42,7 +40,7 @@ export class SendLogEmbed {
 		const expiresAtTimestamp = new Timestamp(expiresAt.getTime());
 		const responsibleUserText = `${staff ? staff : `<@${BotID}>`} - \` ${staff ? staff.id : BotID} \``;
 		const embed = template
-			.setDescription(`Added **\`${amount}% boost\`** to ${user} - \` ${user.id} \` at ${nowTimestamp.getLongDateTime()}`)
+			.setDescription(`Added **\`${amount}% boost\`** to ${user} at ${nowTimestamp.getLongDateTime()}`)
 			.setFields(
 				{ inline: true, name: 'Responsible User', value: responsibleUserText },
 				{ inline: true, name: 'Reason', value: reason },
@@ -55,7 +53,7 @@ export class SendLogEmbed {
 	static SetXpBoost({ user, amount, staff, reason }: { user: User; amount: number; reason: string; staff?: GuildMember }) {
 		const responsibleUserText = `${staff ? staff : `<@${BotID}>`} - \` ${staff ? staff.id : BotID} \``;
 		const embed = template
-			.setDescription(`Set **\`${amount}% boost\`** for ${user} - \` ${user.id} \` at ${nowTimestamp.getLongDateTime()}`)
+			.setDescription(`Set **\`${amount}% boost\`** for ${user} at ${nowTimestamp.getLongDateTime()}`)
 			.setFields({ inline: true, name: 'Responsible User', value: responsibleUserText }, { inline: true, name: 'Reason', value: reason });
 
 		container.client.emit(DugEvents.LogSend, embed);
@@ -95,7 +93,7 @@ export class SendLogEmbed {
 
 	static ReassignRoles({ user, roles, staff, reason }: { user: User; roles: Snowflake[]; reason: string; staff?: GuildMember }) {
 		const responsibleUserText = `${staff ? staff : `<@${BotID}>`} - \` ${staff ? staff.id : BotID} \``;
-		const embed = template.setDescription(`Roles given to ${user} - \` ${user.id} \` at ${nowTimestamp.getLongDateTime()}`).setFields(
+		const embed = template.setDescription(`Roles given to ${user} at ${nowTimestamp.getLongDateTime()}`).setFields(
 			{ inline: true, name: 'Responsible User', value: responsibleUserText },
 			{ inline: true, name: 'Reason', value: reason },
 			{
