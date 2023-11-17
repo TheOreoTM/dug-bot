@@ -1,15 +1,13 @@
-import { DugColors, DugEvents } from '#constants';
+import { BotID, DugColors, DugEvents } from '#constants';
 import { EmbedBuilder, GuildMember, Snowflake, User } from 'discord.js';
 import { Timestamp } from '#lib/classes/Timestamp';
 import { container } from '@sapphire/pieces';
 const template = new EmbedBuilder().setColor(DugColors.Default);
 const nowTimestamp = new Timestamp(Date.now());
-const me = container.client.user!;
 
 export class SendLogEmbed {
 	static AddXp({ user, amount, staff, reason }: { user: User; amount: number; reason: string; staff?: GuildMember }) {
-		console.log(user);
-		const responsibleUserText = `${staff ? staff : me} - \` ${staff ? staff.id : me.id} \``;
+		const responsibleUserText = `${staff ? staff : `<@${BotID}>`} - \` ${staff ? staff.id : BotID} \``;
 		const embed = template
 			.setDescription(`Added **\` ${amount}xp \`** to ${user} - \` ${user.id} \` at ${nowTimestamp.getLongDateTime}`)
 			.addFields(
@@ -40,7 +38,7 @@ export class SendLogEmbed {
 		staff?: GuildMember;
 	}) {
 		const expiresAtTimestamp = new Timestamp(expiresAt.getTime());
-		const responsibleUserText = `${staff ? staff : me} - \` ${staff ? staff.id : me.id} \``;
+		const responsibleUserText = `${staff ? staff : `<@${BotID}>`} - \` ${staff ? staff.id : BotID} \``;
 		const embed = template
 			.setDescription(`Added **\` ${amount}% boost \`** to ${user} - \` ${user.id} \` at ${nowTimestamp.getLongDateTime}`)
 			.addFields(
@@ -53,7 +51,7 @@ export class SendLogEmbed {
 	}
 
 	static SetXpBoost({ user, amount, staff, reason }: { user: User; amount: number; reason: string; staff?: GuildMember }) {
-		const responsibleUserText = `${staff ? staff : me} - \` ${staff ? staff.id : me.id} \``;
+		const responsibleUserText = `${staff ? staff : `<@${BotID}>`} - \` ${staff ? staff.id : BotID} \``;
 		const embed = template
 			.setDescription(`Set **\` ${amount}% boost \`** for ${user} - \` ${user.id} \` at ${nowTimestamp.getLongDateTime}`)
 			.addFields({ inline: true, name: 'Responsible User', value: responsibleUserText }, { inline: true, name: 'Reason', value: reason });
@@ -62,7 +60,7 @@ export class SendLogEmbed {
 	}
 
 	static LevelUp({ user, level, staff, reason }: { user: User; level: number; reason: string; staff?: GuildMember }) {
-		const responsibleUserText = `${staff ? staff : me} - \` ${staff ? staff.id : me.id} \``;
+		const responsibleUserText = `${staff ? staff : `<@${BotID}>`} - \` ${staff ? staff.id : BotID} \``;
 		const embed = template
 			.setDescription(`${user} - \` ${user.id} \` level **up** to \` ${level} \`at ${nowTimestamp.getLongDateTime}`)
 			.addFields(
@@ -78,7 +76,7 @@ export class SendLogEmbed {
 	}
 
 	static LevelSet({ user, level, staff, reason }: { user: User; level: number; reason: string; staff?: GuildMember }) {
-		const responsibleUserText = `${staff ? staff : me} - \` ${staff ? staff.id : me.id} \``;
+		const responsibleUserText = `${staff ? staff : `<@${BotID}>`} - \` ${staff ? staff.id : BotID} \``;
 		const embed = template
 			.setDescription(`${user} - \` ${user.id} \` level **set** to \` ${level} \`at ${nowTimestamp.getLongDateTime}`)
 			.addFields(
@@ -94,7 +92,7 @@ export class SendLogEmbed {
 	}
 
 	static ReassignRoles({ user, roles, staff, reason }: { user: User; roles: Snowflake[]; reason: string; staff?: GuildMember }) {
-		const responsibleUserText = `${staff ? staff : me} - \` ${staff ? staff.id : me.id} \``;
+		const responsibleUserText = `${staff ? staff : `<@${BotID}>`} - \` ${staff ? staff.id : BotID} \``;
 		const embed = template.setDescription(`Roles given to ${user} - \` ${user.id} \` at ${nowTimestamp.getLongDateTime}`).addFields(
 			{ inline: true, name: 'Responsible User', value: responsibleUserText },
 			{ inline: true, name: 'Reason', value: reason },
