@@ -9,7 +9,7 @@ export class SendLogEmbed {
 	static AddXp({ user, amount, staff, reason }: { user: User; amount: number; reason: string; staff?: GuildMember }) {
 		const responsibleUserText = `${staff ? staff : `<@${BotID}>`} - \` ${staff ? staff.id : BotID} \``;
 		const embed = template
-			.setDescription(`Added **\` ${amount}xp \`** to ${user} - \` ${user.id} \` at ${nowTimestamp.getLongDateTime()}`)
+			.setDescription(`Added **\`${amount}xp\`** to ${user} - \` ${user.id} \` at ${nowTimestamp.getLongDateTime()}`)
 			.setFields(
 				{
 					inline: true,
@@ -42,7 +42,7 @@ export class SendLogEmbed {
 		const expiresAtTimestamp = new Timestamp(expiresAt.getTime());
 		const responsibleUserText = `${staff ? staff : `<@${BotID}>`} - \` ${staff ? staff.id : BotID} \``;
 		const embed = template
-			.setDescription(`Added **\` ${amount}% boost \`** to ${user} - \` ${user.id} \` at ${nowTimestamp.getLongDateTime()}`)
+			.setDescription(`Added **\`${amount}% boost\`** to ${user} - \` ${user.id} \` at ${nowTimestamp.getLongDateTime()}`)
 			.setFields(
 				{ inline: true, name: 'Responsible User', value: responsibleUserText },
 				{ inline: true, name: 'Reason', value: reason },
@@ -55,7 +55,7 @@ export class SendLogEmbed {
 	static SetXpBoost({ user, amount, staff, reason }: { user: User; amount: number; reason: string; staff?: GuildMember }) {
 		const responsibleUserText = `${staff ? staff : `<@${BotID}>`} - \` ${staff ? staff.id : BotID} \``;
 		const embed = template
-			.setDescription(`Set **\` ${amount}% boost \`** for ${user} - \` ${user.id} \` at ${nowTimestamp.getLongDateTime()}`)
+			.setDescription(`Set **\`${amount}% boost\`** for ${user} - \` ${user.id} \` at ${nowTimestamp.getLongDateTime()}`)
 			.setFields({ inline: true, name: 'Responsible User', value: responsibleUserText }, { inline: true, name: 'Reason', value: reason });
 
 		container.client.emit(DugEvents.LogSend, embed);
@@ -64,7 +64,7 @@ export class SendLogEmbed {
 	static LevelUp({ user, level, staff, reason }: { user: User; level: number; reason: string; staff?: GuildMember }) {
 		const responsibleUserText = `${staff ? staff : `<@${BotID}>`} - \` ${staff ? staff.id : BotID} \``;
 		const embed = template
-			.setDescription(`${user} - \` ${user.id} \` level **up** to \` ${level} \`at ${nowTimestamp.getLongDateTime()}`)
+			.setDescription(`${user} - \` ${user.id} \` level **up** to \`${level}\`at ${nowTimestamp.getLongDateTime()}`)
 			.setFields(
 				{
 					name: 'Responsible User',
@@ -80,7 +80,7 @@ export class SendLogEmbed {
 	static LevelSet({ user, level, staff, reason }: { user: User; level: number; reason: string; staff?: GuildMember }) {
 		const responsibleUserText = `${staff ? staff : `<@${BotID}>`} - \` ${staff ? staff.id : BotID} \``;
 		const embed = template
-			.setDescription(`${user} - \` ${user.id} \` level **set** to \` ${level} \`at ${nowTimestamp.getLongDateTime()}`)
+			.setDescription(`${user} - \` ${user.id} \` level **set** to \`${level}\` at ${nowTimestamp.getLongDateTime()}`)
 			.setFields(
 				{
 					name: 'Responsible User',
