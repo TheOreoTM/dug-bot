@@ -1,3 +1,4 @@
+import { SendLogEmbed } from '#lib/classes';
 import type { GuildMessage } from '#lib/types/Discord';
 import { formatFailMessage, formatSuccessMessage } from '#lib/util/formatter';
 import { getLevelInfo, getTag } from '#lib/util/utils';
@@ -109,6 +110,12 @@ export class UserCommand extends Command {
 				});
 
 				interaction.reply(formatSuccessMessage(`Set user level to ${levelToSet}`));
+				SendLogEmbed.LevelSet({
+					user: targetMember.user,
+					level: levelToSet,
+					reason: '`xp set level` command',
+					staff: interaction.member as GuildMember
+				});
 				return;
 			}
 
@@ -128,6 +135,13 @@ export class UserCommand extends Command {
 					}
 				});
 				interaction.reply(formatSuccessMessage(`Set user XP Boost to ${boostToSet * 100}%`));
+				SendLogEmbed.SetXpBoost({
+					user: targetMember.user,
+					amount: boostToSet * 100,
+					reason: '`xp set boost` command',
+					staff: interaction.member as GuildMember
+				});
+
 				return;
 			}
 
@@ -142,6 +156,13 @@ export class UserCommand extends Command {
 			});
 
 			interaction.reply(formatSuccessMessage(`Added \`${xpAmountToChange}xp\` to ${getTag(targetMember.user)}`));
+			SendLogEmbed.AddXp({
+				user: targetMember.user,
+				amount: xpAmountToChange,
+				reason: '`xp add` command',
+				staff: interaction.member as GuildMember
+			});
+
 			return;
 		}
 
@@ -149,6 +170,12 @@ export class UserCommand extends Command {
 			await this.container.db.userLevel.removeXp(targetMember.id, xpAmountToChange);
 
 			interaction.reply(formatSuccessMessage(`Removed \`${xpAmountToChange}xp\` from ${getTag(targetMember.user)}`));
+			SendLogEmbed.AddXp({
+				user: targetMember.user,
+				amount: -xpAmountToChange,
+				reason: '`xp remove` command',
+				staff: interaction.member as GuildMember
+			});
 			return;
 		}
 	}

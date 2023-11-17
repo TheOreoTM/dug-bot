@@ -1,4 +1,5 @@
 import { DugEvents, LeavingTaxPercentage } from '#constants';
+import { SendLogEmbed } from '#lib/classes';
 import { getLevelInfo } from '#lib/util/utils';
 import { ApplyOptions } from '@sapphire/decorators';
 import { Listener } from '@sapphire/framework';
@@ -37,5 +38,6 @@ export class UserEvent extends Listener {
 		});
 
 		member.roles.add(availableLevelRoles.map((r) => r.roleId));
+		SendLogEmbed.ReassignRoles({ user: member.user, reason: 'Level Up', roles: availableLevelRoles.map((r) => r.roleId) });
 	}
 }

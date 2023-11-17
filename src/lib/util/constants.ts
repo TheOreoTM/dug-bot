@@ -102,7 +102,8 @@ export enum DugEvents {
 	FactionJoin = 'factionJoin',
 	FactionSendInvite = 'factionSendInvite',
 	TriggerDrop = 'triggerDrop',
-	MemberLevelUp = 'memberLevelUp'
+	MemberLevelUp = 'memberLevelUp',
+	LogSend = 'logSend'
 }
 
 export const ProgressBar = {
@@ -156,7 +157,8 @@ export const CrateAssets = {
 export const ChannelIDs = {
 	General: '856722573576765450',
 	LevelUpChannel: '907323209609797642',
-	WelcomeChannel: '856722573576765450'
+	WelcomeChannel: '856722573576765450',
+	LoggingChannel: '1174956832079495210'
 };
 export const WhitelistedChannels = [ChannelIDs.General];
 

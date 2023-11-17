@@ -1,3 +1,4 @@
+import { SendLogEmbed } from '#lib/classes';
 import { BoostItems } from '#lib/items';
 import { LevelUpItemValue, XpBoostItemValue } from '#lib/types/Data';
 import { hours } from '#lib/util/common';
@@ -72,6 +73,7 @@ export class UserCommand extends Command {
 					requiredXp: levelData.xpNeededToLevelUp
 				}
 			});
+			SendLogEmbed.LevelUp({ user: message.author, level: levelToSet, reason: `Used \`${itemValue}\`` });
 		}
 
 		if (itemToUse.value.startsWith('xpBoost')) {
@@ -81,6 +83,7 @@ export class UserCommand extends Command {
 			const expiresAt = new Date(Date.now() + (itemData.durationMs ?? hours(2)));
 
 			await this.container.db.userLevel.addXpBoost(message.author.id, xpBoostToAdd, expiresAt);
+			SendLogEmbed.AddXpBoost({ user: message.author, amount: xpBoostToAdd, expiresAt: expiresAt, reason: `Used \`${itemValue}\`` });
 		}
 
 		if (itemToUse.value.endsWith('Crate')) {

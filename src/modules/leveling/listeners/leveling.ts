@@ -1,5 +1,5 @@
 import { DugEvents } from '#constants';
-import { Globals } from '#lib/classes';
+import { Globals, SendLogEmbed } from '#lib/classes';
 import { GuildMessage } from '#lib/types/Discord';
 import { ApplyOptions } from '@sapphire/decorators';
 import { Listener } from '@sapphire/framework';
@@ -27,6 +27,11 @@ export class UserEvent extends Listener {
 			xpBoost: data.xpBoost + Globals.GlobalBoost
 		});
 
-		if (addXpData.leveledUp) this.container.client.emit(DugEvents.MemberLevelUp, message, addXpData.oldLevel, addXpData.newLevel);
+		SendLogEmbed.AddXp({ user: member.user, amount: addXpData.xpAdded, reason: 'Messaging' });
+
+		if (addXpData.leveledUp) {
+			this.container.client.emit(DugEvents.MemberLevelUp, message, addXpData.oldLevel, addXpData.newLevel);
+			SendLogEmbed.LevelUp({ user: member.user, level: addXpData.newLevel, reason: 'Messaging' });
+		}
 	}
 }
