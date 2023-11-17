@@ -13,7 +13,7 @@ import type { APIUser, Guild, User } from 'discord.js';
 import fuzzysort from 'fuzzysort';
 
 export function genRandomXp(xpBoost = 0) {
-	const baseXp = genRandomInt(15, 25);
+	const baseXp = genRandomInt(20, 40);
 	const boostedXp = baseXp + baseXp * xpBoost;
 	return Math.floor(boostedXp);
 }
