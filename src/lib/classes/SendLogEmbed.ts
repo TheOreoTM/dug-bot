@@ -8,6 +8,7 @@ const me = container.client.user!;
 
 export class SendLogEmbed {
 	static AddXp({ user, amount, staff, reason }: { user: User; amount: number; reason: string; staff?: GuildMember }) {
+		console.log(user);
 		const responsibleUserText = `${staff ? staff : me} - \` ${staff ? staff.id : me.id} \``;
 		const embed = template
 			.setDescription(`Added **\` ${amount}xp \`** to ${user} - \` ${user.id} \` at ${nowTimestamp.getLongDateTime}`)
