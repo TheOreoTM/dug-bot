@@ -33,10 +33,10 @@ export class reviveChatWithTopicTask extends ScheduledTask {
 		const messageIsOld = message.createdTimestamp > fiveMinutesAgo.getTime();
 		const sentByMe = message.author.id === BotID;
 
-		const shouldNotSend = !(sentByMe && !messageIsOld);
+		const shouldSend = !sentByMe && messageIsOld;
 		console.log(`sentByMe: ${sentByMe} messageIsOld: ${messageIsOld}`);
-		console.log(`shouldSend: ${!shouldNotSend}`);
+		console.log(`shouldSend: ${shouldSend}`);
 
-		return !sentByMe;
+		return shouldSend;
 	}
 }
