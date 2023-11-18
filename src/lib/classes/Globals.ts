@@ -26,24 +26,20 @@ export class GlobalNumberVariableClass {
 			console.log(Object.prototype.hasOwnProperty.call(this.Data, variable));
 			if (Object.prototype.hasOwnProperty.call(this.Data, variable)) {
 				const value = this.Data[variable as keyof typeof this.Data];
-				container.db.globalVariable
-					.upsert({
-						where: {
-							name: variable
-						},
-						create: {
-							name: variable,
-							value: value.toString(),
-							type: typeof value
-						},
-						update: {
-							value: value.toString(),
-							type: typeof value
-						}
-					})
-					.then((d) => {
-						console.log('[NumberVariable] Saved Variable:', d);
-					});
+				container.db.globalVariable.upsert({
+					where: {
+						name: variable
+					},
+					create: {
+						name: variable,
+						value: value.toString(),
+						type: typeof value
+					},
+					update: {
+						value: value.toString(),
+						type: typeof value
+					}
+				});
 			}
 		}
 	}
@@ -93,31 +89,26 @@ export class GlobalStringVariableClass {
 			console.log(Object.prototype.hasOwnProperty.call(this.Data, variable));
 			if (Object.prototype.hasOwnProperty.call(this.Data, variable)) {
 				const value = this.Data[variable as keyof typeof this.Data];
-				container.db.globalVariable
-					.upsert({
-						where: {
-							name: variable
-						},
-						create: {
-							name: variable,
-							value: value.toString(),
-							type: typeof value
-						},
-						update: {
-							value: value.toString(),
-							type: typeof value
-						}
-					})
-					.then((d) => {
-						console.log('[StringVariable] Saved Variable:', d);
-					});
+				container.db.globalVariable.upsert({
+					where: {
+						name: variable
+					},
+					create: {
+						name: variable,
+						value: value.toString(),
+						type: typeof value
+					},
+					update: {
+						value: value.toString(),
+						type: typeof value
+					}
+				});
 			}
 		}
 	}
 
 	private async initVariables() {
 		const variables = await container.db.globalVariable.findMany();
-		console.log(variables);
 		for (const variable of variables) {
 			const name = variable.name as keyof typeof this.Data;
 			if (this.Data[name] !== undefined) {
