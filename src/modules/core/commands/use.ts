@@ -1,4 +1,5 @@
 import { SendLogEmbed } from '#lib/classes';
+import { Crate } from '#lib/classes/Crate';
 import { BoostItems } from '#lib/items';
 import { LevelUpItemValue, XpBoostItemValue } from '#lib/types/Data';
 import { hours } from '#lib/util/common';
@@ -87,6 +88,9 @@ export class UserCommand extends Command {
 		}
 
 		if (itemToUse.value.endsWith('Crate')) {
+			const crate = new Crate(itemToUse);
+			const items = crate.open();
+			send(message, JSON.stringify(items, null, 2));
 		}
 
 		send(message, formatSuccessMessage(`Used \` ${itemToUse.name} \``));

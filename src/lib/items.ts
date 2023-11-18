@@ -1,13 +1,14 @@
 import { CrateAssets } from '#constants';
 import { ItemTypes, LevelingDropType, Item, BoostItemValue, CrateItemValue, CrateDropType, CreateNewItem, ItemValue } from '#lib/types';
 import { hours } from '#utils/common';
+import { ILootTableEntry, LootTable, LootTableEntry } from 'loot-table-advanced';
 
 export const Items = {
 	levelUp1: CreateNewItem({
 		description: 'Gain +1 Level',
 		name: '+1 Level',
 		emoji: '⬆️',
-		price: 1000,
+		price: 500,
 		sellable: true,
 		type: ItemTypes.Item,
 		usable: true,
@@ -31,7 +32,7 @@ export const Items = {
 		description: 'Gain +3 Levels',
 		name: '+3 Levels',
 		emoji: '⬆️',
-		price: 1000,
+		price: 1500,
 		sellable: true,
 		type: ItemTypes.Item,
 		usable: true,
@@ -43,7 +44,7 @@ export const Items = {
 		description: 'Gain +20% XP',
 		name: '20% XP Boost',
 		emoji: '⬆️',
-		price: 1000,
+		price: 800,
 		sellable: true,
 		type: ItemTypes.Boost,
 		usable: true,
@@ -55,7 +56,7 @@ export const Items = {
 		description: 'Gain +30% XP',
 		name: '30% XP Boost',
 		emoji: '⬆️',
-		price: 1000,
+		price: 1200,
 		sellable: true,
 		type: ItemTypes.Boost,
 		usable: true,
@@ -67,7 +68,7 @@ export const Items = {
 		description: 'Gain +50% XP',
 		name: '50% XP Boost',
 		emoji: '⬆️',
-		price: 1000,
+		price: 1600,
 		sellable: true,
 		type: ItemTypes.Boost,
 		usable: true,
@@ -79,7 +80,7 @@ export const Items = {
 		description: 'A crate with common items',
 		name: 'Common Crate',
 		emoji: CrateAssets.Common.Emoji,
-		price: 0,
+		price: 200,
 		sellable: false,
 		type: ItemTypes.Crate,
 		usable: true,
@@ -91,7 +92,7 @@ export const Items = {
 		description: 'A crate with uncommon items',
 		name: 'Uncommon Crate',
 		emoji: CrateAssets.Uncommon.Emoji,
-		price: 0,
+		price: 500,
 		sellable: false,
 		type: ItemTypes.Crate,
 		usable: true,
@@ -103,7 +104,7 @@ export const Items = {
 		description: 'A crate with rare items',
 		name: 'Rare Crate',
 		emoji: CrateAssets.Rare.Emoji,
-		price: 0,
+		price: 1000,
 		sellable: false,
 		type: ItemTypes.Crate,
 		usable: true,
@@ -115,7 +116,7 @@ export const Items = {
 		description: 'A crate with mythic items',
 		name: 'Mythical Crate',
 		emoji: CrateAssets.Mythic.Emoji,
-		price: 0,
+		price: 2000,
 		sellable: false,
 		type: ItemTypes.Crate,
 		usable: true,
@@ -131,7 +132,7 @@ export const Items = {
 		usable: true,
 		usage: 'Use Ghoulish Grimoire to redeem 1 item from the magical shop.',
 		value: 'grimoire',
-		price: 0,
+		price: 3000,
 		sellPrice: 0,
 		sellable: false
 	}),
@@ -140,7 +141,7 @@ export const Items = {
 		description: "Nah bro I ain't selling this shit, I'm broke and I need money",
 		emoji: '<:Ticket:1163384283755466804>',
 		type: ItemTypes.Item,
-		price: 0,
+		price: 2500,
 		usable: true,
 		usage: 'Use to participate in the nitro hunt',
 		value: 'ticket',
@@ -152,7 +153,7 @@ export const Items = {
 		description: 'MARK! MARK! I found the last lottery fragment! We just need 5 more to be rich now',
 		emoji: '<:Ticket_Fragment:1163386943875317821>',
 		type: ItemTypes.Item,
-		price: 0,
+		price: 500,
 		usable: true,
 		usage: 'Use 5 fragments to make a lottery ticket',
 		value: 'ticketFragment',
@@ -165,7 +166,7 @@ export const Items = {
 		emoji: '<:Halloween_Hat:1163382021943480360>',
 		sellable: true,
 		sellPrice: 0,
-		price: 0, // TODO
+		price: 1500,
 		type: ItemTypes.Boost,
 		usable: true,
 		usage: 'Use Halloween Hat to gain 1 level worth of xp',
@@ -177,7 +178,7 @@ export const Items = {
 		emoji: '<a:Candy_Cane:1163381494094508035>',
 		sellable: true,
 		sellPrice: 0,
-		price: 0, // TODO
+		price: 800,
 		type: ItemTypes.Boost,
 		usable: true,
 		usage: 'Use Halloween Candy Cane to gain 30% coin bonus for 1 minute!',
@@ -201,7 +202,7 @@ export const Items = {
 		emoji: '<:Vampiric_Vitality_Vile_weak:1163161116277477526>',
 		sellable: true,
 		sellPrice: 0,
-		price: 0, // TODO
+		price: 600,
 		type: ItemTypes.Boost,
 		usable: true,
 		usage: "Use this potion to give 30% xp boost for 1 hour. Standard xp cooldowns apply even after consuming this bottle. There's also a chance you die to this drink",
@@ -214,7 +215,7 @@ export const Items = {
 		emoji: '<:Vampiric_Vitality_Vile_mild:1163161198016069702>',
 		sellable: true,
 		sellPrice: 0,
-		price: 0, // TODO
+		price: 1000,
 		type: ItemTypes.Boost,
 		usable: true,
 		usage: "Use this potion to give 40% xp boost for 1 hour. Standard xp cooldowns apply even after consuming this bottle. There's also a chance you die to this drink x 2",
@@ -227,7 +228,7 @@ export const Items = {
 		emoji: '<:Vampiric_Vitality_Vile_mild:1163161198016069702>',
 		sellable: true,
 		sellPrice: 0,
-		price: 0, // TODO
+		price: 1500,
 		type: ItemTypes.Boost,
 		usable: true,
 		usage: "Use this potion to give 50% xp boost for 1 hour. Standard xp cooldowns apply even after consuming this bottle. There's also a chance you die to this drink x 3",
@@ -238,6 +239,7 @@ export const Items = {
 export const Crates: Record<CrateItemValue, CrateDropType> = {
 	commonCrate: {
 		name: 'Common Crate',
+		value: 'commonCrate',
 		image: CrateAssets.Common.Image,
 		weight: 90,
 		emoji: CrateAssets.Common.Emoji,
@@ -245,6 +247,7 @@ export const Crates: Record<CrateItemValue, CrateDropType> = {
 	},
 	uncommonCrate: {
 		name: 'Uncommon Crate',
+		value: 'uncommonCrate',
 		image: CrateAssets.Uncommon.Image,
 		weight: 50,
 		emoji: CrateAssets.Uncommon.Emoji,
@@ -252,6 +255,7 @@ export const Crates: Record<CrateItemValue, CrateDropType> = {
 	},
 	rareCrate: {
 		name: 'Rare Crate',
+		value: 'rareCrate',
 		image: CrateAssets.Rare.Image,
 		weight: 5,
 		emoji: CrateAssets.Rare.Emoji,
@@ -259,6 +263,7 @@ export const Crates: Record<CrateItemValue, CrateDropType> = {
 	},
 	mythicCrate: {
 		name: 'Mythical Crate',
+		value: 'mythicCrate',
 		image: CrateAssets.Mythic.Image,
 		weight: 1,
 		emoji: CrateAssets.Mythic.Emoji,
@@ -314,6 +319,44 @@ export const BoostItems: Record<BoostItemValue, LevelingDropType> = {
 	}
 };
 
-export const CommonLootTable: Array<[ItemValue, number]> = [['coin', 100]];
+export const CommonLootTable = [
+	LootTableEntry<ItemValue>('coin', 80, 20, 80, 3, 0),
+	LootTableEntry<ItemValue>('potionWeak', 5, 1, 1, 1, 1),
+	LootTableEntry<ItemValue>(null, 95, 1, 1, 1, 1) // Placeholder entry for illustration
+];
+
+export const UncommonLootTable = [
+	// Include items from common crate
+	...CommonLootTable,
+	LootTableEntry<ItemValue>('potionMild', 15, 1, 1, 1, 1),
+	LootTableEntry<ItemValue>('hat', 10, 1, 1, 1, 1)
+	// Add more uncommon items as needed
+];
+
+export const RareLootTable = [
+	// Include items from common and uncommon crates
+	...CommonLootTable,
+	...UncommonLootTable,
+	LootTableEntry<ItemValue>('candyCane', 10, 1, 1, 1, 1),
+	LootTableEntry<ItemValue>('ticket', 5, 1, 1, 1, 1)
+	// Add more rare items as needed
+];
+
+export const MythicLootTable = [
+	// Include items from common, uncommon, and rare crates
+	...CommonLootTable,
+	...UncommonLootTable,
+	...RareLootTable,
+	LootTableEntry<ItemValue>('grimoire', 5, 1, 1, 1, 1)
+	// Add more mythic items as needed
+];
+
+export const LootTables: Record<string, ILootTableEntry<string, number, LootTable<string, number>>[]> = {
+	commonCrate: CommonLootTable,
+	uncommonCrate: UncommonLootTable,
+	rareCrate: RareLootTable,
+	mythicCrate: MythicLootTable
+};
+
 const shopItemsArray: ReadonlyArray<Item> = Object.values(Items);
 export { shopItemsArray };

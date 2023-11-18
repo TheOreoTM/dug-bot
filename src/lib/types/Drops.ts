@@ -1,3 +1,5 @@
+import { CrateItemValue } from '.';
+
 export type BaseDropType = {
 	name: string;
 	description: string;
@@ -12,6 +14,7 @@ export type LevelingDropType = BaseDropType & {
 };
 
 export type CrateDropType = BaseDropType & {
+	value: CrateItemValue;
 	image: string;
 	emoji: string;
 };
