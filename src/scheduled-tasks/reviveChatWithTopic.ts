@@ -37,6 +37,6 @@ export class reviveChatWithTopicTask extends ScheduledTask {
 		console.log(`sentByMe: ${sentByMe} messageIsOld: ${messageIsOld}`);
 		console.log(`shouldSend: ${!shouldNotSend}`);
 
-		return !shouldNotSend;
+		return !sentByMe;
 	}
 }
