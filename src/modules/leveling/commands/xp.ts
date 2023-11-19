@@ -8,7 +8,8 @@ import { send } from '@sapphire/plugin-editable-commands';
 import { GuildMember } from 'discord.js';
 
 @ApplyOptions<Command.Options>({
-	description: 'XP Command'
+	description: 'XP Command',
+	requiredUserPermissions: ['Administrator']
 })
 export class UserCommand extends Command {
 	// Register Chat Input and Context Menu command
