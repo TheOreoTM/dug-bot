@@ -29,7 +29,10 @@ export const config: Config = {
 	enabled_modules: ['core', 'leveling', 'games', 'faction'],
 	tasks: {
 		bull: {
-			connection: parseRedisOption()
+			connection: parseRedisOption(),
+			defaultJobOptions: {
+				removeOnComplete: true
+			}
 		}
 	},
 	api: {
