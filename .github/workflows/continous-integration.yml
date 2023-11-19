@@ -36,4 +36,4 @@ jobs:
             npx prisma db push
             yarn install
             yarn build
-            pm2 start yarn --interpreter bash --name dug-bot -- start
+            pm2 start dist/index.js --name dug-bot
