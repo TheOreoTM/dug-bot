@@ -1,4 +1,5 @@
 import { ModuleName } from '#config';
+import { CoreSettingsService } from '#lib/services/CoreSettingsService';
 import { ApplyOptions } from '@sapphire/decorators';
 import { Listener, Store } from '@sapphire/framework';
 import { blue, gray, green, magenta, magentaBright, white, yellow } from 'colorette';
@@ -10,6 +11,8 @@ export class UserEvent extends Listener {
 	private readonly style = dev ? yellow : blue;
 
 	public override run() {
+		this.container.core = new CoreSettingsService();
+
 		this.printBanner();
 		this.printStoreDebugInformation();
 	}

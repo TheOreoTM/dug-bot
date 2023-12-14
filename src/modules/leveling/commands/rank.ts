@@ -1,5 +1,4 @@
 import { DugColors, DugEmojis } from '#constants';
-import { Globals } from '#lib/classes';
 import type { GuildMessage } from '#lib/types/Discord';
 import { formatFailMessage, genBar, toCompactNum } from '#lib/util/formatter';
 import { getTag } from '#lib/util/utils';
@@ -78,7 +77,8 @@ export class UserCommand extends Command {
 				userId: member.id
 			}
 		});
-		const GlobalBoost = Globals.GlobalBoost;
+
+		const globalBoost = await this.container.core.getGlobalBoost(0);
 
 		if (!data) {
 			const embed = new EmbedBuilder()
@@ -87,7 +87,7 @@ export class UserCommand extends Command {
 			return { embeds: [embed] };
 		}
 
-		const userXpBoost = Math.floor((data.xpBoost + GlobalBoost) * 100);
+		const userXpBoost = Math.floor((data.xpBoost + globalBoost) * 100);
 		const rank: number = await this.container.db.userLevel.getRank(data.userId);
 
 		if (text) {

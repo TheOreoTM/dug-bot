@@ -60,14 +60,15 @@ export class UserCommand extends Command {
 			};
 		});
 
-		console.log(usersData);
-
 		const filteredUserData = usersData.filter((user) => user !== null) as Promise<{
 			top: number;
 			tag: string;
 			score: number;
 			avatar: string;
 		}>[];
+
+		const formattedUserData = await Promise.all(filteredUserData);
+		console.log(formattedUserData);
 
 		const lbImage = await new Top()
 			.setColors({
@@ -79,7 +80,7 @@ export class UserCommand extends Command {
 				thirdRank: '#94610f'
 			})
 			.setBackground('color', `#2b2d31`)
-			.setUsersData(await Promise.all(filteredUserData))
+			.setUsersData(formattedUserData)
 			.setScoreMessage('Level: ')
 			.setOpacity(0.6)
 			.build();

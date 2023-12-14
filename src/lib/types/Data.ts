@@ -10,6 +10,11 @@ export type BadgeType = {
 	value: string;
 };
 
+/**
+ * Redis Key
+ */
+export type Key = string & { _: never };
+
 export type ItemType = Uppercase<keyof typeof ItemTypes>;
 
 export type NewItem = {

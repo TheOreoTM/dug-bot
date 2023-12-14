@@ -1,5 +1,5 @@
 import { DugEvents } from '#constants';
-import { Globals, SendLogEmbed } from '#lib/classes';
+import { SendLogEmbed } from '#lib/classes';
 import { GuildMessage } from '#lib/types/Discord';
 import { ApplyOptions } from '@sapphire/decorators';
 import { Listener } from '@sapphire/framework';
@@ -23,8 +23,10 @@ export class UserEvent extends Listener {
 				lastXpEarned: new Date()
 			}
 		});
+
+		const globalBoost = await this.container.core.getGlobalBoost();
 		const addXpData = await this.container.db.userLevel.addXp(member.id, {
-			xpBoost: data.xpBoost + Globals.GlobalBoost
+			xpBoost: data.xpBoost + globalBoost
 		});
 
 		SendLogEmbed.AddXp({ user: member.user, amount: addXpData.xpAdded, reason: 'Messaging' });
