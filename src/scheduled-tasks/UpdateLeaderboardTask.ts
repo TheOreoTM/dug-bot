@@ -14,7 +14,7 @@ export class UpdateLeaderboardTaskTask extends ScheduledTask {
 		const START_VALUE = 1;
 		const END_VALUE = 10;
 
-		for (let page = START_VALUE; page < END_VALUE; page++) {
+		for (let page = START_VALUE; page < END_VALUE + 1; page++) {
 			const data = this.container.leaderboard.cacheLevelLeaderboardPage(page);
 			if (!data) {
 				this.container.logger.error(`[UpdateLeaderboardTask] Failed to cache page ${page}`);
