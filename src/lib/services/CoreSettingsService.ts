@@ -8,7 +8,7 @@ export class CoreSettingsService {
 	public constructor() {}
 
 	public async getGlobalBoost(defaultValue = 0) {
-		const key = globalBoostCacheKey();
+		const key = globalBoostCacheKey;
 
 		const globalBoost = await this.cache.get(key);
 		if (isNullish(globalBoost)) return defaultValue;
@@ -16,7 +16,7 @@ export class CoreSettingsService {
 	}
 
 	public async setGlobalBoost(newValue: number) {
-		const key = globalBoostCacheKey();
+		const key = globalBoostCacheKey;
 
 		const returnValue = await this.cache.set(key, newValue);
 		return returnValue;
