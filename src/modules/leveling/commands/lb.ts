@@ -60,6 +60,8 @@ export class UserCommand extends Command {
 			};
 		});
 
+		console.log(usersData);
+
 		const filteredUserData = usersData.filter((user) => user !== null) as Promise<{
 			top: number;
 			tag: string;

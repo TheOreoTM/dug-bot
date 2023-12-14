@@ -4,6 +4,8 @@ import { EmbedBuilder, GuildMember, User } from 'discord.js';
 import { GuildMessage } from './Discord';
 import { ArrayString, NumberString } from '@skyra/env-utilities';
 import { ModuleName } from '#config';
+import { xprisma } from '#lib/util/prisma';
+import { RedisClient } from 'bullmq';
 
 declare module '@sapphire/framework' {
 	interface SapphireClient {
@@ -34,5 +36,12 @@ declare module '@skyra/env-utilities' {
 declare module '@sapphire/plugin-scheduled-tasks' {
 	interface ScheduledTasks {
 		ExpireBoostsTask: never;
+	}
+}
+
+declare module '@sapphire/pieces' {
+	interface Container {
+		db: typeof xprisma;
+		cache: RedisClient;
 	}
 }

@@ -58,8 +58,6 @@ export function toCompactNum(num: number | string): string {
 	return '0';
 }
 
-// Accepts both string and number values!
-
 export function genBar(value: number, maxValue: number, size: number) {
 	return progressBar(
 		ProgressBar.StartEmpty,
