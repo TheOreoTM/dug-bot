@@ -53,10 +53,10 @@ export class LeaderboardService {
 		const cacheData = await this.cache.get(key);
 		if (isNullish(cacheData)) {
 			// If above page 10 OR its not cached
-			await this.cacheLevelLeaderboardPage(page);
 			const data = await this.createLevelLeaderboardPage(page);
 			if (isNullish(data)) return null;
 
+			await this.cacheLevelLeaderboardPage(page);
 			return data;
 		}
 
