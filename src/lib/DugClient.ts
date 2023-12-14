@@ -7,6 +7,7 @@ import { Redis } from 'ioredis';
 import { envParseNumber, envParseString } from '@skyra/env-utilities';
 
 export class DugClient<Ready extends boolean = boolean> extends SapphireClient<Ready> {
+	public readonly loadedModules: ModuleName[] = config.enabled_modules;
 	public constructor() {
 		super(ClientConfig);
 
@@ -16,8 +17,6 @@ export class DugClient<Ready extends boolean = boolean> extends SapphireClient<R
 		if (isEnabled('faction')) enableModule(this, 'faction');
 		if (isEnabled('games')) enableModule(this, 'games');
 		if (isEnabled('welcomer')) enableModule(this, 'welcomer');
-
-		this.loadedModules = config.enabled_modules;
 	}
 
 	public override async login(token?: string): Promise<string> {
