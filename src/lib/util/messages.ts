@@ -1,8 +1,23 @@
-import { MessageCreateOptions } from 'discord.js';
+import { InteractionReplyOptions, InteractionResponse, MessageCreateOptions } from 'discord.js';
 import { Message } from 'discord.js';
 import { seconds } from '#utils/common';
 import { send } from '@sapphire/plugin-editable-commands';
 import { sleep } from '@sapphire/utilities';
+import { InteractionOrMessage } from '#lib/types';
+
+export function sendInteractionOrMessage(
+	interactionOrMessage: InteractionOrMessage,
+	messageOptions: string | MessageCreateOptions | InteractionReplyOptions
+): Promise<Message<boolean>> | Promise<InteractionResponse<true>> {
+	// Use TypeScript type checking to handle different cases
+	if (interactionOrMessage instanceof Message) {
+		// If it's a message, use send function with MessageCreateOptions
+		return send(interactionOrMessage, messageOptions as MessageCreateOptions | string);
+	} else {
+		// If it's an interaction, use reply function with InteractionReplyOptions
+		return interactionOrMessage.reply(messageOptions as InteractionReplyOptions | string);
+	}
+}
 
 async function deleteMessageImmediately(message: Message): Promise<Message> {
 	return (message.deletable ? await message.delete().catch(() => null) : message) ?? message;

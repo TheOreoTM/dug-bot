@@ -1,5 +1,5 @@
 import { ModuleName } from '#config';
-import { CoreSettingsService } from '#lib/services';
+import { CoreSettingsService, LeaderboardService } from '#lib/services';
 import { ApplyOptions } from '@sapphire/decorators';
 import { Listener, Store } from '@sapphire/framework';
 import { blue, gray, green, magenta, magentaBright, white, yellow } from 'colorette';
@@ -12,6 +12,7 @@ export class UserEvent extends Listener {
 
 	public override run() {
 		this.container.core = new CoreSettingsService();
+		this.container.leaderboard = new LeaderboardService();
 
 		this.printBanner();
 		this.printStoreDebugInformation();

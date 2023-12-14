@@ -203,11 +203,11 @@ export function formatItems(itemCounts: Record<string, InventoryItemTypeWithCoun
 }
 
 export function formatFailMessage(message: string) {
-	return `${DugEmojis.Fail} ${message}`;
+	return `${DugEmojis.Fail} ${message}` as const;
 }
 
 export function formatSuccessMessage(message: string) {
-	return `***${DugEmojis.Success} ${message}***`;
+	return `***${DugEmojis.Success} ${message}***` as const;
 }
 
 export function toFriendlyString(value: string) {
@@ -373,52 +373,3 @@ export function formatRoles(perm: PermissionsString[] | string, key = true) {
 		.replace(/T T S/g, 'TTS')
 		.replace(/V A D/g, 'VAD');
 }
-
-const order: Record<PermissionsString, number> = {
-	ViewChannel: 0,
-	SendMessages: 1,
-	EmbedLinks: 2,
-	ReadMessageHistory: 3,
-	Connect: 4,
-	Speak: 5,
-	UseEmbeddedActivities: 5,
-	Stream: 5,
-	AttachFiles: 6,
-	SendVoiceMessages: 6,
-	AddReactions: 7,
-	CreateInstantInvite: 8,
-	UseExternalEmojis: 9,
-	UseExternalStickers: 9,
-	UseExternalSounds: 9,
-	PrioritySpeaker: 10,
-	UseSoundboard: 10,
-	SendMessagesInThreads: 10,
-	SendTTSMessages: 10,
-	UseVAD: 11,
-	ChangeNickname: 12,
-	UseApplicationCommands: 13,
-	RequestToSpeak: 14,
-	CreatePublicThreads: 15,
-	CreatePrivateThreads: 16,
-	ViewGuildInsights: 19,
-	DeafenMembers: 20,
-	ManageThreads: 20,
-	MoveMembers: 20,
-	MuteMembers: 20,
-	ManageEmojisAndStickers: 21,
-	ManageGuildExpressions: 21,
-	ManageEvents: 21,
-	ManageMessages: 22,
-	ManageWebhooks: 23,
-	ManageNicknames: 24,
-	ManageRoles: 25,
-	ModerateMembers: 26,
-	ViewAuditLog: 27,
-	ViewCreatorMonetizationAnalytics: 27,
-	KickMembers: 28,
-	BanMembers: 29,
-	ManageChannels: 30,
-	ManageGuild: 31,
-	MentionEveryone: 32,
-	Administrator: 40
-};

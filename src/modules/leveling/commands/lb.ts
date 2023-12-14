@@ -1,7 +1,7 @@
 import { DugColors } from '#constants';
 import type { GuildMessage, InteractionOrMessage } from '#lib/types/Discord';
 import { formatFailMessage } from '#lib/util/formatter';
-import { getTag } from '#lib/util/utils';
+import { sendInteractionOrMessage } from '#lib/util/messages';
 import { ApplyOptions } from '@sapphire/decorators';
 import { Args, Command } from '@sapphire/framework';
 import { send } from '@sapphire/plugin-editable-commands';
@@ -44,31 +44,24 @@ export class UserCommand extends Command {
 			.setFooter({ text: `Page ${page}` });
 
 		interactionOrMessage instanceof Message ? send(interactionOrMessage, { embeds: [loadingEmbed] }) : interactionOrMessage.deferReply();
-		const leaderboard = await this.container.db.userLevel.getLeaderboard(page);
-		if (!leaderboard)
-			interactionOrMessage instanceof Message
-				? send(interactionOrMessage, formatFailMessage('That page doesnt exist'))
-				: interactionOrMessage.reply(formatFailMessage('That page doesnt exist'));
-		const usersData = leaderboard.map(async (user, index) => {
-			const discordUser = await this.container.client.users.fetch(user.userId);
-			if (!discordUser) return null;
-			return {
-				top: 10 * (page - 1) + (index + 1),
-				tag: getTag(discordUser),
-				score: user.currentLevel,
-				avatar: discordUser?.displayAvatarURL({ extension: 'png', forceStatic: true }) ?? 'https://cdn.discordapp.com/embed/avatars/0.png'
-			};
-		});
+		const leaderboard = await this.container.leaderboard.getLevelLeaderboardPage(page);
+		if (leaderboard === null) {
+			await sendInteractionOrMessage(interactionOrMessage, {
+				embeds: [new EmbedBuilder().setColor(DugColors.Fail).setDescription(formatFailMessage(`That page doesnt exist`))]
+			});
+			return;
+		}
 
-		const filteredUserData = usersData.filter((user) => user !== null) as Promise<{
-			top: number;
-			tag: string;
-			score: number;
-			avatar: string;
-		}>[];
-
-		const formattedUserData = await Promise.all(filteredUserData);
-		console.log(formattedUserData);
+		if (leaderboard.length === 0) {
+			await sendInteractionOrMessage(interactionOrMessage, {
+				embeds: [
+					new EmbedBuilder()
+						.setColor(DugColors.Fail)
+						.setDescription(formatFailMessage(`The leaderboard service is not ready yet, please try again later`))
+				]
+			});
+			return;
+		}
 
 		const lbImage = await new Top()
 			.setColors({
@@ -80,7 +73,7 @@ export class UserCommand extends Command {
 				thirdRank: '#94610f'
 			})
 			.setBackground('color', `#2b2d31`)
-			.setUsersData(formattedUserData)
+			.setUsersData(leaderboard)
 			.setScoreMessage('Level: ')
 			.setOpacity(0.6)
 			.build();

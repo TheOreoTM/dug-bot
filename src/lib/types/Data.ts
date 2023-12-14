@@ -2,6 +2,15 @@ import { Items } from '#lib/items';
 import { Badge, FactionStatus, Title, User } from '@prisma/client';
 import { ItemTypes } from '#lib/types';
 
+export type LeaderboardPositionData = {
+	top: number;
+	tag: string;
+	score: number;
+	avatar: string;
+};
+
+export type LeaderboardPageData = LeaderboardPositionData[];
+
 export type BadgeType = {
 	name: string;
 	price: number;

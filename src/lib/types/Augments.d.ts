@@ -5,7 +5,7 @@ import { GuildMessage } from './Discord';
 import { ArrayString, NumberString } from '@skyra/env-utilities';
 import { ModuleName } from '#config';
 import { xprisma } from '#lib/util/prisma';
-import type { CoreSettingsService } from '#lib/services';
+import type { CoreSettingsService, LeaderboardService } from '#lib/services';
 import { Redis } from 'ioredis';
 
 declare module '@sapphire/framework' {
@@ -46,5 +46,6 @@ declare module '@sapphire/pieces' {
 		cache: Redis;
 
 		core: CoreSettingsService;
+		leaderboard: LeaderboardService;
 	}
 }

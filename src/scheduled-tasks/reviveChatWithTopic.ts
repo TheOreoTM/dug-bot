@@ -6,13 +6,13 @@ import { ScheduledTask } from '@sapphire/plugin-scheduled-tasks';
 import { ActionRowBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder, TextChannel } from 'discord.js';
 
 @ApplyOptions<ScheduledTask.Options>({
-	name: 'reviveChatWithTopicTask',
+	name: 'ReviveChatWithTopicTask',
 	interval: minutes(2.5),
 	bullJobsOptions: {
 		removeOnComplete: true
 	}
 })
-export class reviveChatWithTopicTask extends ScheduledTask {
+export class ReviveChatWithTopicTask extends ScheduledTask {
 	public async run() {
 		this.container.logger.info('[reviveChatWithTopicTask] Started');
 		const channel = this.container.client.channels.cache.get(ChannelIDs.General) as TextChannel;
