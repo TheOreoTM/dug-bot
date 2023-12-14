@@ -1,5 +1,5 @@
 import { ModuleName } from '#config';
-import { CoreSettingsService } from '#lib/services/CoreSettingsService';
+import { CoreSettingsService } from '#lib/services';
 import { ApplyOptions } from '@sapphire/decorators';
 import { Listener, Store } from '@sapphire/framework';
 import { blue, gray, green, magenta, magentaBright, white, yellow } from 'colorette';

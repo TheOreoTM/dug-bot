@@ -11,6 +11,7 @@
 		"#lib/*": "./dist/lib/*.js",
 		"#lib/types": "./dist/lib/types/index.js",
 		"#lib/classes": "./dist/lib/classes/index.js",
+		"#lib/services": "./dist/lib/services/index.js",
 		"#utils/*": "./dist/lib/util/*.js"
 	},
 	"dependencies": {
