@@ -1,7 +1,10 @@
+import { DugColors } from '#constants';
 import { SelectAllOptions } from '#lib/types/Data';
+import { minutes } from '#lib/util/common';
 import { formatFailMessage, generateFactionEmbed } from '#lib/util/formatter';
 import { ApplyOptions } from '@sapphire/decorators';
 import { Command } from '@sapphire/framework';
+import { ActionRowBuilder, ButtonBuilder, ButtonStyle, ComponentType, EmbedBuilder, userMention } from 'discord.js';
 
 @ApplyOptions<Command.Options>({
 	description: 'View info about a faction'
@@ -42,9 +45,39 @@ export class UserCommand extends Command {
 		}
 
 		const embed = generateFactionEmbed(faction);
+		const showMembersButton = new ButtonBuilder().setCustomId('show-members').setLabel('Show Member List').setStyle(ButtonStyle.Secondary);
 
-		interaction.reply({
-			embeds: [embed]
+		const factionInfoMessage = await interaction.reply({
+			embeds: [embed],
+			components: [new ActionRowBuilder<ButtonBuilder>().addComponents(showMembersButton)]
+		});
+
+		const collector = factionInfoMessage.createMessageComponentCollector({ time: minutes(1), componentType: ComponentType.Button });
+
+		collector.on('collect', async (i) => {
+			if (i.user.id !== interaction.user.id) {
+				await i.reply({
+					content: `This button is not for you!`,
+					ephemeral: true
+				});
+				return;
+			}
+			// Code here
+			const members = faction.members;
+			const membersListArray = [];
+			for (const member of members) {
+				const formattedMember = `${userMention(member.id)} - ${member.factionPosition}`;
+				membersListArray.push(formattedMember);
+			}
+
+			const embed = new EmbedBuilder()
+				.setColor(DugColors.Default)
+				.setTitle(`${faction.name}'s Member list`)
+				.setDescription(membersListArray.join('\n'));
+
+			await factionInfoMessage.edit({
+				embeds: [embed]
+			});
 		});
 	}
 }
