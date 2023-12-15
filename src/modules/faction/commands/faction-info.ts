@@ -4,6 +4,7 @@ import { minutes } from '#lib/util/common';
 import { formatFailMessage, generateFactionEmbed } from '#lib/util/formatter';
 import { ApplyOptions } from '@sapphire/decorators';
 import { Command } from '@sapphire/framework';
+import { codeBlock } from '@sapphire/utilities';
 import { ActionRowBuilder, ButtonBuilder, ButtonStyle, ComponentType, EmbedBuilder, userMention } from 'discord.js';
 
 @ApplyOptions<Command.Options>({
@@ -63,10 +64,10 @@ export class UserCommand extends Command {
 				return;
 			}
 			// Code here
-			const members = faction.members;
+			const members = faction.members.reverse();
 			const membersListArray = [];
 			for (const member of members) {
-				const formattedMember = `${userMention(member.id)} - ${member.factionPosition}`;
+				const formattedMember = `${userMention(member.id)} - ${codeBlock('json\n' + JSON.stringify(member, null, 2))}`;
 				membersListArray.push(formattedMember);
 			}
 
