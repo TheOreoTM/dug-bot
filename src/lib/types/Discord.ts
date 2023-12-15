@@ -42,6 +42,6 @@ export interface GuildInteraction extends CommandInteraction {
 	client: DugClient<true>;
 }
 
-export type InteractionOrMessage = GuildMessage | Command.ChatInputCommandInteraction | Command.ContextMenuCommandInteraction;
+export type InteractionOrMessage = GuildMessage | Command.ChatInputCommandInteraction<'cached'> | Command.ContextMenuCommandInteraction<'cached'>;
 export type InteractionOrMessageCommandContext = MessageCommandContext | ChatInputCommandContext | ContextMenuCommandContext;
 export type InteractionOrMessageCommand = MessageCommand | ChatInputCommand | ContextMenuCommand;

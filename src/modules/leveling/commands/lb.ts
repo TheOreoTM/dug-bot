@@ -31,7 +31,7 @@ export class UserCommand extends Command {
 	}
 
 	// Chat Input (slash) command
-	public override async chatInputRun(interaction: Command.ChatInputCommandInteraction) {
+	public override async chatInputRun(interaction: Command.ChatInputCommandInteraction<'cached'>) {
 		const page = interaction.options.getNumber('page') ?? 1;
 		return this.sendLeaderboard(interaction, page);
 	}
@@ -78,11 +78,12 @@ export class UserCommand extends Command {
 			.setOpacity(0.6)
 			.build();
 
+		const userRank = await this.container.db.userLevel.getRank(interactionOrMessage.member.id);
 		const embed = new EmbedBuilder()
 			.setTitle(`${interactionOrMessage.guild?.name}'s leaderboard`)
 			.setImage(`attachment://leaderboard.png`)
 			.setColor(DugColors.Default)
-			.setFooter({ text: `Page ${page}` });
+			.setFooter({ text: `Page ${page} | Your rank: #${userRank}` });
 
 		interactionOrMessage instanceof Message
 			? await send(interactionOrMessage, { files: [{ name: 'leaderboard.png', attachment: lbImage }], embeds: [embed] })
