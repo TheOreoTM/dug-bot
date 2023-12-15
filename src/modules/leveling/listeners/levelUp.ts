@@ -1,5 +1,6 @@
 import { ChannelIDs, DugEvents } from '#constants';
 import { GuildMessage } from '#lib/types/Discord';
+import { formatLevelUpMessage } from '#lib/util/formatter';
 import { genRandomInt, getTag } from '#lib/util/utils';
 import { ApplyOptions } from '@sapphire/decorators';
 import { Listener } from '@sapphire/framework';
@@ -34,9 +35,11 @@ export class UserEvent extends Listener {
 		});
 
 		member.roles.add(availableLevelRoles.map((r) => r.roleId));
+		const defaultMessage = `GG ${member}, You just leveled up!`;
+		const levelUpMessage = (await this.container.db.userLevel.getLevelMessage(member.id)) ?? defaultMessage;
 		const channel = message.guild.channels.cache.get(ChannelIDs.General) as TextChannel;
 		channel.send({
-			content: `GG ${member}, You just leveled up!`,
+			content: `${formatLevelUpMessage(levelUpMessage, message, { oldlevel: oldLevel, newlevel: newLevel })}`,
 			files: [
 				{
 					attachment: levelUp,
