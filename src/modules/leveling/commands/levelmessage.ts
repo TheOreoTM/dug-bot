@@ -59,7 +59,7 @@ export class UserCommand extends Subcommand {
 	}
 
 	public async msgSet(message: GuildMessage, args: Args) {
-		await args.rest('url');
+		await args.rest('url').catch(() => null);
 		const newMessage = await args.rest('string').catch(() => null);
 
 		if (!newMessage) {
