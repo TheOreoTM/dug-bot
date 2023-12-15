@@ -207,6 +207,8 @@ export function formatLevelUpMessage(levelMessage: string, message: GuildMessage
 	levelMessage.replaceAll(`{@user}`, userMention(message.author.id));
 	levelMessage.replaceAll(`{newlevel}`, levelUpData.newlevel.toString());
 	levelMessage.replaceAll(`{oldlevel}`, levelUpData.oldlevel.toString());
+
+	return levelMessage;
 }
 
 export function formatFailMessage(message: string) {
