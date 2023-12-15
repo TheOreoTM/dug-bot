@@ -12,6 +12,8 @@ import { EmbedBuilder } from 'discord.js';
 	aliases: ['lm'],
 	subcommands: [
 		{ name: 'help', messageRun: 'msgHelp', default: true },
+		{ name: 'set', messageRun: 'msgSet' },
+		{ name: 'show', messageRun: 'msgShow' },
 		{ name: 'reset', messageRun: 'msgReset' }
 	]
 })
