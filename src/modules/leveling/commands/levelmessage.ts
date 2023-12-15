@@ -10,6 +10,7 @@ import { EmbedBuilder } from 'discord.js';
 @ApplyOptions<Subcommand.Options>({
 	description: 'Update your level message',
 	aliases: ['lm'],
+	flags: ['raw'],
 	subcommands: [
 		{ name: 'help', messageRun: 'msgHelp', default: true },
 		{ name: 'set', messageRun: 'msgSet' },
@@ -83,11 +84,22 @@ export class UserCommand extends Subcommand {
 		});
 	}
 
-	public async msgShow(message: GuildMessage) {
+	public async msgShow(message: GuildMessage, args: Args) {
 		const levelUpMessage = (await this.container.db.userLevel.getLevelMessage(message.author.id)) ?? this.DEFAULT_MESSAGE;
+
+		const showRaw = args.getFlags('raw');
+		if (showRaw) {
+			send(message, {
+				content: `### Level up message preview\n\`\`\`${levelUpMessage}\`\`\``,
+				allowedMentions: {
+					parse: [],
+					users: [message.author.id]
+				}
+			});
+		}
+
 		const currentLevel = await this.container.db.userLevel.getCurrentLevel(message.author.id);
 		const formattedMessage = formatLevelUpMessage(levelUpMessage, message, { oldlevel: currentLevel, newlevel: currentLevel + 1 });
-
 		send(message, {
 			content: `### Level up message preview\n${formattedMessage}`,
 			allowedMentions: {
