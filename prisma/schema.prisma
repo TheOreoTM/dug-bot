@@ -8,12 +8,6 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model GlobalVariable {
-  name  String @unique
-  value String
-  type  String @default("string") // string | number | json | etc...
-}
-
 model LevelRole {
   id     String @id @default(uuid())
   level  Int    @unique
@@ -36,6 +30,8 @@ model UserLevel {
   currentLevel Int      @default(0)
   xpBoost      Float    @default(0.0)
   lastXpEarned DateTime @default(now())
+
+  levelUpMessage String?
 
   bgImage           String?
   bgColor           String?

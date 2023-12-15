@@ -1,4 +1,5 @@
 import { DugColors, DugEmojis, ProgressBar } from '#constants';
+import { GuildMessage } from '#lib/types';
 import { BadgeIcons, FactionType, InventoryItemTypeWithCount, TitleTexts } from '#lib/types/Data';
 import { Badge, Title } from '@prisma/client';
 import { container } from '@sapphire/framework';
@@ -200,6 +201,12 @@ export function formatItems(itemCounts: Record<string, InventoryItemTypeWithCoun
 		formattedItems.push(count > 1 ? `${emoji}${name} x${count}\n${description}` : name);
 	}
 	return formattedItems;
+}
+
+export function formatLevelUpMessage(levelMessage: string, message: GuildMessage, levelUpData: { newlevel: number; oldlevel: number }) {
+	levelMessage.replaceAll(`{@user}`, userMention(message.author.id));
+	levelMessage.replaceAll(`{newlevel}`, levelUpData.newlevel.toString());
+	levelMessage.replaceAll(`{oldlevel}`, levelUpData.oldlevel.toString());
 }
 
 export function formatFailMessage(message: string) {

@@ -9,6 +9,46 @@ export const xprisma = new PrismaClient().$extends({
 	name: 'xprisma',
 	model: {
 		userLevel: {
+			async setLevelMessage(userId: string, message: string) {
+				await prisma.userLevel.upsert({
+					where: {
+						userId
+					},
+					create: {
+						userId,
+						levelUpMessage: message
+					},
+					update: {
+						levelUpMessage: message
+					}
+				});
+			},
+
+			async resetLevelMessage(userId: string) {
+				await prisma.userLevel.upsert({
+					where: {
+						userId
+					},
+					create: {
+						userId
+					},
+					update: {
+						levelUpMessage: null
+					}
+				});
+			},
+
+			async getLevelMessage(userId: string) {
+				const data = await prisma.userLevel.findUnique({
+					where: {
+						userId
+					}
+				});
+
+				if (!data) return null;
+				return data.levelUpMessage;
+			},
+
 			async getCustoms(userId: string) {
 				const data = await prisma.userLevel.findUnique({
 					where: {

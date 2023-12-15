@@ -14,7 +14,7 @@ import { EmbedBuilder } from 'discord.js';
 	subcommands: [
 		{ name: 'help', chatInputRun: 'slashHelp', messageRun: 'msgHelp', default: true },
 		{ name: 'reset', chatInputRun: 'slashReset', messageRun: 'msgReset' },
-		// { name: 'bgImage', chatInputRun: 'slashBgImage', messageRun: 'msgBgImage' }, // DISABLED!
+		{ name: 'bgImage', chatInputRun: 'slashBgImage', messageRun: 'msgBgImage' },
 		{ name: 'bgColor', chatInputRun: 'slashBgColor', messageRun: 'msgBgColor' },
 		{ name: 'borderColor', chatInputRun: 'slashBorderColor', messageRun: 'msgBorderColor' },
 		{ name: 'hideBorder', chatInputRun: 'slashNoBorder', messageRun: 'msgNoBorder' },
@@ -137,7 +137,7 @@ export class UserCommand extends Subcommand {
 		send(message, { embeds: [embed] });
 	}
 
-	public async DISABLEDmsgBgImageDISABLED(message: GuildMessage, args: Args) {
+	public async msgBgImage(message: GuildMessage, args: Args) {
 		const member = message.member;
 		const bgImage = await args.pick('imageLink');
 		await this.container.db.userLevel.updateCustoms(member.id, {
