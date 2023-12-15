@@ -204,9 +204,9 @@ export function formatItems(itemCounts: Record<string, InventoryItemTypeWithCoun
 }
 
 export function formatLevelUpMessage(levelMessage: string, message: GuildMessage, levelUpData: { newlevel: number; oldlevel: number }) {
-	levelMessage.replaceAll(`{@user}`, userMention(message.author.id));
-	levelMessage.replaceAll(`{newlevel}`, levelUpData.newlevel.toString());
-	levelMessage.replaceAll(`{oldlevel}`, levelUpData.oldlevel.toString());
+	levelMessage = levelMessage.replace(/{@user}/g, userMention(message.author.id));
+	levelMessage = levelMessage.replace(/{newlevel}/g, levelUpData.newlevel.toString());
+	levelMessage = levelMessage.replace(/{oldlevel}/g, levelUpData.oldlevel.toString());
 
 	return levelMessage;
 }
