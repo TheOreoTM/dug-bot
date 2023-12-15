@@ -57,10 +57,16 @@ export class UserCommand extends Subcommand {
 	}
 
 	public async msgSet(message: GuildMessage, args: Args) {
+		await args.rest('url');
 		const newMessage = await args.rest('string').catch(() => null);
 
 		if (!newMessage) {
 			await send(message, formatFailMessage('You have to give a new level up message. If youre confused use `levelmessage help`'));
+			return;
+		}
+
+		if (newMessage.length > 220) {
+			await send(message, formatFailMessage('Level up message should be less than 220 characters long'));
 			return;
 		}
 
