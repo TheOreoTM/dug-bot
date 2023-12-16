@@ -64,7 +64,9 @@ export class UserCommand extends Command {
 			}
 			// Code here
 			const members = faction.members.reverse();
+			members.shift(); // owner
 			const membersListArray = [];
+			membersListArray.push(`${userMention(faction.ownerId)} - 'Owner`);
 			for (const member of members) {
 				const formattedMember = `${userMention(member.id)} - ${member.factionPosition ?? 'Member'}`;
 				membersListArray.push(formattedMember);
