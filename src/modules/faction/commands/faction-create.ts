@@ -1,14 +1,14 @@
+import { DugCommand } from '#lib/structures';
 import { SelectAllOptions } from '#lib/types/Data';
 import { formatSuccessMessage, generateFactionEmbed } from '#lib/util/formatter';
 import { FactionStatus } from '@prisma/client';
 import { ApplyOptions } from '@sapphire/decorators';
-import { Command } from '@sapphire/framework';
 
-@ApplyOptions<Command.Options>({
+@ApplyOptions<DugCommand.Options>({
 	description: 'Create a factions'
 })
-export class UserCommand extends Command {
-	public override registerApplicationCommands(registry: Command.Registry) {
+export class UserCommand extends DugCommand {
+	public override registerApplicationCommands(registry: DugCommand.Registry) {
 		registry.registerChatInputCommand((builder) =>
 			builder //
 				.setName(this.name)
@@ -49,7 +49,7 @@ export class UserCommand extends Command {
 		);
 	}
 
-	public override async chatInputRun(interaction: Command.ChatInputCommandInteraction) {
+	public override async chatInputRun(interaction: DugCommand.ChatInputCommandInteraction) {
 		const { options } = interaction;
 		const owner = (await this.container.db.user.getUser(interaction.user.id))!;
 		const name = options.getString('name', true);
@@ -72,7 +72,16 @@ export class UserCommand extends Command {
 					}
 				}
 			},
-			select: SelectAllOptions 
+			select: SelectAllOptions
+		});
+
+		await this.container.db.user.update({
+			where: {
+				id: interaction.member.id
+			},
+			data: {
+				factionPosition: 'OWNER'
+			}
 		});
 
 		const embed = generateFactionEmbed(faction);

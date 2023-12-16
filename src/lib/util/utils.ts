@@ -10,7 +10,12 @@ import {
 import { isNullishOrEmpty, pickRandom } from '@sapphire/utilities';
 import { cyan } from 'colorette';
 import type { APIUser, Guild, User } from 'discord.js';
+import { GuildMember } from 'discord.js';
 import fuzzysort from 'fuzzysort';
+
+export function isOwner(member: GuildMember) {
+	return member.id === '600707283097485322';
+}
 
 export function genRandomXp(xpBoost = 0) {
 	const baseXp = genRandomInt(20, 40);

@@ -6,3 +6,10 @@ export const enum ItemTypes {
 	Title = 'TITLE',
 	Crate = 'CRATE'
 }
+
+export const enum PermissionLevels {
+	Everyone = 0,
+	EventManager = 5,
+	Administrator = 6,
+	BotOwner = 10
+}
