@@ -54,7 +54,7 @@ export class UserEvent extends Listener {
 		if (shouldSendWarning) {
 			channel.send({
 				content: `\n\n ${quote(
-					`Did your levels not get transferred? [\`click here\`](https://discord.com/channels/519734247519420438/910957338482057256/1147770237945651210 'create a ticket') or the button below to create a ticket and click the \`Other\` option and request your levels back`
+					`Did your levels not get transferred? [\`click here\`](https://discord.com/channels/519734247519420438/910957338482057256/1147770237945651210 'create a ticket') or the button below to create a ticket and click the \`Level Request\` option at the top and send a request`
 				)}`,
 				components: [new ActionRowBuilder<ButtonBuilder>().addComponents(refButton)]
 			});
