@@ -19,8 +19,14 @@ export class UserRoute extends Route {
 		const userId = requestBody.user_id;
 		const staffId = requestBody.staff_id;
 
-		if (!amount || !userId || !staffId) {
-			return response.status(HttpCodes.BadRequest).json({ message: 'Invalid Body' });
+		if (!amount) {
+			return response.status(HttpCodes.BadRequest).json({ message: 'Invalid amount' });
+		}
+		if (!staffId) {
+			return response.status(HttpCodes.BadRequest).json({ message: 'Invalid staff_id' });
+		}
+		if (!userId) {
+			return response.status(HttpCodes.BadRequest).json({ message: 'Invalid user_id' });
 		}
 
 		const levelData = getLevelInfo(amount);
