@@ -14,19 +14,25 @@ export class UserRoute extends Route {
 
 	@authenticated()
 	public async [methods.POST](request: ApiRequest, response: ApiResponse) {
-		const requestBody = request.body as { amount: number | undefined; user_id: string | undefined; staff_id: string | undefined };
-		const amount = requestBody.amount;
+		const requestBody = request.body as { amount: string | undefined; user_id: string | undefined; staff_id: string | undefined };
+		const amountRes = requestBody.amount;
 		const userId = requestBody.user_id;
 		const staffId = requestBody.staff_id;
 
-		if (!amount) {
+		if (!amountRes) {
 			return response.status(HttpCodes.BadRequest).json({ message: 'Invalid amount' });
 		}
+
+		const amount = parseInt(amountRes);
+		if (isNaN(amount)) {
+			return response.status(HttpCodes.BadRequest).json({ message: 'Invalid amount' });
+		}
+
 		if (!staffId) {
 			return response.status(HttpCodes.BadRequest).json({ message: 'Invalid staff_id' });
 		}
 		if (!userId) {
-			return response.status(HttpCodes.BadRequest).json({ message: 'Invalid user_id' });
+			return response.status(HttpCodes.BadRequest).json({ message: 'Invalid Body' });
 		}
 
 		const levelData = getLevelInfo(amount);
