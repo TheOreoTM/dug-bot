@@ -33,7 +33,7 @@ export class UserCommand extends Subcommand {
 			.addFields(
 				{ name: 'card reset', value: 'Reset your card to default' },
 				{ name: 'card bgColor', value: 'Change your cards background color' },
-				{ name: 'card bgImage', value: 'Change your cards background image. DO NOT MISUSE THIS AND RUIN IT FOR EVERYONE. (expoerimental)' },
+				{ name: 'card bgImage', value: 'Change your cards background image. DO NOT MISUSE THIS AND RUIN IT FOR EVERYONE. (experimental)' },
 				{ name: 'card borderColor', value: 'Change your cards border color' },
 				{ name: 'card hideBorder', value: 'Hide the outer border of your card' },
 				{ name: 'card showBorder', value: 'Show the outer border of your card' },
