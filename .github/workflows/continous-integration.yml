@@ -33,7 +33,7 @@ jobs:
             pm2 delete dug-bot
             cd /root/dug-bot
             git pull
-            npx prisma db push
             yarn install
             yarn build
+            npx prisma db push
             pm2 start dist/index.js --name dug-bot
