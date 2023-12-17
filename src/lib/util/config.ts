@@ -38,7 +38,7 @@ export const config: Config = {
 	},
 	api: {
 		origin: '*',
-		prefix: '',
+		prefix: '/',
 		listenOptions: {
 			port: 4040
 		}

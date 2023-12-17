@@ -2,9 +2,9 @@ import { SendLogEmbed } from '#lib/classes';
 import { authenticated } from '#lib/util/api';
 import { getLevelInfo } from '#lib/util/utils';
 import { ApplyOptions } from '@sapphire/decorators';
-import { methods, Route, type ApiRequest, type ApiResponse, HttpCodes } from '@sapphire/plugin-api';
+import { methods, Route, type ApiRequest, type ApiResponse, HttpCodes, type RouteOptions } from '@sapphire/plugin-api';
 
-@ApplyOptions<Route.Options>({
+@ApplyOptions<RouteOptions>({
 	route: 'levels/set'
 })
 export class UserRoute extends Route {
