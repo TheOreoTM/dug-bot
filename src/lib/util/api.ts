@@ -4,6 +4,6 @@ import { envParseString } from '@skyra/env-utilities';
 
 export const authenticated = () =>
 	createFunctionPrecondition(
-		(request: ApiRequest) => Boolean(request.headers.authorization === `Bearer ${envParseString('API_TOKEN')}`),
+		(request: ApiRequest) => Boolean(request.headers.authorization === `Bearer ${envParseString('API_KEY')}`),
 		(_request: ApiRequest, response: ApiResponse) => response.error(HttpCodes.Unauthorized)
 	);
