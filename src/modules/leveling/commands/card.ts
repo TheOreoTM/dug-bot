@@ -10,6 +10,7 @@ import { EmbedBuilder } from 'discord.js';
 @ApplyOptions<Subcommand.Options>({
 	name: 'card',
 	description: 'Modify your rank card',
+	flags: ['remove'],
 
 	subcommands: [
 		{ name: 'help', chatInputRun: 'slashHelp', messageRun: 'msgHelp', default: true },
@@ -33,7 +34,10 @@ export class UserCommand extends Subcommand {
 			.addFields(
 				{ name: 'card reset', value: 'Reset your card to default' },
 				{ name: 'card bgColor', value: 'Change your cards background color' },
-				{ name: 'card bgImage', value: 'Change your cards background image. DO NOT MISUSE THIS AND RUIN IT FOR EVERYONE. (experimental)' },
+				{
+					name: 'card bgImage',
+					value: 'Change your cards background image. Use `--remove` to remove the bgImage. DO NOT MISUSE THIS AND RUIN IT FOR EVERYONE. (experimental)'
+				},
 				// { name: 'card borderColor', value: 'Change your cards border color' },
 				{ name: 'card hideBorder', value: 'Hide the outer border of your card' },
 				{ name: 'card showBorder', value: 'Show the outer border of your card' },
@@ -140,6 +144,19 @@ export class UserCommand extends Subcommand {
 
 	public async msgBgImage(message: GuildMessage, args: Args) {
 		const member = message.member;
+		const remove = args.getFlags('remove');
+
+		if (remove) {
+			this.container.db.userLevel.updateCustoms(member.id, {
+				bgImage: undefined
+			});
+
+			const embed = new EmbedBuilder().setDescription(formatSuccessMessage('Successfully removed your `bgImage`'));
+
+			send(message, { embeds: [embed] });
+			return;
+		}
+
 		const bgImage = await args.pick('imageLink');
 		await this.container.db.userLevel.updateCustoms(member.id, {
 			bgImage
