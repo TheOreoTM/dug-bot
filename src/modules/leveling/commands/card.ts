@@ -31,15 +31,15 @@ export class UserCommand extends Subcommand {
 			.setDescription('Below are the list of subcommands and what they do')
 			.setColor(DugColors.Default)
 			.addFields(
-				{ name: 'reset', value: 'Reset your card to default' },
-				{ name: 'bgColor', value: 'Change your cards background color' },
-				{ name: 'bgImage', value: 'Change your cards background image. DO NOT MISUSE THIS AND RUIN IT FOR EVERYONE' },
-				{ name: 'borderColor', value: 'Change your cards border color' },
-				{ name: 'hideBorder', value: 'Hide the outer border of your card' },
-				{ name: 'showBorder', value: 'Show the outer border of your card' },
-				{ name: 'avatarBorderColor', value: 'Change the border around your avatar' },
-				{ name: 'barColor', value: 'Change the color of the progress bar of your card' },
-				{ name: 'fontColor', value: 'Change the username color of your card' }
+				{ name: 'card reset', value: 'Reset your card to default' },
+				{ name: 'card bgColor', value: 'Change your cards background color' },
+				{ name: 'card bgImage', value: 'Change your cards background image. DO NOT MISUSE THIS AND RUIN IT FOR EVERYONE. (expoerimental)' },
+				{ name: 'card borderColor', value: 'Change your cards border color' },
+				{ name: 'card hideBorder', value: 'Hide the outer border of your card' },
+				{ name: 'card showBorder', value: 'Show the outer border of your card' },
+				{ name: 'card avatarBorderColor', value: 'Change the border around your avatar' },
+				{ name: 'card barColor', value: 'Change the color of the progress bar of your card' },
+				{ name: 'card fontColor', value: 'Change the username color of your card' }
 			);
 
 		send(message, { embeds: [helpEmbed] });
