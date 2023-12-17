@@ -25,7 +25,7 @@ export class UserRoute extends Route {
 
 		const amount = parseInt(amountRes);
 		if (isNaN(amount)) {
-			return response.status(HttpCodes.BadRequest).json({ message: 'Invalid amount' });
+			return response.status(HttpCodes.BadRequest).json({ message: 'Invalid amount, is not a number' });
 		}
 
 		if (!staffId) {
