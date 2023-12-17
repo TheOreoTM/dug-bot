@@ -17,6 +17,7 @@ export class UserPrecondition extends Precondition {
 	}
 
 	private async isBlacklisted(id: string | null) {
+		console.log('id', id);
 		if (!id) return this.ok();
 
 		const blacklisted = await this.container.blacklist.isBlacklisted(id);
