@@ -19,6 +19,8 @@ export class UserRoute extends Route {
 		const userId = requestBody.user_id;
 		const staffId = requestBody.staff_id;
 
+		console.log(requestBody);
+
 		if (!amountRes) {
 			return response.status(HttpCodes.BadRequest).json({ message: 'Invalid amount' });
 		}
