@@ -8,6 +8,10 @@ import { methods, Route, type ApiRequest, type ApiResponse, HttpCodes } from '@s
 	route: 'levels/set'
 })
 export class UserRoute extends Route {
+	public async [methods.GET](_request: ApiRequest, response: ApiResponse) {
+		response.json({ message: 'yo' });
+	}
+
 	@authenticated()
 	public async [methods.POST](request: ApiRequest, response: ApiResponse) {
 		const requestBody = request.body as { amount: number | undefined; user_id: string | undefined; staff_id: string | undefined };
