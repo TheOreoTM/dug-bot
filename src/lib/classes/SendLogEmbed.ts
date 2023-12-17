@@ -73,7 +73,7 @@ export class SendLogEmbed {
 		container.client.emit(DugEvents.LogSend, embed);
 	}
 
-	static LevelSet({ user, level, staff, reason }: { user: User; level: number; reason: string; staff?: GuildMember }) {
+	static LevelSet({ user, level, staff, reason }: { user: User; level: number; reason: string; staff?: GuildMember | User }) {
 		const responsibleUserText = `${staff ? staff : `<@${BotID}>`} - \` ${staff ? staff.id : BotID} \``;
 		const embed = template.setDescription(`${user} level **set** to \`${level}\` at ${nowTimestamp.getLongDateTime()}`).setFields(
 			{

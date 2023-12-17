@@ -23,6 +23,7 @@ declare module '@sapphire/framework' {
 declare module '@skyra/env-utilities' {
 	interface Env {
 		DISCORD_TOKEN: string;
+		API_TOKEN: string;
 
 		BOT_OWNER: string;
 		BOT_PRIVILEGED_USERS?: ArrayString;

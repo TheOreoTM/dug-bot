@@ -5,6 +5,7 @@ import { ApplicationCommandRegistries, RegisterBehavior } from '@sapphire/framew
 import '@sapphire/plugin-logger/register';
 import '@sapphire/plugin-subcommands/register';
 import '@sapphire/plugin-scheduled-tasks/register';
+import '@sapphire/plugin-api/register';
 import { setup } from '@skyra/env-utilities';
 import * as colorette from 'colorette';
 
