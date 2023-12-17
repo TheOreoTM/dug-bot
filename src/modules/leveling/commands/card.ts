@@ -34,7 +34,7 @@ export class UserCommand extends Subcommand {
 				{ name: 'card reset', value: 'Reset your card to default' },
 				{ name: 'card bgColor', value: 'Change your cards background color' },
 				{ name: 'card bgImage', value: 'Change your cards background image. DO NOT MISUSE THIS AND RUIN IT FOR EVERYONE. (experimental)' },
-				{ name: 'card borderColor', value: 'Change your cards border color' },
+				// { name: 'card borderColor', value: 'Change your cards border color' },
 				{ name: 'card hideBorder', value: 'Hide the outer border of your card' },
 				{ name: 'card showBorder', value: 'Show the outer border of your card' },
 				{ name: 'card avatarBorderColor', value: 'Change the border around your avatar' },
@@ -104,17 +104,17 @@ export class UserCommand extends Subcommand {
 		send(message, { embeds: [embed] });
 	}
 
-	public async msgBorderColor(message: GuildMessage, args: Args) {
-		const member = message.member;
-		const borderColor = await args.pick('hexCode');
-		await this.container.db.userLevel.updateCustoms(member.id, {
-			borderColor
-		});
+	// public async msgBorderColor(message: GuildMessage, args: Args) {
+	// 	const member = message.member;
+	// 	const borderColor = await args.pick('hexCode');
+	// 	await this.container.db.userLevel.updateCustoms(member.id, {
+	// 		borderColor
+	// 	});
 
-		const embed = new EmbedBuilder().setDescription(formatSuccessMessage('Successfully set your `borderColor`')).setColor(borderColor);
+	// 	const embed = new EmbedBuilder().setDescription(formatSuccessMessage('Successfully set your `borderColor`')).setColor(borderColor);
 
-		send(message, { embeds: [embed] });
-	}
+	// 	send(message, { embeds: [embed] });
+	// }
 
 	public async msgNoBorder(message: GuildMessage) {
 		const member = message.member;
