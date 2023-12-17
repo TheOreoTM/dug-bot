@@ -15,9 +15,9 @@ export class UserRoute extends Route {
 	@authenticated()
 	public async [methods.POST](request: ApiRequest, response: ApiResponse) {
 		const requestBody = request.body as { amount: string | undefined; user_id: string | undefined; staff_id: string | undefined };
-		const amountRes = requestBody.amount;
-		const userId = requestBody.user_id;
-		const staffId = requestBody.staff_id;
+		const amountRes = requestBody['amount'];
+		const userId = requestBody['user_id'];
+		const staffId = requestBody['staff_id'];
 
 		console.log(requestBody);
 
