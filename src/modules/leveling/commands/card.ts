@@ -39,8 +39,8 @@ export class UserCommand extends Subcommand {
 					value: 'Change your cards background image. Use `--remove` to remove the bgImage. DO NOT MISUSE THIS AND RUIN IT FOR EVERYONE. (experimental)'
 				},
 				// { name: 'card borderColor', value: 'Change your cards border color' },
-				{ name: 'card hideBorder', value: 'Hide the outer border of your card' },
-				{ name: 'card showBorder', value: 'Show the outer border of your card' },
+				// { name: 'card hideBorder', value: 'Hide the outer border of your card' },
+				// { name: 'card showBorder', value: 'Show the outer border of your card' },
 				{ name: 'card avatarBorderColor', value: 'Change the border around your avatar' },
 				{ name: 'card barColor', value: 'Change the color of the progress bar of your card' },
 				{ name: 'card fontColor', value: 'Change the username color of your card' }
