@@ -75,7 +75,6 @@ export class UserCommand extends DugCommand {
 	}
 
 	public async chatInputRun(interaction: DugCommand.ChatInputCommandInteraction) {
-		const subcommandGroup = interaction.options.getSubcommandGroup(true) as 'remove' | 'add';
 		const subcommand = interaction.options.getSubcommand(true) as 'token' | 'member' | 'delete';
 		const factionId = Number(interaction.options.getString('faction', true));
 		if (isNaN(factionId)) {
@@ -105,8 +104,12 @@ export class UserCommand extends DugCommand {
 			});
 
 			message = formatSuccessMessage(`Deleted faction ${faction.name}`);
+
+			interaction.reply(message);
+			return;
 		}
 
+		const subcommandGroup = interaction.options.getSubcommandGroup(true) as 'remove' | 'add';
 		if (subcommand === 'token') {
 			const amount = interaction.options.getNumber('amount', true);
 			if (subcommandGroup === 'add') {
