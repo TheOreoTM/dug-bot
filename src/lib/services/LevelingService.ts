@@ -116,7 +116,9 @@ export class LevelingService {
 				}
 			});
 		}
-		return this.parseCardData(cachedData);
+		const parsedData = this.parseCardData(cachedData);
+		console.log(parsedData);
+		return parsedData;
 	}
 
 	private parseCardData(data: Record<keyof UserLevel, string>): NonNullable<UserLevel> {
