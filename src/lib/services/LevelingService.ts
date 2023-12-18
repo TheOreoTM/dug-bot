@@ -108,7 +108,6 @@ export class LevelingService {
 	public async getCardData(userId: string): Promise<NonNullable<UserLevel> | null> {
 		const key = this.cacheKey(userId);
 		const cachedData = await this.cache.hgetall(key);
-		console.log(cachedData);
 		if (isNullish(cachedData)) {
 			return await this.db.userLevel.findUnique({
 				where: {
@@ -117,7 +116,6 @@ export class LevelingService {
 			});
 		}
 		const parsedData = this.parseCardData(cachedData);
-		console.log(parsedData);
 		return parsedData;
 	}
 

@@ -72,11 +72,12 @@ export class UserCommand extends Command {
 	}
 
 	private async genRankCard(member: GuildMember, text?: boolean): Promise<MessageCreateOptions | (InteractionReplyOptions & { fetchReply: true })> {
-		const data = await this.container.db.userLevel.findUnique({
-			where: {
-				userId: member.id
-			}
-		});
+		const data = await this.container.leveling.getCardData(member.id);
+		// const data = await this.container.db.userLevel.findUnique({
+		// 	where: {
+		// 		userId: member.id
+		// 	}
+		// });
 
 		const globalBoost = await this.container.core.getGlobalBoost(0);
 
@@ -86,9 +87,6 @@ export class UserCommand extends Command {
 				.setColor(DugColors.Fail);
 			return { embeds: [embed] };
 		}
-
-		await this.container.leveling.setCardData(data);
-		await this.container.leveling.getCardData(member.id);
 
 		const userXpBoost = Math.floor((data.xpBoost + globalBoost) * 100);
 		const rank: number = await this.container.db.userLevel.getRank(data.userId);

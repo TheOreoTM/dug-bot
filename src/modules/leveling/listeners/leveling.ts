@@ -35,5 +35,7 @@ export class UserEvent extends Listener {
 			this.container.client.emit(DugEvents.MemberLevelUp, message, addXpData.oldLevel, addXpData.newLevel);
 			SendLogEmbed.LevelUp({ user: member.user, level: addXpData.newLevel, reason: 'Messaging' });
 		}
+
+		await this.container.leveling.setCardData(data);
 	}
 }
