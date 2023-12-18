@@ -105,7 +105,7 @@ export class LevelingService {
 		return await this.cache.hset(key, data);
 	}
 
-	public async getCardData(userId: string) {
+	public async getCardData(userId: string): Promise<NonNullable<UserLevel> | null> {
 		const key = this.cacheKey(userId);
 		const cachedData = await this.cache.hgetall(key);
 		console.log(cachedData);
@@ -119,7 +119,7 @@ export class LevelingService {
 		return this.parseCardData(cachedData);
 	}
 
-	private parseCardData(data: Record<keyof UserLevel, string>): UserLevel {
+	private parseCardData(data: Record<keyof UserLevel, string>): NonNullable<UserLevel> {
 		return {
 			currentLevel: Number(data.currentLevel),
 			lastXpEarned: new Date(data.lastXpEarned),
