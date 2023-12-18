@@ -34,6 +34,6 @@ jobs:
             cd /root/dug-bot
             git pull
             yarn install
-            yarn build
             npx prisma db push
+            yarn build
             pm2 start dist/index.js --name dug-bot
