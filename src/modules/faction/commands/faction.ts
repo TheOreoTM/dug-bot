@@ -5,7 +5,8 @@ import { ApplyOptions } from '@sapphire/decorators';
 
 @ApplyOptions<DugCommand.Options>({
 	description: 'Manage factions',
-	preconditions: ['EventManager']
+	preconditions: ['EventManager'],
+	requiredUserPermissions: ['Administrator']
 })
 export class UserCommand extends DugCommand {
 	public registerApplicationCommands(registry: DugCommand.Registry) {
@@ -64,12 +65,18 @@ export class UserCommand extends DugCommand {
 								.addUserOption((option) => option.setName('member').setDescription('The member you want to remove').setRequired(true))
 						)
 				)
+				.addSubcommand((builder) =>
+					builder
+						.setName('delete')
+						.setDescription('Delete a faction')
+						.addStringOption((option) => option.setName('faction').setDescription('The faction').setAutocomplete(true).setRequired(true))
+				)
 		);
 	}
 
 	public async chatInputRun(interaction: DugCommand.ChatInputCommandInteraction) {
 		const subcommandGroup = interaction.options.getSubcommandGroup(true) as 'remove' | 'add';
-		const subcommand = interaction.options.getSubcommand(true) as 'token' | 'member';
+		const subcommand = interaction.options.getSubcommand(true) as 'token' | 'member' | 'delete';
 		const factionId = Number(interaction.options.getString('faction', true));
 		if (isNaN(factionId)) {
 			interaction.reply({ content: formatFailMessage('That faction doesnt exist'), ephemeral: true });
@@ -89,6 +96,16 @@ export class UserCommand extends DugCommand {
 		}
 
 		let message: string = 'Something happened';
+
+		if (subcommand === 'delete') {
+			await this.container.db.faction.delete({
+				where: {
+					id: faction.id
+				}
+			});
+
+			message = formatSuccessMessage(`Deleted faction ${faction.name}`);
+		}
 
 		if (subcommand === 'token') {
 			const amount = interaction.options.getNumber('amount', true);
