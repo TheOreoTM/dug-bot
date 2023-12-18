@@ -104,7 +104,6 @@ export const SelectAllOptions = {
 	badges: true,
 	titles: true,
 	members: true,
-	joinType: true,
 	pendingMemberIds: true,
 	tokens: true
 };
