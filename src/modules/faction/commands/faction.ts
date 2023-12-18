@@ -91,7 +91,7 @@ export class UserCommand extends DugCommand {
 		let message: string = 'Something happened';
 
 		if (subcommand === 'token') {
-			const amount = interaction.options.getNumber('token', true);
+			const amount = interaction.options.getNumber('amount', true);
 			if (subcommandGroup === 'add') {
 				await this.container.db.faction.update({
 					where: {
