@@ -75,6 +75,7 @@ model Faction {
   ownerId          String
   pendingMemberIds String[]      @default([])
   members          User[]
+  tokens           Int           @default(0)
 }
 
 model Item {

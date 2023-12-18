@@ -6,7 +6,8 @@ import { ApplyOptions } from '@sapphire/decorators';
 import { Command } from '@sapphire/framework';
 
 @ApplyOptions<Command.Options>({
-	description: 'Join a faction'
+	description: 'Join a faction',
+	preconditions: ['EventManager']
 })
 export class UserCommand extends Command {
 	public override registerApplicationCommands(registry: Command.Registry) {

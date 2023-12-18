@@ -8,7 +8,7 @@ import type { Message } from 'discord.js';
 })
 export class UserCommand extends Command {
 	public override async messageRun(message: Message) {
-		// await this.container.db.faction.deleteMany();
+		await this.container.db.faction.deleteMany();
 		// await this.container.db.user.deleteMany();
 		// await this.container.db.item.deleteMany();
 		// await resetAutoIncrement();

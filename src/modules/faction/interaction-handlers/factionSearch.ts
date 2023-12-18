@@ -12,7 +12,7 @@ export class AutocompleteHandler extends InteractionHandler {
 	}
 
 	public override async parse(interaction: AutocompleteInteraction) {
-		if (!['faction-join', 'faction-info'].includes(interaction.commandName)) return this.none();
+		if (!['faction-join', 'faction-info', 'faction'].includes(interaction.commandName)) return this.none();
 		// Get the focussed (current) option
 		const focusedOption = interaction.options.getFocused(true);
 

@@ -17,7 +17,7 @@ export class UserPrecondition extends Precondition {
 	}
 
 	private async check(member: GuildMember) {
-		return member.roles.cache.has(EventConfig.EventManager) ? this.ok() : this.error();
+		return member.roles.cache.has(EventConfig.EventManager) ? this.ok() : this.error({ context: { silent: true } });
 	}
 }
 

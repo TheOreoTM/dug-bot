@@ -5,7 +5,8 @@ import { FactionStatus } from '@prisma/client';
 import { ApplyOptions } from '@sapphire/decorators';
 
 @ApplyOptions<DugCommand.Options>({
-	description: 'Create a factions'
+	description: 'Create a factions',
+	preconditions: ['EventManager']
 })
 export class UserCommand extends DugCommand {
 	public override registerApplicationCommands(registry: DugCommand.Registry) {
@@ -29,17 +30,17 @@ export class UserCommand extends DugCommand {
 						.setDescription('The description of the faction')
 						.setRequired(true)
 				)
-				.addStringOption((option) =>
-					option //
-						.setName('type')
-						.setDescription('Faction join type')
-						.setRequired(true)
-						.addChoices(
-							{ name: 'Open', value: FactionStatus.OPEN },
-							{ name: 'Invite Only', value: FactionStatus.INVITE_ONLY },
-							{ name: 'Closed', value: FactionStatus.CLOSED }
-						)
-				)
+				// .addStringOption((option) =>
+				// 	option //
+				// 		.setName('type')
+				// 		.setDescription('Faction join type')
+				// 		.setRequired(true)
+				// 		.addChoices(
+				// 			{ name: 'Open', value: FactionStatus.OPEN },
+				// 			{ name: 'Invite Only', value: FactionStatus.INVITE_ONLY },
+				// 			{ name: 'Closed', value: FactionStatus.CLOSED }
+				// 		)
+				// )
 				.addAttachmentOption((option) =>
 					option //
 						.setName('icon')

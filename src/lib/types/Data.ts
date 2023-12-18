@@ -105,7 +105,8 @@ export const SelectAllOptions = {
 	titles: true,
 	members: true,
 	joinType: true,
-	pendingMemberIds: true
+	pendingMemberIds: true,
+	tokens: true
 };
 
 export type FactionType = {
