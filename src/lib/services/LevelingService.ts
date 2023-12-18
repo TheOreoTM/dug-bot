@@ -116,6 +116,26 @@ export class LevelingService {
 				}
 			});
 		}
-		return cachedData as unknown as UserLevel;
+		return this.parseCardData(cachedData);
+	}
+
+	private parseCardData(data: Record<keyof UserLevel, string>): UserLevel {
+		return {
+			currentLevel: Number(data.currentLevel),
+			lastXpEarned: new Date(data.lastXpEarned),
+			noBorder: Boolean(data.noBorder),
+			xpBoost: Number(data.xpBoost),
+			currentXp: Number(data.currentXp),
+			requiredXp: Number(data.requiredXp),
+			totalXp: Number(data.totalXp),
+			avatarBorderColor: data.avatarBorderColor,
+			barColor: data.barColor,
+			bgColor: data.bgColor,
+			bgImage: data.bgImage,
+			borderColor: data.borderColor,
+			fontColor: data.fontColor,
+			levelUpMessage: data.levelUpMessage,
+			userId: data.userId
+		};
 	}
 }
