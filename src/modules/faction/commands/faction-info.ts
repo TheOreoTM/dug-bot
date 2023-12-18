@@ -73,7 +73,8 @@ export class UserCommand extends Command {
 
 			const embed = new EmbedBuilder()
 				.setColor(DugColors.Default)
-				.setTitle(`${faction.name}'s Member list`)
+				.setAuthor({ name: `${faction.name}`, iconURL: faction.iconUrl })
+				.setTitle(`Member list`)
 				.setDescription(membersListArray.join('\n'));
 
 			await factionInfoMessage.edit({
