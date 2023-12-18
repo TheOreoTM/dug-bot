@@ -45,6 +45,7 @@ export class UserCommand extends Command {
 
 		interactionOrMessage instanceof Message ? send(interactionOrMessage, { embeds: [loadingEmbed] }) : interactionOrMessage.deferReply();
 		const leaderboard = await this.container.leaderboard.getLevelLeaderboardPage(page);
+		console.log('🚀 ~ file: lb.ts:48 ~ UserCommand ~ sendLeaderboard ~ leaderboard:', leaderboard);
 		if (leaderboard === null) {
 			await sendInteractionOrMessage(interactionOrMessage, {
 				embeds: [new EmbedBuilder().setColor(DugColors.Fail).setDescription(formatFailMessage(`That page doesnt exist`))]
