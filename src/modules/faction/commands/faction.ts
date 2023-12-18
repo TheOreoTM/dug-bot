@@ -88,7 +88,7 @@ export class UserCommand extends DugCommand {
 			return;
 		}
 
-		let message: string;
+		let message: string = 'Something happened';
 
 		if (subcommand === 'token') {
 			const amount = interaction.options.getNumber('token', true);
@@ -149,5 +149,7 @@ export class UserCommand extends DugCommand {
 				message = formatSuccessMessage(`Removed ${member} from \`${faction.name}\``);
 			}
 		}
+
+		interaction.reply(message);
 	}
 }
