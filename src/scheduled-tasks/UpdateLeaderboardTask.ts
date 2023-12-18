@@ -1,6 +1,7 @@
-import { minutes } from '#lib/util/common';
+import { minutes, seconds } from '#lib/util/common';
 import { ApplyOptions } from '@sapphire/decorators';
 import { ScheduledTask } from '@sapphire/plugin-scheduled-tasks';
+import { sleep } from '@sapphire/utilities';
 
 @ApplyOptions<ScheduledTask.Options>({
 	name: 'UpdateLeaderboardTaskTask',
@@ -19,6 +20,7 @@ export class UpdateLeaderboardTaskTask extends ScheduledTask {
 			if (!data) {
 				this.container.logger.error(`[UpdateLeaderboardTask] Failed to cache page ${page}`);
 			}
+			await sleep(seconds(2));
 		}
 	}
 }

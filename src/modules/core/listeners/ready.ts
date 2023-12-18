@@ -1,5 +1,5 @@
 import { ModuleName } from '#config';
-import { BlacklistService, CoreSettingsService, LeaderboardService } from '#lib/services';
+import { BlacklistService, CoreSettingsService, LeaderboardService, LevelingService } from '#lib/services';
 import { ApplyOptions } from '@sapphire/decorators';
 import { Listener, Store } from '@sapphire/framework';
 import { blue, gray, green, magenta, magentaBright, white, yellow } from 'colorette';
@@ -14,6 +14,7 @@ export class UserEvent extends Listener {
 		this.container.core = new CoreSettingsService();
 		this.container.leaderboard = new LeaderboardService();
 		this.container.blacklist = new BlacklistService();
+		this.container.leveling = new LevelingService();
 
 		this.printBanner();
 		this.printStoreDebugInformation();

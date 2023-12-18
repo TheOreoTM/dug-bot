@@ -5,7 +5,6 @@ import { getTag } from '#lib/util/utils';
 import { ApplyOptions } from '@sapphire/decorators';
 import { Args, Command } from '@sapphire/framework';
 import { send } from '@sapphire/plugin-editable-commands';
-import canvacord from 'canvacord';
 import {
 	ActionRowBuilder,
 	ApplicationCommandType,
@@ -18,6 +17,7 @@ import {
 	MessageCreateOptions,
 	blockQuote
 } from 'discord.js';
+import canvacord from 'canvacord';
 const { Rank: RankCard } = canvacord;
 
 @ApplyOptions<Command.Options>({
@@ -86,6 +86,9 @@ export class UserCommand extends Command {
 				.setColor(DugColors.Fail);
 			return { embeds: [embed] };
 		}
+
+		await this.container.leveling.setCardData(data);
+		await this.container.leveling.getCardData(member.id);
 
 		const userXpBoost = Math.floor((data.xpBoost + globalBoost) * 100);
 		const rank: number = await this.container.db.userLevel.getRank(data.userId);
