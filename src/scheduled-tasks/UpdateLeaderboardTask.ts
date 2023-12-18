@@ -12,7 +12,7 @@ export class UpdateLeaderboardTaskTask extends ScheduledTask {
 		this.container.logger.info('[UpdateLeaderboardTask] Started');
 
 		const START_VALUE = 1;
-		const END_VALUE = 10;
+		const END_VALUE = 50;
 
 		for (let page = START_VALUE; page < END_VALUE + 1; page++) {
 			const data = this.container.leaderboard.cacheLevelLeaderboardPage(page);
