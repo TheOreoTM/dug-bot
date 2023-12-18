@@ -116,6 +116,6 @@ export class LevelingService {
 				}
 			});
 		}
-		return cachedData;
+		return cachedData as unknown as UserLevel;
 	}
 }
