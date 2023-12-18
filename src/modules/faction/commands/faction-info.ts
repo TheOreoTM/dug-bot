@@ -68,7 +68,7 @@ export class UserCommand extends Command {
 			const membersListArray = [];
 			membersListArray.push(`${userMention(faction.ownerId)} - Owner`);
 			for (const member of members) {
-				const formattedMember = `${userMention(member.id)} - ${member.factionPosition ?? 'Member'}`;
+				const formattedMember = `${userMention(member.id)} - ${member.factionPosition ?? 'Member'} ${JSON.stringify(member, null, 2)}`;
 				membersListArray.push(formattedMember);
 			}
 
