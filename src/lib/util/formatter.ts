@@ -252,7 +252,7 @@ export function formatBadges(badges: Badge[]) {
 }
 
 export function generateFactionEmbed(data: FactionType) {
-	const { name, description, ownerId, joinType, members, iconUrl, badges, titles } = data;
+	const { name, description, ownerId, tokens, members, iconUrl, badges, titles } = data;
 	const embed = new EmbedBuilder()
 		.setThumbnail(iconUrl)
 		.setTitle(name)
@@ -264,14 +264,15 @@ export function generateFactionEmbed(data: FactionType) {
 				value: `${userMention(ownerId)}`,
 				inline: true
 			},
-			{
-				name: `Join Status`,
-				value: `\`${toFriendlyString(joinType)}\``,
-				inline: true
-			},
+
 			{
 				name: `Member Count`,
 				value: `\`${members?.length ?? 0} Members\``,
+				inline: true
+			},
+			{
+				name: 'Tokens',
+				value: `\`${tokens.toLocaleString()} Tokens\``,
 				inline: true
 			},
 			{

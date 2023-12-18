@@ -1,5 +1,5 @@
 import { Items } from '#lib/items';
-import { Badge, FactionStatus, Title, User } from '@prisma/client';
+import { Badge, Title, User } from '@prisma/client';
 import { ItemTypes } from '#lib/types';
 
 export type LeaderboardPositionData = {
@@ -118,7 +118,7 @@ export type FactionType = {
 	badges: Badge[];
 	titles: Title[];
 	members?: User[];
-	joinType: FactionStatus;
+	tokens: number;
 	pendingMemberIds: string[];
 };
 

@@ -65,17 +65,17 @@ model User {
 }
 
 model Faction {
-  id               Int           @id @default(autoincrement())
+  id               Int      @id @default(autoincrement())
   badges           Badge[]
   titles           Title[]
-  joinType         FactionStatus
+  // joinType         FactionStatus
   iconUrl          String
-  name             String        @db.VarChar(32)
-  description      String        @db.VarChar(512)
+  name             String   @db.VarChar(32)
+  description      String   @db.VarChar(512)
   ownerId          String
-  pendingMemberIds String[]      @default([])
+  pendingMemberIds String[] @default([])
   members          User[]
-  tokens           Int           @default(0)
+  tokens           Int      @default(0)
 }
 
 model Item {

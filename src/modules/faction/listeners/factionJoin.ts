@@ -1,6 +1,5 @@
 import { DugEvents } from '#constants';
 import { FactionType } from '#lib/types/Data';
-import { FactionStatus } from '@prisma/client';
 import { ApplyOptions } from '@sapphire/decorators';
 import { Listener } from '@sapphire/framework';
 import { User } from 'discord.js';
@@ -9,7 +8,7 @@ import { User } from 'discord.js';
 export class UserEvent extends Listener {
 	public override async run(user: User, faction: FactionType) {
 		if (!faction) return;
-		if (faction.joinType === FactionStatus.INVITE_ONLY) this.container.client.emit(DugEvents.FactionSendInvite, user, faction);
+		// if (faction.joinType === FactionStatus.INVITE_ONLY) this.container.client.emit(DugEvents.FactionSendInvite, user, faction);
 
 		await this.container.db.user.update({
 			where: {

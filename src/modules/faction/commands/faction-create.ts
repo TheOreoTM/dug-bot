@@ -1,7 +1,6 @@
 import { DugCommand } from '#lib/structures';
 import { SelectAllOptions } from '#lib/types/Data';
 import { formatSuccessMessage, generateFactionEmbed } from '#lib/util/formatter';
-import { FactionStatus } from '@prisma/client';
 import { ApplyOptions } from '@sapphire/decorators';
 
 @ApplyOptions<DugCommand.Options>({
@@ -30,6 +29,8 @@ export class UserCommand extends DugCommand {
 						.setDescription('The description of the faction')
 						.setRequired(true)
 				)
+				.addUserOption((option) => option.setName('owner').setDescription('The owner of the factoin').setRequired(true))
+
 				// .addStringOption((option) =>
 				// 	option //
 				// 		.setName('type')
@@ -52,10 +53,10 @@ export class UserCommand extends DugCommand {
 
 	public override async chatInputRun(interaction: DugCommand.ChatInputCommandInteraction) {
 		const { options } = interaction;
-		const owner = (await this.container.db.user.getUser(interaction.user.id))!;
+		const owner = options.getUser('owner', true);
 		const name = options.getString('name', true);
 		const description = options.getString('description', true);
-		const joinType = options.getString('type', true) as FactionStatus;
+		// const joinType = options.getString('type', true) as FactionStatus;
 		const icon = options.getAttachment('icon', true);
 
 		const faction = await this.container.db.faction.create({
@@ -63,12 +64,10 @@ export class UserCommand extends DugCommand {
 				ownerId: owner.id,
 				description,
 				name,
-				joinType,
 				iconUrl: icon.url,
 
 				members: {
 					connect: {
-						idx: owner.idx,
 						id: owner.id
 					}
 				}
