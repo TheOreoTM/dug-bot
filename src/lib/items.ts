@@ -277,21 +277,21 @@ export const BoostItems: Record<BoostItemValue, LevelingDropType> = {
 		amount: 1,
 		description: 'Gain +1 Level',
 		type: 'levelUp',
-		weight: 10
+		weight: 5
 	},
 	levelUp2: {
 		name: '+2 Level',
 		amount: 2,
 		description: 'Gain +2 Levels',
 		type: 'levelUp',
-		weight: 5
+		weight: 2
 	},
 	levelUp3: {
 		name: '+3 Levels',
 		amount: 3,
 		description: 'Gain +3 Levels',
 		type: 'levelUp',
-		weight: 2
+		weight: 1
 	},
 	xpBoost20: {
 		name: Items.xpBoost20.name,
