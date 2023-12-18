@@ -5,7 +5,8 @@ import { ApplyOptions } from '@sapphire/decorators';
 
 @ApplyOptions<DugCommand.Options>({
 	description: 'Create a factions',
-	preconditions: ['EventManager']
+	preconditions: ['EventManager'],
+	requiredUserPermissions: ['Administrator']
 })
 export class UserCommand extends DugCommand {
 	public override registerApplicationCommands(registry: DugCommand.Registry) {
