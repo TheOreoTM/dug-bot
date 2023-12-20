@@ -272,7 +272,7 @@ export function generateFactionEmbed(data: FactionType) {
 			},
 			{
 				name: 'Tokens',
-				value: `\`${tokens.toLocaleString()} Tokens\``,
+				value: `${DugEmojis.Token} \`${tokens.toLocaleString()} Tokens\``,
 				inline: true
 			},
 			{

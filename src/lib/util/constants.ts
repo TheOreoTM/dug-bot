@@ -132,7 +132,8 @@ export const DugEmojis = {
 	MythicCrate: '<:crate_mythic:1162410963492937728>',
 	LegendaryCrate: '<:crate_legendary:1162410877627154564>',
 	ListBranch: '<:branch_90_curved:1161486023814025266>',
-	ListLast: '<:branch_tail_curved:1161479147839828018>'
+	ListLast: '<:branch_tail_curved:1161479147839828018>',
+	Token: '<:token:1187044518311235705>'
 };
 
 export const CrateAssets = {
