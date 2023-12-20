@@ -1,8 +1,32 @@
 import { CrateAssets } from '#constants';
-import { ItemTypes, LevelingDropType, Item, BoostItemValue, CrateItemValue, CrateDropType, CreateNewItem, ItemValue } from '#lib/types';
+import {
+	ItemTypes,
+	LevelingDropType,
+	Item,
+	BoostItemValue,
+	CrateItemValue,
+	CrateDropType,
+	CreateNewItem,
+	ItemValue,
+	Badge,
+	BadgeType,
+	BadgeIcons
+} from '#lib/types';
 import { hours } from '#utils/common';
 import { ILootTableEntry, LootTable, LootTableEntry } from 'loot-table-advanced';
 
+export const Badges: Map<Badge, BadgeType> = new Map<Badge, BadgeType>([
+	[
+		Badge.EventWinner,
+		{
+			icon: BadgeIcons[Badge.EventWinner],
+			description: 'Given to those who have won an event before',
+			id: Badge.EventWinner,
+			name: 'Event Winner',
+			price: -1
+		}
+	]
+]);
 export const CipherItems = {} as const;
 
 export const Items = {

@@ -51,7 +51,7 @@ model UserLevel {
 model User {
   idx             Int              @default(autoincrement())
   id              String           @id @unique
-  badges          Badge[]
+  badges          String[]
   titles          Title[]
   bio             String?          @db.VarChar(512)
   factionPosition FactionPosition?
@@ -66,7 +66,7 @@ model User {
 
 model Faction {
   id               Int      @id @default(autoincrement())
-  badges           Badge[]
+  badges           String[] // Internally managed
   titles           Title[]
   // joinType         FactionStatus
   iconUrl          String
@@ -102,10 +102,11 @@ enum PrismaDropRarityType {
   bronze
 }
 
-enum Badge {
-  BETA_TESTER
-  ELITE_LEVEL
-  AHA_BADGE
+model Badge {
+  id          String @id @unique
+  name        String
+  description String
+  icon        String
 }
 
 enum Title {

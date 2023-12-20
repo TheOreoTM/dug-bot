@@ -1,3 +1,4 @@
+import { Badges } from '#lib/items';
 import { ApplyOptions } from '@sapphire/decorators';
 import { InteractionHandler, InteractionHandlerTypes } from '@sapphire/framework';
 import { AutocompleteInteraction, type ApplicationCommandOptionChoiceData } from 'discord.js';
@@ -12,21 +13,18 @@ export class AutocompleteHandler extends InteractionHandler {
 	}
 
 	public override async parse(interaction: AutocompleteInteraction) {
-		if (!['faction-join', 'faction-info', 'faction'].includes(interaction.commandName)) return this.none();
 		// Get the focussed (current) option
 		const focusedOption = interaction.options.getFocused(true);
 
 		// Ensure that the option name is one that can be autocompleted, or return none if not.
 		switch (focusedOption.name) {
-			case 'faction': {
-				const allFactions = await this.container.db.faction.findMany();
-				const factionNames = allFactions.map((faction) => {
-					return { name: faction.name, value: `${faction.id}` };
-				});
+			case 'badge': {
+				const badgeNames: { name: string; value: string }[] = [];
+				Badges.forEach((badge) => badgeNames.push({ name: badge.name, value: `${badge.id}` }));
 
-				const factions = fuzzysort.go(focusedOption.value, factionNames, { key: ['name'], limit: 10, all: true });
+				const badges = fuzzysort.go(focusedOption.value, badgeNames, { key: ['name'], limit: 10, all: true });
 				return this.some(
-					factions.map((f) => {
+					badges.map((f) => {
 						return { name: f.obj.name, value: f.obj.value };
 					})
 				);

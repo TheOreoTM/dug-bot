@@ -1,5 +1,6 @@
+import { Badges } from '#lib/items';
 import { DugCommand } from '#lib/structures';
-import { SelectAllOptions } from '#lib/types';
+import { Badge, SelectAllOptions } from '#lib/types';
 import { formatFailMessage, formatSuccessMessage } from '#lib/util/formatter';
 import { ApplyOptions } from '@sapphire/decorators';
 
@@ -26,6 +27,17 @@ export class UserCommand extends DugCommand {
 								)
 								.addNumberOption((option) =>
 									option.setName('amount').setDescription('The amount of tokens to add').setRequired(true).setMinValue(0)
+								)
+						)
+						.addSubcommand((builder) =>
+							builder
+								.setName('badge')
+								.setDescription('Add a badge to a faction')
+								.addStringOption((option) =>
+									option.setName('faction').setDescription('The faction').setAutocomplete(true).setRequired(true)
+								)
+								.addStringOption((option) =>
+									option.setName('badge').setDescription('The badge you want to add').setRequired(true).setAutocomplete(true)
 								)
 						)
 						.addSubcommand((builder) =>
@@ -74,7 +86,7 @@ export class UserCommand extends DugCommand {
 	}
 
 	public async chatInputRun(interaction: DugCommand.ChatInputCommandInteraction) {
-		const subcommand = interaction.options.getSubcommand(true) as 'token' | 'member' | 'delete';
+		const subcommand = interaction.options.getSubcommand(true) as 'token' | 'member' | 'delete' | 'badge';
 		const factionId = Number(interaction.options.getString('faction', true));
 		if (isNaN(factionId)) {
 			interaction.reply({ content: formatFailMessage('That faction doesnt exist'), ephemeral: true });
@@ -166,6 +178,42 @@ export class UserCommand extends DugCommand {
 				});
 
 				message = formatSuccessMessage(`Removed ${member} from \`${faction.name}\``);
+			}
+		}
+
+		if (subcommand === 'badge') {
+			const badge = interaction.options.getString('badge', true);
+			const hasBadge = Badges.has(badge as Badge);
+			if (!hasBadge) {
+				interaction.reply({ content: formatFailMessage('That badge doesnt exist'), ephemeral: true });
+				return;
+			}
+			const badgeValue = Badges.get(badge as Badge)!;
+			if (subcommandGroup === 'add') {
+				await this.container.db.faction.update({
+					where: { id: faction.id },
+					data: {
+						badges: {
+							push: badgeValue.icon
+						}
+					}
+				});
+
+				message = formatSuccessMessage(`Added ${badgeValue.icon} to \`${faction.name}\``);
+			}
+			if (subcommandGroup === 'remove') {
+				const currentBadges = new Set(faction.badges);
+				currentBadges.delete(badgeValue.id);
+				await this.container.db.faction.update({
+					where: { id: faction.id },
+					data: {
+						badges: {
+							set: Array.from(currentBadges)
+						}
+					}
+				});
+
+				message = formatSuccessMessage(`Added ${badgeValue.icon} to \`${faction.name}\``);
 			}
 		}
 

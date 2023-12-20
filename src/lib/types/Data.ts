@@ -1,6 +1,6 @@
 import { Items } from '#lib/items';
-import { Badge, Title, User } from '@prisma/client';
-import { ItemTypes } from '#lib/types';
+import { Title, User } from '@prisma/client';
+import { BadgeIcon, ItemTypes } from '#lib/types';
 
 export type LeaderboardPositionData = {
 	top: number;
@@ -12,11 +12,11 @@ export type LeaderboardPositionData = {
 export type LeaderboardPageData = LeaderboardPositionData[];
 
 export type BadgeType = {
+	id: string;
 	name: string;
 	price: number;
-	badgeIcon: string;
+	icon: BadgeIcon;
 	description: string;
-	value: string;
 };
 
 /**
@@ -114,20 +114,20 @@ export type FactionType = {
 	name: string;
 	description: string;
 	iconUrl: string;
-	badges: Badge[];
+	badges: string[];
 	titles: Title[];
 	members?: User[];
 	tokens: number;
 	pendingMemberIds: string[];
 };
 
-export const BadgeIcons = {
-	[Badge.BETA_TESTER]: '🐛',
-	[Badge.ELITE_LEVEL]: '✨',
-	[Badge.AHA_BADGE]: '🫀'
-} as const;
+// export const BadgeIcons = {
+// 	[Badge.BETA_TESTER]: '🐛',
+// 	[Badge.ELITE_LEVEL]: '✨',
+// 	[Badge.AHA_BADGE]: '🫀'
+// } as const;
 
-export type BadgeIcons = (typeof BadgeIcons)[keyof typeof BadgeIcons];
+// export type BadgeIcons = (typeof BadgeIcons)[keyof typeof BadgeIcons];
 
 export const TitleTexts = {
 	[Title.BETA_TESTER]: 'Beta Tester',

@@ -1,7 +1,7 @@
 import { DugColors, DugEmojis, ProgressBar } from '#constants';
-import { GuildMessage } from '#lib/types';
-import { BadgeIcons, FactionType, InventoryItemTypeWithCount, TitleTexts } from '#lib/types/Data';
-import { Badge, Title } from '@prisma/client';
+import { Badge, BadgeIcons, GuildMessage, TitleTexts } from '#lib/types';
+import { FactionType, InventoryItemTypeWithCount } from '#lib/types/Data';
+import { Title } from '@prisma/client';
 import { container } from '@sapphire/framework';
 import { EmbedBuilder, GuildMember, PermissionsString, userMention } from 'discord.js';
 
@@ -243,7 +243,7 @@ export function convertValueToBadge(value: string) {
 }
 
 export function formatBadges(badges: Badge[]) {
-	const icons: BadgeIcons[] = [];
+	const icons: string[] = [];
 	for (const badge of badges) {
 		icons.push(BadgeIcons[badge]);
 	}
@@ -277,7 +277,7 @@ export function generateFactionEmbed(data: FactionType) {
 			},
 			{
 				name: 'Badges',
-				value: formatBadges(badges),
+				value: formatBadges(badges as Badge[]),
 				inline: true
 			},
 			{
@@ -321,7 +321,7 @@ export async function generateProfileEmbed(member: GuildMember) {
 
 			{
 				name: 'Badges',
-				value: formatBadges(badges),
+				value: formatBadges(badges as Badge[]),
 				inline: true
 			},
 			{

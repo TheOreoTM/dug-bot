@@ -17,6 +17,17 @@ export function isOwner(member: GuildMember) {
 	return member.id === '600707283097485322';
 }
 
+export function recordToMap<T>(record: Record<string, T>): Map<string, T> {
+	const map = new Map<string, T>();
+
+	// Iterate over the entries of the record and add them to the map
+	for (const [key, value] of Object.entries(record)) {
+		map.set(key, value);
+	}
+
+	return map;
+}
+
 export function genRandomXp(xpBoost = 0) {
 	const baseXp = genRandomInt(20, 40);
 	const boostedXp = baseXp + baseXp * xpBoost;
