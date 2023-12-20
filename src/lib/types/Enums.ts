@@ -13,7 +13,7 @@ export const enum Badge {
 }
 
 export const BadgeIcons = {
-	[Badge.EventWinner]: `<:crown:1187015975678246912>`
+	[Badge.EventWinner]: `<:__:1187015975678246912>`
 } as const;
 
 export type BadgeIcon = (typeof BadgeIcons)[keyof typeof BadgeIcons];
