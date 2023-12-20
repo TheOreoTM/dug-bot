@@ -3,6 +3,8 @@ import { ItemTypes, LevelingDropType, Item, BoostItemValue, CrateItemValue, Crat
 import { hours } from '#utils/common';
 import { ILootTableEntry, LootTable, LootTableEntry } from 'loot-table-advanced';
 
+export const CipherItems = {} as const;
+
 export const Items = {
 	levelUp1: CreateNewItem({
 		description: 'Gain +1 Level',
