@@ -206,7 +206,7 @@ export class UserCommand extends DugCommand {
 					where: { id: faction.id },
 					data: {
 						badges: {
-							push: badgeValue.icon
+							push: badgeValue.id
 						}
 					}
 				});
@@ -215,7 +215,7 @@ export class UserCommand extends DugCommand {
 			}
 			if (subcommandGroup === 'remove') {
 				const currentBadges = new Set(faction.badges);
-				currentBadges.delete(badgeValue.id);
+				currentBadges.delete(badgeValue.icon);
 				await this.container.db.faction.update({
 					where: { id: faction.id },
 					data: {
@@ -225,7 +225,7 @@ export class UserCommand extends DugCommand {
 					}
 				});
 
-				message = formatSuccessMessage(`Added ${badgeValue.icon} to \`${faction.name}\``);
+				message = formatSuccessMessage(`Removed ${badgeValue.icon} to \`${faction.name}\``);
 			}
 		}
 
