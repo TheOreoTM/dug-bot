@@ -44,7 +44,6 @@ export class UserCommand extends Command {
 			return;
 		}
 
-		console.log(faction);
 		const embed = generateFactionEmbed(faction);
 		const showMembersButton = new ButtonBuilder().setCustomId('show-members').setLabel('Show Member List').setStyle(ButtonStyle.Secondary);
 

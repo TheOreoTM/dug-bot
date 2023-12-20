@@ -248,7 +248,6 @@ export function formatBadges(badges: Badge[]) {
 		icons.push(BadgeIcons[badge]);
 	}
 
-	console.log(icons);
 	return icons.length ? icons.join(' ') : 'No badges';
 }
 
