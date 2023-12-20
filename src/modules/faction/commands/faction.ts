@@ -62,8 +62,20 @@ export class UserCommand extends DugCommand {
 								.addStringOption((option) =>
 									option.setName('faction').setDescription('The faction').setAutocomplete(true).setRequired(true)
 								)
+
 								.addNumberOption((option) =>
 									option.setName('amount').setDescription('The amount of tokens to remove').setRequired(true).setMinValue(0)
+								)
+						)
+						.addSubcommand((builder) =>
+							builder
+								.setName('badge')
+								.setDescription('Remove a badge from a faction')
+								.addStringOption((option) =>
+									option.setName('faction').setDescription('The faction').setAutocomplete(true).setRequired(true)
+								)
+								.addStringOption((option) =>
+									option.setName('badge').setDescription('The badge you want to remove').setRequired(true).setAutocomplete(true)
 								)
 						)
 						.addSubcommand((builder) =>
