@@ -5,7 +5,7 @@ import { ScheduledTask } from '@sapphire/plugin-scheduled-tasks';
 
 @ApplyOptions<ScheduledTask.Options>({
 	name: 'UpdateFactionsTeamListTask',
-	interval: minutes(5),
+	interval: minutes(2.5),
 	enabled: config.enabled_modules.includes('faction'),
 	bullJobsOptions: { removeOnComplete: true }
 })

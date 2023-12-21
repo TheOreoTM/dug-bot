@@ -49,7 +49,7 @@ export class FactionListService {
 		// 	return { name: f.name, memberCount: f.members.length, tokens: f.tokens, ownerId: f.ownerId };
 		// });
 		const refreshButton = new ButtonBuilder().setStyle(ButtonStyle.Secondary).setLabel('Refresh').setCustomId('rfl');
-		const nextUpdatesAt = new Date(Date.now() + minutes(5));
+		const nextUpdatesAt = new Date(Date.now() + minutes(2.5));
 		const embed = new EmbedBuilder()
 			.setColor(DugColors.Default)
 			.setTitle('Factions List')
