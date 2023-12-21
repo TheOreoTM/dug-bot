@@ -159,7 +159,8 @@ export const ChannelIDs = {
 	General: '856722573576765450',
 	LevelUpChannel: '907323209609797642',
 	WelcomeChannel: '856722573576765450',
-	LoggingChannel: '1174956832079495210'
+	LoggingChannel: '1174956832079495210',
+	FactionListChannel: '1186666346331775057'
 };
 export const WhitelistedChannels = [ChannelIDs.General];
 

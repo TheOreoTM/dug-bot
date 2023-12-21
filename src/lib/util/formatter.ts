@@ -432,3 +432,20 @@ const order: Record<PermissionsString, number> = {
 	MentionEveryone: 32,
 	Administrator: 40
 };
+
+/**
+ * Uses emojis to format the list into a branched thing
+ * @param items The array of items
+ * @returns An array of items with the branch emojis attached (use .join('\n'))
+ */
+export function formatList(items: Array<string>): Array<string> {
+	if (items.length > 1) return [`${DugEmojis.ListLast} ${items[0]}`];
+	const itemsArray = items;
+	const lastItem = itemsArray.pop()!;
+	const formattedItems = itemsArray.map((item) => {
+		return `${DugEmojis.ListBranch} ${item}`;
+	});
+	formattedItems.push(lastItem);
+
+	return formattedItems;
+}
