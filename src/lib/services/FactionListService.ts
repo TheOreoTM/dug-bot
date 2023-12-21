@@ -50,25 +50,31 @@ export class FactionListService {
 		// });
 		const refreshButton = new ButtonBuilder().setStyle(ButtonStyle.Secondary).setLabel('Refresh').setCustomId('rfl');
 		const nextUpdatesAt = new Date(Date.now() + minutes(2.5));
+		const fields = allFactions.map(async (f) => {
+			const membersList = f.members.map((m) => {
+				return `${userMention(m.id)}`;
+			});
+			const formattedMembers = formatList(membersList);
+			const factionRank = await this.db.faction.count({
+				where: {
+					tokens: {
+						gte: f.tokens
+					}
+				}
+			});
+			return {
+				// inline: true,
+				name: `${factionRank}. ${f.name}`,
+				value: `${DugEmojis.ListBranch}${DugEmojis.Token} \`${f.tokens.toLocaleString()} Tokens\`\n${formattedMembers.join('\n')}`
+			};
+		});
 		const embed = new EmbedBuilder()
 			.setColor(DugColors.Default)
 			.setTitle('Factions List')
 			.setDescription(
 				`Below is the list of live updating factions list\n\n**Next update** ${new Timestamp(nextUpdatesAt.getTime()).getRelativeTime()}`
 			)
-			.setFields(
-				allFactions.map((f, index) => {
-					const membersList = f.members.map((m) => {
-						return `${userMention(m.id)}`;
-					});
-					const formattedMembers = formatList(membersList);
-					return {
-						// inline: true,
-						name: `${index + 1}. ${f.name}`,
-						value: `${DugEmojis.ListBranch}${DugEmojis.Token} \`${f.tokens.toLocaleString()} Tokens\`\n${formattedMembers.join('\n')}`
-					};
-				})
-			);
+			.setFields(await Promise.all(fields));
 
 		return { embeds: [embed], components: [new ActionRowBuilder<ButtonBuilder>().setComponents(refreshButton)] };
 	}
