@@ -5,6 +5,7 @@ import { SelectAllOptions } from '#lib/types';
 import { minutes } from '#lib/util/common';
 import { formatList } from '#lib/util/formatter';
 import { container } from '@sapphire/pieces';
+import { isNullish } from '@sapphire/utilities';
 import {
 	TextChannel,
 	ButtonBuilder,
@@ -25,9 +26,9 @@ export class FactionListService {
 
 	public async refreshList() {
 		const messageId = await this.cache.get(this.key);
-		console.log('🚀 ~ file: FactionListService.ts:28 ~ FactionListService ~ refreshList ~ messageId:', messageId);
+		console.log('🚀 ~ file: FactionListService.ts:28 ~ FactionListService ~ refreshList ~ messageId:', isNullish(messageId));
 		const channel = (await container.client.channels.fetch(ChannelIDs.FactionListChannel)) as TextChannel;
-		if (!messageId) {
+		if (isNullish(messageId)) {
 			const message = await this.sendList(channel);
 			console.log('🚀 ~ file: FactionListService.ts:32 ~ FactionListService ~ refreshList ~ message:', message);
 			await this.cache.set(this.key, message.id);
@@ -78,7 +79,7 @@ export class FactionListService {
 	}
 
 	private async sendList(channel: TextChannel) {
-		await channel.bulkDelete(99); // Delete everything
+		await channel.bulkDelete(99).catch(() => null); // Delete everything
 
 		const list = await this.generateList();
 		console.log('🚀 ~ file: FactionListService.ts:83 ~ FactionListService ~ sendList ~ list:', list);
