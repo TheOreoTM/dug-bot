@@ -67,7 +67,7 @@ export class FactionListService {
 					return {
 						inline: true,
 						name: `${index + 1}. ${f.name}`,
-						value: `${DugEmojis.ListBranch}${DugEmojis.Token} \`${f.tokens.toLocaleString()} Tokens\`${formattedMembers.join('\n')}`
+						value: `${DugEmojis.ListBranch}${DugEmojis.Token} \`${f.tokens.toLocaleString()} Tokens\`\n${formattedMembers.join('\n')}`
 					};
 				})
 			);
