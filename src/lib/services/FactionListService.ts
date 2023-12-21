@@ -26,16 +26,13 @@ export class FactionListService {
 
 	public async refreshList() {
 		const messageId = await this.cache.get(this.key);
-		console.log('🚀 ~ file: FactionListService.ts:28 ~ FactionListService ~ refreshList ~ messageId:', isNullish(messageId));
 		const channel = (await container.client.channels.fetch(ChannelIDs.FactionListChannel)) as TextChannel;
 		if (isNullish(messageId)) {
 			const message = await this.sendList(channel);
-			console.log('🚀 ~ file: FactionListService.ts:32 ~ FactionListService ~ refreshList ~ message:', message);
 			await this.cache.set(this.key, message.id);
 			return;
 		}
 		const message = await channel.messages.fetch(messageId);
-		console.log('🚀 ~ file: FactionListService.ts:36 ~ FactionListService ~ refreshList ~ message:', message);
 		if (!message) {
 			const message = await this.sendList(channel);
 			await this.cache.set(this.key, message.id);
@@ -43,7 +40,6 @@ export class FactionListService {
 		}
 
 		const list = await this.generateList();
-		console.log('🚀 ~ file: FactionListService.ts:44 ~ FactionListService ~ refreshList ~ list:', list);
 		await message.edit(list as MessageEditOptions);
 	}
 
@@ -52,7 +48,7 @@ export class FactionListService {
 		// const factionsList = allFactions.map((f) => {
 		// 	return { name: f.name, memberCount: f.members.length, tokens: f.tokens, ownerId: f.ownerId };
 		// });
-		const refreshButton = new ButtonBuilder().setStyle(ButtonStyle.Secondary).setLabel('Refresh').setEmoji('🔄️').setCustomId('rfl');
+		const refreshButton = new ButtonBuilder().setStyle(ButtonStyle.Secondary).setLabel('Refresh').setCustomId('rfl');
 		const nextUpdatesAt = new Date(Date.now() + minutes(5));
 		const embed = new EmbedBuilder()
 			.setColor(DugColors.Default)
