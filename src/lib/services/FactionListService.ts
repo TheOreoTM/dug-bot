@@ -61,12 +61,14 @@ export class FactionListService {
 					const membersList = f.members.map((m) => {
 						return `${userMention(m.id)}`;
 					});
+					console.log(f.name, f.members);
 					const formattedMembers = formatList(membersList);
 					return {
+						inline: true,
 						name: `${index + 1}. ${f.name}`,
 						value: `${DugEmojis.ListBranch}${
 							DugEmojis.Token
-						} \`${f.tokens.toLocaleString()} Tokens\`\n### Members\n${formattedMembers.join('\n')}`
+						} \`${f.tokens.toLocaleString()} Tokens\`\n\n**__Members__**${formattedMembers.join('\n')}`
 					};
 				})
 			);
