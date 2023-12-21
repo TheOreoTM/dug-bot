@@ -439,7 +439,7 @@ const order: Record<PermissionsString, number> = {
  * @returns An array of items with the branch emojis attached (use .join('\n'))
  */
 export function formatList(items: Array<string>): Array<string> {
-	if (items.length > 1) return [`${DugEmojis.ListLast} ${items[0]}`];
+	if ((items.length = 1)) return [`${DugEmojis.ListLast} ${items[0]}`];
 	const itemsArray = items;
 	const lastItem = itemsArray.pop()!;
 	const formattedItems = itemsArray.map((item) => {

@@ -33,7 +33,7 @@ export class FactionListService {
 			return;
 		}
 		const message = await channel.messages.fetch(messageId);
-		if (!message) {
+		if (isNullish(message)) {
 			const message = await this.sendList(channel);
 			await this.cache.set(this.key, message.id);
 			return;
@@ -66,9 +66,7 @@ export class FactionListService {
 					return {
 						inline: true,
 						name: `${index + 1}. ${f.name}`,
-						value: `${DugEmojis.ListBranch}${
-							DugEmojis.Token
-						} \`${f.tokens.toLocaleString()} Tokens\`\n\n**__Members__**${formattedMembers.join('\n')}`
+						value: `${DugEmojis.ListBranch}${DugEmojis.Token} \`${f.tokens.toLocaleString()} Tokens\`${formattedMembers.join('\n')}`
 					};
 				})
 			);
