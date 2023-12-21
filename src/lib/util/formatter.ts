@@ -447,8 +447,5 @@ export function formatList(items: Array<string>): Array<string> {
 		formattedItems.push(`${DugEmojis.ListBranch} ${item}`);
 	});
 	formattedItems.push(`${DugEmojis.ListLast} ${lastItem}`);
-
-	console.log('🚀 ~ file: formatter.ts:450 ~ formatList ~ formattedItems:', formattedItems);
-
 	return formattedItems;
 }
