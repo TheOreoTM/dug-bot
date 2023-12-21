@@ -32,7 +32,8 @@ export class FactionListService {
 			await this.cache.set(this.key, message.id);
 			return;
 		}
-		const message = await channel.messages.fetch(messageId);
+		const message = await channel.messages.fetch(messageId).catch(() => null);
+		console.log('🚀 ~ file: FactionListService.ts:36 ~ FactionListService ~ refreshList ~ message:', message);
 		if (isNullish(message)) {
 			const message = await this.sendList(channel);
 			await this.cache.set(this.key, message.id);
