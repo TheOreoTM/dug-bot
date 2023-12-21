@@ -1,4 +1,4 @@
-import { FactionItems, Items } from '#lib/items';
+import { Items } from '#lib/items';
 import { Title, User } from '@prisma/client';
 import { BadgeIcon, ItemTypes } from '#lib/types';
 
