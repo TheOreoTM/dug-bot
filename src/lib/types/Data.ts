@@ -1,4 +1,4 @@
-import { Items } from '#lib/items';
+import { FactionItems, Items } from '#lib/items';
 import { Title, User } from '@prisma/client';
 import { BadgeIcon, ItemTypes } from '#lib/types';
 
@@ -53,7 +53,7 @@ export type BaseItemType = {
 	type: ItemType;
 	usable: boolean;
 	usage: string;
-	value: string;
+	value: ItemValue;
 	sellPrice?: number;
 };
 

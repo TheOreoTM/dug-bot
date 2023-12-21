@@ -1,5 +1,6 @@
 import { Economy } from '#lib/classes/Economy';
 import { Items } from '#lib/items';
+import { BaseItemType } from '#lib/types';
 import { formatFailMessage, formatSuccessMessage } from '#lib/util/formatter';
 import { ApplyOptions } from '@sapphire/decorators';
 import { Args, Command } from '@sapphire/framework';
@@ -36,7 +37,7 @@ export class UserCommand extends Command {
 			return;
 		}
 
-		const item = new Economy.Item(itemObject);
+		const item = new Economy.Item(itemObject as BaseItemType);
 		const user = await this.container.db.user.getUser(message.author.id);
 		if (!item.canBuy(user.cash)) {
 			message.channel.send({ content: formatFailMessage("You're too broke to afford this") });

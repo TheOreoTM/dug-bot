@@ -27,7 +27,45 @@ export const Badges: Map<Badge, BadgeType> = new Map<Badge, BadgeType>([
 		}
 	]
 ]);
-export const CipherItems = {} as const;
+
+export const FactionItems = {
+	minorHint: CreateNewItem({
+		description: 'Get a minor hint for a cipher',
+		emoji: '🧩',
+		name: 'Minor Hint',
+		price: 40,
+		sellable: false,
+		type: ItemTypes.Item,
+		usable: true,
+		usage: 'Use to get a minor hint for any cipher',
+		value: 'minorHint',
+		sellPrice: 20
+	}),
+	mediumHint: CreateNewItem({
+		description: 'Get a medium hint for a cipher',
+		emoji: '🧩',
+		name: 'Medium Hint',
+		price: 70,
+		sellable: false,
+		type: ItemTypes.Item,
+		usable: true,
+		usage: 'Use to get a medium hint for any cipher',
+		value: 'mediumHint',
+		sellPrice: 45
+	}),
+	majorHint: CreateNewItem({
+		description: 'Get a major hint for a cipher',
+		emoji: '🧩',
+		name: 'Major Hint',
+		price: 120,
+		sellable: false,
+		type: ItemTypes.Item,
+		usable: true,
+		usage: 'Use to get a major hint for any cipher',
+		value: 'majorHint',
+		sellPrice: 60
+	})
+};
 
 export const Items = {
 	levelUp1: CreateNewItem({

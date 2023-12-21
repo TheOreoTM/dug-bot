@@ -1,5 +1,5 @@
 import { Items } from '#lib/items';
-import { InventoryItemType, InventoryItemTypeWithCount, ItemValue } from '#lib/types/Data';
+import { FactionItemValue, InventoryItemType, InventoryItemTypeWithCount, ItemValue } from '#lib/types/Data';
 import {
 	container,
 	type ChatInputCommandSuccessPayload,
