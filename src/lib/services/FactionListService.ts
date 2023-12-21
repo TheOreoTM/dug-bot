@@ -25,6 +25,7 @@ export class FactionListService {
 
 	public async refreshList() {
 		const messageId = await this.cache.get(this.key);
+		console.log('🚀 ~ file: FactionListService.ts:28 ~ FactionListService ~ refreshList ~ messageId:', messageId);
 		const channel = (await container.client.channels.fetch(ChannelIDs.FactionListChannel)) as TextChannel;
 		if (!messageId) {
 			const message = await this.sendList(channel);
@@ -32,6 +33,7 @@ export class FactionListService {
 			return;
 		}
 		const message = await channel.messages.fetch(messageId);
+		console.log('🚀 ~ file: FactionListService.ts:36 ~ FactionListService ~ refreshList ~ message:', message);
 		if (!message) {
 			const message = await this.sendList(channel);
 			await this.cache.set(this.key, message.id);
@@ -39,6 +41,7 @@ export class FactionListService {
 		}
 
 		const list = await this.generateList();
+		console.log('🚀 ~ file: FactionListService.ts:44 ~ FactionListService ~ refreshList ~ list:', list);
 		await message.edit(list as MessageEditOptions);
 	}
 
