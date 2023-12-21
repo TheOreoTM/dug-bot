@@ -58,13 +58,13 @@ export class FactionListService {
 			const factionRank = await this.db.faction.count({
 				where: {
 					tokens: {
-						gte: f.tokens
+						gt: f.tokens
 					}
 				}
 			});
 			return {
 				// inline: true,
-				name: `${factionRank}. ${f.name}`,
+				name: `${factionRank + 1}. ${f.name}`,
 				value: `${DugEmojis.ListBranch}${DugEmojis.Token} \`${f.tokens.toLocaleString()} Tokens\`\n${formattedMembers.join('\n')}`
 			};
 		});
