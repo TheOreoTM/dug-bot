@@ -62,10 +62,9 @@ export class FactionListService {
 					const membersList = f.members.map((m) => {
 						return `${userMention(m.id)}`;
 					});
-					console.log(f.name, f.members);
 					const formattedMembers = formatList(membersList);
 					return {
-						inline: true,
+						// inline: true,
 						name: `${index + 1}. ${f.name}`,
 						value: `${DugEmojis.ListBranch}${DugEmojis.Token} \`${f.tokens.toLocaleString()} Tokens\`\n${formattedMembers.join('\n')}`
 					};
