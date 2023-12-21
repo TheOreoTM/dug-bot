@@ -50,21 +50,16 @@ export class FactionListService {
 		// });
 		const refreshButton = new ButtonBuilder().setStyle(ButtonStyle.Secondary).setLabel('Refresh').setCustomId('rfl');
 		const nextUpdatesAt = new Date(Date.now() + minutes(2.5));
-		const fields = allFactions.map(async (f) => {
+		const fields = allFactions.map(async (f, index) => {
 			const membersList = f.members.map((m) => {
 				return `${userMention(m.id)}`;
 			});
 			const formattedMembers = formatList(membersList);
-			const factionRank = await this.db.faction.count({
-				where: {
-					tokens: {
-						gt: f.tokens
-					}
-				}
-			});
+			const rank = index === 0 || f.tokens !== allFactions[index - 1].tokens ? index + 1 : index;
+
 			return {
 				// inline: true,
-				name: `${factionRank + 1}. ${f.name}`,
+				name: `${rank}. ${f.name}`,
 				value: `${DugEmojis.ListBranch}${DugEmojis.Token} \`${f.tokens.toLocaleString()} Tokens\`\n${formattedMembers.join('\n')}`
 			};
 		});
