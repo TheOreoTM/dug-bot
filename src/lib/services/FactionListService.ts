@@ -29,6 +29,7 @@ export class FactionListService {
 		const channel = (await container.client.channels.fetch(ChannelIDs.FactionListChannel)) as TextChannel;
 		if (!messageId) {
 			const message = await this.sendList(channel);
+			console.log('🚀 ~ file: FactionListService.ts:32 ~ FactionListService ~ refreshList ~ message:', message);
 			await this.cache.set(this.key, message.id);
 			return;
 		}
@@ -80,6 +81,7 @@ export class FactionListService {
 		await channel.bulkDelete(99); // Delete everything
 
 		const list = await this.generateList();
+		console.log('🚀 ~ file: FactionListService.ts:83 ~ FactionListService ~ sendList ~ list:', list);
 
 		return await channel.send(list as MessageCreateOptions);
 	}
