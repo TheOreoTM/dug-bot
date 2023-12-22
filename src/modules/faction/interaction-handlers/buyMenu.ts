@@ -17,7 +17,6 @@ import {
 	StringSelectMenuInteraction,
 	StringSelectMenuOptionBuilder
 } from 'discord.js';
-import { compileFunction } from 'vm';
 
 @ApplyOptions<InteractionHandler.Options>({
 	interactionHandlerType: InteractionHandlerTypes.SelectMenu
