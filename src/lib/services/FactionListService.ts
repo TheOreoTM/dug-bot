@@ -59,7 +59,7 @@ export class FactionListService {
 			});
 			const formattedMembers = formatList(membersList);
 			const rank = f.tokens < currentHighestTokens ? currentRank++ : currentRank;
-			currentHighestTokens = f.tokens; // I can do this bc its sorted in 'desc' order
+			// currentHighestTokens = f.tokens; // I can do this bc its sorted in 'desc' order
 
 			return {
 				// inline: true,
