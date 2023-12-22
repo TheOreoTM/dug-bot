@@ -17,6 +17,7 @@ import {
 	StringSelectMenuInteraction,
 	StringSelectMenuOptionBuilder
 } from 'discord.js';
+import { compileFunction } from 'vm';
 
 @ApplyOptions<InteractionHandler.Options>({
 	interactionHandlerType: InteractionHandlerTypes.SelectMenu
@@ -119,8 +120,8 @@ export class MenuHandler extends InteractionHandler {
 		const message = await interaction.reply({
 			ephemeral: true,
 			embeds: [embed],
-			components: [new ActionRowBuilder<StringSelectMenuBuilder>().setComponents(cipherSelect)]
-			// fetchReply: true
+			components: [new ActionRowBuilder<StringSelectMenuBuilder>().setComponents(cipherSelect)],
+			fetchReply: true
 		});
 
 		try {
