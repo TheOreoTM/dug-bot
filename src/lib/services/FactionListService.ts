@@ -50,12 +50,16 @@ export class FactionListService {
 		// });
 		const refreshButton = new ButtonBuilder().setStyle(ButtonStyle.Secondary).setLabel('Refresh').setCustomId('rfl');
 		const nextUpdatesAt = new Date(Date.now() + minutes(2.5));
-		const fields = allFactions.map(async (f, index) => {
+
+		let currentRank = 0;
+		let currentHighestTokens = 0;
+		const fields = allFactions.map(async (f) => {
 			const membersList = f.members.map((m) => {
 				return `${userMention(m.id)}`;
 			});
 			const formattedMembers = formatList(membersList);
-			const rank = index === 0 || f.tokens !== allFactions[index - 1].tokens ? index + 1 : index;
+			currentHighestTokens = f.tokens; // I can do this bc its sorted in 'desc' order
+			const rank = f.tokens < currentHighestTokens ? currentRank++ : currentRank;
 
 			return {
 				// inline: true,
