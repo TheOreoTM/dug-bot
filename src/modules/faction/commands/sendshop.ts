@@ -17,8 +17,7 @@ import {
 } from 'discord.js';
 
 @ApplyOptions<DugCommand.Options>({
-	description: 'Send the shop',
-	preconditions: ['Administrator']
+	description: 'Send the shop'
 })
 export class UserCommand extends DugCommand {
 	// Register Chat Input and Context Menu command
