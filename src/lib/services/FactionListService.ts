@@ -51,7 +51,7 @@ export class FactionListService {
 		const refreshButton = new ButtonBuilder().setStyle(ButtonStyle.Secondary).setLabel('Refresh').setCustomId('rfl');
 		const nextUpdatesAt = new Date(Date.now() + minutes(2.5));
 
-		let currentRank = 1;
+		let currentRank = 0;
 		let currentHighestTokens = Number.MAX_VALUE;
 
 		const fields = allFactions.map(async (f) => {
