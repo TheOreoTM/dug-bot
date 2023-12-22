@@ -1,4 +1,4 @@
-import { Items } from '#lib/items';
+import { FactionItems, Items } from '#lib/items';
 import { Title, User } from '@prisma/client';
 import { BadgeIcon, ItemTypes } from '#lib/types';
 
@@ -59,6 +59,11 @@ export type BaseItemType = {
 
 export type Item = (typeof Items)[keyof typeof Items];
 export type ItemValue = keyof typeof Items;
+
+export type FactionItemValue = keyof typeof FactionItems;
+export type HintItemValue = {
+	[K in keyof typeof FactionItems]: K extends `${string}Hint` ? K : never;
+}[keyof typeof FactionItems];
 
 export type XpBoostItemValue = {
 	[K in keyof typeof Items]: K extends `xpBoost${string}` ? K : never;

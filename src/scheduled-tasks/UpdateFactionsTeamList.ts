@@ -14,5 +14,3 @@ export class UpdateFactionsTeamListTask extends ScheduledTask {
 		await this.container.faction.list.refreshList();
 	}
 }
-
-// Add the return type declaration in Augments.d.ts

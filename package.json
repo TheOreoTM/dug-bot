@@ -13,6 +13,7 @@
 		"#lib/classes": "./dist/lib/classes/index.js",
 		"#lib/services": "./dist/lib/services/index.js",
 		"#lib/structures": "./dist/lib/structures/index.js",
+		"#lib/data": "./dist/lib/data/index.js",
 		"#utils/*": "./dist/lib/util/*.js"
 	},
 	"dependencies": {
@@ -27,6 +28,7 @@
 		"@sapphire/plugin-logger": "^3.0.6",
 		"@sapphire/plugin-scheduled-tasks": "^7.1.2",
 		"@sapphire/plugin-subcommands": "^4.2.2",
+		"@sapphire/shapeshift": "^3.9.5",
 		"@sapphire/time-utilities": "^1.7.10",
 		"@sapphire/utilities": "^3.13.0",
 		"@skyra/env-utilities": "^1.2.1",

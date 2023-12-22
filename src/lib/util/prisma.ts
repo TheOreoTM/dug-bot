@@ -382,6 +382,24 @@ export const xprisma = new PrismaClient().$extends({
 			}
 		},
 		user: {
+			async getUserFaction(userId: string) {
+				const user = await prisma.user.findUnique({
+					where: {
+						id: userId
+					}
+				});
+
+				if (!user?.factionId) return null;
+
+				const faction = await prisma.faction.findUnique({
+					where: {
+						id: user.factionId
+					}
+				});
+
+				return faction ? faction : null;
+			},
+
 			async isRegistered(userId: string) {
 				const user = await prisma.user.findUnique({
 					where: {

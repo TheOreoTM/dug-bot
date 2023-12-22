@@ -9,9 +9,14 @@ import {
 } from '@sapphire/framework';
 import { isNullishOrEmpty, pickRandom } from '@sapphire/utilities';
 import { cyan } from 'colorette';
-import type { APIUser, Guild, User } from 'discord.js';
+import type { APIUser, Channel, Guild, User } from 'discord.js';
 import { GuildMember } from 'discord.js';
 import fuzzysort from 'fuzzysort';
+
+export async function fetchChannel<T extends Channel>(channelId: string): Promise<T | null> {
+	const channel = container.client.channels.cache.get(channelId) ?? (await container.client.channels.fetch(channelId));
+	return channel as T | null;
+}
 
 export function isOwner(member: GuildMember) {
 	return member.id === '600707283097485322';
