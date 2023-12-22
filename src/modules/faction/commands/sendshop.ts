@@ -18,11 +18,11 @@ import {
 
 @ApplyOptions<DugCommand.Options>({
 	description: 'Send the shop',
-	preconditions: ['BotOwner']
+	preconditions: ['Administrator']
 })
 export class UserCommand extends DugCommand {
 	// Register Chat Input and Context Menu command
-	public async messageRun(message: DugCommand.Message) {
+	public override async messageRun(message: DugCommand.Message) {
 		console.log('Sending Shop');
 		const embed = new EmbedBuilder().setColor(DugColors.Info).setDescription('Use the buttons below to buy items');
 
