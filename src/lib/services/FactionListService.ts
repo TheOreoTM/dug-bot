@@ -52,18 +52,21 @@ export class FactionListService {
 		const nextUpdatesAt = new Date(Date.now() + minutes(2.5));
 
 		let currentRank = 1;
-		let currentHighestTokens = allFactions[0].tokens;
+		let currentHighestTokens = Number.MAX_VALUE;
+
 		const fields = allFactions.map(async (f) => {
 			const membersList = f.members.map((m) => {
 				return `${userMention(m.id)}`;
 			});
 			const formattedMembers = formatList(membersList);
-			const rank = f.tokens < currentHighestTokens ? currentRank++ : currentRank;
-			// currentHighestTokens = f.tokens; // I can do this bc its sorted in 'desc' order
+			if (f.tokens < currentHighestTokens) {
+				currentRank++;
+				currentHighestTokens = f.tokens;
+			}
 
 			return {
 				// inline: true,
-				name: `${rank}. ${f.name}`,
+				name: `${currentRank}. ${f.name}`,
 				value: `${DugEmojis.ListBranch}${DugEmojis.Token} \`${f.tokens.toLocaleString()} Tokens\`\n${formattedMembers.join('\n')}`
 			};
 		});
