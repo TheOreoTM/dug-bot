@@ -65,6 +65,7 @@ export class MenuHandler extends InteractionHandler {
 			itemBought = FactionItems[hintType];
 			if (itemBought) {
 				await interaction.followUp({
+					ephemeral: true,
 					embeds: [
 						new EmbedBuilder()
 							.setTitle(`Hint for cipher #${hintLevel.split('-')[1]}`)
