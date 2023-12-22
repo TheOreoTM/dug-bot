@@ -58,6 +58,7 @@ export class FactionListService {
 			const membersList = f.members.map((m) => {
 				return `${userMention(m.id)}`;
 			});
+
 			const formattedMembers = formatList(membersList);
 			if (f.tokens < currentHighestTokens) {
 				currentRank++;
