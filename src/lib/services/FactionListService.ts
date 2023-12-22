@@ -51,8 +51,8 @@ export class FactionListService {
 		const refreshButton = new ButtonBuilder().setStyle(ButtonStyle.Secondary).setLabel('Refresh').setCustomId('rfl');
 		const nextUpdatesAt = new Date(Date.now() + minutes(2.5));
 
-		let currentRank = 0;
-		let currentHighestTokens = 0;
+		let currentRank = 1;
+		let currentHighestTokens = allFactions[0].tokens;
 		const fields = allFactions.map(async (f) => {
 			const membersList = f.members.map((m) => {
 				return `${userMention(m.id)}`;
