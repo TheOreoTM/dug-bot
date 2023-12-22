@@ -1,7 +1,7 @@
 import { DugColors, DugEmojis } from '#constants';
 import { FactionItems } from '#lib/items';
 import { DugCommand } from '#lib/structures';
-import { FactionItemValue, PermissionLevels } from '#lib/types';
+import { FactionItemValue } from '#lib/types';
 import { ApplyOptions } from '@sapphire/decorators';
 import { SelectMenuLimits } from '@sapphire/discord.js-utilities';
 import { send } from '@sapphire/plugin-editable-commands';
@@ -18,7 +18,7 @@ import {
 
 @ApplyOptions<DugCommand.Options>({
 	description: 'Send the shop',
-	permissionLevel: PermissionLevels.BotOwner
+	preconditions: ['BotOwner']
 })
 export class UserCommand extends DugCommand {
 	// Register Chat Input and Context Menu command
