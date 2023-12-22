@@ -58,8 +58,8 @@ export class FactionListService {
 				return `${userMention(m.id)}`;
 			});
 			const formattedMembers = formatList(membersList);
-			currentHighestTokens = f.tokens; // I can do this bc its sorted in 'desc' order
 			const rank = f.tokens < currentHighestTokens ? currentRank++ : currentRank;
+			currentHighestTokens = f.tokens; // I can do this bc its sorted in 'desc' order
 
 			return {
 				// inline: true,
