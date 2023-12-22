@@ -125,7 +125,6 @@ export class MenuHandler extends InteractionHandler {
 
 		try {
 			const response = await message.awaitMessageComponent({ componentType: ComponentType.StringSelect, time: 60000 });
-			await message.edit({ components: [] });
 			return response.values[0] as CipherLevel;
 		} catch {
 			await message.edit({ embeds: [], content: 'Something went wrong', components: [] });
