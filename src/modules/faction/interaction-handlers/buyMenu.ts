@@ -17,6 +17,7 @@ import {
 	StringSelectMenuInteraction,
 	StringSelectMenuOptionBuilder
 } from 'discord.js';
+import { compileFunction } from 'vm';
 
 @ApplyOptions<InteractionHandler.Options>({
 	interactionHandlerType: InteractionHandlerTypes.SelectMenu
@@ -125,6 +126,7 @@ export class MenuHandler extends InteractionHandler {
 
 		try {
 			const response = await message.awaitMessageComponent({ componentType: ComponentType.StringSelect, time: 60000 });
+			await response.editReply({ components: [] });
 			return response.values[0] as CipherLevel;
 		} catch {
 			return null;
