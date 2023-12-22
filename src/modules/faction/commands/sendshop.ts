@@ -45,6 +45,8 @@ export class UserCommand extends DugCommand {
 			}
 		}
 
+		embed.setFields(fields);
+
 		const buyMenu = new StringSelectMenuBuilder()
 			.setCustomId('buy-menu')
 			.setMaxValues(1)

@@ -131,7 +131,7 @@ export class MenuHandler extends InteractionHandler {
 	}
 
 	private sendError(interacton: StringSelectMenuInteraction, message: string) {
-		interacton.reply(formatFailMessage(message));
+		interacton.reply({ content: formatFailMessage(message), ephemeral: true });
 	}
 
 	public override parse(interaction: StringSelectMenuInteraction) {
