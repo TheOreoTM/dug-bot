@@ -17,7 +17,7 @@ export class UserListener extends Listener {
 				new EmbedBuilder()
 					.setColor(Colors.Red)
 					.setAuthor({ name: `${guild.name} (${guild.id})`, iconURL: guild.iconURL({ size: 128 }) || undefined })
-					.setDescription(`**Bulk delete in ${channel}, ${messages.size} messages deleted`)
+					.setDescription(`**Bulk delete in ${channel}, ${messages.size} messages deleted**`)
 					.setFooter({ text: `Bulk Message Deleted • #${channel.name}` })
 					.setTimestamp()
 			]
