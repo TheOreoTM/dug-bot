@@ -1,6 +1,6 @@
 import { DugEvents, LoggingWebhooks } from '#constants';
 import { GuildMessage } from '#lib/types';
-import { getContent, getFullEmbedAuthor, getImage } from '#lib/util/utils';
+import { getContent, getFullEmbedAuthor } from '#lib/util/utils';
 import { ApplyOptions } from '@sapphire/decorators';
 import { Listener } from '@sapphire/framework';
 import { cutText } from '@sapphire/utilities';
@@ -18,7 +18,6 @@ export class UserEvent extends Listener {
 					.setAuthor(getFullEmbedAuthor(message.author, message.url))
 					.setDescription(cutText(getContent(message) || '', 1900))
 					.setFooter({ text: `Message Deleted • #${message.channel.name}` })
-					.setImage(getImage(message)!)
 					.setTimestamp()
 			]
 		});
