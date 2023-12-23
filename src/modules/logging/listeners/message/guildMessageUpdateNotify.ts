@@ -1,5 +1,6 @@
 import { DugColors, DugEvents, LoggingWebhooks } from '#constants';
 import { DugEmbedBuilder } from '#lib/classes';
+import { GuildMessage } from '#lib/types';
 import { getFullEmbedAuthor } from '#lib/util/utils';
 import { ApplyOptions } from '@sapphire/decorators';
 import { Listener } from '@sapphire/framework';
@@ -10,7 +11,7 @@ import { Message, escapeMarkdown } from 'discord.js';
 	event: DugEvents.MessageUpdate
 })
 export class UserEvent extends Listener {
-	public async run(old: Message, message: Message) {
+	public async run(old: Message, message: GuildMessage) {
 		if (message.guild === null || old.content === message.content || message.author.bot) return;
 
 		console.log('update');
@@ -25,7 +26,7 @@ export class UserEvent extends Listener {
 							.map((result) => (result.added ? `**${result.value}**` : result.removed ? `~~${result.value}~~` : result.value))
 							.join(' ')
 					)
-					.setFooter({ text: `Message Edited • #${message.channel}` })
+					.setFooter({ text: `Message Edited • #${message.channel.name}` })
 					.setTimestamp()
 			]
 		});

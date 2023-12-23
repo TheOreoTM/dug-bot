@@ -17,7 +17,7 @@ export class UserEvent extends Listener {
 					.setColor(Colors.Red)
 					.setAuthor(getFullEmbedAuthor(message.author, message.url))
 					.setDescription(cutText(getContent(message) || '', 1900))
-					.setFooter({ text: `Message Deleted • #${message.channel}` })
+					.setFooter({ text: `Message Deleted • #${message.channel.name}` })
 					.setImage(getImage(message)!)
 					.setTimestamp()
 			]
