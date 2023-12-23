@@ -27,7 +27,7 @@ export function parseRedisOption(): Pick<RedisOptions, 'port' | 'password' | 'ho
 }
 
 export const config: Config = {
-	enabled_modules: ['core', 'leveling', 'games', 'faction'],
+	enabled_modules: ['core', 'leveling', 'games', 'faction', 'logging'],
 	tasks: {
 		bull: {
 			connection: parseRedisOption(),
