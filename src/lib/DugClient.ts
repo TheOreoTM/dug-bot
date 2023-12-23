@@ -11,12 +11,15 @@ export class DugClient<Ready extends boolean = boolean> extends SapphireClient<R
 	public constructor() {
 		super(ClientConfig);
 
-		if (isEnabled('core')) enableModule(this, 'core');
-		if (isEnabled('leveling')) enableModule(this, 'leveling');
-		if (isEnabled('economy')) enableModule(this, 'economy');
-		if (isEnabled('faction')) enableModule(this, 'faction');
-		if (isEnabled('games')) enableModule(this, 'games');
-		if (isEnabled('welcomer')) enableModule(this, 'welcomer');
+		for (const module of config.enabled_modules) {
+			if (isEnabled(module)) enableModule(this, module);
+		}
+
+		// if (isEnabled('core')) enableModule(this, 'core');
+		// if (isEnabled('leveling')) enableModule(this, 'leveling');
+		// if (isEnabled('economy')) enableModule(this, 'economy');
+		// if (isEnabled('faction')) enableModule(this, 'faction');
+		// if (isEnabled('games')) enableModule(this, 'games');
 	}
 
 	public override async login(token?: string): Promise<string> {

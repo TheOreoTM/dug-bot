@@ -1,5 +1,7 @@
 import { seconds } from '#utils/common';
 
+export const ZeroWidthSpace = '\u200B';
+
 export const BotPrefix = '.';
 export const BotID = '767781855193464882';
 export const BotOwners = ['600707283097485322'];
@@ -103,6 +105,7 @@ export enum DugEvents {
 	FactionSendInvite = 'factionSendInvite',
 	TriggerDrop = 'triggerDrop',
 	MemberLevelUp = 'memberLevelUp',
+	GuildMessageDelete = 'guildMessageDelete',
 	LogSend = 'logSend'
 }
 
@@ -162,6 +165,10 @@ export const ChannelIDs = {
 	LoggingChannel: '1174956832079495210',
 	FactionListChannel: '1186666346331775057',
 	UpdatesChannel: '1186666298852249680'
+};
+
+export const LoggingWebhooks = {
+	Message: 'https://discord.com/api/webhooks/1188188165106843750/MMhrBgO3iYf-ONUTebBD8m6jHKjxUrLv1rFeTH7tQgJyw0Hmpwd7Hy0WRZS1DcjY9pMO'
 };
 export const WhitelistedChannels = [ChannelIDs.General];
 

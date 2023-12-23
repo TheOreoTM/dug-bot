@@ -142,5 +142,5 @@ interface Config {
 	api: ServerOptions;
 }
 
-export type ModuleName = 'leveling' | 'games' | 'core' | 'faction' | 'economy' | 'welcomer';
+export type ModuleName = 'leveling' | 'games' | 'core' | 'faction' | 'economy' | 'logging';
 export type ModulePath = `modules/${ModuleName}`;

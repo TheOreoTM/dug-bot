@@ -1,4 +1,5 @@
 import { globalBoostCacheKey } from '#lib/database/keys';
+import { LoggingService } from '#lib/services/LoggingService';
 import { container } from '@sapphire/pieces';
 import { isNullish } from '@sapphire/utilities';
 
@@ -20,5 +21,9 @@ export class CoreSettingsService {
 
 		const returnValue = await this.cache.set(key, newValue);
 		return returnValue;
+	}
+
+	get logging() {
+		return new LoggingService();
 	}
 }

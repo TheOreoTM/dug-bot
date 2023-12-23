@@ -9,9 +9,98 @@ import {
 } from '@sapphire/framework';
 import { isNullishOrEmpty, pickRandom } from '@sapphire/utilities';
 import { cyan } from 'colorette';
-import type { APIUser, Channel, Guild, User } from 'discord.js';
+import type { APIUser, Channel, EmbedAssetData, EmbedAuthorData, Guild, ImageURLOptions, Message, User } from 'discord.js';
 import { GuildMember } from 'discord.js';
 import fuzzysort from 'fuzzysort';
+
+/**
+ * Image extensions:
+ * - bmp
+ * - jpg
+ * - jpeg
+ * - png
+ * - gif
+ * - webp
+ */
+export const IMAGE_EXTENSION = /\.(bmp|jpe?g|png|gif|webp)$/i;
+
+const ROOT = 'https://cdn.discordapp.com';
+export function getDisplayAvatar(user: User | APIUser, options: ImageURLOptions = {}) {
+	if (user.avatar === null) {
+		const id = (usesPomelo(user) ? (BigInt(user.id) >> 22n) % 6n : Number(user.discriminator) % 5).toString();
+		return `${ROOT}/embed/avatars/${id}.png`;
+	}
+
+	const extension = !options.forceStatic && user.avatar.startsWith('a_') ? 'gif' : options.extension ?? 'webp';
+	const size = typeof options.size === 'undefined' ? '' : `?size=${options.size}`;
+	return `${ROOT}/avatars/${user.id}/${user.avatar}.${extension}${size}`;
+}
+
+/**
+ * Get a image attachment from a message.
+ * @param message The Message instance to get the image url from
+ */
+export function getAttachment(message: Message): EmbedAssetData | null {
+	if (message.attachments.size) {
+		const attachment = message.attachments.find((att) => IMAGE_EXTENSION.test(att.name ?? att.url));
+		if (attachment) {
+			return {
+				url: attachment.url,
+				proxyURL: attachment.proxyURL,
+				height: attachment.height!,
+				width: attachment.width!
+			};
+		}
+	}
+
+	for (const embed of message.embeds) {
+		if (embed.image) {
+			return {
+				url: embed.image.url,
+				proxyURL: embed.image.proxyURL!,
+				height: embed.image.height!,
+				width: embed.image.width!
+			};
+		}
+
+		if (embed.thumbnail) {
+			return {
+				url: embed.thumbnail.url,
+				proxyURL: embed.thumbnail.proxyURL!,
+				height: embed.thumbnail.height!,
+				width: embed.thumbnail.width!
+			};
+		}
+	}
+
+	return null;
+}
+
+/**
+ * Get the image url from a message.
+ * @param message The Message instance to get the image url from
+ */
+export function getImage(message: Message): string | null {
+	const attachment = getAttachment(message);
+	return attachment ? attachment.proxyURL || attachment.url : null;
+}
+
+/**
+ * Get the content from a message.
+ * @param message The Message instance to get the content from
+ */
+export function getContent(message: Message): string | null {
+	if (message.content) return message.content;
+	for (const embed of message.embeds) {
+		if (embed.description) return embed.description;
+		if (embed.fields.length) return embed.fields[0].value;
+	}
+	return null;
+}
+
+export function getFullEmbedAuthor(user: User | APIUser, url?: string | undefined): EmbedAuthorData {
+	return { name: `${getTag(user)} (${user.id})`, iconURL: getDisplayAvatar(user, { size: 128 }), url };
+}
 
 export async function fetchChannel<T extends Channel>(channelId: string): Promise<T | null> {
 	const channel = container.client.channels.cache.get(channelId) ?? (await container.client.channels.fetch(channelId));

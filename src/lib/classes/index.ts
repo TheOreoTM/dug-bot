@@ -6,3 +6,4 @@ export * from './PaginatedShop.js';
 export * from './TypeRacer.js';
 export * from './Timestamp.js';
 export * from './SendLogEmbed.js';
+export * from './DugEmbedBuillder.js';
