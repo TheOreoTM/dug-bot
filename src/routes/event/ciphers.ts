@@ -13,6 +13,6 @@ export class UserRoute extends Route {
 		for (const cipher of unlockedArray) {
 			ciphers.push({ ...CIPHER_DATA[`CIPHER_${cipher}`], LEVEL: cipher });
 		}
-		response.json({ ...ciphers });
+		response.json({ ciphers });
 	}
 }
