@@ -1,5 +1,5 @@
 import { DugColors } from '#constants';
-import { CIPHER_HINTS, CipherLevel } from '#lib/data';
+import { CIPHER_DATA, CipherLevel } from '#lib/data';
 import { FactionItems } from '#lib/items';
 import { FactionItemValue, HintItemValue } from '#lib/types';
 import { formatFailMessage } from '#lib/util/formatter';
@@ -47,14 +47,14 @@ export class MenuHandler extends InteractionHandler {
 			let hint: string = '';
 			switch (hintType) {
 				case 'majorHint':
-					hint = CIPHER_HINTS[hintLevel].MAJOR;
+					hint = CIPHER_DATA[hintLevel].MAJOR;
 
 					break;
 				case 'mediumHint':
-					hint = CIPHER_HINTS[hintLevel].MEDIUM;
+					hint = CIPHER_DATA[hintLevel].MEDIUM;
 					break;
 				case 'minorHint':
-					hint = CIPHER_HINTS[hintLevel].MINOR;
+					hint = CIPHER_DATA[hintLevel].MINOR;
 					break;
 				default:
 					hint = 'No hint available for this. Get scammed idiot. Go ask an admin to refund you ig.';
@@ -104,7 +104,7 @@ export class MenuHandler extends InteractionHandler {
 			availableCiphers.push({
 				label: `Cipher ${cipher}`,
 				value: level,
-				description: CIPHER_HINTS[level].DESCRIPTION
+				description: CIPHER_DATA[level].DESCRIPTION
 			});
 		}
 

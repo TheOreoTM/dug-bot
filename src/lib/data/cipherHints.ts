@@ -1,4 +1,4 @@
-export const CIPHER_HINTS: Readonly<Record<CipherLevel, CipherHint>> = {
+export const CIPHER_DATA: Readonly<Record<CipherLevel, CipherData>> = {
 	CIPHER_1: {
 		DESCRIPTION: 'The Old Newspapers',
 		MINOR: 'Doors are not the only things that are knocked.',
@@ -13,7 +13,7 @@ export const CIPHER_HINTS: Readonly<Record<CipherLevel, CipherHint>> = {
 	}
 } as const;
 
-type CipherHint = {
+export type CipherData = {
 	DESCRIPTION: string;
 	MINOR: string;
 	MEDIUM: string;
