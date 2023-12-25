@@ -10,95 +10,133 @@ import { ApplyOptions } from '@sapphire/decorators';
 })
 export class UserCommand extends DugCommand {
 	public registerApplicationCommands(registry: DugCommand.Registry) {
-		registry.registerChatInputCommand((builder) =>
-			builder
-				.setName(this.name)
-				.setDescription(this.description)
-				.addSubcommandGroup((builder) =>
-					builder
-						.setName('add')
-						.setDescription('Add')
-						.addSubcommand((builder) =>
-							builder
-								.setName('token')
-								.setDescription('Add tokens to a faction')
-								.addStringOption((option) =>
-									option.setName('faction').setDescription('The faction').setAutocomplete(true).setRequired(true)
-								)
-								.addNumberOption((option) =>
-									option.setName('amount').setDescription('The amount of tokens to add').setRequired(true).setMinValue(0)
-								)
-						)
-						.addSubcommand((builder) =>
-							builder
-								.setName('badge')
-								.setDescription('Add a badge to a faction')
-								.addStringOption((option) =>
-									option.setName('faction').setDescription('The faction').setAutocomplete(true).setRequired(true)
-								)
-								.addStringOption((option) =>
-									option.setName('badge').setDescription('The badge you want to add').setRequired(true).setAutocomplete(true)
-								)
-						)
-						.addSubcommand((builder) =>
-							builder
-								.setName('member')
-								.setDescription('Add a member to a faction')
-								.addStringOption((option) =>
-									option.setName('faction').setDescription('The faction').setAutocomplete(true).setRequired(true)
-								)
-								.addUserOption((option) => option.setName('member').setDescription('The member you want to add').setRequired(true))
-						)
-				)
+		registry.registerChatInputCommand(
+			(builder) =>
+				builder
+					.setName(this.name)
+					.setDescription(this.description)
+					.addSubcommandGroup((builder) =>
+						builder
+							.setName('add')
+							.setDescription('Add')
+							.addSubcommand((builder) =>
+								builder
+									.setName('token')
+									.setDescription('Add tokens to a faction')
+									.addStringOption((option) =>
+										option.setName('faction').setDescription('The faction').setAutocomplete(true).setRequired(true)
+									)
+									.addNumberOption((option) =>
+										option.setName('amount').setDescription('The amount of tokens to add').setRequired(true).setMinValue(0)
+									)
+							)
+							.addSubcommand((builder) =>
+								builder
+									.setName('badge')
+									.setDescription('Add a badge to a faction')
+									.addStringOption((option) =>
+										option.setName('faction').setDescription('The faction').setAutocomplete(true).setRequired(true)
+									)
+									.addStringOption((option) =>
+										option.setName('badge').setDescription('The badge you want to add').setRequired(true).setAutocomplete(true)
+									)
+							)
+							.addSubcommand((builder) =>
+								builder
+									.setName('member')
+									.setDescription('Add a member to a faction')
+									.addStringOption((option) =>
+										option.setName('faction').setDescription('The faction').setAutocomplete(true).setRequired(true)
+									)
+									.addUserOption((option) =>
+										option.setName('member').setDescription('The member you want to add').setRequired(true)
+									)
+							)
+					) // add
+					.addSubcommandGroup((builder) =>
+						builder
+							.setName('remove')
+							.setDescription('remove')
+							.addSubcommand((builder) =>
+								builder
+									.setName('token')
+									.setDescription('Remove tokens from a faction')
+									.addStringOption((option) =>
+										option.setName('faction').setDescription('The faction').setAutocomplete(true).setRequired(true)
+									)
 
-				.addSubcommandGroup((builder) =>
-					builder
-						.setName('remove')
-						.setDescription('remove')
-						.addSubcommand((builder) =>
+									.addNumberOption((option) =>
+										option.setName('amount').setDescription('The amount of tokens to remove').setRequired(true).setMinValue(0)
+									)
+							)
+							.addSubcommand((builder) =>
+								builder
+									.setName('badge')
+									.setDescription('Remove a badge from a faction')
+									.addStringOption((option) =>
+										option.setName('faction').setDescription('The faction').setAutocomplete(true).setRequired(true)
+									)
+									.addStringOption((option) =>
+										option.setName('badge').setDescription('The badge you want to remove').setRequired(true).setAutocomplete(true)
+									)
+							)
+							.addSubcommand((builder) =>
+								builder
+									.setName('member')
+									.setDescription('Remove a member from a faction')
+									.addStringOption((option) =>
+										option.setName('faction').setDescription('The faction').setAutocomplete(true).setRequired(true)
+									)
+									.addUserOption((option) =>
+										option.setName('member').setDescription('The member you want to remove').setRequired(true)
+									)
+							)
+					) // remove
+					.addSubcommand((builder) =>
+						builder
+							.setName('delete')
+							.setDescription('Delete a faction')
+							.addStringOption((option) =>
+								option.setName('faction').setDescription('The faction').setAutocomplete(true).setRequired(true)
+							)
+					) // delete
+					.addSubcommand(
+						(builder) =>
 							builder
-								.setName('token')
-								.setDescription('Remove tokens from a faction')
+								.setName('update')
+								.setDescription('Update')
 								.addStringOption((option) =>
 									option.setName('faction').setDescription('The faction').setAutocomplete(true).setRequired(true)
 								)
-
-								.addNumberOption((option) =>
-									option.setName('amount').setDescription('The amount of tokens to remove').setRequired(true).setMinValue(0)
-								)
-						)
-						.addSubcommand((builder) =>
-							builder
-								.setName('badge')
-								.setDescription('Remove a badge from a faction')
 								.addStringOption((option) =>
-									option.setName('faction').setDescription('The faction').setAutocomplete(true).setRequired(true)
+									option //
+										.setMinLength(2)
+										.setMaxLength(32)
+										.setName('name')
+										.setDescription('The name of the faction')
+										.setRequired(true)
 								)
 								.addStringOption((option) =>
-									option.setName('badge').setDescription('The badge you want to remove').setRequired(true).setAutocomplete(true)
+									option //
+										.setMinLength(1)
+										.setMaxLength(512)
+										.setName('description')
+										.setDescription('The description of the faction')
+										.setRequired(true)
 								)
-						)
-						.addSubcommand((builder) =>
-							builder
-								.setName('member')
-								.setDescription('Remove a member from a faction')
-								.addStringOption((option) =>
-									option.setName('faction').setDescription('The faction').setAutocomplete(true).setRequired(true)
-								)
-								.addUserOption((option) => option.setName('member').setDescription('The member you want to remove').setRequired(true))
-						)
-				)
-				.addSubcommand((builder) =>
-					builder
-						.setName('delete')
-						.setDescription('Delete a faction')
-						.addStringOption((option) => option.setName('faction').setDescription('The faction').setAutocomplete(true).setRequired(true))
-				)
+								.addUserOption((option) => option.setName('owner').setDescription('The owner of the faction').setRequired(true))
+								.addAttachmentOption((option) =>
+									option //
+										.setName('icon')
+										.setDescription('The icon of the faction')
+										.setRequired(true)
+								) // update
+					) // update
 		);
 	}
 
 	public async chatInputRun(interaction: DugCommand.ChatInputCommandInteraction) {
-		const subcommand = interaction.options.getSubcommand(true) as 'token' | 'member' | 'delete' | 'badge';
+		const subcommand = interaction.options.getSubcommand(true) as 'token' | 'member' | 'delete' | 'update' | 'badge';
 		const factionId = Number(interaction.options.getString('faction', true));
 		if (isNaN(factionId)) {
 			interaction.reply({ content: formatFailMessage('That faction doesnt exist'), ephemeral: true });
@@ -118,6 +156,30 @@ export class UserCommand extends DugCommand {
 		}
 
 		let message: string = 'Something happened';
+
+		if (subcommand === 'update') {
+			const { options } = interaction;
+			const name = options.getString('name', true);
+			const description = options.getString('description', true);
+			const icon = options.getAttachment('icon', true);
+
+			await this.container.db.faction.update({
+				where: {
+					id: faction.id
+				},
+				data: {
+					description,
+					name,
+					iconUrl: icon.url
+				},
+				select: SelectAllOptions
+			});
+
+			message = formatSuccessMessage(`Updated faction ${faction.name}`);
+
+			interaction.reply(message);
+			return;
+		}
 
 		if (subcommand === 'delete') {
 			await this.container.db.faction.delete({

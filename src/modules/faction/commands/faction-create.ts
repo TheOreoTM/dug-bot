@@ -29,7 +29,7 @@ export class UserCommand extends DugCommand {
 						.setDescription('The description of the faction')
 						.setRequired(true)
 				)
-				.addUserOption((option) => option.setName('owner').setDescription('The owner of the factoin').setRequired(true))
+				.addUserOption((option) => option.setName('owner').setDescription('The owner of the faction').setRequired(true))
 
 				// .addStringOption((option) =>
 				// 	option //
