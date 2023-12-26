@@ -1,5 +1,4 @@
 import { ChannelIDs, DugColors, DugEmojis } from '#constants';
-import { CipherLevel } from '#lib/data';
 import { cipherCacheKey, cipherPurchasesCacheKey } from '#lib/database/keys';
 import { fetchChannel } from '#lib/util/utils';
 import { container } from '@sapphire/pieces';
