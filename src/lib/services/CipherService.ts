@@ -2,6 +2,7 @@ import { ChannelIDs, DugColors, DugEmojis } from '#constants';
 import { cipherCacheKey, cipherPurchasesCacheKey } from '#lib/database/keys';
 import { fetchChannel } from '#lib/util/utils';
 import { container } from '@sapphire/pieces';
+import { isNullish } from '@sapphire/utilities';
 import { EmbedBuilder, TextChannel } from 'discord.js';
 
 export class CipherService {
@@ -12,7 +13,7 @@ export class CipherService {
 	public async getBoughtHints(userId: string, level: number) {
 		const key = this.purchasesKey(userId, level);
 		const cachedData = await this.cache.get(key);
-		if (!cachedData) {
+		if (isNullish(cachedData)) {
 			return [];
 		}
 		const data = JSON.parse(cachedData) as number[];
@@ -22,9 +23,11 @@ export class CipherService {
 	public async buyHint(userId: string, level: number, hint: 0 | 1 | 2) {
 		const key = this.purchasesKey(userId, level);
 		const oldCachedData = await this.getBoughtHints(userId, level);
+		console.log('🚀 ~ file: CipherService.ts:25 ~ CipherService ~ buyHint ~ oldCachedData:', oldCachedData);
 		const boughtHints = new Set(oldCachedData);
 		if (boughtHints.has(hint)) return;
 		boughtHints.add(hint);
+		console.log('🚀 ~ file: CipherService.ts:28 ~ CipherService ~ buyHint ~ boughtHints:', boughtHints);
 
 		this.cache.set(key, JSON.stringify(boughtHints));
 	}
