@@ -7,7 +7,7 @@ import { methods, Route, type ApiRequest, type ApiResponse, HttpCodes } from '@s
 })
 export class UserRoute extends Route {
 	public async [methods.POST](request: ApiRequest, response: ApiResponse) {
-		const requestBody = request.body as { level: string | undefined; user_id: string | undefined };
+		const requestBody = JSON.parse(request.body as string) as { level: string | undefined; user_id: string | undefined };
 
 		const levelRes = requestBody.level;
 		const userId = requestBody.user_id;
