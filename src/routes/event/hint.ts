@@ -43,6 +43,7 @@ export class UserRoute extends Route {
 		const levelRes = requestBody['level'];
 		const userId = requestBody['user_id'];
 		const hintRes = requestBody['hint'];
+		console.log('🚀 ~ file: hint.ts:46 ~ UserRoute ~ hintRes:', hintRes);
 		const priceRes = requestBody['price'];
 
 		if (!levelRes) {
@@ -68,13 +69,14 @@ export class UserRoute extends Route {
 		}
 
 		if (!hintRes) {
-			return response.status(HttpCodes.BadRequest).json({ error: 'Invalid hint' });
+			return response.status(HttpCodes.BadRequest).json({ error: `Invalid hint` });
 		}
 
 		const hint = parseInt(hintRes);
 		if (isNaN(hint) || ![0, 1, 2].includes(hint)) {
 			return response.status(HttpCodes.BadRequest).json({ error: 'Invalid hint. Should be a valid hint' });
 		}
+		console.log('🚀 ~ file: hint.ts:77 ~ UserRoute ~ hint:', hint);
 
 		if (!userId) {
 			return response.status(HttpCodes.BadRequest).json({ error: 'Invalid Body' });
