@@ -29,7 +29,7 @@ export class CipherService {
 		boughtHints.add(hint);
 		console.log('🚀 ~ file: CipherService.ts:28 ~ CipherService ~ buyHint ~ boughtHints:', boughtHints);
 
-		this.cache.set(key, JSON.stringify(boughtHints));
+		this.cache.set(key, JSON.stringify(Array.from(boughtHints)));
 	}
 
 	public async unlockCipher(level: number) {
