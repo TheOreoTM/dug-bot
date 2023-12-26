@@ -7,15 +7,14 @@ import { methods, Route, type ApiRequest, type ApiResponse, HttpCodes } from '@s
 })
 export class UserRoute extends Route {
 	public async [methods.POST](_request: ApiRequest, response: ApiResponse) {
-		const requestBody = _request.body as { level: string | undefined; user_id: string | undefined };
+		const requestBody = _request.body as { level: number | undefined; user_id: string | undefined };
 
-		const levelRes = requestBody['level'];
+		const level = requestBody['level'];
 		const userId = requestBody['user_id'];
 
-		if (!levelRes) {
+		if (!level) {
 			return response.status(HttpCodes.BadRequest).json({ error: 'Invalid cipher' });
 		}
-		const level = parseInt(levelRes);
 		if (isNaN(level)) {
 			return response.status(HttpCodes.BadRequest).json({ error: 'Invalid level. Should be a number' });
 		}
