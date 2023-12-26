@@ -68,7 +68,7 @@ export class UserRoute extends Route {
 		}
 
 		if (hintRes !== '0' && !hintRes) {
-			return response.status(HttpCodes.BadRequest).json({ error: `Invalid hint: ${hintRes}` });
+			return response.status(HttpCodes.BadRequest).json({ error: `Invalid hint: ${typeof hintRes} ${hintRes}` });
 		}
 
 		const hint = parseInt(hintRes);
