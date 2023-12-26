@@ -88,6 +88,17 @@ export class UserRoute extends Route {
 
 		await this.container.cipher.buyHint(userId, level, hint as 0 | 1 | 2);
 
+		await this.container.db.faction.update({
+			where: {
+				id: faction.id
+			},
+			data: {
+				tokens: {
+					decrement: price
+				}
+			}
+		});
+
 		return response.json({ message: 'success' });
 	}
 }
