@@ -14,20 +14,20 @@ export class CipherService {
 		const key = this.purchasesKey(userId, level);
 		const cachedData = await this.cache.get(key);
 		if (!cachedData) {
-			return {};
+			return [];
 		}
-		const data = JSON.parse(cachedData) as Record<number, number[]>;
+		const data = JSON.parse(cachedData) as number[];
 		return data;
 	}
 
 	public async buyHint(userId: string, level: number, hint: 0 | 1 | 2) {
 		const key = this.purchasesKey(userId, level);
 		const oldCachedData = await this.getBoughtHints(userId, level);
-		const boughtHints = new Set(oldCachedData[level]);
+		const boughtHints = new Set(oldCachedData);
 		if (boughtHints.has(hint)) return;
 		boughtHints.add(hint);
-		oldCachedData[level] = Array.from(boughtHints);
-		this.cache.set(key, JSON.stringify(oldCachedData));
+
+		this.cache.set(key, JSON.stringify(boughtHints));
 	}
 
 	public async unlockCipher(level: number) {
