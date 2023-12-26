@@ -1,5 +1,5 @@
-import { DugColors } from '#constants';
-import { CIPHER_DATA, CipherLevel } from '#lib/data';
+import { API_URI, DugColors } from '#constants';
+import { CipherData, CipherLevel } from '#lib/data';
 import { FactionItems } from '#lib/items';
 import { FactionItemValue, HintItemValue } from '#lib/types';
 import { formatFailMessage } from '#lib/util/formatter';
@@ -43,6 +43,9 @@ export class MenuHandler extends InteractionHandler {
 			const hintType = item.value as HintItemValue;
 			const hintLevel: CipherLevel | null = await this.promptHintLevel(interaction);
 			if (!hintLevel) return;
+
+			const cipherDataRes = await fetch(`${API_URI}/ciphers`);
+			const CIPHER_DATA = (await cipherDataRes.json()) as Record<CipherLevel, CipherData>;
 
 			let hint: string = '';
 			switch (hintType) {
@@ -97,6 +100,8 @@ export class MenuHandler extends InteractionHandler {
 
 		const unlockedCiphers = await this.container.cipher.getUnlockedSet();
 		const availableCiphers: StringSelectMenuOption = [];
+		const cipherDataRes = await fetch(`${API_URI}/ciphers`);
+		const CIPHER_DATA = (await cipherDataRes.json()) as Record<CipherLevel, CipherData>;
 
 		for (const cipher of unlockedCiphers) {
 			const level = `CIPHER_${cipher}` as CipherLevel;

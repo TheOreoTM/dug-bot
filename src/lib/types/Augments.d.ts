@@ -25,6 +25,7 @@ declare module '@skyra/env-utilities' {
 	interface Env {
 		DISCORD_TOKEN: string;
 		API_KEY: string;
+		API_URI: string;
 
 		BOT_OWNER: string;
 		BOT_PRIVILEGED_USERS?: ArrayString;

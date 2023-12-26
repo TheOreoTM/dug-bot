@@ -1,6 +1,9 @@
 import { seconds } from '#utils/common';
+import { envParseString } from '@skyra/env-utilities';
 
 export const ZeroWidthSpace = '\u200B';
+
+export const API_URI = envParseString('API_URI');
 
 export const BotPrefix = '.';
 export const BotID = '767781855193464882';
