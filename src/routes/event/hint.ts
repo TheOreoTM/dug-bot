@@ -6,7 +6,7 @@ import { methods, Route, type ApiRequest, type ApiResponse, HttpCodes } from '@s
 	route: 'event/hint'
 })
 export class UserRoute extends Route {
-	public async [methods.GET](_request: ApiRequest, response: ApiResponse) {
+	public async [methods.POST](_request: ApiRequest, response: ApiResponse) {
 		const requestBody = _request.body as { level: string | undefined; user_id: string | undefined };
 
 		const levelRes = requestBody['level'];
@@ -29,7 +29,7 @@ export class UserRoute extends Route {
 	}
 
 	@authenticated()
-	public async [methods.POST](request: ApiRequest, response: ApiResponse) {
+	public async [methods.PATCH](request: ApiRequest, response: ApiResponse) {
 		const requestBody = request.body as {
 			level: string | undefined;
 			price: string | undefined;
