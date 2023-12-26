@@ -9,10 +9,10 @@ export class UserRoute extends Route {
 	public async [methods.POST](request: ApiRequest, response: ApiResponse) {
 		const requestBody = request.body as { level: string | undefined; user_id: string | undefined };
 
-		const levelRes = requestBody['level'];
-		const userId = requestBody['user_id'];
+		const levelRes = requestBody.level;
+		const userId = requestBody.user_id;
 
-		console.log(requestBody);
+		console.log(requestBody, JSON.parse(requestBody as unknown as string));
 		console.log(levelRes, userId);
 
 		if (!levelRes) {
