@@ -9,6 +9,6 @@ export class UserRoute extends Route {
 		const unlockedSet = await this.container.cipher.getUnlockedSet();
 		const unlockedArray = Array.from(unlockedSet);
 
-		response.json({ cipher: unlockedArray });
+		response.json({ ciphers: unlockedArray });
 	}
 }
