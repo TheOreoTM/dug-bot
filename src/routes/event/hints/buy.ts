@@ -3,7 +3,7 @@ import { ApplyOptions } from '@sapphire/decorators';
 import { methods, Route, type ApiRequest, type ApiResponse, HttpCodes, type RouteOptions } from '@sapphire/plugin-api';
 
 @ApplyOptions<RouteOptions>({
-	route: 'event/hint/buy'
+	route: 'event/hints/buy'
 })
 export class UserRoute extends Route {
 	public async [methods.GET](_request: ApiRequest, response: ApiResponse) {
