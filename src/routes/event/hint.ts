@@ -42,10 +42,6 @@ export class UserRoute extends Route {
 		const hintRes = requestBody['hint'];
 		const priceRes = requestBody['price'];
 
-		console.log(requestBody);
-		console.log(levelRes, userId, hintRes);
-		console.log(requestBody.level, requestBody.hint, requestBody.user_id);
-
 		if (!levelRes) {
 			return response.status(HttpCodes.BadRequest).json({ message: 'Invalid cipher' });
 		}
