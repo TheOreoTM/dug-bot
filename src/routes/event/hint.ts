@@ -37,12 +37,12 @@ export class UserRoute extends Route {
 			level: string | undefined;
 			price: string | undefined;
 			user_id: string | undefined;
-			hint: string | undefined;
+			hint: number | undefined;
 		};
 
 		const levelRes = requestBody['level'];
 		const userId = requestBody['user_id'];
-		const hintRes = requestBody['hint'];
+		const hint = requestBody['hint'];
 		const priceRes = requestBody['price'];
 
 		if (!levelRes) {
@@ -67,11 +67,10 @@ export class UserRoute extends Route {
 			return response.status(HttpCodes.BadRequest).json({ error: 'Invalid cipher. Should be a number' });
 		}
 
-		if (hintRes !== '0' && !hintRes) {
-			return response.status(HttpCodes.BadRequest).json({ error: `Invalid hint: ${typeof hintRes} ${hintRes}` });
+		if (hint !== 0 && !hint) {
+			return response.status(HttpCodes.BadRequest).json({ error: `Invalid hint: ${typeof hint} ${hint}` });
 		}
 
-		const hint = parseInt(hintRes);
 		if (isNaN(hint) || ![0, 1, 2].includes(hint)) {
 			return response.status(HttpCodes.BadRequest).json({ error: 'Invalid hint. Should be a valid hint' });
 		}
