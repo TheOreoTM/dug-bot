@@ -1,12 +1,34 @@
 import { ChannelIDs, DugColors, DugEmojis } from '#constants';
-import { cipherCacheKey } from '#lib/database/keys';
+import { CipherLevel } from '#lib/data';
+import { cipherCacheKey, cipherPurchasesCacheKey } from '#lib/database/keys';
 import { fetchChannel } from '#lib/util/utils';
 import { container } from '@sapphire/pieces';
 import { EmbedBuilder, TextChannel } from 'discord.js';
 
 export class CipherService {
-	private readonly key = cipherCacheKey;
+	private readonly hintsKey = cipherCacheKey;
+	private readonly purchasesKey = cipherPurchasesCacheKey;
 	private readonly cache = container.cache;
+
+	public async getBoughtHints(userId: string, level: number) {
+		const key = this.purchasesKey(userId, level);
+		const cachedData = await this.cache.get(key);
+		if (!cachedData) {
+			return {};
+		}
+		const data = JSON.parse(cachedData) as Record<number, number[]>;
+		return data;
+	}
+
+	public async buyHint(userId: string, level: number, hint: 0 | 1 | 2) {
+		const key = this.purchasesKey(userId, level);
+		const oldCachedData = await this.getBoughtHints(userId, level);
+		const boughtHints = new Set(oldCachedData[level]);
+		if (boughtHints.has(hint)) return;
+		boughtHints.add(hint);
+		oldCachedData[level] = Array.from(boughtHints);
+		this.cache.set(key, JSON.stringify(oldCachedData));
+	}
 
 	public async unlockCipher(level: number) {
 		const currentUnlockedSet = await this.getUnlockedSet();
@@ -26,16 +48,16 @@ export class CipherService {
 
 	public async setUnlockedList(newSet: Set<number>) {
 		const arr = Array.from(newSet);
-		await this.cache.set(this.key, JSON.stringify(arr));
+		await this.cache.set(this.hintsKey, JSON.stringify(arr));
 	}
 
 	public async __getUnlockedList() {
-		const currentUnlockedList: Array<number> = JSON.parse((await this.cache.get(this.key)) ?? '[]');
+		const currentUnlockedList: Array<number> = JSON.parse((await this.cache.get(this.hintsKey)) ?? '[]');
 		return currentUnlockedList;
 	}
 
 	public async getUnlockedSet() {
-		const currentUnlockedList: Array<number> = JSON.parse((await this.cache.get(this.key)) ?? '[]');
+		const currentUnlockedList: Array<number> = JSON.parse((await this.cache.get(this.hintsKey)) ?? '[]');
 		return new Set(currentUnlockedList);
 	}
 }

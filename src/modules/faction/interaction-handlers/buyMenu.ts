@@ -51,7 +51,6 @@ export class MenuHandler extends InteractionHandler {
 			switch (hintType) {
 				case 'majorHint':
 					hint = CIPHER_DATA[hintLevel].MAJOR;
-
 					break;
 				case 'mediumHint':
 					hint = CIPHER_DATA[hintLevel].MEDIUM;
