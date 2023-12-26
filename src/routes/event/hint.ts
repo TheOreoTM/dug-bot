@@ -13,15 +13,15 @@ export class UserRoute extends Route {
 		const userId = requestBody['user_id'];
 
 		if (!levelRes) {
-			return response.status(HttpCodes.BadRequest).json({ message: 'Invalid cipher' });
+			return response.status(HttpCodes.BadRequest).json({ error: 'Invalid cipher' });
 		}
 		const level = parseInt(levelRes);
 		if (isNaN(level)) {
-			return response.status(HttpCodes.BadRequest).json({ message: 'Invalid level. Should be a number' });
+			return response.status(HttpCodes.BadRequest).json({ error: 'Invalid level. Should be a number' });
 		}
 
 		if (!userId) {
-			return response.status(HttpCodes.BadRequest).json({ message: 'Invalid Body' });
+			return response.status(HttpCodes.BadRequest).json({ error: 'Invalid Body' });
 		}
 
 		const hints = await this.container.cipher.getBoughtHints(userId, level);
@@ -43,46 +43,46 @@ export class UserRoute extends Route {
 		const priceRes = requestBody['price'];
 
 		if (!levelRes) {
-			return response.status(HttpCodes.BadRequest).json({ message: 'Invalid cipher' });
+			return response.status(HttpCodes.BadRequest).json({ error: 'Invalid cipher' });
 		}
 		const level = parseInt(levelRes);
 		if (isNaN(level)) {
-			return response.status(HttpCodes.BadRequest).json({ message: 'Invalid level. Should be a number' });
+			return response.status(HttpCodes.BadRequest).json({ error: 'Invalid level. Should be a number' });
 		}
 
 		if (!priceRes) {
-			return response.status(HttpCodes.BadRequest).json({ message: 'Invalid price' });
+			return response.status(HttpCodes.BadRequest).json({ error: 'Invalid price' });
 		}
 
 		const price = parseInt(priceRes);
 		if (isNaN(price)) {
-			return response.status(HttpCodes.BadRequest).json({ message: 'Invalid price. Should be a number' });
+			return response.status(HttpCodes.BadRequest).json({ error: 'Invalid price. Should be a number' });
 		}
 
 		const amount = parseInt(levelRes);
 		if (isNaN(amount)) {
-			return response.status(HttpCodes.BadRequest).json({ message: 'Invalid cipher. Should be a number' });
+			return response.status(HttpCodes.BadRequest).json({ error: 'Invalid cipher. Should be a number' });
 		}
 
 		if (!hintRes) {
-			return response.status(HttpCodes.BadRequest).json({ message: 'Invalid hint' });
+			return response.status(HttpCodes.BadRequest).json({ error: 'Invalid hint' });
 		}
 
 		const hint = parseInt(hintRes);
 		if (isNaN(hint) || ![0, 1, 2].includes(hint)) {
-			return response.status(HttpCodes.BadRequest).json({ message: 'Invalid hint. Should be a valid hint' });
+			return response.status(HttpCodes.BadRequest).json({ error: 'Invalid hint. Should be a valid hint' });
 		}
 
 		if (!userId) {
-			return response.status(HttpCodes.BadRequest).json({ message: 'Invalid Body' });
+			return response.status(HttpCodes.BadRequest).json({ error: 'Invalid Body' });
 		}
 
 		const faction = await this.container.db.user.getUserFaction(userId);
-		if (!faction) return response.status(HttpCodes.BadRequest).json({ message: 'You have to be in a faction to participate in this event' });
+		if (!faction) return response.status(HttpCodes.BadRequest).json({ error: 'You have to be in a faction to participate in this event' });
 
 		const factionBalance = faction.tokens ?? 0;
 		const canBuy = factionBalance >= price;
-		if (!canBuy) return response.status(HttpCodes.BadRequest).json({ message: 'Your faction cannot afford this' });
+		if (!canBuy) return response.status(HttpCodes.BadRequest).json({ error: 'Your faction cannot afford this' });
 
 		await this.container.cipher.buyHint(userId, level, hint as 0 | 1 | 2);
 
