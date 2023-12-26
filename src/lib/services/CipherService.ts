@@ -13,7 +13,7 @@ export class CipherService {
 	public async getBoughtHints(userId: string, level: number) {
 		const key = this.purchasesKey(userId, level);
 		const cachedData = await this.cache.get(key);
-		if (isNullish(cachedData)) {
+		if (isNullish(cachedData) || cachedData === '{}') {
 			return [];
 		}
 		const data = JSON.parse(cachedData) as number[];
