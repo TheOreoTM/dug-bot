@@ -6,12 +6,13 @@ import { methods, Route, type ApiRequest, type ApiResponse, HttpCodes } from '@s
 	route: 'event/hint'
 })
 export class UserRoute extends Route {
-	public async [methods.POST](_request: ApiRequest, response: ApiResponse) {
-		const requestBody = _request.body as { level: string | undefined; user_id: string | undefined };
+	public async [methods.POST](request: ApiRequest, response: ApiResponse) {
+		const requestBody = request.body as { level: string | undefined; user_id: string | undefined };
 
 		const levelRes = requestBody['level'];
 		const userId = requestBody['user_id'];
 
+		console.log(requestBody);
 		console.log(levelRes, userId);
 
 		if (!levelRes) {
