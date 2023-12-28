@@ -34,6 +34,11 @@ declare module '@skyra/env-utilities' {
 		REDIS_PORT: NumberString;
 		REDIS_HOST: string;
 		REDIS_PASSWORD: string;
+
+		WEBHOOK_LOGGING_MESSAGE: string;
+		WEBHOOK_LOGGING_SERVER: string;
+		WEBHOOK_LOGGING_CHANNEL: string;
+		WEBHOOK_LOGGING_ROLE: string;
 	}
 }
 

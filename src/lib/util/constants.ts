@@ -171,7 +171,7 @@ export const ChannelIDs = {
 };
 
 export const LoggingWebhooks = {
-	Message: 'https://discord.com/api/webhooks/1188188165106843750/MMhrBgO3iYf-ONUTebBD8m6jHKjxUrLv1rFeTH7tQgJyw0Hmpwd7Hy0WRZS1DcjY9pMO'
+	Message: envParseString('WEBHOOK_LOGGING_MESSAGE')
 };
 export const WhitelistedChannels = [ChannelIDs.General];
 
