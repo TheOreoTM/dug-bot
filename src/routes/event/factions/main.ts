@@ -11,6 +11,6 @@ export class UserRoute extends Route {
 		response.setHeader('Cache-Control', `public, max-age=${cacheMaxAge}`);
 
 		const allFactions = await this.container.db.faction.findMany({ orderBy: { tokens: 'desc' }, select: SelectAllOptions });
-		return response.json({ ...allFactions });
+		return response.json([...allFactions]);
 	}
 }
