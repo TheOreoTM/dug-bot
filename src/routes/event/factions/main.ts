@@ -9,6 +9,6 @@ export class UserRoute extends Route {
 	public async [methods.GET](_request: ApiRequest, response: ApiResponse) {
 		const allFactions = await this.container.db.faction.findMany({ orderBy: { tokens: 'desc' }, select: SelectAllOptions });
 
-		return response.json({ allFactions });
+		return response.json({ ...allFactions });
 	}
 }
