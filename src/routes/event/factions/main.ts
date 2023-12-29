@@ -7,8 +7,10 @@ import { methods, Route, type ApiRequest, type ApiResponse } from '@sapphire/plu
 })
 export class UserRoute extends Route {
 	public async [methods.GET](_request: ApiRequest, response: ApiResponse) {
-		const allFactions = await this.container.db.faction.findMany({ orderBy: { tokens: 'desc' }, select: SelectAllOptions });
+		const cacheMaxAge = 120;
+		response.setHeader('Cache-Control', `public, max-age=${cacheMaxAge}`);
 
+		const allFactions = await this.container.db.faction.findMany({ orderBy: { tokens: 'desc' }, select: SelectAllOptions });
 		return response.json({ ...allFactions });
 	}
 }
