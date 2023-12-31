@@ -1,3 +1,4 @@
+import { SelectAllOptions } from '#lib/types';
 import { ApplyOptions } from '@sapphire/decorators';
 import { methods, Route, type ApiRequest, type ApiResponse, HttpCodes } from '@sapphire/plugin-api';
 
@@ -10,6 +11,9 @@ export class UserRoute extends Route {
 		const faction = await this.container.db.faction.findUnique({
 			where: {
 				id: factionId
+			},
+			select: {
+				...SelectAllOptions
 			}
 		});
 
