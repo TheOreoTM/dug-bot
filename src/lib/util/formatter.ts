@@ -245,7 +245,7 @@ export function convertValueToBadge(value: string) {
 export function formatBadges(badges: Badge[]) {
 	const icons: string[] = [];
 	for (const badge of badges) {
-		icons.push(`${toFriendlyString(badge)} ${BadgeIcons[badge]}`);
+		icons.push(`**${toFriendlyString(badge)}** ${BadgeIcons[badge]}`);
 	}
 
 	return icons.length ? icons.join(' ') : 'No badges';
