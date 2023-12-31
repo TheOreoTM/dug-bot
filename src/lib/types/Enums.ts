@@ -7,7 +7,6 @@ export const enum ItemTypes {
 	Crate = 'CRATE'
 }
 
-// ! Always add to the end
 export const enum Badge {
 	EventWinner = 'EVENT_WINNER'
 }
