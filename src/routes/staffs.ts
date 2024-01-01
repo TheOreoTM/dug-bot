@@ -8,6 +8,7 @@ import { methods, Route, type ApiRequest, type ApiResponse, HttpCodes } from '@s
 export class UserRoute extends Route {
 	public async [methods.GET](request: ApiRequest, response: ApiResponse) {
 		const staffId = request.params.staff;
+		console.log('staffId', staffId);
 
 		const scc = await this.container.client.guilds.fetch(MainServerID);
 		const member = await scc.members.fetch(staffId);
