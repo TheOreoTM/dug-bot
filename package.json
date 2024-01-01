@@ -47,13 +47,13 @@
 		"@sapphire/cli": "^1.6.1",
 		"@sapphire/prettier-config": "^2.0.0",
 		"@sapphire/ts-config": "^5.0.0",
-		"@types/diff": "^5",
-		"@types/node": "^18.17.12",
-		"@types/ws": "^8.5.5",
-		"prettier": "^3.0.2",
-		"prisma": "^5.2.0",
+		"@types/diff": "^5.0.9",
+		"@types/node": "^20.10.6",
+		"@types/ws": "^8.5.10",
+		"prettier": "^3.1.1",
+		"prisma": "^5.7.1",
 		"tsc-watch": "^6.0.4",
-		"typescript": "^5.2.2"
+		"typescript": "^5.3.3"
 	},
 	"scripts": {
 		"sapphire": "sapphire",

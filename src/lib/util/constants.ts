@@ -7,10 +7,22 @@ export const API_URI = envParseString('API_URI');
 
 export const BotPrefix = '.';
 export const BotID = '767781855193464882';
+export const MainServerID = '519734247519420438'
 export const BotOwners = ['600707283097485322'];
 export const EventConfig = {
 	EventManager: '1129689783774490656'
 };
+
+export const StaffRoles = {
+	Junior: '1016966909121527809',
+	Staff: '634605860206804992',
+	Manager: '904263866270228502',
+	Admin: '902884958354407484',
+	TrustedAdmin: '1151087011751546900',
+	CEO: '1106240922901020793'
+}
+
+export const AllStaffRoles = Object.values(StaffRoles)
 
 export const TyperacerConfig = {
 	LobbyTime: seconds(12),
