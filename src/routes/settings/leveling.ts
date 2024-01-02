@@ -41,6 +41,8 @@ export class UserRoute extends Route {
 
 			await this.container.db.levelRole.setRoles(requestBody.value);
 		}
+
+		return response.status(200);
 	}
 
 	private badRequest(response: ApiResponse, error?: string) {
