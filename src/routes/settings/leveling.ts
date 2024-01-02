@@ -26,6 +26,7 @@ export class UserRoute extends Route {
 			}
 
 			await this.container.db.settings.setModuleEnabled('leveling', requestBody.value);
+			return response.status(200);
 		}
 
 		if (requestBody.setting === 'globalBoost') {
@@ -34,6 +35,7 @@ export class UserRoute extends Route {
 			}
 
 			await this.container.core.setGlobalBoost(requestBody.value);
+			return response.status(200);
 		}
 
 		if (requestBody.setting === 'levelRoles') {
@@ -42,9 +44,8 @@ export class UserRoute extends Route {
 			}
 
 			await this.container.db.levelRole.setRoles(requestBody.value);
+			return response.status(200);
 		}
-
-		return response.status(200);
 	}
 
 	private badRequest(response: ApiResponse, error?: string) {
