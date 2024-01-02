@@ -63,7 +63,19 @@ export const xprisma = new PrismaClient().$extends({
 				return data ? data.globalBoost : setIfNotExists;
 			},
 
-			async setModuleEnabled(setting: 'leveling', enabled: boolean) {
+			async isModuleEnabled(setting: Setting) {
+				const data = await prisma.settings.findUnique({
+					where: {
+						id: 'main'
+					}
+				});
+
+				if (!data) return false;
+
+				return data[`${setting}Enabled`];
+			},
+
+			async setModuleEnabled(setting: Setting, enabled: boolean) {
 				await prisma.settings.upsert({
 					create: {
 						[`${setting}Enabled`]: enabled
@@ -543,6 +555,8 @@ export async function resetAutoIncrement() {
 		await prisma.$disconnect();
 	}
 }
+
+type Setting = 'leveling';
 
 interface AddXpOptions {
 	amount?: number;
