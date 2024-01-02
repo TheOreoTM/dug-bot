@@ -10,7 +10,7 @@ datasource db {
 
 model Settings {
   id              String  @id @default("main")
-  globalBoost     Int     @default(0)
+  globalBoost     Int     @default(1)
   levelingEnabled Boolean @default(true)
 }
 

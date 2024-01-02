@@ -8,7 +8,7 @@ import { methods, Route, type ApiRequest, type ApiResponse, HttpCodes } from '@s
 export class UserRoute extends Route {
 	public async [methods.GET](_request: ApiRequest, response: ApiResponse) {
 		const levelRoles = await this.container.db.levelRole.findMany({ orderBy: { level: 'asc' }, select: { level: true, roleId: true } });
-		const globalBoost = await this.container.core.getGlobalBoost();
+		const globalBoost = await this.container.core.getGlobalBoost(1);
 		const enabled = await this.container.db.settings.isModuleEnabled('leveling');
 
 		response.json({ enabled, levelRoles, globalBoost } as LevelingSettings);

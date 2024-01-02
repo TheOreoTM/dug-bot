@@ -36,12 +36,7 @@ export class UserCommand extends Command {
 								.setDescription("Change the user's XP Boost")
 								.addUserOption((o) => o.setName('member').setDescription('Target member').setRequired(true))
 								.addNumberOption((o) =>
-									o
-										.setName('boost')
-										.setDescription('The new XP Boost percentage')
-										.setRequired(true)
-										.setMinValue(0)
-										.setMaxValue(1000)
+									o.setName('boost').setDescription('The new XP Boost amount').setRequired(true).setMinValue(0).setMaxValue(1000)
 								)
 						)
 
@@ -121,7 +116,7 @@ export class UserCommand extends Command {
 			}
 
 			if (subcommand === 'boost') {
-				const boostToSet = interaction.options.getNumber('boost', true) / 100;
+				const boostToSet = interaction.options.getNumber('boost', true);
 
 				await this.container.db.userLevel.upsert({
 					where: {
@@ -135,10 +130,10 @@ export class UserCommand extends Command {
 						xpBoost: boostToSet
 					}
 				});
-				interaction.reply(formatSuccessMessage(`Set user XP Boost to ${boostToSet * 100}%`));
+				interaction.reply(formatSuccessMessage(`Set user XP Boost to ${boostToSet}`));
 				SendLogEmbed.SetXpBoost({
 					user: targetMember.user,
-					amount: boostToSet * 100,
+					amount: boostToSet,
 					reason: '`xp set boost` command',
 					staff: interaction.member as GuildMember
 				});

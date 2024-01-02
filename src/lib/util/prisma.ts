@@ -394,11 +394,11 @@ export const xprisma = new PrismaClient().$extends({
 			},
 
 			async addXp(userId: string, options?: AddXpOptions) {
-				const xpBoost = options?.xpBoost ? options.xpBoost : 0;
+				const xpBoost = options?.xpBoost ? options.xpBoost : 1;
 
 				let amount: number = genRandomXp();
 				if (options?.amount) amount = options.amount;
-				if (xpBoost > 0) amount += amount * xpBoost;
+				if (xpBoost) amount = amount * xpBoost;
 
 				const data = await prisma.userLevel.upsert({
 					where: {
@@ -425,7 +425,6 @@ export const xprisma = new PrismaClient().$extends({
 					let currentXp = data.currentXp;
 					while (currentXp >= requiredXp) {
 						currentXp = currentXp - requiredXp;
-						console.log(currentXp, requiredXp);
 						levelsToAdd++;
 
 						requiredXp = getLevelInfo(data.currentLevel + levelsToAdd).xpNeededToLevelUp;

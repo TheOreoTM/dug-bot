@@ -10,7 +10,7 @@ import type { Message } from 'discord.js';
 })
 export class UserCommand extends Command {
 	public override async messageRun(message: Message, args: Args) {
-		const xpBoost = await args.pick('float').catch(() => 0);
+		const xpBoost = await args.pick('float').catch(() => 1);
 		if (xpBoost > 2147483647 - 1) {
 			send(message, formatFailMessage('Calm down buddy'));
 			return;

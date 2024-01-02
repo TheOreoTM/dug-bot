@@ -40,7 +40,7 @@ export class SendLogEmbed {
 		const expiresAtTimestamp = new Timestamp(expiresAt.getTime());
 		const responsibleUserText = `${staff ? staff : `<@${BotID}>`} - \` ${staff ? staff.id : BotID} \``;
 		const embed = template
-			.setDescription(`Added **\`${amount}% boost\`** to ${user} at ${nowTimestamp.getLongDateTime()}`)
+			.setDescription(`Added **\`x${amount} boost\`** to ${user} at ${nowTimestamp.getLongDateTime()}`)
 			.setFields(
 				{ inline: true, name: 'Responsible User', value: responsibleUserText },
 				{ inline: true, name: 'Reason', value: reason },
@@ -53,7 +53,7 @@ export class SendLogEmbed {
 	static SetXpBoost({ user, amount, staff, reason }: { user: User; amount: number; reason: string; staff?: GuildMember }) {
 		const responsibleUserText = `${staff ? staff : `<@${BotID}>`} - \` ${staff ? staff.id : BotID} \``;
 		const embed = template
-			.setDescription(`Set **\`${amount}% boost\`** for ${user} at ${nowTimestamp.getLongDateTime()}`)
+			.setDescription(`Set **\`x${amount} boost\`** for ${user} at ${nowTimestamp.getLongDateTime()}`)
 			.setFields({ inline: true, name: 'Responsible User', value: responsibleUserText }, { inline: true, name: 'Reason', value: reason });
 
 		container.client.emit(DugEvents.LogSend, embed);

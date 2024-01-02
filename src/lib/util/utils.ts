@@ -122,9 +122,9 @@ export function recordToMap<T>(record: Record<string, T>): Map<string, T> {
 	return map;
 }
 
-export function genRandomXp(xpBoost = 0) {
+export function genRandomXp(xpBoost = 1) {
 	const baseXp = genRandomInt(20, 40);
-	const boostedXp = baseXp + baseXp * xpBoost;
+	const boostedXp = baseXp * xpBoost;
 	return Math.floor(boostedXp);
 }
 

@@ -9,9 +9,9 @@ import type { Message } from 'discord.js';
 })
 export class UserCommand extends Command {
 	public override async messageRun(message: Message, args: Args) {
-		const newBoostPercentage = await args.pick('number').catch(() => 0);
-		await this.container.core.setGlobalBoost(newBoostPercentage / 100);
+		const newBoostAmount = await args.pick('number').catch(() => 1);
+		await this.container.core.setGlobalBoost(newBoostAmount);
 
-		message.channel.send(formatSuccessMessage(`Set Global Boost to \`${newBoostPercentage}%\``));
+		message.channel.send(formatSuccessMessage(`Set Global Boost to \`x${newBoostAmount}\``));
 	}
 }

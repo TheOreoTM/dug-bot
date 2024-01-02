@@ -26,7 +26,7 @@ export class LevelingService {
 			}
 		});
 
-		const globalBoost = await container.core.getGlobalBoost(0);
+		const globalBoost = await container.core.getGlobalBoost(1);
 
 		if (!data) {
 			const embed = new EmbedBuilder()
@@ -35,7 +35,7 @@ export class LevelingService {
 			return { embeds: [embed] };
 		}
 
-		const userXpBoost = Math.floor((data.xpBoost + globalBoost) * 100);
+		const userXpBoost = Math.floor(data.xpBoost + globalBoost);
 		const rank: number = await this.db.userLevel.getRank(data.userId);
 
 		// if (text) {
@@ -90,7 +90,7 @@ export class LevelingService {
 
 		const xpBoostButton = new ButtonBuilder()
 			.setDisabled(true)
-			.setLabel(`Current Xp Boost: ${userXpBoost}%`)
+			.setLabel(`Current Xp Boost: x${userXpBoost}`)
 			.setCustomId('none')
 			.setStyle(ButtonStyle.Secondary);
 
