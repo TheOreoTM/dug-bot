@@ -86,10 +86,7 @@ export class UserCommand extends Command {
 			return { embeds: [embed] };
 		}
 
-		const userXpBoost = Math.floor(data.xpBoost + globalBoost);
-		console.log('🚀 ~ file: rank.ts:90 ~ UserCommand ~ genRankCard ~ globalBoost:', globalBoost);
-		console.log('🚀 ~ file: rank.ts:90 ~ UserCommand ~ genRankCard ~ data.xpBoost:', data.xpBoost);
-		console.log('🚀 ~ file: rank.ts:92 ~ UserCommand ~ genRankCard ~ userXpBoost:', userXpBoost);
+		const userXpBoost = data.xpBoost + globalBoost;
 		const rank: number = await this.container.db.userLevel.getRank(data.userId);
 
 		// if (text) {
@@ -144,7 +141,7 @@ export class UserCommand extends Command {
 
 		const xpBoostButton = new ButtonBuilder()
 			.setDisabled(true)
-			.setLabel(`Current Xp Boost: x${userXpBoost}`)
+			.setLabel(`Current Xp Boost: ×${userXpBoost}`)
 			.setCustomId('none')
 			.setStyle(ButtonStyle.Secondary);
 
