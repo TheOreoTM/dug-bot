@@ -18,6 +18,8 @@ export class UserRoute extends Route {
 	public async [methods.POST](request: ApiRequest, response: ApiResponse) {
 		const requestBody = request.body as { setting: keyof LevelingSettings; value: LevelingSettings[keyof LevelingSettings] };
 
+		console.log(requestBody.value, typeof requestBody.value);
+
 		if (requestBody.setting === 'enabled') {
 			if (typeof requestBody.value !== 'boolean') {
 				return this.badRequest(response, `Not a valid value for the setting "enabled". Received "${requestBody.value}"`);
