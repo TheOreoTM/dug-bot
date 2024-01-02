@@ -1,6 +1,6 @@
-import { DugColors, DugEmojis } from '#constants';
+import { DugColors } from '#constants';
 import type { GuildMessage } from '#lib/types/Discord';
-import { formatFailMessage, genBar, toCompactNum } from '#lib/util/formatter';
+import { formatFailMessage } from '#lib/util/formatter';
 import { getTag } from '#lib/util/utils';
 import { ApplyOptions } from '@sapphire/decorators';
 import { Args, Command } from '@sapphire/framework';
@@ -14,8 +14,7 @@ import {
 	EmbedBuilder,
 	GuildMember,
 	InteractionReplyOptions,
-	MessageCreateOptions,
-	blockQuote
+	MessageCreateOptions
 } from 'discord.js';
 import canvacord from 'canvacord';
 const { Rank: RankCard } = canvacord;
@@ -52,9 +51,8 @@ export class UserCommand extends Command {
 
 	// Message command
 	public override async messageRun(message: GuildMessage, args: Args) {
-		const shouldText = args.getFlags('text', 't', 'slow-wifi');
 		const member = await args.pick('member').catch(() => message.member);
-		const result = (await this.genRankCard(member, shouldText)) as MessageCreateOptions;
+		const result = (await this.genRankCard(member)) as MessageCreateOptions;
 		send(message, result);
 	}
 
@@ -71,7 +69,7 @@ export class UserCommand extends Command {
 		interaction.reply(result);
 	}
 
-	private async genRankCard(member: GuildMember, text?: boolean): Promise<MessageCreateOptions | (InteractionReplyOptions & { fetchReply: true })> {
+	private async genRankCard(member: GuildMember): Promise<MessageCreateOptions | (InteractionReplyOptions & { fetchReply: true })> {
 		const data = await this.container.leveling.getCardData(member.id);
 		// const data = await this.container.db.userLevel.findUnique({
 		// 	where: {
@@ -89,6 +87,7 @@ export class UserCommand extends Command {
 		}
 
 		const userXpBoost = Math.floor(data.xpBoost + globalBoost);
+		console.log('🚀 ~ file: rank.ts:92 ~ UserCommand ~ genRankCard ~ userXpBoost:', userXpBoost);
 		const rank: number = await this.container.db.userLevel.getRank(data.userId);
 
 		// if (text) {

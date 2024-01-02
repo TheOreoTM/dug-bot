@@ -130,7 +130,7 @@ export class UserCommand extends Command {
 						xpBoost: boostToSet
 					}
 				});
-				interaction.reply(formatSuccessMessage(`Set user XP Boost to ${boostToSet}`));
+				interaction.reply(formatSuccessMessage(`Set user XP Boost to x${boostToSet}`));
 				SendLogEmbed.SetXpBoost({
 					user: targetMember.user,
 					amount: boostToSet,
