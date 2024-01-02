@@ -8,8 +8,9 @@ export class UserRoute extends Route {
 	public async [methods.GET](_request: ApiRequest, response: ApiResponse) {
 		const levelRoles = await this.container.db.levelRole.findMany({ orderBy: { level: 'asc' } });
 		const globalBoost = await this.container.core.getGlobalBoost();
+		const enabled = true;
 
-		response.json({ levelRoles, globalBoost });
+		response.json({ enabled, levelRoles, globalBoost });
 	}
 
 	public [methods.POST](_request: ApiRequest, response: ApiResponse) {
