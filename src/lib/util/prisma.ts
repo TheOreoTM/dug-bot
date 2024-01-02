@@ -8,6 +8,75 @@ const prisma = new PrismaClient();
 export const xprisma = new PrismaClient().$extends({
 	name: 'xprisma',
 	model: {
+		levelRole: {
+			async addRole(roleId: string, level: number) {
+				await prisma.levelRole.upsert({
+					where: {
+						level
+					},
+					create: {
+						level,
+						roleId: roleId
+					},
+					update: {
+						level,
+						roleId: roleId
+					}
+				});
+			},
+
+			async removeRole(roleId: string) {
+				await prisma.levelRole.deleteMany({
+					where: {
+						roleId
+					}
+				});
+			},
+
+			async setRoles(roles: { roleId: string; level: number }[]) {
+				await prisma.levelRole.deleteMany();
+				await prisma.levelRole.createMany({ data: roles });
+			}
+		},
+		settings: {
+			async setGlobalBoost(value: number) {
+				await prisma.settings.upsert({
+					create: {
+						globalBoost: value
+					},
+					update: {
+						globalBoost: value
+					},
+					where: {
+						id: 'main'
+					}
+				});
+			},
+
+			async getGlobalBoost(setIfNotExists: number) {
+				const data = await prisma.settings.findUnique({
+					where: {
+						id: 'main'
+					}
+				});
+
+				return data ? data.globalBoost : setIfNotExists;
+			},
+
+			async setModuleEnabled(setting: 'leveling', enabled: boolean) {
+				await prisma.settings.upsert({
+					create: {
+						[`${setting}Enabled`]: enabled
+					},
+					update: {
+						[`${setting}Enabled`]: enabled
+					},
+					where: {
+						id: 'main'
+					}
+				});
+			}
+		},
 		userLevel: {
 			async setLevelMessage(userId: string, message: string) {
 				await prisma.userLevel.upsert({

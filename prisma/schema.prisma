@@ -8,6 +8,12 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model Settings {
+  id              String  @id @default("main")
+  globalBoost     Int     @default(0)
+  levelingEnabled Boolean @default(true)
+}
+
 model Blacklist {
   userId    String   @id
   reason    String

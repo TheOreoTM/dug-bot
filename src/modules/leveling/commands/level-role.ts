@@ -51,19 +51,7 @@ export class UserCommand extends Command {
 				return;
 			}
 
-			await this.container.db.levelRole.upsert({
-				where: {
-					level
-				},
-				create: {
-					level,
-					roleId: role.id
-				},
-				update: {
-					level,
-					roleId: role.id
-				}
-			});
+			await this.container.db.levelRole.addRole(role.id, level);
 
 			interaction.reply(formatSuccessMessage(`Set new level role for \`level ${level}\` as \`${role.name}\``));
 			return;
@@ -72,11 +60,7 @@ export class UserCommand extends Command {
 		if (subcommand === 'remove') {
 			const roleId = interaction.options.getString('level', true);
 
-			await this.container.db.levelRole.deleteMany({
-				where: {
-					roleId
-				}
-			});
+			await this.container.db.levelRole.removeRole(roleId);
 
 			interaction.reply({
 				content: formatSuccessMessage(`Deleted level role for ${roleMention(roleId)}`),

@@ -17,6 +17,8 @@ export class LevelingService {
 	// Todo: Add add/remove/set xp/level commands
 	public constructor() {}
 
+	public async enable() {}
+
 	public async createRankCard(member: GuildMember) {
 		const data = await this.db.userLevel.findUnique({
 			where: {

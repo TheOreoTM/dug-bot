@@ -5,19 +5,26 @@ import { isNullish } from '@sapphire/utilities';
 
 export class CoreSettingsService {
 	private readonly cache = container.cache;
+	private readonly db = container.db;
 
 	public constructor() {}
 
-	public async getGlobalBoost(defaultValue = 0) {
+	public async getGlobalBoost(fallbackValue = 0) {
 		const key = globalBoostCacheKey;
 
 		const globalBoost = await this.cache.get(key);
-		if (isNullish(globalBoost)) return defaultValue;
+		if (isNullish(globalBoost)) {
+			await this.db.settings.getGlobalBoost(fallbackValue);
+			await this.cache.set(key, fallbackValue);
+			return fallbackValue;
+		}
 		return Number(globalBoost);
 	}
 
 	public async setGlobalBoost(newValue: number) {
 		const key = globalBoostCacheKey;
+
+		await this.db.settings.setGlobalBoost(newValue);
 
 		const returnValue = await this.cache.set(key, newValue);
 		return returnValue;
