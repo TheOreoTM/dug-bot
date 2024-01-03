@@ -1,13 +1,24 @@
+import { MainServerID } from '#constants';
 import { authenticated } from '#lib/util/api';
 import { ApplyOptions } from '@sapphire/decorators';
 import { methods, Route, type ApiRequest, type ApiResponse, HttpCodes } from '@sapphire/plugin-api';
+import { Guild } from 'discord.js';
 
 @ApplyOptions<Route.Options>({
 	route: 'settings/leveling'
 })
 export class UserRoute extends Route {
 	public async [methods.GET](_request: ApiRequest, response: ApiResponse) {
-		const levelRoles = await this.container.db.levelRole.findMany({ orderBy: { level: 'asc' }, select: { level: true, roleId: true } });
+		const scc = this.container.client.guilds.cache.get(MainServerID) as Guild;
+		const levelRolesData = await this.container.db.levelRole.findMany({ orderBy: { level: 'asc' }, select: { level: true, roleId: true } });
+		const levelRoles: LevelRole[] = levelRolesData.map((r) => {
+			const role = scc.roles.cache.get(r.roleId);
+
+			return {
+				...r,
+				roleName: role?.name ?? 'deleted-role'
+			};
+		});
 		const globalBoost = await this.container.core.getGlobalBoost(1);
 		const enabled = await this.container.db.settings.isModuleEnabled('leveling');
 
@@ -17,8 +28,6 @@ export class UserRoute extends Route {
 	@authenticated()
 	public async [methods.POST](request: ApiRequest, response: ApiResponse) {
 		const requestBody = request.body as { setting: keyof LevelingSettings; value: LevelingSettings[keyof LevelingSettings] };
-
-		console.log(requestBody.value, typeof requestBody.value);
 
 		if (requestBody.setting === 'enabled') {
 			if (typeof requestBody.value !== 'boolean') {
@@ -52,7 +61,7 @@ export class UserRoute extends Route {
 }
 
 function isArrayOfLevelRoles(value: unknown): value is LevelRole[] {
-	return Array.isArray(value) && value.every((item) => typeof item === 'object' && 'id' in item && 'level' in item && 'roleId' in item);
+	return Array.isArray(value) && value.every((item) => 'level' in item && 'roleId' in item);
 }
 
 type LevelingSettings = { enabled: boolean; levelRoles: LevelRole[]; globalBoost: number };
@@ -60,4 +69,5 @@ type LevelingSettings = { enabled: boolean; levelRoles: LevelRole[]; globalBoost
 type LevelRole = {
 	level: number;
 	roleId: string;
+	roleName: string;
 };
