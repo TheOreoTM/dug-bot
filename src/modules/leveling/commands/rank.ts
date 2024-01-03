@@ -149,7 +149,7 @@ export class UserCommand extends Command {
 
 		return {
 			files: [attachment],
-			components: userXpBoost > 1 ? [new ActionRowBuilder<ButtonBuilder>().addComponents(xpBoostButton)] : []
+			components: [new ActionRowBuilder<ButtonBuilder>().addComponents(xpBoostButton)]
 		};
 	}
 }
