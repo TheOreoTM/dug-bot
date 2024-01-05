@@ -31,7 +31,13 @@ export class UserRoute extends Route {
 
 		const cardBuffer = this.genRankCard(member, rank, userData);
 
-		return response.setContentType(MimeTypes.ImagePng).status(200).end(cardBuffer);
+		console.log(await cardBuffer.build());
+		console.log(cardBuffer.build());
+
+		return response
+			.setContentType(MimeTypes.ImagePng)
+			.status(200)
+			.end(await cardBuffer.build());
 	}
 
 	public [methods.POST](_request: ApiRequest, response: ApiResponse) {
@@ -72,6 +78,6 @@ export class UserRoute extends Route {
 			.setCustomStatusColor(customStatusColor);
 		if (bgImage) card.setBackground('IMAGE', bgImage);
 
-		return card.build();
+		return card;
 	}
 }
