@@ -9,7 +9,7 @@ export class UserRoute extends Route {
 		const userId = request.params.user;
 
 		const user = this.container.client.users.cache.get(userId);
-		if (!user) return response.error(HttpCodes.BadRequest);
+		if (!user) return response.json(null);
 
 		const userData = await this.container.db.userLevel.findUnique({
 			where: {
