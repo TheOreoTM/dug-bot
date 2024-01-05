@@ -9,7 +9,7 @@ import { GuildMember } from 'discord.js';
 const { Rank: RankCard } = canvacord;
 
 @ApplyOptions<Route.Options>({
-	route: 'levels/card/:user'
+	route: 'levels/card/:member'
 })
 export class UserRoute extends Route {
 	public async [methods.GET](request: ApiRequest, response: ApiResponse) {
