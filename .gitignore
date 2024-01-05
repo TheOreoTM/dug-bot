@@ -19,6 +19,7 @@ dist/
 
 # Ignore npm lockfiles file
 package-lock.json
+yarn.lock
 
 # Environment variables
 .env.local
