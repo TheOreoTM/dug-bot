@@ -65,5 +65,6 @@
 		"watch:start": "tsup --watch --onSuccess \"node ./dist/index.js\"",
 		"format": "prettier --write \"src/\""
 	},
-	"prettier": "@sapphire/prettier-config"
+	"prettier": "@sapphire/prettier-config",
+	"packageManager": "yarn@3.6.3"
 }

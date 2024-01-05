@@ -1,5 +1,5 @@
 import { ApplyOptions } from '@sapphire/decorators';
-import { methods, Route, type ApiRequest, type ApiResponse, HttpCodes } from '@sapphire/plugin-api';
+import { methods, Route, type ApiRequest, type ApiResponse } from '@sapphire/plugin-api';
 
 @ApplyOptions<Route.Options>({
 	route: 'levels/:user'
