@@ -10,7 +10,7 @@ export class UserRoute extends Route {
 		const memberId = request.params.member;
 
 		const scc = await this.container.client.guilds.fetch(MainServerID);
-		const member = scc.members.cache.get(memberId);
+		const member = scc.members.fetch(memberId);
 		if (!member) return response.error(HttpCodes.BadRequest);
 
 		return response.json({ ...member });
