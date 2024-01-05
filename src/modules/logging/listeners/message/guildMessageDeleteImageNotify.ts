@@ -3,7 +3,7 @@ import { GuildMessage } from '#lib/types';
 import { getFullEmbedAuthor } from '#lib/util/utils';
 import { ApplyOptions } from '@sapphire/decorators';
 import { Listener } from '@sapphire/framework';
-import { Colors, EmbedBuilder } from 'discord.js';
+import { AttachmentBuilder, Colors, EmbedBuilder } from 'discord.js';
 
 @ApplyOptions<Listener.Options>({
 	event: DugEvents.GuildMessageDelete
@@ -13,20 +13,25 @@ export class UserEvent extends Listener {
 		if (message.attachments.size === 0) return;
 
 		const embeds: EmbedBuilder[] = [];
+		const files: AttachmentBuilder[]= []
 
 		message.attachments.forEach((attachment) => {
+			const image = new AttachmentBuilder(attachment.proxyURL, {name: 'deleted-image.png'})
+
 			const embed = new EmbedBuilder()
 				.setColor(Colors.Red)
 				.setAuthor(getFullEmbedAuthor(message.author, message.url))
 				.setFooter({ text: `Image Deleted • #${message.channel.name}` })
-				.setImage(attachment.proxyURL)
+				.setImage(`attachment://deleted-image.png`)
 				.setTimestamp();
 
 			embeds.push(embed);
+			files.push(image)
 		});
 
 		this.container.core.logging.sendLog(LoggingWebhooks.Message, {
-			embeds: embeds
+			embeds: embeds,
+			files: files
 		});
 	}
 }
