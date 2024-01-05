@@ -17,7 +17,9 @@ export class UserRoute extends Route {
 			}
 		});
 
-		return response.json({ ...userData });
+		const rank = await this.container.db.userLevel.getRank(userId);
+
+		return response.json({ ...userData, rank });
 	}
 
 	public [methods.POST](_request: ApiRequest, response: ApiResponse) {
