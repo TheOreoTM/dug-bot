@@ -29,7 +29,7 @@ export class UserRoute extends Route {
 
 		const rank = await this.container.db.userLevel.getRank(memberId);
 
-		const cardBuffer = await this.genRankCard(member, rank, userData);
+		const cardBuffer = this.genRankCard(member, rank, userData);
 
 		return response.setContentType(MimeTypes.ImagePng).status(200).end(cardBuffer);
 	}
