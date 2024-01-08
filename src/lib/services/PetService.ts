@@ -33,6 +33,20 @@ class PetRegistry {
 		return null;
 	}
 
+	getPetName(id: number): string {
+		const pet = this.petMap.get(id);
+		if (!pet) return `Unknown Pet`;
+
+		return pet.names[0];
+	}
+
+	getPetNames(id: number): string[] {
+		const pet = this.petMap.get(id);
+		if (!pet) return [`Unknown Pet`];
+
+		return pet.names;
+	}
+
 	getAllPets(): IterableIterator<[number, PetData]> {
 		return this.petMap.entries();
 	}
@@ -104,6 +118,10 @@ export class UserPetHandler {
 		return new PetHandler(selectedPet);
 	}
 
+	public async getPets(): Promise<Array<Pet>> {
+		return this.userPets;
+	}
+
 	public async selectPet(idx: number): Promise<Pet | null> {
 		const user = await this.db.user.update({
 			where: { id: this.userId },
@@ -117,7 +135,8 @@ export class UserPetHandler {
 
 export class PetHandler {
 	private readonly db = container.db;
-	private readonly pet: Pet;
+	public readonly pet: Pet;
+	private readonly registry = new PetRegistry();
 
 	constructor(pet: Pet) {
 		this.pet = pet;
@@ -154,6 +173,33 @@ export class PetHandler {
 		await this.updatePet({
 			nickname
 		});
+	}
+
+	/**
+	 *
+	 * @param {Pet} pet The pet you want to format the name for
+	 * @param {string} spec The formatting you want
+	 * l -> Level {level}
+	 * L -> L{level}
+	 * n -> nickname
+	 * f -> favourite
+	 * @returns The formated name
+	 */
+	public formatName(spec: string) {
+		let name: string = '';
+
+		if (this.pet.chromatic) name = `🌟 `; // shiny emoji
+		if (spec.includes('l')) name += `Level ${this.pet.level} `; // long
+		if (spec.includes('L')) name += `L${this.pet.level} `; // short
+		// if (spec.includes('e')) name = emoji + ' ' + name // emoji
+		const petName = this.registry.getPetName(this.pet.registryId);
+
+		name += petName;
+
+		if (spec.includes('n') && this.pet.nickname) name += ` "${this.pet.nickname}"`; // nickname
+		if (spec.includes('f') && this.pet.favorite) name += ` ❤️`; // favourite
+
+		return name;
 	}
 
 	public async getUserPetHandler(): Promise<UserPetHandler> {

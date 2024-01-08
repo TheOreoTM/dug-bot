@@ -1,5 +1,5 @@
 import { DugColors, DugEvents, LoggingWebhooks } from '#constants';
-import { DugEmbedBuilder } from '#lib/classes';
+import { DugEmbedBuilder } from '#lib/structures/builders';
 import { GuildMessage } from '#lib/types';
 import { getFullEmbedAuthor } from '#lib/util/utils';
 import { ApplyOptions } from '@sapphire/decorators';
