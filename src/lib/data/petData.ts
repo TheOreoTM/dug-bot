@@ -43,3 +43,5 @@ export const PET_DATA: PetData[] = [
 		}
 	}
 ] as const;
+
+export const PET_EMOJIS: Record<number, string> = {};

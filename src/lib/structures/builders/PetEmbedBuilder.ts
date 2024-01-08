@@ -1,4 +1,5 @@
 import { LongWidthSpace } from '#constants';
+import { PET_EMOJIS } from '#lib/data/petData';
 import { PetHandler } from '#lib/services/PetService';
 import { DugEmbedBuilder } from '#lib/structures';
 import { Pet } from '@prisma/client';
@@ -35,7 +36,7 @@ export class PetListEmbedBuilder {
 		const idxText = `\`${pet.pet.idx}\``.padStart(`${maxIdx}`.length, ' ');
 
 		text += `${idxText}${LongWidthSpace}`;
-		text += `${pet.formatName('nif')}${seperator}`;
+		text += `${PET_EMOJIS[pet.pet.registryId] ?? '❔'} ${pet.formatName('nif')}${seperator}`;
 		text += `Lvl. ${pet.pet.level}${seperator}`;
 		text += `${pet.pet.averageIv}%\n`;
 
