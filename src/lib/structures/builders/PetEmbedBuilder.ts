@@ -1,6 +1,6 @@
 import { LongWidthSpace } from '#constants';
 import { PetHandler } from '#lib/services/PetService';
-import { DugEmbedBuilder } from '#lib/structures/builders';
+import { DugEmbedBuilder } from '#lib/structures';
 import { Pet } from '@prisma/client';
 
 export class PetListEmbedBuilder {
