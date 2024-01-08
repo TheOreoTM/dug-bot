@@ -118,8 +118,8 @@ export class UserPetHandler {
 		return new PetHandler(selectedPet);
 	}
 
-	public async getPets(): Promise<Array<Pet>> {
-		return this.userPets;
+	public async getPets(amount = 10): Promise<Array<Pet>> {
+		return this.userPets.slice(0, amount);
 	}
 
 	public async selectPet(idx: number): Promise<Pet | null> {
