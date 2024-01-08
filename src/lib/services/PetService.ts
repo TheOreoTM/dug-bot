@@ -238,6 +238,9 @@ export class PetService {
 		const userPets = await this.db.pet.findMany({
 			where: {
 				ownerId: userId
+			},
+			orderBy: {
+				idx: 'asc'
 			}
 		});
 
