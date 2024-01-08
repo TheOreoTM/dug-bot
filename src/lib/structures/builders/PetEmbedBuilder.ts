@@ -27,6 +27,9 @@ export class PetListEmbedBuilder {
 
 	private getHighestIdx(): number {
 		const idxArray: number[] = this.pets.map((p) => p.idx);
+		console.log('🚀 ~ file: PetEmbedBuilder.ts:30 ~ PetListEmbedBuilder ~ getHighestIdx ~ idxArray:', idxArray);
+		console.log('🚀 ~ file: PetEmbedBuilder.ts:33 ~ PetListEmbedBuilder ~ getHighestIdx ~ Math.max(...idxArray):', Math.max(...idxArray));
+
 		return Math.max(...idxArray);
 	}
 
