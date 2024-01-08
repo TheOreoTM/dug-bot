@@ -32,7 +32,7 @@ export class PetListEmbedBuilder {
 	private formatItem(pet: PetHandler, maxIdx: number): string {
 		let text = ``;
 		const seperator = `${LongWidthSpace}•${LongWidthSpace}`;
-		const idxText = `${pet.pet.idx}`.padStart(`${maxIdx}`.length, ' ');
+		const idxText = `\`${pet.pet.idx}\``.padStart(`${maxIdx}`.length, ' ');
 
 		text += `${idxText}${LongWidthSpace}`;
 		text += `${pet.formatName('nif')}${seperator}`;
