@@ -11,7 +11,7 @@ export class UserCommand extends DugCommand {
 		const handler = await this.container.pet.getUserPetHandler(message.author.id);
 		const pet = await handler.createPet();
 
-		const json = `${JSON.stringify(pet)}`;
+		const json = `${JSON.stringify(pet, null, 2)}`;
 
 		send(message, `\`\`\`json\n${json}\`\`\``);
 	}
