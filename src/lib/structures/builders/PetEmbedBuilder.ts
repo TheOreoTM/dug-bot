@@ -34,9 +34,9 @@ export class PetListEmbedBuilder {
 	private formatItem(pet: PetHandler, maxIdx: number): string {
 		let text = ``;
 		const seperator = `${LongWidthSpace}•${LongWidthSpace}`;
-		const idxText = `\`${pet.pet.idx}\``.padStart(`${maxIdx}`.length, LongWidthSpace);
+		const idxText = `${pet.pet.idx}`.padStart(`${maxIdx}`.length, ' ');
 
-		text += `${idxText}${LongWidthSpace}`;
+		text += `\`${idxText}\`${LongWidthSpace}`;
 		text += `${PET_EMOJIS[pet.pet.registryId] ?? '❔'} ${pet.formatName('nif')}${seperator}`;
 		text += `Lvl. ${pet.pet.level}${seperator}`;
 		text += `${pet.pet.averageIv}%\n`;
