@@ -1,5 +1,6 @@
 import { ModuleName } from '#config';
 import { BlacklistService, CipherService, CoreSettingsService, FactionService, LeaderboardService, LevelingService } from '#lib/services';
+import { PetService } from '#lib/services/PetService';
 import { ApplyOptions } from '@sapphire/decorators';
 import { Listener, Store } from '@sapphire/framework';
 import { blue, gray, green, magenta, magentaBright, white, yellow } from 'colorette';
@@ -17,6 +18,7 @@ export class UserEvent extends Listener {
 		this.container.leveling = new LevelingService();
 		this.container.faction = new FactionService();
 		this.container.cipher = new CipherService();
+		this.container.pet = new PetService();
 
 		this.printBanner();
 		this.printStoreDebugInformation();

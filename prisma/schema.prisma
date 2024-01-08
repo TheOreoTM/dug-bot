@@ -14,6 +14,43 @@ model Settings {
   levelingEnabled Boolean @default(true)
 }
 
+model Pet {
+  // General
+  id       String   @id @unique @default(uuid())
+  idx      Int
+  caughtAt DateTime @default(now())
+
+  owner           User    @relation("owner", fields: [ownerId], references: [id])
+  ownerId         String
+  selectedOwner   User?   @relation("selected_owner", fields: [selectedOwnerId], references: [id])
+  selectedOwnerId String? @unique
+
+  // Details
+  registryId Int
+  level      Int
+  xp         Int
+  chromatic  Boolean
+
+  // Stats
+  hpIv  Int
+  atkIv Int
+  defIv Int
+  spdIv Int
+
+  totalIv   Int
+  averageIv Float
+
+  // Customization
+  nickname String?
+  favorite Boolean @default(false)
+  heldItem Int?
+  moves    Int[]   @default([])
+  hasColor Boolean @default(false)
+  color    String?
+
+  @@unique([ownerId, idx])
+}
+
 model Blacklist {
   userId    String   @id
   reason    String
@@ -68,6 +105,9 @@ model User {
 
   faction   Faction? @relation(fields: [factionId], references: [id])
   factionId Int?
+
+  pets        Pet[] @relation("owner")
+  selectedPet Pet?  @relation("selected_owner")
 }
 
 model Faction {

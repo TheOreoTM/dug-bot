@@ -7,6 +7,7 @@ import { ModuleName } from '#config';
 import { xprisma } from '#lib/util/prisma';
 import type { BlacklistService, CipherService, CoreSettingsService, FactionService, LeaderboardService, LevelingService } from '#lib/services';
 import { Redis } from 'ioredis';
+import { PetService } from '#lib/services/PetService';
 
 declare module '@sapphire/framework' {
 	interface SapphireClient {
@@ -59,5 +60,6 @@ declare module '@sapphire/pieces' {
 		leveling: LevelingService;
 		faction: FactionService;
 		cipher: CipherService;
+		pet: PetService;
 	}
 }

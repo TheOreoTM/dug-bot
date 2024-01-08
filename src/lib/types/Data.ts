@@ -1,6 +1,24 @@
 import { FactionItems, Items } from '#lib/items';
 import { Title, User } from '@prisma/client';
 import { BadgeIcon, ItemTypes } from '#lib/types';
+import { NumericRange } from '#lib/types/Helper';
+
+export type CreatePetOptions = {};
+
+export type PetBaseStats = {
+	hp: number;
+	def: number;
+	atk: number;
+	spd: number;
+};
+
+export type PetID = NumericRange<0, 4>;
+
+export type PetData = {
+	id: number;
+	names: string[];
+	baseStats: PetBaseStats;
+};
 
 export type LeaderboardPositionData = {
 	top: number;
