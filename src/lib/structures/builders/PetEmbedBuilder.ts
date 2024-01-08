@@ -27,8 +27,6 @@ export class PetListEmbedBuilder {
 
 	private getHighestIdx(): number {
 		const idxArray: number[] = this.pets.map((p) => p.idx);
-		console.log('🚀 ~ file: PetEmbedBuilder.ts:30 ~ PetListEmbedBuilder ~ getHighestIdx ~ idxArray:', idxArray);
-		console.log('🚀 ~ file: PetEmbedBuilder.ts:33 ~ PetListEmbedBuilder ~ getHighestIdx ~ Math.max(...idxArray):', Math.max(...idxArray));
 
 		return Math.max(...idxArray);
 	}
@@ -38,6 +36,7 @@ export class PetListEmbedBuilder {
 		const seperator = `${LongWidthSpace}•${LongWidthSpace}`;
 		const idxText = `\`${pet.pet.idx}\``.padStart(`${maxIdx}`.length, ' ');
 
+		console.log('🚀 ~ file: PetEmbedBuilder.ts:39 ~ PetListEmbedBuilder ~ formatItem ~ `${maxIdx}`.length:', `${maxIdx}`.length);
 		text += `${idxText}${LongWidthSpace}`;
 		text += `${PET_EMOJIS[pet.pet.registryId] ?? '❔'} ${pet.formatName('nif')}${seperator}`;
 		text += `Lvl. ${pet.pet.level}${seperator}`;
