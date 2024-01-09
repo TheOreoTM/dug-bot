@@ -195,7 +195,7 @@ export class PetHandler {
 						`**Attack**: ${this.calcStat('atk')} – IV: ${petData.atkIv}/31`,
 						`**Defense**: ${this.calcStat('def')} – IV: ${petData.defIv}/31`,
 						`**Speed**: ${this.calcStat('spd')} – IV: ${petData.spdIv}/31`,
-						`**Total IV:** ${petData.averageIv}`
+						`**Total IV:** ${petData.averageIv}%`
 					].join('\n')
 				}
 			)
