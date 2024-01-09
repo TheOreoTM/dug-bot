@@ -37,7 +37,7 @@ export class PetListEmbedBuilder {
 		const idxText = `${pet.pet.idx}`.padStart(`${maxIdx}`.length, ' ');
 
 		text += `\`${idxText}\`${LongWidthSpace}`;
-		text += `${PET_EMOJIS[pet.pet.registryId] ?? '❔'} ${pet.formatName('nif')}${seperator}`;
+		text += `<:__:${PET_EMOJIS[pet.pet.registryId]}> ${pet.formatName('nif')}${seperator}`;
 		text += `Lvl. ${pet.pet.level}${seperator}`;
 		text += `${pet.pet.averageIv}%\n`;
 
