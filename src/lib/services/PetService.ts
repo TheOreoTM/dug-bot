@@ -185,7 +185,7 @@ export class PetHandler {
 		const name = this.formatName('nlf');
 		embed
 			.setTitle(name)
-			.setThumbnail(`${CDN_URL}/pets/${petData.registryId}.png`)
+			.setImage(`${CDN_URL}/pets/${petData.registryId}.png`)
 			.setFields(
 				{ name: 'Details', value: `**XP**: ${petData.xp}/${250 + 25 * petData.level}` },
 				{
