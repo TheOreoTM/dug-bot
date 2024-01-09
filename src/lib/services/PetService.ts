@@ -1,9 +1,11 @@
-import { PET_DATA } from '#lib/data/petData';
+import { CDN_URL } from '#constants';
+import { NATURES, NATURE_MULTIPLIERS, PET_DATA } from '#lib/data/petData';
+import { DugEmbedBuilder } from '#lib/structures';
 import { PetData } from '#lib/types';
-import { genRandomInt } from '#lib/util/utils';
+import { genRandomInt, randomItem } from '#lib/util/utils';
 import { Pet, Prisma } from '@prisma/client';
 import { container } from '@sapphire/pieces';
-import { HexColorString } from 'discord.js';
+import type { HexColorString } from 'discord.js';
 
 class PetRegistry {
 	private petMap: Map<number, PetData>;
@@ -76,6 +78,7 @@ export class UserPetHandler {
 		const [atkIv, hpIv, spdIv, defIv] = ivs;
 		const totalIv = ivs.reduce((partialSum, a) => partialSum + a, 0);
 		const averageIv = +((totalIv / (MAX_IV * NUM_STAGES)) * 100).toFixed(2);
+		const nature = randomItem([...NATURES]);
 
 		const pet = await this.db.pet.create({
 			data: {
@@ -85,6 +88,7 @@ export class UserPetHandler {
 				defIv,
 				averageIv,
 				totalIv,
+				nature,
 				chromatic: Math.random() < 1 / 512,
 				idx: this.fetchNextIdx(),
 				level: genRandomInt(10, 20),
@@ -111,6 +115,13 @@ export class UserPetHandler {
 		return pet;
 	}
 
+	/**
+	 * Retrieves a PetHandler for the specified pet.
+	 * If a pet is provided, a new PetHandler instance is created for that pet.
+	 * If no pet is provided, the selected pet is retrieved and a PetHandler instance is created for it.
+	 * @param pet - The pet for which to create a PetHandler instance.
+	 * @returns A Promise that resolves to a PetHandler instance or null if no pet is found.
+	 */
 	public async getPetHandler(pet?: Pet): Promise<PetHandler | null> {
 		if (pet) return new PetHandler(pet);
 		const selectedPet = await this.getSelectedPet();
@@ -142,6 +153,58 @@ export class PetHandler {
 		this.pet = pet;
 	}
 
+	get imageLink() {
+		return ``;
+	}
+
+	get data() {
+		return this.registry.getPetById(this.pet.registryId);
+	}
+
+	public calcStat(stat: 'hp' | 'atk' | 'def' | 'spd'): number {
+		const data = this.data;
+		if (!data) return 0;
+
+		const base = data.baseStats[stat];
+		const iv = this.pet[`${stat}Iv`] ?? 0;
+
+		return Math.floor((((2 * base + iv + 5) * this.pet.level) / 100 + 5) * NATURE_MULTIPLIERS[this.pet.nature][stat]);
+	}
+
+	public calcMaxHp(): number {
+		const data = this.data;
+		if (!data) return 1;
+
+		return (2 * data.baseStats.hp + this.pet.hpIv + 5) * this.pet.level; // 100 + this.pet.level + 10
+	}
+
+	public generateEmbed() {
+		const petData = this.pet;
+
+		const embed = new DugEmbedBuilder();
+		const name = this.formatName('nlf');
+		embed
+			.setTitle(name)
+			.setThumbnail(`${CDN_URL}/pets/${petData.registryId}.png`)
+			.setFields(
+				{ name: 'Details', value: `**XP**: ${petData.xp}/${250 + 25 * petData.level}` },
+				{
+					name: 'Stats',
+					value: [
+						`**HP**: ${this.calcMaxHp()} – IV:${petData.hpIv}/31 `,
+						`**ATK**: ${this.calcStat('atk')} – IV:${petData.atkIv}/31`,
+						`**DEF**: ${this.calcStat('def')} – IV:${petData.defIv}/31`,
+						`**SPD**: ${this.calcStat('spd')} – IV:${petData.spdIv}/31`
+					].join('\n')
+				}
+			)
+			.setFooter({ text: `Displaying pet ${petData.idx}\nID: ${petData.id}` });
+
+		if (petData.hasColor) embed.setColor(this.color);
+
+		return embed;
+	}
+
 	public async resetColor() {
 		await this.updatePet({
 			color: null,
@@ -154,6 +217,10 @@ export class PetHandler {
 			color,
 			hasColor: true
 		});
+	}
+
+	get color(): HexColorString | null {
+		return this.pet.color ? (this.pet.color as HexColorString) : null;
 	}
 
 	public async toggleFavorite() {

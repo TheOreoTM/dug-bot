@@ -36,6 +36,10 @@ export function getDisplayAvatar(user: User | APIUser, options: ImageURLOptions 
 	return `${ROOT}/avatars/${user.id}/${user.avatar}.${extension}${size}`;
 }
 
+export function randomItem<T>(array: T[]): T {
+	return array[Math.floor(Math.random() * array.length)];
+}
+
 /**
  * Get a image attachment from a message.
  * @param message The Message instance to get the image url from

@@ -4,6 +4,7 @@ import { envParseString } from '@skyra/env-utilities';
 export const ZeroWidthSpace = '\u200B';
 export const LongWidthSpace = '\u3000';
 
+export const CDN_URL = `https://cdn.oreotm.xyz`;
 export const API_URI = envParseString('API_URI');
 
 export const BotPrefix = '.';

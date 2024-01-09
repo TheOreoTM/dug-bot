@@ -29,6 +29,7 @@ model Pet {
   registryId Int
   level      Int
   xp         Int
+  nature     String
   chromatic  Boolean
 
   // Stats
