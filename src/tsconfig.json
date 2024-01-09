@@ -3,7 +3,7 @@
 	"compilerOptions": {
 		"outDir": "../dist",
 		"rootDir": ".",
-		"baseUrl": ".",
+		"baseUrl": "./",
 		"allowJs": true,
 		"paths": {
 			"#config": ["lib/util/config.ts"],
@@ -12,7 +12,9 @@
 			"#utils/*": ["lib/util/*"]
 		},
 		"skipLibCheck": true,
-		"composite": true
+		"composite": true,
+		"moduleResolution": "node",
+		"esModuleInterop": true
 	},
 	"include": [".", "./**/*.json"],
 	"exclude": ["./tsconfig.json"]
