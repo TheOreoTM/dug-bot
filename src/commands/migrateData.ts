@@ -6,7 +6,8 @@ import { ApplyOptions } from '@sapphire/decorators';
 	description: 'ADD',
 	permissionLevel: PermissionLevels.BotOwner,
 	requiredUserPermissions: ['Administrator'],
-	preconditions: ['BotOwner']
+	preconditions: ['BotOwner'],
+	enabled: false
 })
 export class UserCommand extends DugCommand {
 	// Message command

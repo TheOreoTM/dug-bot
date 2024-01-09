@@ -4,7 +4,7 @@ import { GuildMessage } from '#lib/types/Discord';
 import { ApplyOptions } from '@sapphire/decorators';
 import { Listener } from '@sapphire/framework';
 
-@ApplyOptions<Listener.Options>({ event: DugEvents.MessageCreate, enabled: false })
+@ApplyOptions<Listener.Options>({ event: DugEvents.MessageCreate })
 export class UserEvent extends Listener {
 	public override async run(message: GuildMessage) {
 		if (message.content === '' || message.author.bot) return;
