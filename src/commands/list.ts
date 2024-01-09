@@ -1,5 +1,5 @@
 import { DugCommand } from '#lib/structures';
-import { PetListEmbedBuilder } from '#lib/structures';
+import { PetListEmbedBuilder } from '#lib/structures/builders/PetListEmbedBuilder';
 import { ApplyOptions } from '@sapphire/decorators';
 import { send } from '@sapphire/plugin-editable-commands';
 
