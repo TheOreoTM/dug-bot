@@ -9,7 +9,7 @@ import { send } from '@sapphire/plugin-editable-commands';
 export class UserCommand extends DugCommand {
 	public override async messageRun(message: DugCommand.Message) {
 		const handler = await this.container.pet.getUserPetHandler(message.author.id);
-		const pets = await handler.getPets();
+		const pets = handler.getPets();
 
 		const embed = new PetListEmbedBuilder(pets).build();
 

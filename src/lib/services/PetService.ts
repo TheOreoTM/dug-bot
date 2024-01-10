@@ -163,7 +163,7 @@ export class PetHandler {
 		return this.registry.getPetById(this.pet.registryId);
 	}
 
-	public calcStat(stat: 'hp' | 'atk' | 'def' | 'spd'): number {
+	public calcStat(stat: 'atk' | 'def' | 'spd'): number {
 		const data = this.data;
 		if (!data) return 0;
 
