@@ -122,14 +122,16 @@ export class UserPetHandler {
 	 * @param pet - The pet for which to create a PetHandler instance.
 	 * @returns A Promise that resolves to a PetHandler instance or null if no pet is found.
 	 */
+	public async getPetHandler(pet: Pet): Promise<PetHandler>;
+	public async getPetHandler(): Promise<PetHandler | null>;
 	public async getPetHandler(pet?: Pet): Promise<PetHandler | null> {
-		if (pet) return new PetHandler(pet);
+		if (pet) return new PetHandler(pet) as PetHandler;
 		const selectedPet = await this.getSelectedPet();
 		if (!selectedPet) return null;
-		return new PetHandler(selectedPet);
+		return new PetHandler(selectedPet) as PetHandler;
 	}
 
-	public async getPets(amount = 10): Promise<Array<Pet>> {
+	public getPets(amount = 10): Array<Pet> {
 		return this.userPets.slice(0, amount);
 	}
 
