@@ -71,7 +71,7 @@ export namespace Economy {
 			if (item.type === ItemTypes.Badge) {
 				const badge = convertValueToBadge(item.value);
 				if (!badge) {
-					return console.log(`Badge ${badge} is not implemented but is avaiable for purchase`);
+					return container.logger.error(`Badge ${badge} is not implemented but is avaiable for purchase`);
 				}
 				await container.db.user.update({
 					where: {

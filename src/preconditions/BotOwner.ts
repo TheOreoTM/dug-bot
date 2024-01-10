@@ -5,7 +5,6 @@ import { isOwner } from '#lib/util/utils';
 
 export class UserPrecondition extends Precondition {
 	public override messageRun(message: GuildMessage) {
-		console.log(isOwner(message.member));
 		return isOwner(message.member) ? this.ok() : this.error({ context: { silent: true } });
 	}
 

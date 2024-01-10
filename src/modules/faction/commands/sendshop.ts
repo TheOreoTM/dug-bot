@@ -22,7 +22,6 @@ import {
 export class UserCommand extends DugCommand {
 	// Register Chat Input and Context Menu command
 	public override async messageRun(message: DugCommand.Message) {
-		console.log('Sending Shop');
 		const embed = new EmbedBuilder().setColor(DugColors.Info).setDescription('Use the buttons below to buy items');
 
 		const fields: EmbedField[] = [];

@@ -23,11 +23,9 @@ export class CipherService {
 	public async buyHint(userId: string, level: number, hint: 0 | 1 | 2) {
 		const key = this.purchasesKey(userId, level);
 		const oldCachedData = await this.getBoughtHints(userId, level);
-		console.log('🚀 ~ file: CipherService.ts:25 ~ CipherService ~ buyHint ~ oldCachedData:', oldCachedData);
 		const boughtHints = new Set(oldCachedData);
 		if (boughtHints.has(hint)) return;
 		boughtHints.add(hint);
-		console.log('🚀 ~ file: CipherService.ts:28 ~ CipherService ~ buyHint ~ boughtHints:', boughtHints);
 
 		this.cache.set(key, JSON.stringify(Array.from(boughtHints)));
 	}

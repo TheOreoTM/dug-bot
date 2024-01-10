@@ -31,9 +31,6 @@ export class UserRoute extends Route {
 
 		const cardBuffer = this.genRankCard(member, rank, userData);
 
-		console.log(await cardBuffer.build());
-		console.log(cardBuffer.build());
-
 		return response
 			.setContentType(MimeTypes.ImagePng)
 			.status(200)

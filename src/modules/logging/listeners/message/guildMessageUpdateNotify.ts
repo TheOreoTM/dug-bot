@@ -14,8 +14,6 @@ export class UserEvent extends Listener {
 	public async run(old: Message, message: GuildMessage) {
 		if (message.guild === null || old.content === message.content || message.author.bot) return;
 
-		console.log('update');
-
 		this.container.core.logging.sendLog(LoggingWebhooks.Message, {
 			embeds: [
 				new DugEmbedBuilder()
