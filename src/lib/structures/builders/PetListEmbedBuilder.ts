@@ -39,7 +39,6 @@ export class PetListEmbedBuilder {
 		text += `\`${idxText}\`${LongWidthSpace}`;
 		text += `<:__:${PET_EMOJIS[pet.pet.registryId]}> ${pet.formatName('nif')}${seperator}`;
 		text += `Lvl. ${pet.pet.level}${seperator}`;
-		console.log('🚀 ~ PetListEmbedBuilder ~ formatItem ~ ${PET_EMOJIS[pet.pet.registryId]}:', PET_EMOJIS[pet.pet.registryId]);
 		text += `${pet.pet.averageIv}%\n`;
 
 		return text;
