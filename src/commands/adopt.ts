@@ -19,8 +19,7 @@ export class UserCommand extends DugCommand {
 		const pet = await handler.createPet();
 
 		const petHandler = await handler.getPetHandler(pet);
-		const embed = petHandler.generateEmbed();
 
-		return send(message, { content: `Adopted ${petHandler.formatName('l')}`, embeds: [embed] });
+		return send(message, { content: `Adopted ${petHandler.formatName('l')}` });
 	}
 }
