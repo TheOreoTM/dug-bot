@@ -1,4 +1,4 @@
-import { LongWidthSpace } from '#constants';
+import { DugColors, LongWidthSpace } from '#constants';
 import { PET_EMOJIS } from '#lib/data/petData';
 import { PetHandler } from '#lib/services/PetService';
 import { DugEmbedBuilder } from '#lib/structures';
@@ -21,6 +21,7 @@ export class PetListEmbedBuilder {
 		}
 		this.embed.setDescription(description);
 		this.embed.setTitle('Your pets');
+		this.embed.setColor(DugColors.Default);
 
 		return this.embed;
 	}
