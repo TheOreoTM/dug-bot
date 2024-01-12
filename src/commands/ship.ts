@@ -1,7 +1,6 @@
 import { DugCommand } from '#lib/structures';
 import { ApplyOptions } from '@sapphire/decorators';
 import { Args } from '@sapphire/framework';
-import { Collection, GuildMember } from 'discord.js';
 
 @ApplyOptions<DugCommand.Options>({
 	description: 'ADD'
