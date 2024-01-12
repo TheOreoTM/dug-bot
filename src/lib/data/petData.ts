@@ -46,10 +46,30 @@ export const PET_DATA: PetData[] = [
 		id: 5,
 		names: ['Ketsu'],
 		baseStats: {
-			hp: 44,
-			atk: 48,
-			def: 65,
-			spd: 43
+			hp: 78,
+			atk: 84,
+			def: 78,
+			spd: 100
+		}
+	},
+	{
+		id: 6,
+		names: ['Kyubi'],
+		baseStats: {
+			hp: 100,
+			atk: 100,
+			def: 100,
+			spd: 100
+		}
+	},
+	{
+		id: 7,
+		names: ['Raiden'],
+		baseStats: {
+			hp: 79,
+			atk: 83,
+			def: 100,
+			spd: 78
 		}
 	}
 ] as const;
