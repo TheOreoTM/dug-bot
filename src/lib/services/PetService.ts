@@ -189,7 +189,7 @@ export class PetHandler {
 			.setTitle(name)
 			.setImage(`${CDN_URL}/pets/${petData.registryId}.png`)
 			.setFields(
-				{ name: 'Details', value: `**XP**: ${petData.xp}/${250 + 25 * petData.level}` },
+				{ name: 'Details', value: [`**XP**: ${petData.xp}/${250 + 25 * petData.level}`, `**Nature:** ${this.pet.nature}`].join('\n') },
 				{
 					name: 'Stats',
 					value: [
