@@ -177,7 +177,7 @@ export class PetHandler {
 		const data = this.data;
 		if (!data) return 1;
 
-		return (2 * data.baseStats.hp + this.pet.hpIv + 5) * this.pet.level; // 100 + this.pet.level + 10
+		return ((2 * data.baseStats.hp + this.pet.hpIv + 5) * this.pet.level) / 100 + this.pet.level + 10;
 	}
 
 	public generateEmbed() {
