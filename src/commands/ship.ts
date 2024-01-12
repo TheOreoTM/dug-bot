@@ -9,11 +9,11 @@ import { Collection, GuildMember } from 'discord.js';
 export class UserCommand extends DugCommand {
 	public override async messageRun(message: DugCommand.Message, args: Args) {
 		const first = await args
-			.pick('member')
+			.pick('user')
 			.catch(() => args.pick('string'))
 			.catch(() => null);
 		const second = await args
-			.pick('member')
+			.pick('user')
 			.catch(() => args.pick('string'))
 			.catch(() => null);
 
