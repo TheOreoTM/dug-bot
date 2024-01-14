@@ -22,7 +22,11 @@ export class UserPrecondition extends Precondition {
 
 		const blacklisted = await this.container.blacklist.isBlacklisted(id);
 
-		return blacklisted ? this.error({ context: { silent: true } }) : this.ok();
+		if (blacklisted) {
+			console.log('blacklisted');
+			return this.error({ context: { silent: true } });
+		}
+		return this.ok();
 	}
 }
 
