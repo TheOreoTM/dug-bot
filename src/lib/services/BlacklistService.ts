@@ -24,7 +24,6 @@ export class BlacklistService {
 
 	public async isBlacklisted(userId: string) {
 		const exists = await this.db.blacklist.findUnique({ where: { userId } });
-		console.log('🚀 ~ BlacklistService ~ isBlacklisted ~ exists:', exists);
 		return Boolean(exists);
 	}
 
