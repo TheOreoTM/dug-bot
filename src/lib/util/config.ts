@@ -64,7 +64,7 @@ export const config: Config = {
 		repliedUser: false
 	},
 	logger: {
-		level: LogLevel.Info
+		level: LogLevel.Debug
 	},
 	sweepers: {
 		bans: {
