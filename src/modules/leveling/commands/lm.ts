@@ -95,6 +95,7 @@ export class UserCommand extends Subcommand {
 					users: [message.author.id]
 				}
 			});
+			return;
 		}
 
 		const currentLevel = await this.container.db.userLevel.getCurrentLevel(message.author.id);

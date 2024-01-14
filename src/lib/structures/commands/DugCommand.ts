@@ -33,7 +33,7 @@ export abstract class DugCommand extends Command {
 	 */
 	public readonly permissionLevel?: PermissionLevels;
 
-	public constructor(context: Command.Context, options: DugCommand.Options) {
+	public constructor(context: Command.LoaderContext, options: DugCommand.Options) {
 		const perms = new PermissionsBitField(options.requiredClientPermissions).add(
 			PermissionFlagsBits.SendMessages,
 			PermissionFlagsBits.EmbedLinks,
