@@ -4,7 +4,7 @@ import type { GuildMessage } from '#lib/types/Discord';
 import { seconds } from '#lib/util/common';
 import { formatSuccessMessage } from '#lib/util/formatter';
 import { ApplyOptions } from '@sapphire/decorators';
-import { Args, BucketScope, ChatInputCommand } from '@sapphire/framework';
+import { Args, BucketScope } from '@sapphire/framework';
 import { send } from '@sapphire/plugin-editable-commands';
 import { Subcommand } from '@sapphire/plugin-subcommands';
 import { EmbedBuilder } from 'discord.js';

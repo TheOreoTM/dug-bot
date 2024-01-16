@@ -148,12 +148,12 @@ export class UserCommand extends Command {
 		const rankcard = await card.build().catch(() => null);
 
 		if (!rankcard) {
+			const defaultCard = await card.setBackground('COLOR', bgColor).build();
+			const attachment = new AttachmentBuilder(defaultCard, { name: 'rankcard.png' });
+
 			return {
-				embeds: [
-					new EmbedBuilder()
-						.setDescription(formatFailMessage('Failed to generate rankcard. Check your bgImage maybe. Make sure its a valid link.'))
-						.setColor(DugColors.Fail)
-				]
+				content: formatFailMessage('Failed to generate your original rankcard.\n\n Check your bgImage maybe. Make sure its a valid link.'),
+				files: [attachment]
 			};
 		}
 
