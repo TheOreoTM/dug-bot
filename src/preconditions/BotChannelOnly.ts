@@ -3,9 +3,7 @@ import { ApplyOptions } from '@sapphire/decorators';
 import { Precondition } from '@sapphire/framework';
 import type { ChatInputCommandInteraction, ContextMenuCommandInteraction, Message, Snowflake } from 'discord.js';
 
-ApplyOptions<Precondition.Options>({
-	position: 1
-});
+ApplyOptions<Precondition.Options>({});
 export class UserPrecondition extends Precondition {
 	public override messageRun(message: Message) {
 		return this.isBotChannel(message.channel.id);

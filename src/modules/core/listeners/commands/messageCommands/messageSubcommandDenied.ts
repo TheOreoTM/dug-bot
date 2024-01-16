@@ -6,11 +6,11 @@ import { SubcommandPluginEvents } from '@sapphire/plugin-subcommands';
 import { EmbedBuilder, Message } from 'discord.js';
 
 @ApplyOptions<Listener.Options>({
-	event: SubcommandPluginEvents.MessageSubcommandError
+	event: SubcommandPluginEvents.MessageSubcommandDenied
 })
 export class UserListener extends Listener {
 	public override async run(error: Error, { message, context }: MessageCommandErrorPayload) {
-		this.container.logger.error(`[SUBCOMMAND ERROR]: ${error}`);
+		this.container.logger.error(`[SUBCOMMAND DENIED]: ${error}`);
 		if (Reflect.get(Object(context), 'silent')) return;
 
 		if (error instanceof ArgumentError) return this.argumentError(message, error);
