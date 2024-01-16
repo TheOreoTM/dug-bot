@@ -9,7 +9,7 @@ import { GuildMember } from 'discord.js';
 export class UserEvent extends Listener {
 	public override async run(member: GuildMember) {
 		const level = await this.container.db.userLevel.getCurrentLevel(member.id);
-		const newLevel = Math.floor(level * (1 - LeavingTaxPercentage));
+		const newLevel = level === 0 ? level : Math.floor(level * (1 - LeavingTaxPercentage));
 		const levelInfo = getLevelInfo(newLevel);
 		await this.container.db.userLevel.upsert({
 			where: {
@@ -37,6 +37,11 @@ export class UserEvent extends Listener {
 			}
 		});
 
+		if (availableLevelRoles.length === 0) return;
+
+		if (newLevel !== 0) {
+			member.send(`You have lost ${LeavingTaxPercentage * 100}% of your level and xp due to leaving the server. `);
+		}
 		member.roles.add(availableLevelRoles.map((r) => r.roleId));
 		SendLogEmbed.ReassignRoles({ user: member.user, reason: 'Level Up', roles: availableLevelRoles.map((r) => r.roleId) });
 	}

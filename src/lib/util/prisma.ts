@@ -5,6 +5,9 @@ import { container } from '@sapphire/pieces';
 
 const prisma = new PrismaClient();
 
+/**
+ * This file contains utility functions for interacting with the Prisma ORM.
+ */
 export const xprisma = new PrismaClient().$extends({
 	name: 'xprisma',
 	model: {
@@ -228,6 +231,12 @@ export const xprisma = new PrismaClient().$extends({
 
 				return data?.requiredXp ? data.requiredXp : 100;
 			},
+
+			/**
+			 * Retrieves the current level of a user.
+			 * @param userId The ID of the user.
+			 * @returns The current level of the user, or 0 if not found.
+			 */
 			async getCurrentLevel(userId: string) {
 				const data = await prisma.userLevel.findUnique({
 					where: {
