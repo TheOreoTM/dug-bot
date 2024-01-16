@@ -38,7 +38,7 @@ export class UserCommand extends Subcommand {
 				.setDescription(this.description)
 				.addSubcommand((builder) =>
 					builder //
-						.setName('image')
+						.setName('bgimage')
 						.setDescription('Change your cards background image')
 						.addAttachmentOption((option) =>
 							option //
