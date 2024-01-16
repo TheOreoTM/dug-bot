@@ -30,10 +30,10 @@ jobs:
           host: ${{ secrets.HOST_IP }}
           username: ${{ secrets.HOST_USERNAME }}
           script: |
-            pm2 delete dug-bot
             cd /root/dug-bot
             git pull
             yarn install
             npx prisma db push
             yarn build
+            pm2 delete dug-bot
             pm2 start dist/index.js --name dug-bot
