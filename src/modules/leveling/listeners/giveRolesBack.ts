@@ -40,7 +40,11 @@ export class UserEvent extends Listener {
 		if (availableLevelRoles.length === 0) return;
 
 		if (newLevel !== 0) {
-			member.send(`You have lost ${LeavingTaxPercentage * 100}% of your level and xp due to leaving the server. `);
+			try {
+				member.send(`You have lost ${LeavingTaxPercentage * 100}% of your level and xp due to leaving the server. `);
+			} catch (e) {
+				console.log(e);
+			}
 		}
 		member.roles.add(availableLevelRoles.map((r) => r.roleId));
 		SendLogEmbed.ReassignRoles({ user: member.user, reason: 'Level Up', roles: availableLevelRoles.map((r) => r.roleId) });
