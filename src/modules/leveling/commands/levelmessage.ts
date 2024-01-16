@@ -1,8 +1,9 @@
 import { DugColors } from '#constants';
 import type { GuildMessage } from '#lib/types/Discord';
+import { seconds } from '#lib/util/common';
 import { formatFailMessage, formatLevelUpMessage, formatSuccessMessage } from '#lib/util/formatter';
 import { ApplyOptions } from '@sapphire/decorators';
-import { Args } from '@sapphire/framework';
+import { Args, BucketScope } from '@sapphire/framework';
 import { send } from '@sapphire/plugin-editable-commands';
 import { Subcommand } from '@sapphire/plugin-subcommands';
 import { EmbedBuilder } from 'discord.js';
@@ -10,6 +11,9 @@ import { EmbedBuilder } from 'discord.js';
 @ApplyOptions<Subcommand.Options>({
 	description: 'Update your level message',
 	flags: ['raw'],
+	cooldownDelay: seconds(0),
+	cooldownLimit: 1,
+	cooldownScope: BucketScope.User,
 	subcommands: [
 		{ name: 'help', messageRun: 'msgHelp', default: true },
 		{ name: 'set', messageRun: 'msgSet' },
