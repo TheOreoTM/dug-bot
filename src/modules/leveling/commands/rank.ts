@@ -145,7 +145,19 @@ export class UserCommand extends Command {
 			.setCustomId('none')
 			.setStyle(ButtonStyle.Secondary);
 
-		const attachment = new AttachmentBuilder(await card.build(), { name: 'rankcard.png' });
+		const rankcard = await card.build().catch(() => null);
+
+		if (!rankcard) {
+			return {
+				embeds: [
+					new EmbedBuilder()
+						.setDescription(formatFailMessage('Failed to generate rankcard. Check your bgImage maybe. Make sure its a valid link.'))
+						.setColor(DugColors.Fail)
+				]
+			};
+		}
+
+		const attachment = new AttachmentBuilder(rankcard, { name: 'rankcard.png' });
 
 		return {
 			files: [attachment],

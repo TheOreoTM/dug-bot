@@ -1,9 +1,10 @@
 import { DugColors } from '#constants';
+import { DugCommand } from '#lib/structures';
 import type { GuildMessage } from '#lib/types/Discord';
 import { seconds } from '#lib/util/common';
 import { formatSuccessMessage } from '#lib/util/formatter';
 import { ApplyOptions } from '@sapphire/decorators';
-import { Args, BucketScope } from '@sapphire/framework';
+import { Args, BucketScope, ChatInputCommand } from '@sapphire/framework';
 import { send } from '@sapphire/plugin-editable-commands';
 import { Subcommand } from '@sapphire/plugin-subcommands';
 import { EmbedBuilder } from 'discord.js';
@@ -18,7 +19,7 @@ import { EmbedBuilder } from 'discord.js';
 	subcommands: [
 		{ name: 'help', chatInputRun: 'slashHelp', messageRun: 'msgHelp', default: true },
 		{ name: 'reset', chatInputRun: 'slashReset', messageRun: 'msgReset' },
-		{ name: 'bgImage', chatInputRun: 'slashBgImage', messageRun: 'msgBgImage' },
+		{ name: 'bgimage', chatInputRun: 'slashBgImage', messageRun: 'msgBgImage' },
 		{ name: 'bgColor', chatInputRun: 'slashBgColor', messageRun: 'msgBgColor' },
 		{ name: 'borderColor', chatInputRun: 'slashBorderColor', messageRun: 'msgBorderColor' },
 		{ name: 'hideBorder', chatInputRun: 'slashNoBorder', messageRun: 'msgNoBorder' },
@@ -29,6 +30,20 @@ import { EmbedBuilder } from 'discord.js';
 	]
 })
 export class UserCommand extends Subcommand {
+	public override registerApplicationCommands(registry: Subcommand.Registry) {
+		// Register Chat Input command
+		registry.registerChatInputCommand((builder) =>
+			builder //
+				.setName(this.name)
+				.setDescription(this.description)
+				.addAttachmentOption((option) =>
+					option //
+						.setName('bgimage')
+						.setDescription('The image you want to set as your background image')
+						.setRequired(true)
+				)
+		);
+	}
 	public async msgHelp(message: GuildMessage) {
 		const helpEmbed = new EmbedBuilder()
 			.setTitle('Card Help')
@@ -143,6 +158,17 @@ export class UserCommand extends Subcommand {
 		const embed = new EmbedBuilder().setDescription(formatSuccessMessage('Successfully un-hid your `border`')).setColor(DugColors.Success);
 
 		send(message, { embeds: [embed] });
+	}
+
+	public async slashBgImage(interaction: DugCommand.ChatInputCommandInteraction) {
+		const bgImage = interaction.options.getAttachment('bgimage', true).url;
+		await this.container.db.userLevel.updateCustoms(interaction.member.id, {
+			bgImage
+		});
+
+		const embed = new EmbedBuilder().setDescription(formatSuccessMessage('Successfully set your `bgImage`')).setImage(bgImage);
+
+		interaction.reply({ embeds: [embed] });
 	}
 
 	public async msgBgImage(message: GuildMessage, args: Args) {
