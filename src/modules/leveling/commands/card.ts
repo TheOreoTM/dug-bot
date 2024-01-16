@@ -1,8 +1,9 @@
 import { DugColors } from '#constants';
 import type { GuildMessage } from '#lib/types/Discord';
+import { seconds } from '#lib/util/common';
 import { formatSuccessMessage } from '#lib/util/formatter';
 import { ApplyOptions } from '@sapphire/decorators';
-import { Args } from '@sapphire/framework';
+import { Args, BucketScope, CooldownLevel } from '@sapphire/framework';
 import { send } from '@sapphire/plugin-editable-commands';
 import { Subcommand } from '@sapphire/plugin-subcommands';
 import { EmbedBuilder } from 'discord.js';
@@ -11,7 +12,9 @@ import { EmbedBuilder } from 'discord.js';
 	name: 'card',
 	description: 'Modify your rank card',
 	flags: ['remove'],
-
+	cooldownDelay: seconds(1),
+	cooldownLimit: 1,
+	cooldownScope: BucketScope.User,
 	subcommands: [
 		{ name: 'help', chatInputRun: 'slashHelp', messageRun: 'msgHelp', default: true },
 		{ name: 'reset', chatInputRun: 'slashReset', messageRun: 'msgReset' },

@@ -55,7 +55,7 @@ export const config: Config = {
 	],
 	partials: [Partials.Channel, Partials.Message, Partials.GuildMember, Partials.User],
 	cooldown_options: {
-		delay: Time.Second * 10,
+		delay: Time.Second * 5,
 		filteredUsers: BotOwners,
 		scope: BucketScope.User
 	},
