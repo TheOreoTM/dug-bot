@@ -12,7 +12,7 @@ import { EmbedBuilder } from 'discord.js';
 	name: 'card',
 	description: 'Modify your rank card',
 	flags: ['remove'],
-	cooldownDelay: seconds(1),
+	cooldownDelay: seconds(0),
 	cooldownLimit: 1,
 	cooldownScope: BucketScope.User,
 	subcommands: [
