@@ -36,11 +36,16 @@ export class UserCommand extends Subcommand {
 			builder //
 				.setName(this.name)
 				.setDescription(this.description)
-				.addAttachmentOption((option) =>
-					option //
-						.setName('bgimage')
-						.setDescription('The image you want to set as your background image')
-						.setRequired(true)
+				.addSubcommand((builder) =>
+					builder //
+						.setName('image')
+						.setDescription('Change your cards background image')
+						.addAttachmentOption((option) =>
+							option //
+								.setName('image')
+								.setDescription('The image you want to set as your background image')
+								.setRequired(true)
+						)
 				)
 		);
 	}
@@ -161,7 +166,7 @@ export class UserCommand extends Subcommand {
 	}
 
 	public async slashBgImage(interaction: DugCommand.ChatInputCommandInteraction) {
-		const bgImage = interaction.options.getAttachment('bgimage', true).url;
+		const bgImage = interaction.options.getAttachment('image', true).url;
 		await this.container.db.userLevel.updateCustoms(interaction.member.id, {
 			bgImage
 		});
