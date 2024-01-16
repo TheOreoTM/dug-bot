@@ -11,6 +11,7 @@ import { EmbedBuilder } from 'discord.js';
 @ApplyOptions<Subcommand.Options>({
 	description: 'Update your level message',
 	flags: ['raw'],
+	aliases: ['lm'],
 	cooldownDelay: seconds(0),
 	cooldownLimit: 1,
 	cooldownScope: BucketScope.User,
