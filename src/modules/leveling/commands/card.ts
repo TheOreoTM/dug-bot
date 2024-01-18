@@ -58,12 +58,14 @@ export class UserCommand extends Subcommand {
 				{ name: 'card reset', value: 'Reset your card to default' },
 				{ name: 'card bgColor', value: 'Change your cards background color' },
 				{
-					name: 'card bgImage',
+					name: 'card bgImage "DEPRECATED"',
 					value: 'Change your cards background image. Use `--remove` to remove the bgImage. DO NOT MISUSE THIS AND RUIN IT FOR EVERYONE. (experimental)'
 				},
-				// { name: 'card borderColor', value: 'Change your cards border color' },
-				// { name: 'card hideBorder', value: 'Hide the outer border of your card' },
-				// { name: 'card showBorder', value: 'Show the outer border of your card' },
+				{
+					name: '/card bgimage',
+					value: `USE THIS INSTEAD OF .card bgimage\nChange your card background image by UPLOADING an image file. I made this because none of you seem to know how to use image links.`
+				},
+
 				{ name: 'card avatarBorderColor', value: 'Change the border around your avatar' },
 				{ name: 'card barColor', value: 'Change the color of the progress bar of your card' },
 				{ name: 'card fontColor', value: 'Change the username color of your card' }
