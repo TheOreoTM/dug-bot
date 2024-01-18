@@ -19,7 +19,7 @@ export class UserListener extends Listener {
 	}
 
 	private userError(message: Message, error: UserError) {
-		// `context: { silent: true }` should make UserError silent:
+		// `context: { silent: traue }` should make UserError silent:
 		// Use cases for this are for example permissions error when running the `eval` command.
 		if (Reflect.get(Object(error.context), 'silent')) return;
 
