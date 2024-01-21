@@ -14,4 +14,4 @@ export const RANDOM_ROLE_COLORS: HexColorString[] = [
 	'#9129ed'
 ];
 
-export const RANDOM_ROLE_NAMES: string[] = [DEFAULT_ROLE_NAME, 'Neko of the week', 'Champions of the week', ''];
+export const RANDOM_ROLE_NAMES: string[] = [DEFAULT_ROLE_NAME, 'Neko of the week', 'Champions of the week', 'Weekly Warriors'];
