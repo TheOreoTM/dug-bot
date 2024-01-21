@@ -5,10 +5,10 @@ export const DEFAULT_ROLE_NAME = 'Weekly Active';
 
 export const RANDOM_ROLE_COLORS: HexColorString[] = [
 	DEFAULT_ROLE_COLOR,
+	'#ffa6a6',
 	'#00fffff',
 	'#60f10e',
 	'#069833',
-	'#49ca7e',
 	'#8eec7a',
 	'#d8a0c0',
 	'#9129ed'
