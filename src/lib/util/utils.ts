@@ -1,3 +1,4 @@
+import { MainServerID } from '#constants';
 import { Items } from '#lib/items';
 import { InventoryItemType, InventoryItemTypeWithCount, ItemValue } from '#lib/types/Data';
 import {
@@ -12,6 +13,10 @@ import { cyan } from 'colorette';
 import type { APIUser, Channel, EmbedAssetData, EmbedAuthorData, Guild, ImageURLOptions, Message, User } from 'discord.js';
 import { GuildMember } from 'discord.js';
 import fuzzysort from 'fuzzysort';
+
+export async function fetchSCC() {
+	return await container.client.guilds.fetch(MainServerID);
+}
 
 /**
  * Image extensions:

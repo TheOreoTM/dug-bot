@@ -10,6 +10,7 @@ export const API_URI = envParseString('API_URI');
 export const BotPrefix = '.';
 export const BotID = '767781855193464882';
 export const MainServerID = '519734247519420438';
+export const WeeklyActiveRoleID = '1135930962652438637';
 export const BotOwners = ['600707283097485322'];
 export const EventConfig = {
 	EventManager: '1129689783774490656'
