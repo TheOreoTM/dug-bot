@@ -1,4 +1,4 @@
-import { ChannelIDs } from '#constants';
+import { ChannelIDs, DugColors } from '#constants';
 import { dailyAnswerCacheKey, dailyCurrentQuestion, dailySubmissionsCacheKey } from '#lib/database/keys';
 import { TruthOrDare } from '#lib/types/Api';
 import { fetchChannel } from '#lib/util/utils';
@@ -14,6 +14,38 @@ import { EmbedBuilder, TextChannel } from 'discord.js';
 export class SendDailyQuestionTask extends ScheduledTask {
 	public async run() {
 		this.container.logger.info('[SendDailyQuestionTask] Started');
+
+		const previousQuestion = await this.getCurrentQuestion();
+
+		if (previousQuestion) {
+			const previousAnswers = await this.container.cache.lrange(dailyAnswerCacheKey(previousQuestion), 0, -1);
+
+			const topAnswers: Record<string, number> = {};
+
+			for (const answer of previousAnswers) {
+				if (!topAnswers[answer]) {
+					topAnswers[answer] = 1;
+					continue;
+				}
+
+				topAnswers[answer]++;
+			}
+
+			const topAnswersSorted = Object.entries(topAnswers).sort(([, a], [, b]) => b - a);
+
+			const topAnswersString = topAnswersSorted.map(([id, count]) => `<@${id}>: ${count}`).join('\n');
+
+			const previousQuestionEmbed = new EmbedBuilder()
+				.setTitle('Previous question results')
+				.setColor(DugColors.Default)
+				.setDescription('This is the previous question results\n\n')
+				.addFields({ name: 'Answers', value: topAnswersString });
+
+			const channel = await fetchChannel<TextChannel>(ChannelIDs.DailyChan);
+			if (!channel) return;
+
+			channel.send({ embeds: [previousQuestionEmbed] });
+		}
 
 		let question = await this.getQuestion();
 
@@ -48,6 +80,14 @@ export class SendDailyQuestionTask extends ScheduledTask {
 		await this.container.cache.set(dailySubmissionsCacheKey(question.id), `[]`);
 		await this.container.cache.set(dailyAnswerCacheKey(question.id), `[]`);
 		await this.container.cache.set(dailyCurrentQuestion, question.id);
+	}
+
+	private async getCurrentQuestion() {
+		const redis = this.container.cache;
+
+		const question = await redis.get(dailyCurrentQuestion);
+
+		return question;
 	}
 
 	private async getQuestion(): Promise<TruthOrDare | null> {
