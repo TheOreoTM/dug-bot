@@ -36,11 +36,12 @@ export class UserCommand extends DugCommand {
 
 			const topAnswersString = topAnswersSorted.map(([id, count]) => `<@${id}>: ${count}`).join('\n');
 
+			console.log('🚀 ~ SendDailyQuestionTask ~ run ~ topAnswersString:', topAnswersString);
 			const previousQuestionEmbed = new EmbedBuilder()
 				.setTitle('Previous question results')
 				.setColor(DugColors.Default)
 				.setDescription('This is the previous question results\n\n')
-				.addFields({ name: 'Answers', value: topAnswersString });
+				.addFields({ name: 'Answers', value: previousAnswers.length === 0 ? 'No answers' : topAnswersString });
 
 			const channel = await fetchChannel<TextChannel>(ChannelIDs.DailyChan);
 			if (!channel) return;
