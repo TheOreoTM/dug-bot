@@ -46,6 +46,7 @@ declare module '@skyra/env-utilities' {
 declare module '@sapphire/plugin-scheduled-tasks' {
 	interface ScheduledTasks {
 		ExpireBoostsTask: never;
+		SendDailyQuestionTask: never;
 	}
 }
 
