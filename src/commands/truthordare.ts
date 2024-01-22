@@ -11,7 +11,7 @@ import { EmbedBuilder } from 'discord.js';
 @ApplyOptions<DugCommand.Options>({
 	description: 'Play truth or dare',
 	aliases: ['tod'],
-	flags: ['truth', 'dare', 'nsfw', 'pg'],
+	flags: ['nsfw', 'pg'],
 	cooldownDelay: seconds(10),
 	cooldownLimit: 2,
 	cooldownScope: BucketScope.Channel
@@ -62,17 +62,9 @@ export class UserCommand extends DugCommand {
 
 	// Message command
 	public override async messageRun(message: DugCommand.Message, args: DugCommand.Args) {
-		const truth = args.getFlags('truth');
-		const dare = args.getFlags('dare');
+		const type = await args.pick('truthOrDare').catch(() => (Math.random() < 0.5 ? 'truth' : 'dare'));
 
 		const rating = args.getFlags('nsfw') ? 'R' : args.getFlags('pg') ? 'PG' : 'PG13';
-
-		if (truth && dare) {
-			send(message, "You can't have both truth and dare");
-			return;
-		}
-
-		const type = truth ? 'truth' : dare ? 'dare' : Math.random() < 0.5 ? 'truth' : 'dare';
 
 		const truthOrDare = await this.getTruthOrDare(type, rating);
 

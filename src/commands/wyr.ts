@@ -1,4 +1,3 @@
-import { DugColors } from '#constants';
 import { DugCommand } from '#lib/structures';
 import { TruthOrDare } from '#lib/types/Api';
 import { seconds } from '#lib/util/common';
