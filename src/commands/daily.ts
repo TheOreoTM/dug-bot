@@ -44,9 +44,8 @@ export class UserCommand extends DugCommand {
 	}
 
 	private async hasSubmitted(submitterID: string, currentQuestion: string) {
-		const redis = this.container.cache;
-
-		const submissions = await redis.lrange(dailySubmissionsCacheKey(currentQuestion), 0, -1);
+		const submissionsString = await this.container.cache.get(dailySubmissionsCacheKey(currentQuestion));
+		const submissions = JSON.parse(submissionsString ?? '[]');
 
 		return submissions.includes(submitterID);
 	}
@@ -54,7 +53,18 @@ export class UserCommand extends DugCommand {
 	private async sendSubmission(submitterID: string, targetId: string, currentQuestion: string) {
 		const redis = this.container.cache;
 
-		await redis.lpush(dailySubmissionsCacheKey(currentQuestion), submitterID);
-		await redis.lpush(dailyAnswerCacheKey(currentQuestion), targetId);
+		const submissionsString = await redis.get(dailySubmissionsCacheKey(currentQuestion));
+		const submissions = JSON.parse(submissionsString ?? '[]');
+
+		submissions.push(submitterID);
+
+		await redis.set(dailySubmissionsCacheKey(currentQuestion), JSON.stringify(submissions));
+
+		const answersString = await redis.get(dailyAnswerCacheKey(currentQuestion));
+		const answers = JSON.parse(answersString ?? '[]');
+
+		answers.push(targetId);
+
+		await redis.set(dailyAnswerCacheKey(currentQuestion), JSON.stringify(answers));
 	}
 }

@@ -18,7 +18,8 @@ export class UserCommand extends DugCommand {
 		const previousQuestion = await this.getCurrentQuestion();
 
 		if (previousQuestion) {
-			const previousAnswers = await this.container.cache.lrange(dailyAnswerCacheKey(previousQuestion), 0, -1);
+			const previousAnswersString = await this.container.cache.get(dailyAnswerCacheKey(previousQuestion));
+			const previousAnswers = JSON.parse(previousAnswersString ?? '[]');
 
 			const topAnswers: Record<string, number> = {};
 
@@ -78,8 +79,8 @@ export class UserCommand extends DugCommand {
 
 		// Reset the cache
 
-		await this.container.cache.del(dailyAnswerCacheKey(question.id));
-		await this.container.cache.del(dailySubmissionsCacheKey(question.id));
+		await this.container.cache.set(dailyAnswerCacheKey(question.id), '[]');
+		await this.container.cache.set(dailySubmissionsCacheKey(question.id), '[]');
 		await this.container.cache.del(dailyCurrentQuestion);
 
 		send(message, 'Sent daily question');
