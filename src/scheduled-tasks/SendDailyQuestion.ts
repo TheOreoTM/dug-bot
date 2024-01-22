@@ -36,7 +36,6 @@ export class SendDailyQuestionTask extends ScheduledTask {
 
 			const topAnswersString = topAnswersSorted.map(([id, count]) => `<@${id}>: ${count}`).join('\n');
 
-			console.log('🚀 ~ SendDailyQuestionTask ~ run ~ topAnswersString:', topAnswersString);
 			const previousQuestionEmbed = new EmbedBuilder()
 				.setTitle('Previous question results')
 				.setColor(DugColors.Default)
@@ -69,7 +68,7 @@ export class SendDailyQuestionTask extends ScheduledTask {
 			.setTitle('Which member...')
 			.setColor('Random')
 			.setDescription(
-				`${question.question}\n\nUse \`.daily @user\` and mention the user to send your submission. Eg. .daily <@600707283097485322>`
+				`**${question.question}**\n\n\nUse \`.daily @user\` and mention the user to send your submission. \nEg. .daily <@600707283097485322>`
 			)
 			.setFooter({ text: `Use ".daily @user" to send you submissions` });
 
