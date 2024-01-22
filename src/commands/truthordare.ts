@@ -12,7 +12,7 @@ import { EmbedBuilder } from 'discord.js';
 	description: 'Play truth or dare',
 	aliases: ['tod'],
 	flags: ['truth', 'dare', 'nsfw', 'pg'],
-	cooldownDelay: seconds(5),
+	cooldownDelay: seconds(10),
 	cooldownLimit: 2,
 	cooldownScope: BucketScope.Channel
 })
@@ -92,6 +92,7 @@ export class UserCommand extends DugCommand {
 		await sleep(seconds(10));
 
 		response.delete().catch(() => null);
+		message.delete().catch(() => null);
 	}
 
 	// Chat Input (slash) command
@@ -118,7 +119,7 @@ export class UserCommand extends DugCommand {
 			embeds: [embed]
 		});
 
-		await sleep(seconds(10));
+		await sleep(seconds(15));
 
 		response.delete().catch(() => null);
 	}

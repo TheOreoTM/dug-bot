@@ -10,7 +10,7 @@ import { EmbedBuilder } from 'discord.js';
 
 @ApplyOptions<DugCommand.Options>({
 	description: 'Get a would you rather question',
-	cooldownDelay: seconds(5),
+	cooldownDelay: seconds(10),
 	cooldownLimit: 2,
 	cooldownScope: BucketScope.Channel
 })
@@ -45,9 +45,10 @@ export class UserCommand extends DugCommand {
 			embeds: [embed]
 		});
 
-		await sleep(seconds(10));
+		await sleep(seconds(15));
 
 		response.delete().catch(() => null);
+		message.delete().catch(() => null);
 	}
 
 	private async getWyr(): Promise<TruthOrDare | null> {
