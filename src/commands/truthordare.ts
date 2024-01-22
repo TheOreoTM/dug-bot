@@ -1,13 +1,18 @@
 import { DugColors } from '#constants';
 import { DugCommand } from '#lib/structures';
+import { seconds } from '#lib/util/common';
 import { ApplyOptions } from '@sapphire/decorators';
+import { BucketScope } from '@sapphire/framework';
 import { send } from '@sapphire/plugin-editable-commands';
 import { EmbedBuilder } from 'discord.js';
 
 @ApplyOptions<DugCommand.Options>({
 	description: 'Play truth or dare',
 	aliases: ['tod'],
-	flags: ['truth', 'dare', 'nsfw', 'pg13']
+	flags: ['truth', 'dare', 'nsfw', 'pg13'],
+	cooldownDelay: seconds(5),
+	cooldownLimit: 2,
+	cooldownScope: BucketScope.Channel
 })
 export class UserCommand extends DugCommand {
 	// Register Chat Input and Context Menu command
