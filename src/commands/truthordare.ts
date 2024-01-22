@@ -123,8 +123,8 @@ export class UserCommand extends DugCommand {
 		response.delete().catch(() => null);
 	}
 
-	private async getTruthOrDare(type: 'truth' | 'dare', rating: Rating = 'PG13'): Promise<TruthOrDare | null> {
-		const response = await fetch(`https://api.truthordarebot.xyz/v1/${type}?rating=${rating}`);
+	private async getTruthOrDare(type: 'truth' | 'dare', _rating: Rating = 'PG13'): Promise<TruthOrDare | null> {
+		const response = await fetch(`https://api.truthordarebot.xyz/v1/${type}`);
 		const data = (await response.json()) as any;
 
 		if (data.error) {
