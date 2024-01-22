@@ -1,6 +1,6 @@
 export type TruthOrDare = {
 	id: string;
-	type: 'TRUTH' | 'DARE' | 'WYR';
+	type: 'TRUTH' | 'DARE' | 'WYR' | 'NHIE' | 'PARANOIA';
 	rating: Rating;
 	question: string;
 	translations: {

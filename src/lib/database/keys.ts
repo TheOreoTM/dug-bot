@@ -12,3 +12,7 @@ export const factionListCacheKey: Key = `${factionCacheKey}:list.message` as Key
 
 export const leaderboardCacheKey = (page: number): Key => `${baseCacheKey}:page:${page}` as Key;
 export const levelDataCacheKey = (userId: string): Key => `${baseCacheKey}:leveling:${userId}` as Key;
+
+export const dailyCurrentQuestion: Key = `${baseCacheKey}:daily:current` as Key;
+export const dailyAnswerCacheKey = (question: string): Key => `${baseCacheKey}:daily:${question}:answer` as Key;
+export const dailySubmissionsCacheKey = (question: string): Key => `${baseCacheKey}:daily:${question}:submissions` as Key;
