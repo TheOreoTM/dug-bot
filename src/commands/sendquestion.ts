@@ -68,7 +68,7 @@ export class UserCommand extends DugCommand {
 			.setTitle('Which member...')
 			.setColor('Random')
 			.setDescription(
-				`${question.question}\n\nUse \`.daily @user\` and mention the user to send your submission. Eg. \`.daily <@600707283097485322>\``
+				`${question.question}\n\nUse \`.daily @user\` and mention the user to send your submission. Eg. .daily <@600707283097485322>`
 			)
 			.setFooter({ text: `Use ".daily @user" to send you submissions` });
 
@@ -81,7 +81,7 @@ export class UserCommand extends DugCommand {
 
 		await this.container.cache.set(dailyAnswerCacheKey(question.id), '[]');
 		await this.container.cache.set(dailySubmissionsCacheKey(question.id), '[]');
-		await this.container.cache.del(dailyCurrentQuestion);
+		await this.container.cache.set(dailyCurrentQuestion, question.id);
 
 		send(message, 'Sent daily question');
 	}
@@ -95,7 +95,7 @@ export class UserCommand extends DugCommand {
 	}
 
 	private async getQuestion(): Promise<TruthOrDare | null> {
-		const response = await fetch(`https://api.truthordarebot.xyz/api/paranoia`);
+		const response = await fetch(`https://api.truthordarebot.xyz/api/paranoia?rating=pg13`);
 
 		const data = (await response.json()) as any;
 

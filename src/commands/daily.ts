@@ -32,7 +32,7 @@ export class UserCommand extends DugCommand {
 
 		await this.sendSubmission(message.author.id, member.id, currentQuestion);
 
-		send(message, `You have sent your daily submission}`);
+		send(message, `You have sent your daily submission`);
 	}
 
 	private async getCurrentQuestion() {
