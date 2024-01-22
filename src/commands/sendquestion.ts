@@ -77,9 +77,10 @@ export class UserCommand extends DugCommand {
 		channel.send({ embeds: [embed] });
 
 		// Reset the cache
-		await this.container.cache.set(dailySubmissionsCacheKey(question.id), `[]`);
-		await this.container.cache.set(dailyAnswerCacheKey(question.id), `[]`);
-		await this.container.cache.set(dailyCurrentQuestion, question.id);
+
+		await this.container.cache.del(dailyAnswerCacheKey(question.id));
+		await this.container.cache.del(dailySubmissionsCacheKey(question.id));
+		await this.container.cache.del(dailyCurrentQuestion);
 
 		send(message, 'Sent daily question');
 	}
