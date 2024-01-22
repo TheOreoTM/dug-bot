@@ -36,6 +36,7 @@ export class SendDailyQuestionTask extends ScheduledTask {
 
 			const topAnswersString = topAnswersSorted.map(([id, count]) => `<@${id}>: ${count}`).join('\n');
 
+			console.log('🚀 ~ SendDailyQuestionTask ~ run ~ topAnswersString:', topAnswersString);
 			const previousQuestionEmbed = new EmbedBuilder()
 				.setTitle('Previous question results')
 				.setColor(DugColors.Default)
