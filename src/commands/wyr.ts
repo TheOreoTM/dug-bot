@@ -35,7 +35,7 @@ export class UserCommand extends DugCommand {
 		}
 
 		const embed = new EmbedBuilder()
-			.setColor(DugColors.Default)
+			.setColor('Random')
 			.setTitle(`Would you rather #${wyr.id}`)
 			.setDescription(wyr.question)
 			.setFooter({ text: `Rating: ${wyr.rating}` });
@@ -47,7 +47,7 @@ export class UserCommand extends DugCommand {
 
 		await sleep(seconds(15));
 
-		response.edit({ content: `Would you rather question requested by ${message.member}\n**${wyr.question}**`, embeds: [] });
+		response.edit({ content: `Requested by ${message.member}\n**${wyr.question}**`, embeds: [] });
 		message.delete().catch(() => null);
 	}
 

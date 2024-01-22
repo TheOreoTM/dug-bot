@@ -25,7 +25,7 @@ export class UserCommand extends DugCommand {
 
 		const embed = new EmbedBuilder()
 			.setColor('Random')
-			.setTitle(`Never have I ever #${nhie.id}`)
+			.setTitle(`NHIE #${nhie.id}`)
 			.setDescription(nhie.question)
 			.setFooter({ text: `Rating: ${nhie.rating}` });
 
@@ -33,7 +33,7 @@ export class UserCommand extends DugCommand {
 
 		await sleep(seconds(15));
 
-		repsonse.edit({ content: `Never have I ever question requested by ${message.member}\n**${nhie.question}**`, embeds: [] });
+		repsonse.edit({ content: `Requested by ${message.member}\n**${nhie.question}**`, embeds: [] });
 		message.delete().catch(() => null);
 	}
 
