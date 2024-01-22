@@ -1,9 +1,11 @@
 import { DugColors } from '#constants';
 import { DugCommand } from '#lib/structures';
+import { Rating, TruthOrDare } from '#lib/types/Api';
 import { seconds } from '#lib/util/common';
 import { ApplyOptions } from '@sapphire/decorators';
 import { BucketScope } from '@sapphire/framework';
 import { send } from '@sapphire/plugin-editable-commands';
+import { sleep } from '@sapphire/utilities';
 import { EmbedBuilder } from 'discord.js';
 
 @ApplyOptions<DugCommand.Options>({
@@ -66,7 +68,8 @@ export class UserCommand extends DugCommand {
 		const rating = args.getFlags('nsfw') ? 'R' : args.getFlags('pg') ? 'PG' : 'PG13';
 
 		if (truth && dare) {
-			return send(message, "You can't have both truth and dare");
+			send(message, "You can't have both truth and dare");
+			return;
 		}
 
 		const type = truth ? 'truth' : dare ? 'dare' : Math.random() < 0.5 ? 'truth' : 'dare';
@@ -74,7 +77,8 @@ export class UserCommand extends DugCommand {
 		const truthOrDare = await this.getTruthOrDare(type, rating);
 
 		if (!truthOrDare) {
-			return send(message, 'Something went wrong');
+			send(message, 'Something went wrong');
+			return;
 		}
 
 		const embed = new EmbedBuilder()
@@ -83,7 +87,11 @@ export class UserCommand extends DugCommand {
 			.setColor(type === 'truth' ? DugColors.Success : DugColors.Warn)
 			.setFooter({ text: `Rating: ${truthOrDare.rating}` });
 
-		return send(message, { content: `${type === 'truth' ? 'Truth' : 'Dare'} selected by ${message.member}`, embeds: [embed] });
+		const response = await send(message, { content: `${type === 'truth' ? 'Truth' : 'Dare'} selected by ${message.member}`, embeds: [embed] });
+
+		await sleep(seconds(10));
+
+		response.delete().catch(() => null);
 	}
 
 	// Chat Input (slash) command
@@ -95,7 +103,8 @@ export class UserCommand extends DugCommand {
 		const truthOrDare = await this.getTruthOrDare(type, rating);
 
 		if (!truthOrDare) {
-			return interaction.reply('Something went wrong');
+			interaction.reply('Something went wrong');
+			return;
 		}
 
 		const embed = new EmbedBuilder()
@@ -104,7 +113,14 @@ export class UserCommand extends DugCommand {
 			.setColor(type === 'truth' ? DugColors.Success : DugColors.Warn)
 			.setFooter({ text: `Rating: ${truthOrDare.rating}` });
 
-		return interaction.reply({ content: `${type === 'truth' ? 'Truth' : 'Dare'} selected by ${interaction.member}`, embeds: [embed] });
+		const response = await interaction.reply({
+			content: `${type === 'truth' ? 'Truth' : 'Dare'} selected by ${interaction.member}`,
+			embeds: [embed]
+		});
+
+		await sleep(seconds(10));
+
+		response.delete().catch(() => null);
 	}
 
 	private async getTruthOrDare(type: 'truth' | 'dare', rating: Rating = 'PG13'): Promise<TruthOrDare | null> {
@@ -118,20 +134,3 @@ export class UserCommand extends DugCommand {
 		return data as TruthOrDare;
 	}
 }
-
-type TruthOrDare<IsTruth extends boolean | null = null> = {
-	id: string;
-	type: IsTruth extends true ? 'truth' : IsTruth extends false ? 'dare' : 'truth' | 'dare';
-	rating: Rating;
-	question: string;
-	translations: {
-		bn: string;
-		de: string;
-		es: string;
-		fr: string;
-		hi: string;
-		tl: string;
-	};
-};
-
-type Rating = 'PG' | 'PG13' | 'R';
