@@ -21,6 +21,8 @@ export class UserCommand extends DugCommand {
 			return;
 		}
 
+		console.log(currentQuestion);
+
 		const hasSubmitted = await this.hasSubmitted(message.author.id, currentQuestion);
 
 		if (hasSubmitted) {
