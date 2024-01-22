@@ -9,7 +9,7 @@ import { EmbedBuilder } from 'discord.js';
 @ApplyOptions<DugCommand.Options>({
 	description: 'Play truth or dare',
 	aliases: ['tod'],
-	flags: ['truth', 'dare', 'nsfw', 'pg13'],
+	flags: ['truth', 'dare', 'nsfw', 'pg'],
 	cooldownDelay: seconds(5),
 	cooldownLimit: 2,
 	cooldownScope: BucketScope.Channel
@@ -63,7 +63,7 @@ export class UserCommand extends DugCommand {
 		const truth = args.getFlags('truth');
 		const dare = args.getFlags('dare');
 
-		const rating = args.getFlags('nsfw') ? 'R' : args.getFlags('pg13') ? 'PG13' : 'PG';
+		const rating = args.getFlags('nsfw') ? 'R' : args.getFlags('pg') ? 'PG' : 'PG13';
 
 		if (truth && dare) {
 			return send(message, "You can't have both truth and dare");
