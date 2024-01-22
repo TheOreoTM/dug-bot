@@ -40,7 +40,7 @@ export class SendDailyQuestionTask extends ScheduledTask {
 				.setTitle('Previous question results')
 				.setColor(DugColors.Default)
 				.setDescription('This is the previous question results\n\n')
-				.addFields({ name: 'Answers', value: topAnswersString });
+				.addFields({ name: 'Answers', value: topAnswersString.length === 0 ? 'No answers' : topAnswersString });
 
 			const channel = await fetchChannel<TextChannel>(ChannelIDs.DailyChan);
 			if (!channel) return;
