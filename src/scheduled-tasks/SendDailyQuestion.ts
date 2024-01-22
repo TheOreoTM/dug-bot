@@ -18,7 +18,8 @@ export class SendDailyQuestionTask extends ScheduledTask {
 		const previousQuestion = await this.getCurrentQuestion();
 
 		if (previousQuestion) {
-			const previousAnswers = await this.container.cache.lrange(dailyAnswerCacheKey(previousQuestion), 0, -1);
+			const previousAnswersString = await this.container.cache.get(dailyAnswerCacheKey(previousQuestion));
+			const previousAnswers = JSON.parse(previousAnswersString ?? '[]');
 
 			const topAnswers: Record<string, number> = {};
 
@@ -67,7 +68,7 @@ export class SendDailyQuestionTask extends ScheduledTask {
 			.setTitle('Which member...')
 			.setColor('Random')
 			.setDescription(
-				`${question.question}\n\nUse \`.daily @user\` and mention the user to send your submission. Eg. \`.daily <@600707283097485322>\``
+				`${question.question}\n\nUse \`.daily @user\` and mention the user to send your submission. Eg. .daily <@600707283097485322>`
 			)
 			.setFooter({ text: `Use ".daily @user" to send you submissions` });
 
@@ -77,8 +78,9 @@ export class SendDailyQuestionTask extends ScheduledTask {
 		channel.send({ embeds: [embed] });
 
 		// Reset the cache
-		await this.container.cache.set(dailySubmissionsCacheKey(question.id), `[]`);
-		await this.container.cache.set(dailyAnswerCacheKey(question.id), `[]`);
+
+		await this.container.cache.set(dailyAnswerCacheKey(question.id), '[]');
+		await this.container.cache.set(dailySubmissionsCacheKey(question.id), '[]');
 		await this.container.cache.set(dailyCurrentQuestion, question.id);
 	}
 
@@ -91,7 +93,7 @@ export class SendDailyQuestionTask extends ScheduledTask {
 	}
 
 	private async getQuestion(): Promise<TruthOrDare | null> {
-		const response = await fetch(`https://api.truthordarebot.xyz/api/paranoia`);
+		const response = await fetch(`https://api.truthordarebot.xyz/api/paranoia?rating=pg13`);
 
 		const data = (await response.json()) as any;
 
