@@ -91,7 +91,9 @@ export class UserCommand extends DugCommand {
 
 		await sleep(seconds(10));
 
-		response.delete().catch(() => null);
+		response
+			.edit({ content: `${type === 'truth' ? 'Truth' : 'Dare'} selected by ${message.member}\n**${truthOrDare.question}**`, embeds: [] })
+			.catch(() => null);
 		message.delete().catch(() => null);
 	}
 

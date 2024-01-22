@@ -47,7 +47,7 @@ export class UserCommand extends DugCommand {
 
 		await sleep(seconds(15));
 
-		response.delete().catch(() => null);
+		response.edit({ content: `Would you rather question requested by ${message.member}\n**${wyr.question}**` });
 		message.delete().catch(() => null);
 	}
 
