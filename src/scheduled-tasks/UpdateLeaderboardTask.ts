@@ -5,7 +5,7 @@ import { sleep } from '@sapphire/utilities';
 
 @ApplyOptions<ScheduledTask.Options>({
 	name: 'UpdateLeaderboardTaskTask',
-	interval: minutes(2),
+	interval: minutes(1),
 	bullJobsOptions: { removeOnComplete: true }
 })
 export class UpdateLeaderboardTaskTask extends ScheduledTask {
