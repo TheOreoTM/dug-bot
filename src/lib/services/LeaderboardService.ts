@@ -31,7 +31,9 @@ export class LeaderboardService {
 				top: 10 * (page - 1) + (index + 1),
 				tag: getTag(discordUser),
 				score: user.currentLevel,
-				avatar: discordUser.displayAvatarURL() ?? 'https://cdn.discordapp.com/embed/avatars/0.png'
+				avatar:
+					discordUser.displayAvatarURL({ forceStatic: true, extension: 'png', size: 64 }) ??
+					'https://cdn.discordapp.com/embed/avatars/0.png'
 			};
 		});
 
