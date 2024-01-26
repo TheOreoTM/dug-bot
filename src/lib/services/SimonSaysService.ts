@@ -37,7 +37,7 @@ export class SimonSaysService {
 		if (this.inProgress) {
 			return;
 		}
-		this.inProgress = false;
+		this.resetGame();
 
 		console.log('[SimonSaysService] Starting game...');
 
@@ -95,12 +95,14 @@ export class SimonSaysService {
 		);
 	}
 
-	public async endGame() {
+	private resetGame() {
 		this.inProgress = false;
 		this.players.clear();
 		this.controller = null;
 		this.message = null;
+	}
 
+	public async endGame() {
 		const channel = this.getChannel();
 
 		await channel.send(`Game ended. Thanks for playing!`);
