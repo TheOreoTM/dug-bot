@@ -34,12 +34,13 @@ export class SimonSaysService {
 
 	public constructor() {}
 
-	public async startGame() {
+	public async startGame(reset = true) {
 		this.message;
 		if (this.inProgress) {
 			return;
 		}
-		this.resetGame();
+
+		if (reset) this.resetGame();
 		await this.closeChannel();
 
 		const invitationEmbed = await this.channel.send({
@@ -52,8 +53,9 @@ export class SimonSaysService {
 		await sleep(LOBBY_DURATION);
 
 		if (this.players.size < MIN_PLAYERS) {
+			this.channel.send(`Not enough players to start the game. Restarting game.`);
 			await invitationEmbed.delete();
-			this.startGame();
+			this.startGame(false);
 			return;
 		}
 
