@@ -59,6 +59,12 @@ export class SimonSaysService {
 			return;
 		}
 
+		const scc = await fetchSCC();
+
+		this.players.map((player) => {
+			scc.members.cache.get(player.id)?.roles.add(RoleIDs.Participant);
+		});
+
 		let controller = this.getController();
 
 		if (!controller) {
@@ -73,11 +79,7 @@ export class SimonSaysService {
 			return;
 		}
 
-		const scc = await fetchSCC();
-
-		this.players.map((player) => {
-			scc.members.cache.get(player.id)?.roles.add(RoleIDs.Participant);
-		});
+		
 
 		this.inProgress = true;
 		const startingEmbed = BASE_EMBED.setDescription(
