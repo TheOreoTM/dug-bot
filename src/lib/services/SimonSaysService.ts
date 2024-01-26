@@ -50,9 +50,8 @@ export class SimonSaysService {
 		await sleep(LOBBY_DURATION);
 
 		if (this.players.size < MIN_PLAYERS) {
-			this.channel.send(`Not enough players joined. Game cancelled.`);
 			await invitationEmbed.delete();
-			this.endGame();
+			this.startGame();
 			return;
 		}
 
@@ -112,18 +111,18 @@ export class SimonSaysService {
 		this.startGame();
 	}
 
-	public async addPlayer(user: User) {
+	public addPlayer(user: User) {
 		this.players.set(user.id, user);
 
 		const message = this.message;
 		if (!message) return;
 	}
 
-	public async removePlayer(userId: Snowflake) {
+	public removePlayer(userId: Snowflake) {
 		this.players.delete(userId);
 	}
 
-	public async getPlayers() {
+	public getPlayers() {
 		return this.players;
 	}
 
