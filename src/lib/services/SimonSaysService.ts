@@ -16,7 +16,7 @@ import {
 } from 'discord.js';
 
 const LOBBY_DURATION = minutes(1.5);
-const MIN_PLAYERS = 3;
+const MIN_PLAYERS = 1;
 const BASE_EMBED = new EmbedBuilder()
 	.setColor(DugColors.Info)
 	.setTitle('Sion Says')
