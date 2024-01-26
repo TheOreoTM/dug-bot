@@ -152,7 +152,13 @@ export class SimonSaysService {
 		return this.controller;
 	}
 
-	private setController() {
+	public setController(controller?: User) {
+		if (controller) {
+			this.controller = controller;
+			this.players.delete(controller.id);
+			return;
+		}
+
 		const randomUser = this.players.random();
 
 		if (!randomUser) {
@@ -163,7 +169,7 @@ export class SimonSaysService {
 		this.players.delete(randomUser.id);
 	}
 
-	private getChannel() {
+	public getChannel() {
 		return this.channel;
 	}
 }
