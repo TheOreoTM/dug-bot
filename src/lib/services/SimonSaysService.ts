@@ -16,7 +16,7 @@ import {
 } from 'discord.js';
 
 const LOBBY_DURATION = minutes(1.5);
-const MIN_PLAYERS = 1;
+const MIN_PLAYERS = 3;
 const BASE_EMBED = new EmbedBuilder()
 	.setColor(DugColors.Info)
 	.setTitle('Sion Says')
@@ -77,7 +77,7 @@ export class SimonSaysService {
 				'',
 				`**Simon:** Its up to ${userMention(controller.id)},
          to ask questions. You're the simon for this game. 
-         You can eliminate players using \`.eliminate\` and you can see the list of remaining players using \`.remaining\`.`,
+         You can eliminate players using \`/eliminate\` and you can see the list of remaining players using \`/remaining\`.`,
 				'',
 				`**Players:** You must answer the questions asked by the simon. If you answer incorrectly, you will be eliminated.`
 			].join('\n')
@@ -148,7 +148,7 @@ export class SimonSaysService {
 		}
 	}
 
-	private getController() {
+	public getController() {
 		return this.controller;
 	}
 
