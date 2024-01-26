@@ -1,5 +1,6 @@
-import { ChannelIDs, DugColors, MainServerID, RoleIDs } from '#constants';
+import { ChannelIDs, DugColors, RoleIDs } from '#constants';
 import { minutes } from '#lib/util/common';
+import { fetchSCC } from '#lib/util/utils';
 import { container } from '@sapphire/pieces';
 import { sleep } from '@sapphire/utilities';
 import {
@@ -34,6 +35,7 @@ export class SimonSaysService {
 	public constructor() {}
 
 	public async startGame() {
+		this.message;
 		if (this.inProgress) {
 			return;
 		}
@@ -127,11 +129,11 @@ export class SimonSaysService {
 		this.startGame();
 	}
 
-	public addPlayer(user: User) {
+	public async addPlayer(user: User) {
 		this.players.set(user.id, user);
 
-		const message = this.message;
-		if (!message) return;
+		const scc = await fetchSCC();
+		scc.members.cache.get(user.id)?.roles.add(RoleIDs.Participant);
 	}
 
 	public removePlayer(userId: Snowflake) {
@@ -145,7 +147,9 @@ export class SimonSaysService {
 	public async eliminatePlayer(userId: Snowflake) {
 		const channel = this.getChannel();
 
-		this.players.delete(userId);
+		this.removePlayer(userId);
+		const scc = await fetchSCC();
+		scc.members.cache.get(userId)?.roles.remove(RoleIDs.Participant);
 
 		channel.send(`You have been eliminated ${userMention(userId)}! ${this.players.size} players remain.`);
 
