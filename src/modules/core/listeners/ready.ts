@@ -1,6 +1,7 @@
 import { ModuleName } from '#config';
 import { BlacklistService, CipherService, CoreSettingsService, FactionService, LeaderboardService, LevelingService } from '#lib/services';
 import { PetService } from '#lib/services/PetService';
+import { SimonSaysService } from '#lib/services/SimonSaysService';
 import { ApplyOptions } from '@sapphire/decorators';
 import { Listener, Store } from '@sapphire/framework';
 import { blue, gray, green, magenta, magentaBright, white, yellow } from 'colorette';
@@ -19,6 +20,9 @@ export class UserEvent extends Listener {
 		this.container.faction = new FactionService();
 		this.container.cipher = new CipherService();
 		this.container.pet = new PetService();
+		this.container.says = new SimonSaysService();
+
+		this.container.says.startGame();
 
 		this.printBanner();
 		this.printStoreDebugInformation();

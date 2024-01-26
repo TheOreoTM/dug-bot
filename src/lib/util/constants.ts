@@ -183,6 +183,7 @@ export const ChannelIDs = {
 	LoggingChannel: '1174956832079495210',
 	FactionListChannel: '1186666346331775057',
 	UpdatesChannel: '1186666298852249680',
+	SionSaysChannel: '1200433060043296949',
 	DailyChan: '739513498278559764'
 };
 
