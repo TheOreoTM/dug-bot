@@ -1,4 +1,4 @@
-import { ChannelIDs, DugColors } from '#constants';
+import { ChannelIDs, DugColors, MainServerID, RoleIDs } from '#constants';
 import { minutes } from '#lib/util/common';
 import { container } from '@sapphire/pieces';
 import { sleep } from '@sapphire/utilities';
@@ -38,8 +38,7 @@ export class SimonSaysService {
 			return;
 		}
 		this.resetGame();
-
-		console.log('[SimonSaysService] Starting game...');
+		await this.closeChannel();
 
 		const invitationEmbed = await this.channel.send({
 			embeds: [BASE_EMBED],
@@ -93,6 +92,20 @@ export class SimonSaysService {
 				.map((player) => userMention(player.id))
 				.join(', ')} are the players.`
 		);
+
+		await this.openChannel();
+	}
+
+	private async closeChannel() {
+		await this.channel.permissionOverwrites.edit(RoleIDs.Participant, {
+			SendMessages: false
+		});
+	}
+
+	private async openChannel() {
+		await this.channel.permissionOverwrites.edit(RoleIDs.Participant, {
+			SendMessages: true
+		});
 	}
 
 	private resetGame() {

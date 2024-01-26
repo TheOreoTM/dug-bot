@@ -187,6 +187,10 @@ export const ChannelIDs = {
 	DailyChan: '739513498278559764'
 };
 
+export const RoleIDs = {
+	Participant: '1200463748050194482'
+};
+
 export const LoggingWebhooks = {
 	Message: envParseString('WEBHOOK_LOGGING_MESSAGE')
 };
