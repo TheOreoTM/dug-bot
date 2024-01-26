@@ -126,6 +126,9 @@ export class SimonSaysService {
 
 		await sleep(minutes(0.5));
 
+		const scc = await fetchSCC();
+		this.players.map((player) => scc.members.cache.get(player.id)?.roles.remove(RoleIDs.Participant));
+		scc.members.cache.get(this.controller!.id)?.roles.remove(RoleIDs.Participant);
 		this.startGame();
 	}
 
