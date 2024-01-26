@@ -153,6 +153,11 @@ export class SimonSaysService {
 	}
 
 	public setController(controller?: User) {
+		const oldController = this.getController();
+		if (oldController) {
+			this.players.set(oldController.id, oldController);
+		}
+
 		if (controller) {
 			this.controller = controller;
 			this.players.delete(controller.id);
