@@ -34,6 +34,12 @@ export class SimonSaysService {
 	public constructor() {}
 
 	public async startGame() {
+		if (this.inProgress) {
+			return;
+		}
+
+		console.log('[SimonSaysService] Starting game...');
+
 		const invitationEmbed = await this.channel.send({
 			embeds: [BASE_EMBED],
 			components: [new ActionRowBuilder<ButtonBuilder>().addComponents(JOIN_BUTTON)]
