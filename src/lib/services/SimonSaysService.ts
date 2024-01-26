@@ -37,6 +37,7 @@ export class SimonSaysService {
 		if (this.inProgress) {
 			return;
 		}
+		this.inProgress = false;
 
 		console.log('[SimonSaysService] Starting game...');
 

@@ -11,13 +11,6 @@ export class ButtonHandler extends InteractionHandler {
 
 		const saysService = this.container.says;
 
-		if (!saysService.inProgress) {
-			return interaction.reply({
-				content: `${userMention(user.id)} The game is already in progress`,
-				ephemeral: true
-			});
-		}
-
 		if (saysService.getPlayers().has(user.id)) {
 			return interaction.reply({
 				content: `${userMention(user.id)} You are already in the game`,
