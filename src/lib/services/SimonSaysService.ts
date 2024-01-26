@@ -79,8 +79,6 @@ export class SimonSaysService {
 			return;
 		}
 
-		
-
 		this.inProgress = true;
 		const startingEmbed = BASE_EMBED.setDescription(
 			[
@@ -139,6 +137,7 @@ export class SimonSaysService {
 		const scc = await fetchSCC();
 		this.players.map((player) => scc.members.cache.get(player.id)?.roles.remove(RoleIDs.Participant));
 		scc.members.cache.get(this.controller!.id)?.roles.remove(RoleIDs.Participant);
+		this.inProgress = false;
 		this.startGame();
 	}
 
