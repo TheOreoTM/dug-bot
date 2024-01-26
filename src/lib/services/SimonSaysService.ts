@@ -1,5 +1,5 @@
 import { ChannelIDs, DugColors, RoleIDs } from '#constants';
-import { minutes } from '#lib/util/common';
+import { minutes, seconds } from '#lib/util/common';
 import { fetchSCC } from '#lib/util/utils';
 import { container } from '@sapphire/pieces';
 import { sleep } from '@sapphire/utilities';
@@ -124,7 +124,7 @@ export class SimonSaysService {
 
 		// send embed again and start game again
 
-		await sleep(minutes(0.5));
+		await sleep(seconds(10));
 
 		const scc = await fetchSCC();
 		this.players.map((player) => scc.members.cache.get(player.id)?.roles.remove(RoleIDs.Participant));
