@@ -30,21 +30,24 @@ export class UserCommand extends DugCommand {
 
 		if (!controller) {
 			return interaction.reply({
-				content: `There is no controller`
+				content: `There is no controller`,
+				ephemeral: true
 			});
 		}
 
 		if (controller.id === newController.id) {
 			return interaction.reply({
-				content: `This user is already the controller`
+				content: `This user is already the controller`,
+				ephemeral: true
 			});
 		}
 
-		if (!says.getPlayers().has(newController.id)) {
-			return interaction.reply({
-				content: `This user is not in the game`
-			});
-		}
+		// if (!says.getPlayers().has(newController.id)) {
+		// 	return interaction.reply({
+		// 		content: `This user is not in the game`,
+		// 		ephemeral: true
+		// 	});
+		// }
 
 		says.setController(newController);
 
@@ -52,7 +55,8 @@ export class UserCommand extends DugCommand {
 
 		if (!channel) {
 			return interaction.reply({
-				content: `There is no channel`
+				content: `There is no channel`,
+				ephemeral: true
 			});
 		}
 
@@ -61,7 +65,8 @@ export class UserCommand extends DugCommand {
 		);
 
 		return interaction.reply({
-			content: `${newController} is now the controller`
+			content: `${newController} is now the controller`,
+			ephemeral: true
 		});
 	}
 }
