@@ -144,14 +144,14 @@ export class SimonSaysService {
 		return this.players;
 	}
 
-	public async eliminatePlayer(userId: Snowflake) {
+	public async eliminatePlayer(userId: Snowflake, force = false) {
 		const channel = this.getChannel();
 
 		this.removePlayer(userId);
 		const scc = await fetchSCC();
 		scc.members.cache.get(userId)?.roles.remove(RoleIDs.Participant);
 
-		channel.send(`You have been eliminated ${userMention(userId)}! ${this.players.size} players remain.`);
+		channel.send(`${force ? '[ADMIN]' : ''} You have been eliminated ${userMention(userId)}! ${this.players.size} players remain.`);
 
 		if (this.players.size === 1) {
 			channel.send(`Congratulations ${userMention(this.players.first()!.id)}! You won the game!`);
