@@ -1,5 +1,7 @@
+import { DugColors } from '#constants';
 import { DugCommand } from '#lib/structures';
 import { ApplyOptions } from '@sapphire/decorators';
+import { EmbedBuilder } from 'discord.js';
 
 @ApplyOptions<DugCommand.Options>({
 	description: 'View the remaining users in the game'
@@ -14,19 +16,16 @@ export class UserCommand extends DugCommand {
 	// Chat Input (slash) command
 	public override async chatInputRun(interaction: DugCommand.ChatInputCommandInteraction) {
 		const players = this.container.says.getPlayers();
-
-		await interaction.deferReply({ ephemeral: true });
-
 		if (players.size === 0) {
-			return interaction.editReply({
+			return interaction.reply({
 				content: `There are no players in the game`
 			});
 		}
 
 		const playersList = players.map((player) => `<@${player.id}>`).join(', ');
 
-		return interaction.editReply({
-			content: `Players: ${playersList}`
+		return interaction.reply({
+			embeds: [new EmbedBuilder().setColor(DugColors.Info).setDescription(`Players: ${playersList}`)]
 		});
 	}
 }
