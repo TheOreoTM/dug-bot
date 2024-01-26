@@ -71,6 +71,12 @@ export class SimonSaysService {
 			return;
 		}
 
+		const scc = await fetchSCC();
+
+		this.players.map((player) => {
+			scc.members.cache.get(player.id)?.roles.add(RoleIDs.Participant);
+		});
+
 		this.inProgress = true;
 		const startingEmbed = BASE_EMBED.setDescription(
 			[
@@ -134,9 +140,6 @@ export class SimonSaysService {
 
 	public async addPlayer(user: User) {
 		this.players.set(user.id, user);
-
-		const scc = await fetchSCC();
-		scc.members.cache.get(user.id)?.roles.add(RoleIDs.Participant);
 	}
 
 	public removePlayer(userId: Snowflake) {
