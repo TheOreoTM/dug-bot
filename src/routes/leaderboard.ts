@@ -8,8 +8,6 @@ import { methods, Route, type ApiRequest, type ApiResponse } from '@sapphire/plu
 export class UserRoute extends Route {
 	public async [methods.GET](_request: ApiRequest, response: ApiResponse) {
 		let limit = Number(_request.query['limit']) || 50;
-		console.log('🚀 ~ UserRoute ~ _request.query:', _request.query);
-
 		if (limit > 100) limit = 100;
 
 		const topMembers = await this.container.db.userLevel.findMany({
@@ -21,7 +19,6 @@ export class UserRoute extends Route {
 
 		const leaderboard = topMembers.map((userLevel, index) => {
 			const user = this.container.client.users.cache.get(userLevel.userId);
-			console.log('🚀 ~ UserRoute ~ leaderboard ~ user:', userLevel.userId, '-', user);
 
 			return {
 				avatarUrl:
