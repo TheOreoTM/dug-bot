@@ -21,8 +21,8 @@ export class UserRoute extends Route {
 
 		const scc = await fetchSCC();
 
-		const leaderboard = topMembers.map((userLevel, index) => {
-			const member = scc.members.cache.get(userLevel.userId);
+		const awaitLeaderboard = topMembers.map(async (userLevel, index) => {
+			const member = await scc.members.fetch(userLevel.userId);
 			return {
 				avatarUrl:
 					member?.user.displayAvatarURL({ forceStatic: true, extension: 'webp', size: 128 }) ??
@@ -34,6 +34,8 @@ export class UserRoute extends Route {
 				position: index + 1
 			};
 		});
+
+		const leaderboard = await Promise.all(awaitLeaderboard);
 
 		return response.json({ ...leaderboard });
 	}
