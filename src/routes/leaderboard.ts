@@ -19,23 +19,18 @@ export class UserRoute extends Route {
 			}
 		});
 
-		const scc = await fetchSCC();
-
-		const awaitLeaderboard = topMembers.map(async (userLevel, index) => {
-			const member = await scc.members.fetch(userLevel.userId);
+		const leaderboard = topMembers.map((userLevel, index) => {
+			const user = this.container.client.users.cache.get(userLevel.userId);
 			return {
 				avatarUrl:
-					member?.user.displayAvatarURL({ forceStatic: true, extension: 'webp', size: 128 }) ??
-					`https://cdn.discordapp.com/embed/avatars/1.png`,
+					user?.displayAvatarURL({ forceStatic: true, extension: 'webp', size: 128 }) ?? `https://cdn.discordapp.com/embed/avatars/1.png`,
 				id: userLevel.userId,
-				username: member?.user.username ?? 'Deleted User',
+				username: user?.username ?? 'Deleted User',
 				level: userLevel.currentLevel,
 				xp: userLevel.currentXp,
 				position: index + 1
 			};
 		});
-
-		const leaderboard = await Promise.all(awaitLeaderboard);
 
 		response.setHeader('Cache-Control', 'public, max-age=3600');
 		return response.json({ ...leaderboard });
