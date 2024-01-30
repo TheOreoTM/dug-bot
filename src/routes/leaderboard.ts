@@ -17,21 +17,26 @@ export class UserRoute extends Route {
 			}
 		});
 
-		const leaderboard: object[] = [];
+		const leaderboard = [];
 
-		topMembers.forEach((userLevel, index) => {
-			const user = this.container.client.users.cache.get(userLevel.userId);
+		for (const userLevel of topMembers) {
+			try {
+				const user = await this.container.client.users.fetch(userLevel.userId);
 
-			leaderboard.push({
-				avatarUrl:
-					user?.displayAvatarURL({ forceStatic: true, extension: 'webp', size: 128 }) ?? `https://cdn.discordapp.com/embed/avatars/1.png`,
-				id: userLevel.userId,
-				username: user?.username ?? 'Deleted User',
-				level: userLevel.currentLevel,
-				xp: userLevel.currentXp,
-				position: index + 1
-			});
-		});
+				leaderboard.push({
+					avatarUrl:
+						user.displayAvatarURL({ forceStatic: true, extension: 'webp', size: 128 }) ||
+						'https://cdn.discordapp.com/embed/avatars/1.png',
+					id: userLevel.userId,
+					username: user.username || 'Deleted User',
+					level: userLevel.currentLevel,
+					xp: userLevel.currentXp,
+					position: leaderboard.length + 1
+				});
+			} catch (error) {
+				console.error(`Error fetching user ${userLevel.userId}:`, error);
+			}
+		}
 
 		response.setHeader('Cache-Control', 'public, max-age=3600');
 		return response.json({ ...leaderboard });
