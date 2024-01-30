@@ -3,10 +3,10 @@ import type { GuildMessage, InteractionOrMessage } from '#lib/types/Discord';
 import { formatFailMessage } from '#lib/util/formatter';
 import { sendInteractionOrMessage } from '#lib/util/messages';
 import { ApplyOptions } from '@sapphire/decorators';
-import { Args, Command } from '@sapphire/framework';
+import { Command } from '@sapphire/framework';
 import { send } from '@sapphire/plugin-editable-commands';
 import canvafy from 'canvafy';
-import { EmbedBuilder, Message } from 'discord.js';
+import { ActionRowBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder, Message } from 'discord.js';
 const { Top } = canvafy;
 @ApplyOptions<Command.Options>({
 	description: 'View the leaderbord of the server',
@@ -16,35 +16,28 @@ export class UserCommand extends Command {
 	// Register Chat Input and Context Menu command
 	public override registerApplicationCommands(registry: Command.Registry) {
 		// Register Chat Input command
-		registry.registerChatInputCommand((builder) =>
-			builder
-				.setName(this.name)
-				.setDescription(this.description)
-				.addNumberOption((o) => o.setName('page').setDescription('The page you want to see').setMaxValue(10).setMinValue(1))
-		);
+		registry.registerChatInputCommand((builder) => builder.setName(this.name).setDescription(this.description));
 	}
 
 	// Message command
-	public override async messageRun(message: GuildMessage, args: Args) {
-		const page = await args.pick('number').catch(() => 1);
-		return this.sendLeaderboard(message, page);
+	public override async messageRun(message: GuildMessage) {
+		return this.sendLeaderboard(message);
 	}
 
 	// Chat Input (slash) command
 	public override async chatInputRun(interaction: Command.ChatInputCommandInteraction<'cached'>) {
-		const page = interaction.options.getNumber('page') ?? 1;
-		return this.sendLeaderboard(interaction, page);
+		return this.sendLeaderboard(interaction);
 	}
 
-	private async sendLeaderboard(interactionOrMessage: InteractionOrMessage, page = 1) {
+	private async sendLeaderboard(interactionOrMessage: InteractionOrMessage) {
 		const loadingEmbed = new EmbedBuilder()
 			.setTitle(`Loading... ${interactionOrMessage.guild?.name}'s leaderboard`)
 			.setImage(`https://media.tenor.com/On7kvXhzml4AAAAi/loading-gif.gif`)
 			.setColor(DugColors.Default)
-			.setFooter({ text: `Page ${page}` });
+			.setFooter({ text: `Page ${1}` });
 
 		interactionOrMessage instanceof Message ? send(interactionOrMessage, { embeds: [loadingEmbed] }) : interactionOrMessage.deferReply();
-		const leaderboard = await this.container.leaderboard.getLevelLeaderboardPage(page);
+		const leaderboard = await this.container.leaderboard.getLevelLeaderboardPage(1);
 		if (leaderboard === null) {
 			await sendInteractionOrMessage(interactionOrMessage, {
 				embeds: [new EmbedBuilder().setColor(DugColors.Fail).setDescription(formatFailMessage(`That page doesnt exist`))]
@@ -83,10 +76,21 @@ export class UserCommand extends Command {
 			.setTitle(`${interactionOrMessage.guild?.name}'s leaderboard`)
 			.setImage(`attachment://leaderboard.png`)
 			.setColor(DugColors.Default)
-			.setFooter({ text: `Page ${page} | Your rank: #${userRank}` });
+			.setFooter({ text: `Page ${1} | Your rank: #${userRank}` });
 
 		interactionOrMessage instanceof Message
-			? await send(interactionOrMessage, { files: [{ name: 'leaderboard.png', attachment: lbImage }], embeds: [embed] })
+			? await send(interactionOrMessage, {
+					files: [{ name: 'leaderboard.png', attachment: lbImage }],
+					components: [
+						new ActionRowBuilder<ButtonBuilder>().addComponents(
+							new ButtonBuilder()
+								.setLabel('View top 100')
+								.setStyle(ButtonStyle.Link)
+								.setURL('https://dashboard.skittlechan.com/leaderboard')
+						)
+					],
+					embeds: [embed]
+				})
 			: await interactionOrMessage.editReply({ files: [{ name: 'leaderboard.png', attachment: lbImage }], embeds: [embed] });
 	}
 }
