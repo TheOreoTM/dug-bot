@@ -35,6 +35,6 @@ export class UserRoute extends Route {
 			};
 		});
 
-		return response.json(leaderboard);
+		return response.json({ ...leaderboard });
 	}
 }
