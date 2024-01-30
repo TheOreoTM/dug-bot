@@ -37,6 +37,7 @@ export class UserRoute extends Route {
 
 		const leaderboard = await Promise.all(awaitLeaderboard);
 
+		response.setHeader('Cache-Control', 'public, max-age=3600');
 		return response.json({ ...leaderboard });
 	}
 }
