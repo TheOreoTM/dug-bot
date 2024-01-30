@@ -22,8 +22,6 @@ export class UserEvent extends Listener {
 		this.container.pet = new PetService();
 		this.container.says = new SimonSaysService();
 
-		this.container.says.startGame();
-
 		this.printBanner();
 		this.printStoreDebugInformation();
 	}

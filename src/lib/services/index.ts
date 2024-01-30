@@ -5,3 +5,5 @@ export * from './LevelingService.js';
 export * from './FactionService.js';
 export * from './CipherService.js';
 export * from './LoggingService.js';
+export * from './SimonSaysService.js';
+export * from './PetService.js';
