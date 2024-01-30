@@ -17,10 +17,12 @@ export class UserRoute extends Route {
 			}
 		});
 
-		const leaderboard = topMembers.map((userLevel, index) => {
+		const leaderboard: object[] = [];
+
+		topMembers.forEach((userLevel, index) => {
 			const user = this.container.client.users.cache.get(userLevel.userId);
 
-			return {
+			leaderboard.push({
 				avatarUrl:
 					user?.displayAvatarURL({ forceStatic: true, extension: 'webp', size: 128 }) ?? `https://cdn.discordapp.com/embed/avatars/1.png`,
 				id: userLevel.userId,
@@ -28,7 +30,7 @@ export class UserRoute extends Route {
 				level: userLevel.currentLevel,
 				xp: userLevel.currentXp,
 				position: index + 1
-			};
+			});
 		});
 
 		response.setHeader('Cache-Control', 'public, max-age=3600');
