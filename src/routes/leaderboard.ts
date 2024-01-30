@@ -3,7 +3,7 @@ import { ApplyOptions } from '@sapphire/decorators';
 import { methods, Route, type ApiRequest, type ApiResponse } from '@sapphire/plugin-api';
 
 @ApplyOptions<Route.Options>({
-	route: 'levels/leaderboard'
+	route: 'leaderboard'
 })
 export class UserRoute extends Route {
 	public async [methods.GET](_request: ApiRequest, response: ApiResponse) {
