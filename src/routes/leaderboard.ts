@@ -1,4 +1,3 @@
-import { fetchSCC } from '#lib/util/utils';
 import { ApplyOptions } from '@sapphire/decorators';
 import { methods, Route, type ApiRequest, type ApiResponse } from '@sapphire/plugin-api';
 
@@ -39,6 +38,6 @@ export class UserRoute extends Route {
 		}
 
 		response.setHeader('Cache-Control', 'public, max-age=3600');
-		return response.json({ ...leaderboard });
+		return response.json(leaderboard);
 	}
 }
