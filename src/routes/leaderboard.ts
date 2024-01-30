@@ -21,6 +21,8 @@ export class UserRoute extends Route {
 
 		const leaderboard = topMembers.map((userLevel, index) => {
 			const user = this.container.client.users.cache.get(userLevel.userId);
+			console.log('🚀 ~ UserRoute ~ leaderboard ~ user:', userLevel.userId, '-', user);
+
 			return {
 				avatarUrl:
 					user?.displayAvatarURL({ forceStatic: true, extension: 'webp', size: 128 }) ?? `https://cdn.discordapp.com/embed/avatars/1.png`,
