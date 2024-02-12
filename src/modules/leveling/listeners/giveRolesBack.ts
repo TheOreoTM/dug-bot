@@ -1,4 +1,4 @@
-import { DugEvents, LeavingTaxPercentage } from '#constants';
+import { DugEvents, LeavingTaxPercentage, MainServerID } from '#constants';
 import { SendLogEmbed } from '#lib/classes';
 import { getLevelInfo } from '#lib/util/utils';
 import { ApplyOptions } from '@sapphire/decorators';
@@ -8,6 +8,8 @@ import { GuildMember } from 'discord.js';
 @ApplyOptions<Listener.Options>({ event: DugEvents.GuildMemberAdd })
 export class UserEvent extends Listener {
 	public override async run(member: GuildMember) {
+		if (member.guild.id !== MainServerID) return;
+
 		const level = await this.container.db.userLevel.getCurrentLevel(member.id);
 		const newLevel = level === 0 ? level : Math.floor(level * (1 - LeavingTaxPercentage));
 		const levelInfo = getLevelInfo(newLevel);
