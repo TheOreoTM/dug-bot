@@ -51,6 +51,7 @@ export const config: Config = {
 		GatewayIntentBits.GuildMembers,
 		GatewayIntentBits.DirectMessages,
 		GatewayIntentBits.DirectMessageReactions,
+		GatewayIntentBits.GuildMessageReactions,
 		GatewayIntentBits.DirectMessageTyping
 	],
 	partials: [Partials.Channel, Partials.Message, Partials.GuildMember, Partials.User],
