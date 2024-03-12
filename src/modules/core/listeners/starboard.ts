@@ -10,7 +10,6 @@ import { ActionRowBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder, MessageReac
 })
 export class UserEvent extends Listener<typeof Events.MessageReactionAdd> {
 	public override async run(messageReaction: MessageReaction, user: User) {
-		console.log(messageReaction);
 		if (user.bot) return;
 		if (!messageReaction.message.guild) return;
 		if (messageReaction.message.guild.id !== MainServerID) return;
@@ -18,7 +17,7 @@ export class UserEvent extends Listener<typeof Events.MessageReactionAdd> {
 		const scc = messageReaction.message.guild;
 
 		if (messageReaction.emoji.name !== '💀') return;
-		if (messageReaction.count !== 3) return;
+		if (messageReaction.count !== 5) return;
 
 		const starboard = scc.channels.cache.get(ChannelIDs.DailyChan) as TextChannel | null;
 		if (!starboard) return;
