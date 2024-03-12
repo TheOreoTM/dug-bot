@@ -10,6 +10,7 @@ import { ActionRowBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder, MessageReac
 })
 export class UserEvent extends Listener<typeof Events.MessageReactionAdd> {
 	public override async run(messageReaction: MessageReaction, user: User) {
+		console.log(messageReaction);
 		if (user.bot) return;
 		if (!messageReaction.message.guild) return;
 		if (messageReaction.message.guild.id !== MainServerID) return;
