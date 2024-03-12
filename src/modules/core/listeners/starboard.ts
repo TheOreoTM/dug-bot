@@ -40,6 +40,7 @@ export class UserEvent extends Listener<typeof Events.MessageReactionAdd> {
 		const jumpToMessageButton = new ButtonBuilder().setLabel('Jump to message').setStyle(ButtonStyle.Link).setURL(message.url);
 
 		starboard.send({
+			content: `💀 **${messageReaction.count}** | ${message.channel}`,
 			embeds: [embed],
 			components: [new ActionRowBuilder<ButtonBuilder>().addComponents(jumpToMessageButton)]
 		});
