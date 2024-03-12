@@ -54,7 +54,7 @@ export const config: Config = {
 		GatewayIntentBits.GuildMessageReactions,
 		GatewayIntentBits.DirectMessageTyping
 	],
-	partials: [Partials.Channel, Partials.Message, Partials.GuildMember, Partials.User],
+	partials: [Partials.Channel, Partials.Message, Partials.GuildMember, Partials.User, Partials.Reaction],
 	cooldown_options: {
 		delay: Time.Second * 5,
 		filteredUsers: BotOwners,
