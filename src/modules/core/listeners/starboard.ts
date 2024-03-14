@@ -5,11 +5,14 @@ import { ApplyOptions } from '@sapphire/decorators';
 import { Events, Listener } from '@sapphire/framework';
 import { ActionRowBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder, MessageReaction, TextChannel, User } from 'discord.js';
 
+const starboardMessages = new Set();
+
 @ApplyOptions<Listener.Options>({
 	event: Events.MessageReactionAdd
 })
 export class UserEvent extends Listener<typeof Events.MessageReactionAdd> {
 	public override async run(messageReaction: MessageReaction, user: User) {
+		if (starboardMessages.has(messageReaction.message.id)) return;
 		if (user.bot) return;
 		if (!messageReaction.message.guild) return;
 		if (messageReaction.message.guild.id !== MainServerID) return;
@@ -44,5 +47,7 @@ export class UserEvent extends Listener<typeof Events.MessageReactionAdd> {
 			embeds: [embed],
 			components: [new ActionRowBuilder<ButtonBuilder>().addComponents(jumpToMessageButton)]
 		});
+
+		starboardMessages.add(messageReaction.message.id);
 	}
 }
