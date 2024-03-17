@@ -8,7 +8,8 @@ import { ActionRowBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder, MessageReac
 const starboardMessages = new Set();
 
 @ApplyOptions<Listener.Options>({
-	event: Events.MessageReactionAdd
+	event: Events.MessageReactionAdd,
+	enabled: false
 })
 export class UserEvent extends Listener<typeof Events.MessageReactionAdd> {
 	public override async run(messageReaction: MessageReaction, user: User) {
