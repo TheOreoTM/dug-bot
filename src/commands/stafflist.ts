@@ -2,17 +2,15 @@ import { DugColors } from '#constants';
 import { DugCommand, DugEmbedBuilder } from '#lib/structures';
 import { ApplyOptions } from '@sapphire/decorators';
 import { send } from '@sapphire/plugin-editable-commands';
-import { TextChannel } from 'discord.js';
 
 @ApplyOptions<DugCommand.Options>({
-	description: 'ADD'
+	description: 'ADD',
+	aliases: ['sl', 'staffs']
 })
 export class UserCommand extends DugCommand {
 	// Message command
 	public override async messageRun(message: DugCommand.Message) {
 		const { guild } = message;
-
-		const channel = message.channel as TextChannel;
 
 		await guild.members.fetch();
 
