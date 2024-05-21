@@ -17,10 +17,10 @@ export class UserCommand extends DugCommand {
 		const staffRoleId = `634605860206804992`;
 		const traineeRoleId = `1016966909121527809`;
 
-		const adminRole = guild?.roles.cache.get(adminRoleId ?? '0');
-		const modRole = guild?.roles.cache.get(modRoleId ?? '0');
-		const staffRole = guild?.roles.cache.get(staffRoleId ?? '0');
-		const traineeRole = guild?.roles.cache.get(traineeRoleId ?? '0');
+		const adminRole = await guild?.roles.fetch(adminRoleId ?? '0');
+		const modRole = await guild?.roles.fetch(modRoleId ?? '0');
+		const staffRole = await guild?.roles.fetch(staffRoleId ?? '0');
+		const traineeRole = await guild?.roles.fetch(traineeRoleId ?? '0');
 
 		const admins = adminRole?.members.map((m) => m.id) ?? [];
 		const mods = modRole?.members.map((m) => m.id) ?? [];
