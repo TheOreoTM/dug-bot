@@ -21,11 +21,6 @@ export class UserCommand extends DugCommand {
 		const staffRoleId = `634605860206804992`;
 		const traineeRoleId = `1016966909121527809`;
 
-		channel.send(adminRoleId);
-		channel.send(modRoleId);
-		channel.send(staffRoleId);
-		channel.send(traineeRoleId);
-
 		const adminRole = guild?.roles.cache.get(adminRoleId ?? '0');
 		const modRole = guild?.roles.cache.get(modRoleId ?? '0');
 		const staffRole = guild?.roles.cache.get(staffRoleId ?? '0');
