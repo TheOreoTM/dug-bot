@@ -12,6 +12,8 @@ export class UserCommand extends DugCommand {
 	public override async messageRun(message: DugCommand.Message) {
 		const { guild } = message;
 
+		await guild.members.fetch({});
+
 		const adminRoleId = `902884958354407484`;
 		const modRoleId = `904263866270228502`;
 		const staffRoleId = `634605860206804992`;
