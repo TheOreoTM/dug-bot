@@ -12,6 +12,9 @@ const { LevelUp } = canvafy;
 export class UserEvent extends Listener {
 	public override async run(message: GuildMessage, oldLevel: number, newLevel: number) {
 		const member = message.member;
+		const userSettings = await this.container.db.userLevel.findUnique({ where: { userId: member.id } });
+
+		if (userSettings?.silenced ?? false) return;
 
 		const refButton = new ButtonBuilder()
 			.setLabel('Click Here')
@@ -38,6 +41,7 @@ export class UserEvent extends Listener {
 		const defaultMessage = `GG ${member}, You just leveled up!`;
 		const levelUpMessage = (await this.container.db.userLevel.getLevelMessage(member.id)) ?? defaultMessage;
 		const channel = message.guild.channels.cache.get(ChannelIDs.General) as TextChannel;
+
 		channel.send({
 			content: `${formatLevelUpMessage(levelUpMessage, message, { oldlevel: oldLevel, newlevel: newLevel })}`,
 			files: [

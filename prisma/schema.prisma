@@ -82,6 +82,7 @@ model UserLevel {
   lastXpEarned DateTime @default(now())
 
   levelUpMessage String?
+  silenced       Boolean @default(false)
 
   bgImage           String?
   bgColor           String?
