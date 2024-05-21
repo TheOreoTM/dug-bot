@@ -4,7 +4,8 @@ import { sendInteractionOrMessage } from '#lib/util/messages';
 import { ApplyOptions } from '@sapphire/decorators';
 
 @ApplyOptions<DugCommand.Options>({
-	description: 'Stop the bot from sending the level-up message'
+	description: 'Stop the bot from sending the level-up message',
+	aliases: ['shutup', 'shush']
 })
 export class UserCommand extends DugCommand {
 	// Register Chat Input and Context Menu command
