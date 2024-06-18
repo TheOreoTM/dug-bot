@@ -2,10 +2,15 @@ import { BotID, DugColors, DugEvents } from '#constants';
 import { EmbedBuilder, GuildMember, Snowflake, User } from 'discord.js';
 import { Timestamp } from '#lib/classes/Timestamp';
 import { container } from '@sapphire/pieces';
+import type { DugEmbedBuilder } from '#lib/structures';
 const template = new EmbedBuilder().setColor(DugColors.Default);
 const nowTimestamp = new Timestamp(Date.now());
 
 export class SendLogEmbed {
+	static Command(embed: DugEmbedBuilder) {
+		container.client.emit(DugEvents.LogSend, embed);
+	}
+
 	static AddXp({ user, amount, staff, reason }: { user: User; amount: number; reason: string; staff?: GuildMember }) {
 		const responsibleUserText = `${staff ? staff : `<@${BotID}>`} - \` ${staff ? staff.id : BotID} \``;
 		const embed = template.setDescription(`Added **\`${amount}xp\`** to ${user} at ${nowTimestamp.getLongDateTime()}`).setFields(

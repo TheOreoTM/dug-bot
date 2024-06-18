@@ -1,5 +1,6 @@
-import { MainServerID } from '#constants';
+import { DugEvents, MainServerID } from '#constants';
 import { Items } from '#lib/items';
+import { DugEmbedBuilder } from '#lib/structures';
 import { InventoryItemType, InventoryItemTypeWithCount, ItemValue } from '#lib/types/Data';
 import {
 	container,
@@ -259,13 +260,45 @@ export function fuzzysearch(search: string, targets: (string | Fuzzysort.Prepare
 export function logSuccessCommand(payload: ContextMenuCommandSuccessPayload | ChatInputCommandSuccessPayload | MessageCommandSuccessPayload): void {
 	let successLoggerData: ReturnType<typeof getSuccessLoggerData>;
 
+	const logEmbed = new DugEmbedBuilder();
 	if ('interaction' in payload) {
 		successLoggerData = getSuccessLoggerData(payload.interaction.guild, payload.interaction.user, payload.command);
+		logEmbed.setAuthor({
+			name: `${payload.interaction.user.tag} (${payload.interaction.user.id})`,
+			iconURL: payload.interaction.user.displayAvatarURL({ forceStatic: true })
+		});
 	} else {
 		successLoggerData = getSuccessLoggerData(payload.message.guild, payload.message.author, payload.command);
+		logEmbed.setAuthor({
+			name: `${payload.message.author.tag} (${payload.message.author.id})`,
+			iconURL: payload.message.author.displayAvatarURL({ forceStatic: true })
+		});
 	}
 
+	const messageLink = getMesssageLink(payload);
+
+	const description = [
+		`**Command:** ${successLoggerData.commandName}`,
+		`**Author:** ${successLoggerData.author}`,
+		`**Sent at:** ${successLoggerData.sentAt}`
+	];
+
+	if (messageLink) {
+		description.push(`**Message:** ${messageLink}`);
+	}
+
+	logEmbed.setDescription(description.join('\n'));
+
+	container.client.emit(DugEvents.LogSend, logEmbed);
 	container.logger.debug(`${successLoggerData.shard} - ${successLoggerData.commandName} ${successLoggerData.author} ${successLoggerData.sentAt}`);
+}
+
+function getMesssageLink(payload: ContextMenuCommandSuccessPayload | ChatInputCommandSuccessPayload | MessageCommandSuccessPayload): string | null {
+	if ('interaction' in payload) {
+		return null;
+	}
+
+	return payload.message.url;
 }
 
 export function getSuccessLoggerData(guild: Guild | null, user: User, command: Command) {
