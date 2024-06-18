@@ -284,7 +284,7 @@ export function logSuccessCommand(payload: ContextMenuCommandSuccessPayload | Ch
 	const messageLink = getMesssageLink(payload);
 	const description = [
 		`**Command:** \`${successLoggerData.commandName}\``,
-		`**Author:** ${user.tag} \`[${user.id}]\``,
+		`**Author:** ${user} \`[${user.id}]\``,
 		`**Sent at:** ${channel} \`[${channel.id}]\``
 	];
 
