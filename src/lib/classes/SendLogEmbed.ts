@@ -8,6 +8,7 @@ const nowTimestamp = new Timestamp(Date.now());
 
 export class SendLogEmbed {
 	static Command(embed: DugEmbedBuilder) {
+		embed.setColor(DugColors.Default);
 		container.client.emit(DugEvents.LogSend, embed);
 	}
 

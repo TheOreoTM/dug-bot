@@ -11,7 +11,7 @@ import {
 } from '@sapphire/framework';
 import { isNullishOrEmpty, pickRandom } from '@sapphire/utilities';
 import { cyan } from 'colorette';
-import type { APIUser, Channel, EmbedAssetData, EmbedAuthorData, Guild, ImageURLOptions, Message, User } from 'discord.js';
+import type { APIUser, Channel, EmbedAssetData, EmbedAuthorData, Guild, ImageURLOptions, Message, TextChannel, User } from 'discord.js';
 import { GuildMember } from 'discord.js';
 import fuzzysort from 'fuzzysort';
 
@@ -259,15 +259,21 @@ export function fuzzysearch(search: string, targets: (string | Fuzzysort.Prepare
 
 export function logSuccessCommand(payload: ContextMenuCommandSuccessPayload | ChatInputCommandSuccessPayload | MessageCommandSuccessPayload): void {
 	let successLoggerData: ReturnType<typeof getSuccessLoggerData>;
+	let channel: TextChannel;
+	let user: User | APIUser;
 
 	const logEmbed = new DugEmbedBuilder();
 	if ('interaction' in payload) {
+		channel = payload.interaction.channel as TextChannel;
+		user = payload.interaction.user;
 		successLoggerData = getSuccessLoggerData(payload.interaction.guild, payload.interaction.user, payload.command);
 		logEmbed.setAuthor({
 			name: `${payload.interaction.user.tag} (${payload.interaction.user.id})`,
 			iconURL: payload.interaction.user.displayAvatarURL({ forceStatic: true })
 		});
 	} else {
+		channel = payload.message.channel as TextChannel;
+		user = payload.message.author;
 		successLoggerData = getSuccessLoggerData(payload.message.guild, payload.message.author, payload.command);
 		logEmbed.setAuthor({
 			name: `${payload.message.author.tag} (${payload.message.author.id})`,
@@ -276,11 +282,10 @@ export function logSuccessCommand(payload: ContextMenuCommandSuccessPayload | Ch
 	}
 
 	const messageLink = getMesssageLink(payload);
-
 	const description = [
-		`**Command:** ${successLoggerData.commandName}`,
-		`**Author:** ${successLoggerData.author}`,
-		`**Sent at:** ${successLoggerData.sentAt}`
+		`**Command:** \`${successLoggerData.commandName}\``,
+		`**Author:** ${user.tag} \`[${user.id}]\``,
+		`**Sent at:** ${channel} \`[${channel.id}]\``
 	];
 
 	if (messageLink) {
@@ -318,13 +323,13 @@ function getCommandInfo(command: Command) {
 	return cyan(command.name);
 }
 
-function getAuthorInfo(author: User | APIUser) {
-	return `${author.username}[${cyan(author.id)}]`;
+function getAuthorInfo(author: User | APIUser, pretty = false) {
+	pretty ? `${author.username} [\`${cyan(author.id)}\`]` : `${author.username}[${cyan(author.id)}]`;
 }
 
 function getGuildInfo(guild: Guild | null) {
 	if (guild === null) return 'Direct Messages';
-	return `${guild.name}[${cyan(guild.id)}]`;
+	return `${guild.name} [${cyan(guild.id)}]`;
 }
 
 interface FuzzysearchOptions {
