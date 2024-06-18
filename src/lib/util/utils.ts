@@ -1,4 +1,4 @@
-import { DugEvents, MainServerID } from '#constants';
+import { DugColors, DugEvents, MainServerID } from '#constants';
 import { Items } from '#lib/items';
 import { DugEmbedBuilder } from '#lib/structures';
 import { InventoryItemType, InventoryItemTypeWithCount, ItemValue } from '#lib/types/Data';
@@ -293,6 +293,7 @@ export function logSuccessCommand(payload: ContextMenuCommandSuccessPayload | Ch
 	}
 
 	logEmbed.setDescription(description.join('\n'));
+	logEmbed.setColor(DugColors.Default);
 
 	container.client.emit(DugEvents.LogSend, logEmbed);
 	container.logger.debug(`${successLoggerData.shard} - ${successLoggerData.commandName} ${successLoggerData.author} ${successLoggerData.sentAt}`);
