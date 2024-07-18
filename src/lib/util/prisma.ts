@@ -291,6 +291,7 @@ export const xprisma = new PrismaClient().$extends({
 				});
 
 				const offset = expiresAt.getTime() - Date.now();
+				console.log(`debug: ${offset} ${amount}`);
 				container.tasks.create('ExpireBoostsTask', { amountToRemove: amount, userId: userId }, offset);
 			},
 
