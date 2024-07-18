@@ -3,6 +3,7 @@ import type { GuildMessage } from '#lib/types/Discord';
 import { formatFailMessage, formatSuccessMessage } from '#lib/util/formatter';
 import { getLevelInfo, getTag } from '#lib/util/utils';
 import { ApplyOptions } from '@sapphire/decorators';
+import { Duration, DurationFormatter } from '@sapphire/duration';
 import { Command } from '@sapphire/framework';
 import { send } from '@sapphire/plugin-editable-commands';
 import { GuildMember } from 'discord.js';
@@ -63,6 +64,17 @@ export class UserCommand extends Command {
 						.addUserOption((o) => o.setName('member').setDescription('Target member').setRequired(true))
 						.addNumberOption((o) => o.setName('xp').setDescription('Amount of xp to remove').setRequired(true).setMinValue(0))
 				)
+
+				.addSubcommand((cmd) =>
+					cmd
+						.setName('add-boost')
+						.setDescription('Add a boost to the user')
+						.addUserOption((o) => o.setName('member').setDescription('Target member').setRequired(true))
+						.addNumberOption((o) =>
+							o.setName('boost').setDescription('The new XP Boost amount').setRequired(true).setMinValue(0).setMaxValue(100)
+						)
+						.addStringOption((o) => o.setName('time').setDescription('The time to add the boost').setRequired(true))
+				)
 		);
 	}
 
@@ -74,7 +86,7 @@ export class UserCommand extends Command {
 	// Chat Input (slash) command
 	public override async chatInputRun(interaction: Command.ChatInputCommandInteraction) {
 		const subcommandGroup = interaction.options.getSubcommandGroup() as 'set' | null;
-		const subcommand = interaction.options.getSubcommand(true) as 'level' | 'xp' | 'add' | 'remove' | 'boost';
+		const subcommand = interaction.options.getSubcommand(true) as 'level' | 'xp' | 'add' | 'remove' | 'boost' | 'add-boost';
 		const targetMember = interaction.options.getMember('member');
 		if (!targetMember || !(targetMember instanceof GuildMember)) {
 			interaction.reply({ content: formatFailMessage('Please provide a valid target member'), ephemeral: true });
@@ -142,6 +154,19 @@ export class UserCommand extends Command {
 			}
 
 			return;
+		}
+
+		if (subcommand === 'add-boost') {
+			const boostToAdd = interaction.options.getNumber('boost', true);
+			const timeToAddString = interaction.options.getString('time', true);
+			const timeDuration = new Duration(timeToAddString);
+			const boostExpireDate = timeDuration.fromNow;
+			const boostDurationMs = timeDuration.offset;
+			const formattedDuration = new DurationFormatter().format(boostDurationMs);
+
+			this.container.db.userLevel.addXpBoost(targetMember.id, boostToAdd, boostExpireDate);
+
+			interaction.reply(formatSuccessMessage(`Added a boost of \`${boostToAdd}xp\` to ${getTag(targetMember.user)} for ${formattedDuration}`));
 		}
 
 		const xpAmountToChange = interaction.options.getNumber('xp', true);
