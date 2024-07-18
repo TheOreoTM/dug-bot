@@ -2,7 +2,8 @@ import { DugCommand } from '#lib/structures';
 import { ApplyOptions } from '@sapphire/decorators';
 
 @ApplyOptions<DugCommand.Options>({
-	description: 'ADD'
+	description: 'ADD',
+	enabled: false
 })
 export class UserCommand extends DugCommand {
 	public override async messageRun(message: DugCommand.Message) {
