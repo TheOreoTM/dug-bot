@@ -1,4 +1,3 @@
-import { minutes } from '#lib/util/common';
 import { fetchMember } from '#lib/util/utils';
 import { ApplyOptions } from '@sapphire/decorators';
 import { ScheduledTask } from '@sapphire/plugin-scheduled-tasks';
@@ -7,7 +6,7 @@ import { GuildMember } from 'discord.js';
 @ApplyOptions<ScheduledTask.Options>({
 	name: 'ExpireBoostsTask',
 	customJobOptions: { removeOnComplete: true, removeOnFail: true },
-	interval: minutes(0.5),
+	pattern: '* * * * *',
 	enabled: true
 })
 export class ExpireBoostsTask extends ScheduledTask {
