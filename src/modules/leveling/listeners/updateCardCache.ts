@@ -4,7 +4,8 @@ import { MessageSubcommandSuccessPayload, SubcommandPluginEvents } from '@sapphi
 import { GuildMember } from 'discord.js';
 
 @ApplyOptions<Listener.Options>({
-	event: SubcommandPluginEvents.MessageSubcommandRun
+	event: SubcommandPluginEvents.MessageSubcommandRun,
+	enabled: false
 })
 export class UserListener extends Listener {
 	public override async run(payload: MessageSubcommandSuccessPayload) {
