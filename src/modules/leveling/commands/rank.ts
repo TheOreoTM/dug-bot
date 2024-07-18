@@ -158,7 +158,8 @@ export class UserCommand extends Command {
 				content: formatFailMessage(
 					`Failed to generate your original rankcard.\n\n Check your bgImage maybe. Make sure its a valid link. \`${bgImage}\``
 				),
-				files: [attachment]
+				files: [attachment],
+				components: [new ActionRowBuilder<ButtonBuilder>().addComponents(xpBoostButton)]
 			};
 		}
 
