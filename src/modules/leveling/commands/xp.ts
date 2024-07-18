@@ -161,12 +161,15 @@ export class UserCommand extends Command {
 			const timeToAddString = interaction.options.getString('time', true);
 			const timeDuration = new Duration(timeToAddString);
 			const boostExpireDate = timeDuration.fromNow;
+			console.log('🚀 ~ UserCommand ~ overridechatInputRun ~ boostExpireDate:', boostExpireDate);
 			const boostDurationMs = timeDuration.offset;
+			console.log('🚀 ~ UserCommand ~ overridechatInputRun ~ boostDurationMs:', boostDurationMs);
 			const formattedDuration = new DurationFormatter().format(boostDurationMs);
 
 			await this.container.db.userLevel.addXpBoost(targetMember.id, boostToAdd, boostExpireDate);
 
 			interaction.reply(formatSuccessMessage(`Added a boost of \`x${boostToAdd}\` to ${getTag(targetMember.user)} for ${formattedDuration}`));
+			return;
 		}
 
 		const xpAmountToChange = interaction.options.getNumber('xp', true);
