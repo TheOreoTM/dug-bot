@@ -23,7 +23,7 @@ export class ExpireBoostsTask extends ScheduledTask {
 		if (!expiredBoosts) return;
 
 		for (const boost of expiredBoosts) {
-			this.container.db.xpBoost.delete({ where: { id: boost.id } });
+			await this.container.db.xpBoost.delete({ where: { id: boost.id } });
 			await this.container.db.userLevel.removeXpBoost(boost.userId, boost.amount);
 			const member = await fetchMember<GuildMember>(boost.userId);
 			if (!member) continue;
