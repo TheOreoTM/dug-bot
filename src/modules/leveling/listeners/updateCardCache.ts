@@ -11,7 +11,7 @@ export class UserListener extends Listener {
 		const { message, context } = payload;
 		if (Reflect.get(Object(context), 'silent')) return;
 
-		const commandName = payload.command.name;
+		const commandName = payload.context.commandName;
 		const member = message.member;
 
 		if (commandName !== 'card') return;
