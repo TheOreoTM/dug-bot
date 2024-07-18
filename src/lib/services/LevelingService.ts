@@ -107,18 +107,25 @@ export class LevelingService {
 		return await this.cache.hset(key, data);
 	}
 
-	public async getCardData(userId: string): Promise<NonNullable<UserLevel> | null> {
-		const key = this.cacheKey(userId);
-		const cachedData = await this.cache.hgetall(key);
-		if (isNullish(cachedData)) {
-			return await this.db.userLevel.findUnique({
-				where: {
-					userId
-				}
-			});
+	public async getCardData(userId: string, useCache = false): Promise<NonNullable<UserLevel> | null> {
+		if (useCache) {
+			const key = this.cacheKey(userId);
+			const cachedData = await this.cache.hgetall(key);
+			if (isNullish(cachedData)) {
+				return await this.db.userLevel.findUnique({
+					where: {
+						userId
+					}
+				});
+			}
+			const parsedData = this.parseCardData(cachedData);
+			return parsedData;
 		}
-		const parsedData = this.parseCardData(cachedData);
-		return parsedData;
+		return await this.db.userLevel.findUnique({
+			where: {
+				userId
+			}
+		});
 	}
 
 	private parseCardData(data: Record<keyof UserLevel, any>): NonNullable<UserLevel> {
