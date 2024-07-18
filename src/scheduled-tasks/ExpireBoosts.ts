@@ -17,6 +17,8 @@ export class ExpireBoostsTask extends ScheduledTask {
 		const userId = payload.userId;
 		const amount = payload.amountToRemove;
 
+		console.log(`[ExpireBoostsTask] Removing ${amount} from ${userId}`);
+
 		await this.container.db.userLevel.upsert({
 			where: {
 				userId
