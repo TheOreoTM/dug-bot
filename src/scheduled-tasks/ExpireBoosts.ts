@@ -28,7 +28,7 @@ export class ExpireBoostsTask extends ScheduledTask {
 			await this.container.db.userLevel.removeXpBoost(boost.userId, boost.amount);
 			const member = await fetchMember<GuildMember>(boost.userId);
 			if (!member) continue;
-			member.user.send(`Your \`x${boost.amount}\` boost has expired. You have been removed from the boost list.`).catch(() => {});
+			member.user.send(`Your **x${boost.amount}** boost has expired. (\`${boost.id}\`)`).catch(() => {});
 		}
 	}
 }
