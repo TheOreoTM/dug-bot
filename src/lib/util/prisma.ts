@@ -267,15 +267,7 @@ export const xprisma = new PrismaClient().$extends({
 			},
 
 			async addXpBoost(userId: string, amount: number, expiresAt: Date) {
-				await prisma.xpBoost.create({
-					data: {
-						userId,
-						amount,
-						expiresAt
-					}
-				});
-
-				const data = await prisma.userLevel.upsert({
+				await prisma.userLevel.upsert({
 					where: {
 						userId
 					},
@@ -292,7 +284,6 @@ export const xprisma = new PrismaClient().$extends({
 
 				const offset = expiresAt.getTime() - Date.now();
 				container.tasks.create('ExpireBoostsTask', { amountToRemove: amount, userId: userId }, offset);
-				console.log(data);
 			},
 
 			async getLeaderboard(page = 1) {

@@ -71,6 +71,7 @@ export class UserCommand extends Command {
 
 	private async genRankCard(member: GuildMember): Promise<MessageCreateOptions | (InteractionReplyOptions & { fetchReply: true })> {
 		const data = await this.container.leveling.getCardData(member.id);
+		console.log('🚀 ~ UserCommand ~ genRankCard ~ data:', data);
 		// const data = await this.container.db.userLevel.findUnique({
 		// 	where: {
 		// 		userId: member.id
