@@ -8,7 +8,7 @@ interface ExpireBoostsTaskPaylod {
 
 @ApplyOptions<ScheduledTask.Options>({
 	name: 'ExpireBoostsTask',
-	bullJobsOptions: { removeOnComplete: true }
+	customJobOptions: { removeOnComplete: true }
 })
 export class ExpireBoostsTask extends ScheduledTask {
 	public async run(payload: ExpireBoostsTaskPaylod) {

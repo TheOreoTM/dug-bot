@@ -5,7 +5,7 @@ import { ScheduledTask } from '@sapphire/plugin-scheduled-tasks';
 @ApplyOptions<ScheduledTask.Options>({
 	name: 'UpdateFactionsTeamListTask',
 	interval: minutes(2.5),
-	bullJobsOptions: { removeOnComplete: true },
+	customJobOptions: { removeOnComplete: true },
 	enabled: false
 })
 export class UpdateFactionsTeamListTask extends ScheduledTask {
