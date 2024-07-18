@@ -35,5 +35,7 @@ export class ExpireBoostsTask extends ScheduledTask {
 		});
 
 		console.log(data);
+
+		return;
 	}
 }
