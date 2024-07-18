@@ -145,14 +145,19 @@ export class UserCommand extends Command {
 			.setCustomId('none')
 			.setStyle(ButtonStyle.Secondary);
 
-		const rankcard = await card.build().catch(() => null);
+		const rankcard = await card.build().catch((e) => {
+			console.log(e);
+			return null;
+		});
 
 		if (!rankcard) {
 			const defaultCard = await card.setBackground('COLOR', bgColor).build();
 			const attachment = new AttachmentBuilder(defaultCard, { name: 'rankcard.png' });
 
 			return {
-				content: formatFailMessage('Failed to generate your original rankcard.\n\n Check your bgImage maybe. Make sure its a valid link.'),
+				content: formatFailMessage(
+					`Failed to generate your original rankcard.\n\n Check your bgImage maybe. Make sure its a valid link. \`${bgImage}\``
+				),
 				files: [attachment]
 			};
 		}
