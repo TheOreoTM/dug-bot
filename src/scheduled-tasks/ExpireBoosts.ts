@@ -20,7 +20,7 @@ export class ExpireBoostsTask extends ScheduledTask {
 
 		console.log(`[ExpireBoostsTask] Removing ${amount} from ${userId}`);
 
-		await this.container.db.userLevel.upsert({
+		const data = await this.container.db.userLevel.upsert({
 			where: {
 				userId
 			},
@@ -33,5 +33,7 @@ export class ExpireBoostsTask extends ScheduledTask {
 				userId
 			}
 		});
+
+		console.log(data);
 	}
 }
