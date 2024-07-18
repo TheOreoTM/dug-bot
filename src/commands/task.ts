@@ -2,12 +2,11 @@ import { DugCommand } from '#lib/structures';
 import { ApplyOptions } from '@sapphire/decorators';
 
 @ApplyOptions<DugCommand.Options>({
-	description: 'ADD',
-	enabled: false
+	description: 'ADD'
 })
 export class UserCommand extends DugCommand {
-	public override async messageRun(message: DugCommand.Message) {
-		this.container.tasks.create('ExpireBoostsTask', { amountToRemove: 10, userId: message.author.id }, { delay: 1000, repeated: false });
+	public override async messageRun() {
+		this.container.tasks.create('ExpireBoostsTask');
 		return;
 	}
 }
