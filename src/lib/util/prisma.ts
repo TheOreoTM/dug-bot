@@ -275,7 +275,7 @@ export const xprisma = new PrismaClient().$extends({
 					}
 				});
 
-				await prisma.userLevel.upsert({
+				const data = await prisma.userLevel.upsert({
 					where: {
 						userId
 					},
@@ -289,6 +289,8 @@ export const xprisma = new PrismaClient().$extends({
 						}
 					}
 				});
+
+				console.log(data);
 
 				const offset = expiresAt.getTime() - Date.now();
 				console.log(`debug: ${offset} ${amount}`);
