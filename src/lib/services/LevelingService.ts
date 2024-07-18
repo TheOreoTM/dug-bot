@@ -121,7 +121,7 @@ export class LevelingService {
 		return parsedData;
 	}
 
-	private parseCardData(data: Record<keyof UserLevel, string>): NonNullable<UserLevel> {
+	private parseCardData(data: Record<keyof UserLevel, any>): NonNullable<UserLevel> {
 		return {
 			currentLevel: Number(data.currentLevel),
 			lastXpEarned: new Date(data.lastXpEarned),
@@ -137,7 +137,8 @@ export class LevelingService {
 			borderColor: data.borderColor,
 			fontColor: data.fontColor,
 			levelUpMessage: data.levelUpMessage,
-			userId: data.userId
+			userId: data.userId,
+			silenced: data.silenced
 		};
 	}
 }
