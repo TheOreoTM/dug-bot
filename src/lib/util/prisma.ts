@@ -1,7 +1,6 @@
 import { InventoryItemType } from '#lib/types/Data';
 import { PrismaClient } from '@prisma/client';
 import { genRandomXp, getLevelInfo } from '#utils/utils';
-import { container } from '@sapphire/pieces';
 
 const prisma = new PrismaClient();
 
@@ -267,6 +266,14 @@ export const xprisma = new PrismaClient().$extends({
 			},
 
 			async addXpBoost(userId: string, amount: number, expiresAt: Date) {
+				await prisma.xpBoost.create({
+					data: {
+						userId,
+						amount,
+						expiresAt
+					}
+				});
+
 				await prisma.userLevel.upsert({
 					where: {
 						userId
@@ -282,8 +289,27 @@ export const xprisma = new PrismaClient().$extends({
 					}
 				});
 
-				const offset = expiresAt.getTime() - Date.now();
-				container.tasks.create('ExpireBoostsTask', { amountToRemove: amount, userId: userId }, offset);
+				// const offset = expiresAt.getTime() - Date.now();
+				// container.tasks.create('ExpireBoostsTask', { amountToRemove: amount, userId: userId }, offset);
+			},
+
+			async removeXpBoost(userId: string, amount: number) {
+				await prisma.userLevel.upsert({
+					where: {
+						userId
+					},
+					create: {
+						userId
+					},
+					update: {
+						xpBoost: {
+							decrement: amount
+						}
+					}
+				});
+
+				// const offset = expiresAt.getTime() - Date.now();
+				// container.tasks.create('ExpireBoostsTask', { amountToRemove: amount, userId: userId }, offset);
 			},
 
 			async getLeaderboard(page = 1) {

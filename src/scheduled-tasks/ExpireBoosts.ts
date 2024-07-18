@@ -1,41 +1,36 @@
+import { minutes } from '#lib/util/common';
+import { fetchMember } from '#lib/util/utils';
 import { ApplyOptions } from '@sapphire/decorators';
 import { ScheduledTask } from '@sapphire/plugin-scheduled-tasks';
-
-interface ExpireBoostsTaskPaylod {
-	amountToRemove: number;
-	userId: string;
-}
+import { GuildMember } from 'discord.js';
 
 @ApplyOptions<ScheduledTask.Options>({
 	name: 'ExpireBoostsTask',
 	customJobOptions: { removeOnComplete: true, removeOnFail: true },
+	interval: minutes(0.5),
 	enabled: true
 })
 export class ExpireBoostsTask extends ScheduledTask {
-	public async run(payload: ExpireBoostsTaskPaylod) {
+	public async run() {
 		this.container.logger.info('[ExpireBoostsTask] Started');
-
-		const userId = payload.userId;
-		const amount = payload.amountToRemove;
-
-		console.log(`[ExpireBoostsTask] Removing ${amount} from ${userId}`);
-
-		const data = await this.container.db.userLevel.upsert({
+		const expiredBoosts = await this.container.db.xpBoost.findMany({
 			where: {
-				userId
-			},
-			update: {
-				xpBoost: {
-					decrement: amount
+				expiresAt: {
+					lt: new Date()
 				}
-			},
-			create: {
-				userId
 			}
 		});
 
-		console.log(data);
+		if (!expiredBoosts) return;
 
-		return;
+		for (const boost of expiredBoosts) {
+			this.container.db.xpBoost.delete({ where: { id: boost.id } });
+			await this.container.db.userLevel.removeXpBoost(boost.userId, boost.amount);
+			const member = await fetchMember<GuildMember>(boost.userId);
+			if (!member) continue;
+			member.user.send(`Your \`x${boost.amount}\` boost has expired. You have been removed from the boost list.`).catch(() => {});
+
+			return;
+		}
 	}
 }

@@ -117,6 +117,13 @@ export async function fetchChannel<T extends Channel>(channelId: string): Promis
 	return channel as T | null;
 }
 
+export async function fetchMember<T extends GuildMember>(memberId: string): Promise<T | null> {
+	const member =
+		container.client.guilds.cache.get(MainServerID)?.members.cache.get(memberId) ??
+		(await container.client.guilds.fetch(MainServerID).then((guild) => guild.members.fetch(memberId)));
+	return member as T | null;
+}
+
 export function isOwner(member: GuildMember) {
 	return member.id === '600707283097485322';
 }
