@@ -166,7 +166,7 @@ export class UserCommand extends Command {
 
 			this.container.db.userLevel.addXpBoost(targetMember.id, boostToAdd, boostExpireDate);
 
-			interaction.reply(formatSuccessMessage(`Added a boost of \`${boostToAdd}xp\` to ${getTag(targetMember.user)} for ${formattedDuration}`));
+			interaction.reply(formatSuccessMessage(`Added a boost of \`x${boostToAdd}\` to ${getTag(targetMember.user)} for ${formattedDuration}`));
 		}
 
 		const xpAmountToChange = interaction.options.getNumber('xp', true);
