@@ -271,7 +271,7 @@ export const xprisma = new PrismaClient().$extends({
 				const delay = expiresAtTimestamp - Date.now();
 
 				await container.tasks
-					.create('ExpireBoostsTask', { amount, userId }, { repeated: false, delay })
+					.create('ExpireBoost', { amount, userId }, { repeated: false, delay })
 					?.then((task) => console.log('task', task));
 				console.log('delay', delay);
 
