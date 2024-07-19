@@ -11,7 +11,8 @@ interface ExpireBoostPayload {
 @ApplyOptions<ScheduledTask.Options>({
 	name: 'ExpireBoost',
 	customJobOptions: {
-		removeOnComplete: true
+		removeOnComplete: true,
+		priority: 1
 	},
 	enabled: true
 })
