@@ -8,6 +8,7 @@ export class UserEvent extends Listener {
 	public override async run(message: GuildMessage) {
 		if (message.content === '' || message.author.bot) return;
 		const member = message.member;
+		if (!member) return;
 		const shouldAddXP = await this.container.db.userLevel.shouldAddXP(member.id);
 		if (!shouldAddXP) return;
 		const data = await this.container.db.userLevel.upsert({
