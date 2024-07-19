@@ -1,7 +1,6 @@
 import { InventoryItemType } from '#lib/types/Data';
 import { PrismaClient } from '@prisma/client';
 import { genRandomXp, getLevelInfo } from '#utils/utils';
-import { container } from '@sapphire/pieces';
 
 const prisma = new PrismaClient();
 
@@ -267,14 +266,6 @@ export const xprisma = new PrismaClient().$extends({
 			},
 
 			async addXpBoost(userId: string, amount: number, expiresAt: Date) {
-				const expiresAtTimestamp = expiresAt.getTime();
-				const delay = expiresAtTimestamp - Date.now();
-
-				await container.tasks
-					.create('ExpireBoost', { amount, userId }, { repeated: false, delay })
-					?.then((task) => console.log('task', task));
-				console.log('delay', delay);
-
 				await prisma.xpBoost.create({
 					data: {
 						userId,
