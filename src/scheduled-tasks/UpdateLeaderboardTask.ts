@@ -6,7 +6,8 @@ import { sleep } from '@sapphire/utilities';
 @ApplyOptions<ScheduledTask.Options>({
 	name: 'UpdateLeaderboardTaskTask',
 	pattern: '* * * * *',
-	customJobOptions: { removeOnComplete: true, removeOnFail: true }
+	customJobOptions: { removeOnComplete: true, removeOnFail: true },
+	enabled: false
 })
 export class UpdateLeaderboardTaskTask extends ScheduledTask {
 	public async run() {

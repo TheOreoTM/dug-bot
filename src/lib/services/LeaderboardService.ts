@@ -2,7 +2,6 @@ import { leaderboardCacheKey } from '#lib/database/keys';
 import { LeaderboardPageData } from '#lib/types';
 import { getTag } from '#lib/util/utils';
 import { container } from '@sapphire/pieces';
-import { isNullish } from '@sapphire/utilities';
 
 export class LeaderboardService {
 	private readonly levelingCacheKey = leaderboardCacheKey;
@@ -50,22 +49,24 @@ export class LeaderboardService {
 	}
 
 	public async getLevelLeaderboardPage(page = 1): Promise<LeaderboardPageData | null> {
-		const key = this.levelingCacheKey(page);
+		const data = await this.createLevelLeaderboardPage(page);
+		return data;
+		// const key = this.levelingCacheKey(page);
 
-		const cacheData = await this.cache.get(key);
-		if (isNullish(cacheData)) {
-			// If above page 10 OR its not cached
-			const data = await this.createLevelLeaderboardPage(page);
-			if (isNullish(data)) return null;
+		// const cacheData = await this.cache.get(key);
+		// if (isNullish(cacheData)) {
+		// 	// If above page 10 OR its not cached
+		// 	const data = await this.createLevelLeaderboardPage(page);
+		// 	if (isNullish(data)) return null;
 
-			await this.cacheLevelLeaderboardPage(page);
-			return data;
-		}
+		// 	await this.cacheLevelLeaderboardPage(page);
+		// 	return data;
+		// }
 
-		const data = JSON.parse(cacheData);
-		if (isNullish(data)) return [];
+		// const data = JSON.parse(cacheData);
+		// if (isNullish(data)) return [];
 
-		return data as LeaderboardPageData;
+		// return data as LeaderboardPageData;
 	}
 
 	public async cacheLevelLeaderboardPage(page = 1) {

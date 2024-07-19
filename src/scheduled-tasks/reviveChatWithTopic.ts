@@ -11,7 +11,8 @@ import { ActionRowBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder, TextChannel
 	customJobOptions: {
 		removeOnComplete: true,
 		removeOnFail: true
-	}
+	},
+	enabled: false
 })
 export class ReviveChatWithTopicTask extends ScheduledTask {
 	public async run() {

@@ -7,7 +7,8 @@ import { ScheduledTask } from '@sapphire/plugin-scheduled-tasks';
 @ApplyOptions<ScheduledTask.Options>({
 	name: 'UpdateWeeklyActiveRoleTask',
 	pattern: '0 0 * * *',
-	customJobOptions: { removeOnComplete: true, removeOnFail: true }
+	customJobOptions: { removeOnComplete: true, removeOnFail: true },
+	enabled: false
 })
 export class UpdateWeeklyActiveRoleTask extends ScheduledTask {
 	public async run() {
