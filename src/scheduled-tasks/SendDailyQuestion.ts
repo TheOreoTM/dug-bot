@@ -9,7 +9,7 @@ import { EmbedBuilder, TextChannel } from 'discord.js';
 @ApplyOptions<ScheduledTask.Options>({
 	name: 'SendDailyQuestionTask',
 	pattern: '0 0 * * *',
-	customJobOptions: { removeOnComplete: true }
+	customJobOptions: { removeOnComplete: true, removeOnFail: true }
 })
 export class SendDailyQuestionTask extends ScheduledTask {
 	public async run() {

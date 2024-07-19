@@ -9,7 +9,8 @@ import { ActionRowBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder, TextChannel
 	name: 'ReviveChatWithTopicTask',
 	interval: minutes(2.5),
 	customJobOptions: {
-		removeOnComplete: true
+		removeOnComplete: true,
+		removeOnFail: true
 	}
 })
 export class ReviveChatWithTopicTask extends ScheduledTask {
