@@ -1,11 +1,11 @@
-import { minutes, seconds } from '#lib/util/common';
+import { seconds } from '#lib/util/common';
 import { ApplyOptions } from '@sapphire/decorators';
 import { ScheduledTask } from '@sapphire/plugin-scheduled-tasks';
 import { sleep } from '@sapphire/utilities';
 
 @ApplyOptions<ScheduledTask.Options>({
 	name: 'UpdateLeaderboardTaskTask',
-	interval: minutes(1),
+	pattern: '* * * * *',
 	customJobOptions: { removeOnComplete: true, removeOnFail: true }
 })
 export class UpdateLeaderboardTaskTask extends ScheduledTask {

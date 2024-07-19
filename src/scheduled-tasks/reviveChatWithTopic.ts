@@ -7,7 +7,7 @@ import { ActionRowBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder, TextChannel
 
 @ApplyOptions<ScheduledTask.Options>({
 	name: 'ReviveChatWithTopicTask',
-	interval: minutes(2.5),
+	pattern: '0 */2 * * *',
 	customJobOptions: {
 		removeOnComplete: true,
 		removeOnFail: true
