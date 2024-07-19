@@ -166,7 +166,7 @@ export class UserCommand extends Command {
 			const formattedDuration = new DurationFormatter().format(boostDurationMs);
 
 			await this.container.db.userLevel.addXpBoost(targetMember.id, boostToAdd, boostExpireDate);
-			await this.container.tasks.create('ExpireBoost', { boostToAdd, userId: targetMember.id }, boostDurationMs);
+			await this.container.tasks.create('ExpireBoost', { amount: boostToAdd, userId: targetMember.id }, boostDurationMs);
 
 			interaction.reply(formatSuccessMessage(`Added a boost of \`x${boostToAdd}\` to ${getTag(targetMember.user)} for ${formattedDuration}`));
 			return;

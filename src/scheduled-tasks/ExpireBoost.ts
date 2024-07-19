@@ -20,7 +20,7 @@ export class ExpireBoostTask extends ScheduledTask {
 		this.container.logger.info('[ExpireBoost] Started');
 		const { userId, amount } = payload;
 
-		this.container.logger.info(`[ExpireBoost] Removing ${amount} xp from ${userId}`);
+		this.container.logger.info(`[ExpireBoost] Removing ${amount} boost from ${userId}`);
 		await this.container.db.userLevel.removeXpBoost(userId, amount);
 
 		const member = await fetchMember<GuildMember>(userId);
