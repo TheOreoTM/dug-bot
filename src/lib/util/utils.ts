@@ -332,7 +332,7 @@ function getCommandInfo(command: Command) {
 }
 
 function getAuthorInfo(author: User | APIUser, pretty = false) {
-	pretty ? `${author.username} [\`${cyan(author.id)}\`]` : `${author.username}[${cyan(author.id)}]`;
+	return pretty ? `${author.username} [\`${cyan(author.id)}\`]` : `${author.username}[${cyan(author.id)}]`;
 }
 
 function getGuildInfo(guild: Guild | null) {
