@@ -7,7 +7,7 @@ import { GuildMember } from 'discord.js';
 	name: 'ExpireBoostsTask',
 	customJobOptions: { removeOnComplete: true, removeOnFail: true },
 	pattern: '* * * * *',
-	enabled: true
+	enabled: false
 })
 export class ExpireBoostsTask extends ScheduledTask {
 	public async run() {

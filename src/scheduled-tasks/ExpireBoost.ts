@@ -11,12 +11,11 @@ interface ExpireBoostPayload {
 @ApplyOptions<ScheduledTask.Options>({
 	name: 'ExpireBoost',
 	customJobOptions: {
-		removeOnComplete: true,
-		removeOnFail: true
+		removeOnComplete: true
 	},
 	enabled: true
 })
-export class ExpireBoostsTask extends ScheduledTask {
+export class ExpireBoostTask extends ScheduledTask {
 	public async run(payload: ExpireBoostPayload) {
 		this.container.logger.info('[ExpireBoost] Started');
 		const { userId, amount } = payload;
