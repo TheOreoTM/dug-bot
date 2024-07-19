@@ -48,6 +48,7 @@ declare module '@sapphire/plugin-scheduled-tasks' {
 	interface ScheduledTasks {
 		ExpireBoostsTask: never;
 		SendDailyQuestionTask: never;
+		ExpireBoost: never;
 	}
 }
 
