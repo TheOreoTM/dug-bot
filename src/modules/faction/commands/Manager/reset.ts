@@ -1,12 +1,13 @@
 import { DugColors } from '#constants';
 import { DugCommand } from '#lib/structures';
+import { PermissionLevels } from '#lib/types';
 import { ApplyOptions } from '@sapphire/decorators';
 import { send } from '@sapphire/plugin-editable-commands';
 import { ActionRowBuilder, ButtonBuilder, ButtonStyle, ComponentType, EmbedBuilder, type ButtonInteraction } from 'discord.js';
 
 @ApplyOptions<DugCommand.Options>({
 	description: 'Reset all factions',
-	preconditions: ['Administrator']
+	permissionLevel: PermissionLevels.Administrator
 })
 export class UserCommand extends DugCommand {
 	// Register Chat Input and Context Menu command
