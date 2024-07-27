@@ -17,35 +17,33 @@ export class UserCommand extends DugCommand {
 		const cancel = new ButtonBuilder().setCustomId('cancel').setLabel('Cancel').setStyle(ButtonStyle.Danger);
 		const row = new ActionRowBuilder<ButtonBuilder>().addComponents(confirm, cancel);
 
-		const response = await send(message, { embeds: [embed], components: [row] });
-		const collectorFilter = (i: ButtonInteraction) => {
-			i.deferUpdate();
+		const initialMessage = await send(message, { embeds: [embed], components: [row] });
+		const collectorFilter = async (i: ButtonInteraction) => {
+			await i.deferUpdate();
 			return i.user.id === message.author.id;
 		};
-		const collector = response.createMessageComponentCollector({
-			filter: collectorFilter,
-			time: 60000,
-			componentType: ComponentType.Button
-		});
 
-		collector.on('collect', async (i: ButtonInteraction) => {
-			if (i.customId === 'confirm') {
-				await this.container.db.faction.deleteMany();
-				await i.editReply({ content: 'Factions reset!' });
-				collector.stop('success');
-			} else if (i.customId === 'cancel') {
-				await i.editReply({ content: 'Cancelled' });
-				collector.stop();
-			}
-		});
-		collector.on('end', async (_collected, reason) => {
-			if (reason === 'time') {
-				await response.edit({ content: 'Timed out', components: [] });
+		initialMessage
+			.awaitMessageComponent({
+				filter: collectorFilter,
+				time: 60000,
+				componentType: ComponentType.Button
+			})
+			.then(async (i: ButtonInteraction) => {
+				if (i.customId === 'confirm') {
+					await this.container.db.faction.deleteMany();
+					await i.editReply({ content: 'Factions reset!' });
+				} else if (i.customId === 'cancel') {
+					await i.editReply({ content: 'Cancelled' });
+				}
+			})
+			.catch(async (error) => {
+				if (error === 'time') {
+					await initialMessage.edit({ content: 'Timed out', components: [] });
+					return;
+				}
+				await initialMessage.delete();
 				return;
-			}
-
-			await response.delete();
-			return;
-		});
+			});
 	}
 }
