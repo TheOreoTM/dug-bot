@@ -32,9 +32,9 @@ export class UserCommand extends DugCommand {
 			.then(async (i: ButtonInteraction) => {
 				if (i.customId === 'confirm') {
 					await this.container.db.faction.deleteMany();
-					await i.editReply({ content: 'Factions reset!' });
+					await i.editReply({ content: 'Factions reset!', components: [], embeds: [] });
 				} else if (i.customId === 'cancel') {
-					await i.editReply({ content: 'Cancelled' });
+					await i.editReply({ content: 'Cancelled', components: [], embeds: [] });
 				}
 			})
 			.catch(async (error) => {
