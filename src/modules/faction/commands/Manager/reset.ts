@@ -25,13 +25,14 @@ export class UserCommand extends DugCommand {
 			time: 60000,
 			componentType: ComponentType.Button
 		});
+
 		collector.on('collect', async (i: ButtonInteraction) => {
 			if (i.customId === 'confirm') {
 				await this.container.db.faction.deleteMany();
 				await i.reply({ content: 'Factions reset!', ephemeral: true });
+				collector.stop('success');
 			} else if (i.customId === 'cancel') {
 				await i.reply({ content: 'Cancelled', ephemeral: true });
-				response.delete();
 				collector.stop();
 			}
 		});
@@ -41,7 +42,7 @@ export class UserCommand extends DugCommand {
 				return;
 			}
 
-			await response.edit({ content: 'Cancelled', components: [] });
+			await response.delete();
 			return;
 		});
 	}
