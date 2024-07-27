@@ -5,7 +5,8 @@ import { send } from '@sapphire/plugin-editable-commands';
 import { ActionRowBuilder, ButtonBuilder, ButtonStyle, ComponentType, EmbedBuilder, type ButtonInteraction } from 'discord.js';
 
 @ApplyOptions<DugCommand.Options>({
-	description: 'Reset all factions'
+	description: 'Reset all factions',
+	preconditions: ['Administrator']
 })
 export class UserCommand extends DugCommand {
 	// Register Chat Input and Context Menu command
