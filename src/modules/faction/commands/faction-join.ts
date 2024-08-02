@@ -1,5 +1,3 @@
-import { DugEvents } from '#constants';
-import { FactionType } from '#lib/types/Data';
 import { formatFailMessage, formatSuccessMessage } from '#lib/util/formatter';
 import { ApplyOptions } from '@sapphire/decorators';
 import { Command } from '@sapphire/framework';
@@ -43,9 +41,27 @@ export class UserCommand extends Command {
 		}
 
 		// const isInviteOnly = faction.joinType === FactionStatus.INVITE_ONLY;
+		// this.container.client.emit(DugEvents.FactionJoin, interaction.user, faction as FactionType);
 
-		this.container.client.emit(DugEvents.FactionJoin, interaction.user, faction as FactionType);
-		interaction.reply({ content: formatSuccessMessage(`You have joined ${faction.name}`) });
+		await this.container.db.user
+			.update({
+				where: {
+					id: interaction.user.id
+				},
+				data: {
+					faction: {
+						connect: {
+							id: faction.id
+						}
+					}
+				}
+			})
+			.then(() => {
+				interaction.reply({ content: formatSuccessMessage(`You have joined ${faction.name}`) });
+			})
+			.catch(() => {
+				interaction.reply({ content: formatFailMessage('Something went wrong') });
+			});
 
 		// isInviteOnly
 		// interaction.reply({ content: formatSuccessMessage(`Your request to join ${faction.name} has been sent`) })
