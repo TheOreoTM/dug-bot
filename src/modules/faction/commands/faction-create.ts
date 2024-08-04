@@ -1,6 +1,6 @@
 import { DugCommand } from '#lib/structures';
 import { SelectAllOptions } from '#lib/types/Data';
-import { formatSuccessMessage, generateFactionEmbed } from '#lib/util/formatter';
+import { formatFailMessage, formatSuccessMessage, generateFactionEmbed } from '#lib/util/formatter';
 import { ApplyOptions } from '@sapphire/decorators';
 
 @ApplyOptions<DugCommand.Options>({
@@ -29,19 +29,6 @@ export class UserCommand extends DugCommand {
 						.setDescription('The description of the faction')
 						.setRequired(true)
 				)
-				.addUserOption((option) => option.setName('owner').setDescription('The owner of the faction').setRequired(true))
-
-				// .addStringOption((option) =>
-				// 	option //
-				// 		.setName('type')
-				// 		.setDescription('Faction join type')
-				// 		.setRequired(true)
-				// 		.addChoices(
-				// 			{ name: 'Open', value: FactionStatus.OPEN },
-				// 			{ name: 'Invite Only', value: FactionStatus.INVITE_ONLY },
-				// 			{ name: 'Closed', value: FactionStatus.CLOSED }
-				// 		)
-				// )
 				.addAttachmentOption((option) =>
 					option //
 						.setName('icon')
@@ -53,11 +40,22 @@ export class UserCommand extends DugCommand {
 
 	public override async chatInputRun(interaction: DugCommand.ChatInputCommandInteraction) {
 		const { options } = interaction;
-		const owner = options.getUser('owner', true);
+		const owner = interaction.user;
 		const name = options.getString('name', true);
 		const description = options.getString('description', true);
-		// const joinType = options.getString('type', true) as FactionStatus;
 		const icon = options.getAttachment('icon', true);
+
+		const currentFaction = await this.container.db.faction.findFirst({
+			where: {
+				ownerId: owner.id
+			},
+			select: SelectAllOptions
+		});
+
+		if (currentFaction) {
+			interaction.reply({ content: formatFailMessage('You already have a faction') });
+			return;
+		}
 
 		const faction = await this.container.db.faction.create({
 			data: {
