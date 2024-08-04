@@ -4,7 +4,7 @@ import { formatSuccessMessage, generateFactionEmbed } from '#lib/util/formatter'
 import { ApplyOptions } from '@sapphire/decorators';
 
 @ApplyOptions<DugCommand.Options>({
-	description: 'Create a factions',
+	description: 'Create a faction',
 	preconditions: ['EventManager']
 })
 export class UserCommand extends DugCommand {
