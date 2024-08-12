@@ -8,15 +8,15 @@ import type { Message } from 'discord.js';
 })
 export class UserCommand extends DugCommand {
 	public override async messageRun(message: Message) {
-		const members = await message.guild?.members.fetch();
+		const members = await message.guild?.members.list();
 		let counter = 0;
-		members?.forEach((member) => {
+		message.guild?.members.cache?.forEach((member) => {
 			counter++;
 			member.roles.add('1272577465193205800');
-			console.log(`Added ${member.user.username} to the role (${counter / members.size})`);
+			console.log(`Added ${member.user.username} to the role (${counter}/ ${message.guild?.members.cache.size})`);
 		});
 
-		message.channel.send(`Added ${counter} users to the role`);
+		message.channel.send(`Added ${counter} of ${message.guild?.members.cache?.size} users to the role.`);
 		return;
 	}
 }
