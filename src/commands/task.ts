@@ -9,9 +9,9 @@ import type { Message } from 'discord.js';
 export class UserCommand extends DugCommand {
 	public override async messageRun(message: Message) {
 		let counter = 0;
-		(await message.guild?.members.fetch())?.forEach((member) => {
+		(await message.guild?.members.fetch())?.forEach(async (member) => {
 			counter++;
-			member.roles.add('1272577465193205800');
+			await member.roles.add('1272577465193205800');
 			console.log(`Added ${member.user.username} to the role (${counter}/ ${message.guild?.members.cache.size})`);
 		});
 
