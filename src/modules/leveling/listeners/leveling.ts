@@ -2,6 +2,7 @@ import { DugEvents } from '#constants';
 import { GuildMessage } from '#lib/types/Discord';
 import { ApplyOptions } from '@sapphire/decorators';
 import { Listener } from '@sapphire/framework';
+import type { GuildMember } from 'discord.js';
 
 @ApplyOptions<Listener.Options>({ event: DugEvents.MessageCreate })
 export class UserEvent extends Listener {
@@ -37,5 +38,22 @@ export class UserEvent extends Listener {
 		}
 
 		await this.container.leveling.setCardData(data);
+		await this.addLevelRoles(data.currentLevel, member);
+	}
+
+	public async addLevelRoles(currentLevel: number, member: GuildMember) {
+		const availableRoles = await this.container.db.levelRole.findMany({
+			where: {
+				level: {
+					lte: currentLevel
+				}
+			}
+		});
+
+		const roleIds = availableRoles.map((role) => role.roleId);
+
+		if (roleIds.length === 0) return;
+
+		await member.roles.add(roleIds);
 	}
 }
