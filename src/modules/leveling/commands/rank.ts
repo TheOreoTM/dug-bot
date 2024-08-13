@@ -165,9 +165,27 @@ export class UserCommand extends Command {
 
 		const attachment = new AttachmentBuilder(rankcard, { name: 'rankcard.png' });
 
+		await this.addLevelRoles(data.currentLevel, member);
+
 		return {
 			files: [attachment],
 			components: [new ActionRowBuilder<ButtonBuilder>().addComponents(xpBoostButton)]
 		};
+	}
+
+	public async addLevelRoles(currentLevel: number, member: GuildMember) {
+		const availableRoles = await this.container.db.levelRole.findMany({
+			where: {
+				level: {
+					lte: currentLevel
+				}
+			}
+		});
+
+		const roleIds = availableRoles.map((role) => role.roleId);
+
+		if (roleIds.length === 0) return;
+
+		await member.roles.add(roleIds);
 	}
 }
