@@ -6,7 +6,7 @@ import { ApplyOptions } from '@sapphire/decorators';
 import { Command } from '@sapphire/framework';
 import { send } from '@sapphire/plugin-editable-commands';
 import { ActionRowBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder, Message } from 'discord.js';
-const canvafy = require('canvafy');
+import canvafy from 'canvafy';
 
 @ApplyOptions<Command.Options>({
 	description: 'View the leaderbord of the server',
