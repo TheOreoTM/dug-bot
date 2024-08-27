@@ -5,9 +5,9 @@ import { sendInteractionOrMessage } from '#lib/util/messages';
 import { ApplyOptions } from '@sapphire/decorators';
 import { Command } from '@sapphire/framework';
 import { send } from '@sapphire/plugin-editable-commands';
-import canvafy from 'canvafy';
 import { ActionRowBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder, Message } from 'discord.js';
-const { Top } = canvafy;
+const canvafy = require('canvafy');
+
 @ApplyOptions<Command.Options>({
 	description: 'View the leaderbord of the server',
 	aliases: ['leaderboard', 'top']
@@ -56,7 +56,7 @@ export class UserCommand extends Command {
 			return;
 		}
 
-		const lbImage = await new Top()
+		const lbImage = await new canvafy.Top()
 			.setColors({
 				box: '#212121',
 				username: '#ffffff',

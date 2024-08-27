@@ -13,6 +13,7 @@ import { Message, escapeMarkdown } from 'discord.js';
 export class UserEvent extends Listener {
 	public async run(old: Message, message: GuildMessage) {
 		if (message.guild === null || old.content === message.content || message.author.bot) return;
+		if (message.content.length <= 0) return;
 
 		this.container.core.logging.sendLog(LoggingWebhooks.Message, {
 			embeds: [
@@ -20,7 +21,7 @@ export class UserEvent extends Listener {
 					.setColor(DugColors.Warn)
 					.setAuthor(getFullEmbedAuthor(message.author, message.url))
 					.splitFields(
-						diffWordsWithSpace(escapeMarkdown(old.content), escapeMarkdown(message.content))
+						diffWordsWithSpace(escapeMarkdown(old.content ?? ''), escapeMarkdown(message.content ?? ''))
 							.map((result) => (result.added ? `**${result.value}**` : result.removed ? `~~${result.value}~~` : result.value))
 							.join(' ')
 					)
