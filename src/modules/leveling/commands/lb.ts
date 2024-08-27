@@ -10,7 +10,7 @@ import { ActionRowBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder, Message } f
 const { Top } = canvafy;
 @ApplyOptions<Command.Options>({
 	description: 'View the leaderbord of the server',
-	aliases: ['leaderboard', 'top']
+	aliases: ['leaderboard', 'top', 'lb']
 })
 export class UserCommand extends Command {
 	// Register Chat Input and Context Menu command
