@@ -34,7 +34,7 @@
 		"@skyra/env-utilities": "^1.2.1",
 		"bullmq": "^4.12.4",
 		"canvacord": "^5.4.10",
-		"canvafy": "^7.0.4",
+		"canvafy": "^7.1.0",
 		"colorette": "^2.0.20",
 		"diff": "^5.1.0",
 		"discord.js": "^14.13.0",
