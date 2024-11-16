@@ -17,6 +17,7 @@
 		"#utils/*": "./dist/lib/util/*.js"
 	},
 	"dependencies": {
+		"@napi-rs/canvas": "^0.1.62",
 		"@prisma/client": "^5.7.1",
 		"@sapphire/decorators": "^6.0.2",
 		"@sapphire/discord.js-utilities": "^7.0.2",
