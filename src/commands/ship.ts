@@ -1,7 +1,6 @@
 import { Message, GuildMember, EmbedBuilder, AttachmentBuilder, MessageCreateOptions } from 'discord.js';
 import { createCanvas, Image, loadImage, SKRSContext2D } from '@napi-rs/canvas';
-import { DugCommand} from '#lib/structures';
-import { Args } from '@sapphire/framework';
+import { Args, Command } from '@sapphire/framework';
 
 // Interfaces for structured data types
 interface ShipReturnData {
@@ -53,13 +52,15 @@ const remarks: { range: [number, number]; remark: string }[] = [
     { range: [69, 69], remark: 'NICE ( ͡° ͜ʖ ͡°)' },
 ];
 
-export class UserCommand extends DugCommand {
-    constructor(context: DugCommand.Context, options: DugCommand.Options) {
+export class UserCommand extends Command {
+    constructor(context: Command.LoaderContext, options: Command.Options) {
         super(context, {
             ...options,
             name: 'ship',
             aliases: ['shipper'],
             description: 'Calculate and display a compatibility score between two users or names.',
+            cooldownDelay: 10000,
+            cooldownFilteredUsers: ['1203054172686254081']
         });
 
         this.preloadImages();
@@ -180,12 +181,25 @@ export class UserCommand extends DugCommand {
             return memberId ? await message.guild?.members.fetch(memberId).catch(() => input) as GuildMember : input;
         };
 
-        const firstInput = await args.pick('string').catch(() => null);
-        const secondInput = await args.pick('string').catch(() => null);
+        let firstInput = await args.pick('string').catch(() => null);
+        let secondInput = await args.pick('string').catch(() => null);
 
-        const firstMember = firstInput ? await fetchMember(firstInput) : message.member!;
-        const secondMember =
-            secondInput ? await fetchMember(secondInput) : message.guild?.members.cache.random() || message.member!;
+        let firstMember;
+        let secondMember;
+
+        if (!firstInput) {
+            // Case 1: No arguments provided
+            firstMember = message.member!;
+            secondMember = message.guild?.members.cache.random() || firstMember;
+        } else if (!secondInput) {
+            // Case 2: One argument provided
+            secondMember = await fetchMember(firstInput);
+            firstMember = message.member!;
+        } else {
+            // Case 3: Two arguments provided
+            firstMember = await fetchMember(firstInput);
+            secondMember = await fetchMember(secondInput);
+        }
 
         return {
             UserOne: {
