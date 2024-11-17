@@ -1,6 +1,7 @@
-import { Command, Args } from '@sapphire/framework';
 import { Message, GuildMember, EmbedBuilder, AttachmentBuilder, MessageCreateOptions } from 'discord.js';
 import { createCanvas, Image, loadImage, SKRSContext2D } from '@napi-rs/canvas';
+import { DugCommand} from '#lib/structures';
+import { Args } from '@sapphire/framework';
 
 // Interfaces for structured data types
 interface ShipReturnData {
@@ -52,8 +53,8 @@ const remarks: { range: [number, number]; remark: string }[] = [
     { range: [69, 69], remark: 'NICE ( ͡° ͜ʖ ͡°)' },
 ];
 
-export class ShipCommand extends Command {
-    constructor(context: Command.Context, options: Command.Options) {
+export class UserCommand extends DugCommand {
+    constructor(context: DugCommand.Context, options: DugCommand.Options) {
         super(context, {
             ...options,
             name: 'ship',
